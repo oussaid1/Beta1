@@ -121,12 +121,14 @@
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_marginTop="16dp"
+                    android:visibility="invisible"
                     android:background="@drawable/redlight" />
 
                 <Button
                     android:id="@+id/BtnOrange"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
+                    android:visibility="invisible"
                     android:layout_below="@id/BtnRed"
                     android:layout_marginTop="22dp"
                     android:background="@drawable/orangelight" />
@@ -136,6 +138,7 @@
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_below="@id/BtnOrange"
+                    android:visibility="invisible"
                     android:layout_marginTop="22dp"
                     android:background="@drawable/greenlight"> </Button>
             </RelativeLayout>
@@ -147,6 +150,7 @@
                 android:textColor="@color/red"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
+                android:visibility="invisible"
                 android:layout_marginEnd="42dp"
                 android:text="Limit Exceeded" />
 
@@ -154,6 +158,7 @@
                 android:id="@+id/Carefull"
                 android:layout_width="120dp"
                 android:layout_height="30dp"
+                android:visibility="invisible"
                 android:layout_below="@id/Limit"
                 android:textColor="@color/orange"
                 android:layout_alignParentEnd="true"
@@ -165,6 +170,7 @@
                 android:id="@+id/Good"
                 android:layout_width="120dp"
                 android:layout_height="30dp"
+                android:visibility="invisible"
                 android:layout_below="@id/Carefull"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
