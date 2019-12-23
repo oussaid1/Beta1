@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DateFormat;
@@ -27,17 +28,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity {
     MyDataBaseCreator MDBC;
     public Button addBut;
-    public EditText NameIn, PriceIn,moolhanotNm;
+    public EditText NameIn, PriceIn, moolhanotNm;
     public TextView DateV1, RedL, OrangeL, GreenL, LeftOut, TotalOut, RedText, OrangeText, GreenText;
-    public  Spinner ItMSpinner,moolhanotSpinner;
+    public Spinner ItMSpinner, molhanotSpinner;
     public ListView ListaOut;
     public Switch Guestmode;
     public boolean ischecked;
     public double LeftOfQuota, ItemPriceDbl;
-    public String date, ItemNameStr, itemId,Sir;
+    public String date, ItemNameStr, itemId, Sir;
     public int Quota;
     public ArrayList<String> allList;
     public ArrayList<String> Molhanot;
@@ -93,14 +94,38 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         RedL = findViewById(R.id.BtnRed);
         ItMSpinner = findViewById(R.id.ItemNameInSp);
         NameIn = findViewById(R.id.ItemNameIn);
-        moolhanotNm=findViewById(R.id.molhanoutNameIn);
-        moolhanotSpinner=findViewById(R.id.molhanoutNameInSp);
-        moolhanotSpinner.setOnItemClickListener(this);
+        moolhanotNm = findViewById(R.id.molhanoutNameIn);
+        molhanotSpinner = findViewById(R.id.molhanoutNameInSp);
+        molhanotSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String molhanotname = String.valueOf(parent.getItemAtPosition(position));
+                moolhanotNm.setText(" " + molhanotname);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         PriceIn = findViewById(R.id.ItemPriceIn);
         LeftOut = findViewById(R.id.QuotaLeftOut);
         TotalOut = findViewById(R.id.TotalTodayOut);
         addBut = findViewById(R.id.AddBtn);
-        ItMSpinner.setOnItemSelectedListener(this);
+        ItMSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String SpineerText = String.valueOf(parent.getItemAtPosition(position));
+                NameIn.setText(" " + SpineerText);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         DateV1.setText("" + GetDate());
         MDBC = new MyDataBaseCreator(getApplicationContext());
         dataBaselist = new ArrayList<>();
@@ -113,35 +138,39 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
 
-                if (PriceIn.length() != 0 && NameIn.length() != 0)
+                if (PriceIn.length() != 0 && NameIn.length() != 0) {
+                    openDialogue();
                     LoadDatabase();
+                    getTotal();
+                    GetDbData();
+                    TraficLight();
+                }else MsgBox("Plz Insert Data");
+            }
+        });
+
+        Guestmode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ischecked = Guestmode.isChecked();
+                if (ischecked) {
+                    MsgBox("Guest Mode On");
+                } else {
+                    MsgBox("Family Mode On");
+                }
                 getTotal();
-                GetDbData();
                 TraficLight();
             }
         });
 
-                Guestmode.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ischecked = Guestmode.isChecked();
-                        if (ischecked) {
-                            MsgBox("Guest Mode On");
-                        } else {
-                            MsgBox("Family Mode On");
-                        }
-                        getTotal();
-                        TraficLight();
-                    }
-                });
-
     }
+
     public void OpentAvtivity2() {
         final Intent intent1;
         intent1 = new Intent(this, Main2Activity.class);
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent1);
     }
+
     public void OpentAvtivity3() {
         final Intent intent2;
         intent2 = new Intent(this, Main3Activity.class);
@@ -157,13 +186,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //startActivity(dateIntent);
         return date;
     }
-    public void FillMolhanot(){
-        Molhanot=new ArrayList<>();
+
+    public void FillMolhanot() {
+        Molhanot = new ArrayList<>();
         Molhanot.add(" Hessina ");
         Molhanot.add(" Momo ");
         Molhanot.add(" Belaise ");
-        MolhntSpinnerAdapter=new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line,Molhanot);
-        moolhanotSpinner.setAdapter(MolhntSpinnerAdapter);
+        MolhntSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
+        molhanotSpinner.setAdapter(MolhntSpinnerAdapter);
     }
 
     public void FillArrList() {
@@ -189,14 +219,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         SpinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, allList);
         ItMSpinner.setAdapter(SpinnerAdapter);
     }
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String SpineerText = String.valueOf(parent.getItemAtPosition(position));
-        NameIn.setText(" " + SpineerText);
-    }
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-    }
+
     public int GetQuota() {
         if (Guestmode.isChecked()) {
             Quota = 600;
@@ -218,18 +241,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ItemNameStr = NameIn.getText().toString();
         Sir = moolhanotNm.getText().toString();
 // insert data to database's Table.
-        boolean newRowAdded = MDBC.InjectData(Sir ,ItemNameStr, ItemPriceDbl);
+        boolean newRowAdded = MDBC.InjectData(Sir, ItemNameStr, ItemPriceDbl);
         if (newRowAdded) {
             MsgBox("data inserted");
         } else MsgBox("data not inserted");
     }
-    /*private void PrintMessage(String message) {
+
+    private void PrintMessage(String title, String message) {
         AlertDialog.Builder newAlert = new AlertDialog.Builder(this);
         newAlert.setCancelable(true);
-        //newAlert.setTitle(Title);
+        newAlert.setTitle(title);
         newAlert.setMessage(message);
         newAlert.show();
-    }*/
+    }
 
     public void DeleteTablecontent() {
         boolean del = MDBC.deleteall();
@@ -239,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     //this method gets the Sum of all elements in ItemPrice Column
     public void getTotal() {
-        // if (PriceIn.length()!=0 && NameIn.length()!=0 )
+
         Cursor c = MDBC.GetSum();
         if (c.getCount() == 0) MsgBox("No Sum");
         else
@@ -254,10 +278,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
     }
 
+    //this method gets Cursor data from table products
+//and fills an arraylist dataBaselist
     public void GetDbData() {
         dataBaselist.clear();
-
-
         Cursor data = MDBC.GetDBdata();
 
         if (data.getCount() == 0) {
@@ -272,10 +296,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         }
         data.close();
-        //DbList = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, dataBaselist);
-        // Listhere.setAdapter(DbList);
     }
 
+    // this method controlls Traffic Light and the text with it
     public void TraficLight() {
         float halfquota = Quota / 2;
         if (LeftOfQuota < Quota && LeftOfQuota > 0) {
@@ -284,6 +307,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             OrangeL.setVisibility(View.INVISIBLE);
             OrangeText.setText("");
             GreenL.setVisibility(View.VISIBLE);
+            GreenText.setVisibility(View.VISIBLE);
             GreenText.setText(R.string.good);
         }
         if (LeftOfQuota < halfquota && LeftOfQuota > 0) {
@@ -291,6 +315,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             GreenText.setText("");
             OrangeL.setVisibility(View.VISIBLE);
             OrangeText.setText("");
+            OrangeText.setVisibility(View.VISIBLE);
             OrangeText.setText(R.string.carefull);
         }
         if (LeftOfQuota < 0) {
@@ -299,13 +324,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             OrangeL.setVisibility(View.INVISIBLE);
             OrangeText.setText("");
             RedL.setVisibility(View.VISIBLE);
+            RedText.setVisibility(View.VISIBLE);
             RedText.setText(R.string.limit_exceeded);
+
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String molhanotname = String.valueOf(parent.getItemAtPosition(position));
-        moolhanotNm.setText(" " + molhanotname);
+    public void openDialogue() {
+        Alerdialogue AlrtDlg = new Alerdialogue();
+        AlrtDlg.show(getSupportFragmentManager(), "Something");
     }
+
+
 }

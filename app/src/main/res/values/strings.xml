@@ -24,5 +24,8 @@
     <string name="mool_hanout">Mool Hanout</string>
     <string name="refrsh_list">Refrsh List</string>
     <string name="name_here">Name here</string>
+    <string name="rusure"> Are You Sure You want to Add this item</string>
+    <string name="alertmsgtitle0"> Error</string>
+    <string name="alertmsgtitle1"> Goood Job</string>
 
 </resources>
