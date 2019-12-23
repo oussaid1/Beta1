@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
     MyDataBaseCreator MDBC;
     public Button addBut;
     public EditText NameIn, PriceIn,moolhanotNm;
@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         NameIn = findViewById(R.id.ItemNameIn);
         moolhanotNm=findViewById(R.id.molhanoutNameIn);
         moolhanotSpinner=findViewById(R.id.molhanoutNameInSp);
+        moolhanotSpinner.setOnItemClickListener(this);
         PriceIn = findViewById(R.id.ItemPriceIn);
         LeftOut = findViewById(R.id.QuotaLeftOut);
         TotalOut = findViewById(R.id.TotalTodayOut);
@@ -300,5 +301,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             RedL.setVisibility(View.VISIBLE);
             RedText.setText(R.string.limit_exceeded);
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String molhanotname = String.valueOf(parent.getItemAtPosition(position));
+        moolhanotNm.setText(" " + molhanotname);
     }
 }

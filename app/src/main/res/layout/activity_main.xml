@@ -241,17 +241,11 @@
                 android:id="@+id/ItemNameInSp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="27dp"
-                android:layout_marginEnd="19dp"
-                android:layout_marginBottom="2dp"
+                android:layout_marginTop="28dp"
                 android:padding="4dp"
-                app:layout_constraintBottom_toTopOf="@+id/ItemNameIn"
-                app:layout_constraintEnd_toStartOf="@+id/AddBtn"
-                app:layout_constraintHorizontal_bias="0.645"
-                app:layout_constraintStart_toEndOf="@+id/ItemNameIn"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                android:textColor="@color/edittextcolors"
+                app:layout_constraintLeft_toRightOf="@id/ItemNameIn"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/ItemPriceIn"
