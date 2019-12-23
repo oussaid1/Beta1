@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/AppTheme"
     tools:context=".MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:theme="@style/AppTheme">
 
         <RelativeLayout
             android:id="@+id/TitleRL"
@@ -26,6 +28,7 @@
             <TextView
                 android:id="@+id/dateView"
                 android:layout_width="120dp"
+                android:padding="4dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
@@ -39,13 +42,14 @@
                 android:id="@+id/SwitchGuest"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
+                android:textColor="@color/edittextcolors"
                 android:layout_marginTop="8dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="8dp"
-                android:text="Hello World!"
-                android:textColor="@color/grey4" />
+                android:text="@string/guest_mode"
+                 />
 
         </RelativeLayout>
 
@@ -73,7 +77,9 @@
             <TextView
                 android:id="@+id/TotalTodayOut"
                 android:layout_width="80dp"
+                android:padding="4dp"
                 android:layout_height="24dp"
+                android:textColor="@color/edittextcolors"
                 android:layout_below="@id/TotalTodayNm"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
@@ -92,6 +98,8 @@
                 android:id="@+id/QuotaLeftOut"
                 android:layout_width="80dp"
                 android:layout_height="24dp"
+                android:padding="4dp"
+                android:textColor="@color/edittextcolors"
                 android:layout_below="@id/QuotaLeftNm"
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="16dp"
@@ -133,6 +141,7 @@
                 android:id="@+id/Limit"
                 android:layout_width="120dp"
                 android:layout_height="30dp"
+                android:textColor="@color/red"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="42dp"
@@ -143,6 +152,7 @@
                 android:layout_width="120dp"
                 android:layout_height="30dp"
                 android:layout_below="@id/Limit"
+                android:textColor="@color/orange"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="42dp"
@@ -155,9 +165,10 @@
                 android:layout_below="@id/Carefull"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
+                android:textColor="@color/green"
                 android:layout_marginEnd="42dp"
                 android:layout_marginBottom="16dp"
-                android:text="Good To Go"></TextView>
+                android:text="Good To Go"> </TextView>
         </RelativeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -207,11 +218,12 @@
                 android:id="@+id/ItemNameIn"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
+                android:textColor="@color/edittextcolors"
                 android:layout_marginStart="26dp"
-                android:layout_marginLeft="-37dp"
+                android:padding="4dp"
                 android:layout_marginTop="28dp"
                 android:background="@drawable/edittextborders"
-                android:hint="Name here"
+                android:hint="@string/name_here"
                 android:maxLength="16"
                 app:layout_constraintLeft_toRightOf="@id/ItemNameNm"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -224,6 +236,7 @@
                 android:layout_marginTop="27dp"
                 android:layout_marginEnd="19dp"
                 android:layout_marginBottom="2dp"
+                android:padding="4dp"
                 app:layout_constraintBottom_toTopOf="@+id/ItemNameIn"
                 app:layout_constraintEnd_toStartOf="@+id/AddBtn"
                 app:layout_constraintHorizontal_bias="0.645"
@@ -234,11 +247,13 @@
             <EditText
                 android:id="@+id/ItemPriceIn"
                 android:layout_width="140dp"
+                android:padding="4dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="36dp"
                 android:background="@drawable/edittextborders"
                 android:hint="Price in here"
+                android:textColor="@color/edittextcolors"
                 android:inputType="numberDecimal"
                 android:maxLength="8"
                 app:layout_constraintLeft_toRightOf="@id/ItemPriceNm"
@@ -252,8 +267,10 @@
                 android:layout_marginTop="36dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/edittextborders"
-                android:hint="Name here"
+                android:hint="@string/name_here"
+                android:padding="4dp"
                 android:maxLength="16"
+                android:textColor="@color/edittextcolors"
                 app:layout_constraintLeft_toRightOf="@id/molhanoutName"
                 app:layout_constraintTop_toBottomOf="@id/ItemPriceIn" />
 
@@ -266,6 +283,7 @@
                 android:layout_marginEnd="96dp"
                 android:layout_marginBottom="10dp"
                 android:textAlignment="center"
+                android:padding="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
