@@ -1,6 +1,8 @@
 package com.dev_bourheem.hadi;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialogFragment;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.deleteTB_M:
                 DeleteTablecontent();
+                Main2Activity.mainList.clear();
                 return true;
             case R.id.about_M:
                 //funtion here
@@ -100,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String molhanotname = String.valueOf(parent.getItemAtPosition(position));
-                moolhanotNm.setText(" " + molhanotname);
+                moolhanotNm.setText("" + molhanotname);
             }
 
             @Override
@@ -117,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String SpineerText = String.valueOf(parent.getItemAtPosition(position));
-                NameIn.setText(" " + SpineerText);
+                NameIn.setText(""+ SpineerText);
             }
 
             @Override
@@ -141,9 +145,10 @@ public class MainActivity extends AppCompatActivity {
                 if (PriceIn.length() != 0 && NameIn.length() != 0) {
                     openDialogue();
                     LoadDatabase();
-                    getTotal();
-                    GetDbData();
-                    TraficLight();
+                  getTotal();
+                  GetDbData();
+                   TraficLight();
+                    PriceIn.setText("");
                 }else MsgBox("Plz Insert Data");
             }
         });
@@ -334,6 +339,24 @@ public class MainActivity extends AppCompatActivity {
         Alerdialogue AlrtDlg = new Alerdialogue();
         AlrtDlg.show(getSupportFragmentManager(), "Something");
     }
-
+    /*public class Alerdialogue extends AppCompatDialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+            builder.setIcon(R.drawable.ic_error);
+            builder.setTitle("Alert");
+            builder.setMessage("Are You Sure");
+            builder.setPositiveButton("Sure", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    LoadDatabase();
+                    getTotal();
+                    GetDbData();
+                    TraficLight();
+                }
+            });
+            return builder.create();
+        }
+    }*/
 
 }

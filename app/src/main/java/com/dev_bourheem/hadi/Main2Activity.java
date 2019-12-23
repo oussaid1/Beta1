@@ -17,11 +17,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Main2Activity extends AppCompatActivity {
-    TextView DateviewActvt2, back;
+    TextView DateviewActvt2,refresh, back;
     ListView list_VActivity2Var;
     Button ShowListBtn;
     String date2;
-    ArrayList<String> mainList;
+    static ArrayList<String> mainList;
     ArrayAdapter<String> mainListAdapter;
 
     @Override
@@ -31,9 +31,16 @@ public class Main2Activity extends AppCompatActivity {
         // Method prints date to dateview
         DateviewActvt2 = findViewById(R.id.DateviewActvt2);
         list_VActivity2Var = findViewById(R.id.list_VActivity2);
+        refresh=findViewById(R.id.refreshV);
         ShowListBtn = findViewById(R.id.ShowList);
         mainList = new ArrayList<>();
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainListAdapter.notifyDataSetChanged();
 
+            }
+        });
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
