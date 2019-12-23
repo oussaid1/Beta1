@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/TitleRL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/textborderz"
+            android:theme="@style/AppTheme">
+
+            <TextView
+                android:id="@+id/dateView"
+                android:layout_width="120dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edittextborders"
+                />
+
+            <Switch
+                android:id="@+id/SwitchGuest"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="8dp"
+                android:text="Hello World!"
+                android:textColor="@color/grey4" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelLout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TitleRL"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/textborderz">
+
+            <TextView
+                android:id="@+id/TotalTodayNm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Total Today" />
+
+            <TextView
+                android:id="@+id/TotalTodayOut"
+                android:layout_width="80dp"
+                android:layout_height="24dp"
+                android:layout_below="@id/TotalTodayNm"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edittextborders" />
+
+            <TextView
+                android:id="@+id/QuotaLeftNm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@id/TotalTodayNm"
+                android:text=" Left Today" />
+
+            <TextView
+                android:id="@+id/QuotaLeftOut"
+                android:layout_width="80dp"
+                android:layout_height="24dp"
+                android:layout_below="@id/QuotaLeftNm"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@id/TotalTodayOut"
+                android:background="@drawable/edittextborders" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="140dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/BtnRed"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/redlight" />
+
+                <Button
+                    android:id="@+id/BtnOrange"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_below="@id/BtnRed"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/orangelight" />
+
+                <Button
+                    android:id="@+id/BtnGreen"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_below="@id/BtnOrange"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/greenlight"></Button>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/Limit"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="42dp"
+                android:text="Limit Exceeded" />
+
+            <TextView
+                android:id="@+id/Carefull"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/Limit"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="42dp"
+                android:text="Be Carefull " />
+
+            <TextView
+                android:id="@+id/Good"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/Carefull"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="42dp"
+                android:layout_marginBottom="16dp"
+                android:text="Good To Go"></TextView>
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/RelLout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/RelLout2"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/textborderz">
+
+            <TextView
+                android:id="@+id/ItemNameNm"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="28dp"
+                android:text="Item Name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ItemPriceNm"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="56dp"
+                android:text="Item Price"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ItemNameNm" />
+
+            <TextView
+                android:id="@+id/molhanoutName"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginBottom="12dp"
+                android:text="Shop Name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ItemPriceNm" />
+
+            <EditText
+                android:id="@+id/ItemNameIn"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginLeft="-37dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/edittextborders"
+                android:hint="Name here"
+                android:maxLength="16"
+                app:layout_constraintLeft_toRightOf="@id/ItemNameNm"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/ItemNameInSp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="19dp"
+                android:layout_marginBottom="2dp"
+                app:layout_constraintBottom_toTopOf="@+id/ItemNameIn"
+                app:layout_constraintEnd_toStartOf="@+id/AddBtn"
+                app:layout_constraintHorizontal_bias="0.645"
+                app:layout_constraintStart_toEndOf="@+id/ItemNameIn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/ItemPriceIn"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/edittextborders"
+                android:hint="Price in here"
+                android:inputType="numberDecimal"
+                android:maxLength="8"
+                app:layout_constraintLeft_toRightOf="@id/ItemPriceNm"
+                app:layout_constraintTop_toBottomOf="@id/ItemNameIn" />
+
+            <EditText
+                android:id="@+id/molhanoutNameIn"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/edittextborders"
+                android:hint="Name here"
+                android:maxLength="16"
+                app:layout_constraintLeft_toRightOf="@id/molhanoutName"
+                app:layout_constraintTop_toBottomOf="@id/ItemPriceIn" />
+
+            <Spinner
+                android:id="@+id/molhanoutNameInSp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="72dp"
+                android:layout_marginEnd="96dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.525"
+                app:layout_constraintStart_toEndOf="@+id/molhanoutNameIn"
+                app:layout_constraintTop_toBottomOf="@+id/SaveBtn"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/AddBtn"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/buttonstyles"
+                android:text="Add"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/SaveBtn"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/buttonstyles"
+                android:text="Save"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/AddBtn" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+
+</ScrollView>
