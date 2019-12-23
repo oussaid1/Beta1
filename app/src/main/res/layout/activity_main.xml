@@ -29,6 +29,7 @@
                 android:id="@+id/dateView"
                 android:layout_width="120dp"
                 android:padding="4dp"
+                android:textAlignment="center"
                 android:layout_height="24dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
@@ -78,6 +79,7 @@
                 android:id="@+id/TotalTodayOut"
                 android:layout_width="80dp"
                 android:padding="4dp"
+                android:textAlignment="center"
                 android:layout_height="24dp"
                 android:textColor="@color/edittextcolors"
                 android:layout_below="@id/TotalTodayNm"
@@ -99,6 +101,7 @@
                 android:layout_width="80dp"
                 android:layout_height="24dp"
                 android:padding="4dp"
+                android:textAlignment="center"
                 android:textColor="@color/edittextcolors"
                 android:layout_below="@id/QuotaLeftNm"
                 android:layout_marginStart="22dp"
@@ -134,7 +137,7 @@
                     android:layout_height="22dp"
                     android:layout_below="@id/BtnOrange"
                     android:layout_marginTop="22dp"
-                    android:background="@drawable/greenlight"></Button>
+                    android:background="@drawable/greenlight"> </Button>
             </RelativeLayout>
 
             <TextView
