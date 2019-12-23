@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">hadi</string>
+    <string name="app_name">Tahanoty</string>
+    <string name="pricehere">Price in here</string>
+    <string name="name_in_here">Name in here</string>
+    <string name="good">Go On</string>
+    <string name="orange">Carefull</string>
+    <string name="green">Add</string>
+    <string name="show_today_items">Show items</string>
+    <string name="limit_exceeded">Limit Exceeded</string>
+    <string name="carefull">Carefull !</string>
+    <string name="date">15/12/2019</string>
+    <string name="back">Back</string>
+    <string name="product_name">Product Name</string>
+    <string name="view_list">View List</string>
+    <string name="Error_rowinser"> Data Not Inserted Into Table </string>
+    <string name="rowinserted"> Data is Successfully Inserted Into Table </string>
+    <string name="guestmodeon"> You Just Activated Guest Mode </string>
+    <string name="guestmodeoff"> You Are in Normal Mode </string>
+    <string name="guest_mode"> Guest Mode ! </string>
+    <string name="emptyspace">\" \"</string>
+    <string name="product_price">Product Price</string>
+    <string name="left_for_today">Left for Today</string>
+    <string name="total_today">Total Today</string>
+    <string name="mool_hanout">Mool Hanout</string>
+    <string name="refrsh_list">Refrsh List</string>
 </resources>
