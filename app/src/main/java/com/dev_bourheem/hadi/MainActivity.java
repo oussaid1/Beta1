@@ -121,19 +121,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        Guestmode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ischecked = Guestmode.isChecked();
-                if (ischecked) {
-                    MsgBox("Guest Mode On");
-                } else {
-                    MsgBox("Family Mode On");
-                }
-                getTotal();
-                TraficLight();
-            }
-        });
+                Guestmode.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ischecked = Guestmode.isChecked();
+                        if (ischecked) {
+                            MsgBox("Guest Mode On");
+                        } else {
+                            MsgBox("Family Mode On");
+                        }
+                        getTotal();
+                        TraficLight();
+                    }
+                });
 
     }
     public void OpentAvtivity2() {
