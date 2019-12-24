@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DateFormat;
@@ -51,7 +52,9 @@ public class Main2Activity extends AppCompatActivity {
         ShowListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FillmainList();
+                if (MainActivity.dataBaselist.isEmpty())
+                    PrintMessage("Sorry","There is No Data");
+                else FillmainList();
 
             }
         });
@@ -68,5 +71,12 @@ public class Main2Activity extends AppCompatActivity {
     public void FillmainList() {
         mainListAdapter = new ArrayAdapter<>(Main2Activity.this, android.R.layout.simple_list_item_1, MainActivity.dataBaselist);
         list_VActivity2Var.setAdapter(mainListAdapter);
+    }
+    private void PrintMessage(String title, String message) {
+        AlertDialog.Builder newAlert = new AlertDialog.Builder(this);
+        newAlert.setCancelable(true);
+        newAlert.setTitle(title);
+        newAlert.setMessage(message);
+        newAlert.show();
     }
 }
