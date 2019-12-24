@@ -10,6 +10,8 @@
     <color name="green">#64DD17</color>
     <color name="orange">#FF6D00</color>
     <color name="grey4">#BBB9B9</color>
+    <color name="lightRed">#EE4A4A</color>
     <color name="edittextcolors">#07B18B</color>
+
 
 </resources>

@@ -44,7 +44,7 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mainListAdapter.notifyDataSetChanged();
-                MainActivity.dataBaselist.clear();
+               mainList.clear();
             }
         });
         back = findViewById(R.id.back);
@@ -57,10 +57,11 @@ public class Main2Activity extends AppCompatActivity {
         ShowListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GetDbData();
                if (mainList.isEmpty()) {
                     PrintMessage("Sorry", "There is No Data");
-                }else
-                    GetDbData();
+                }
+
                     //FillmainList();
                 //MainActivity.dataBaselist.clear();
             }
@@ -91,7 +92,7 @@ public class Main2Activity extends AppCompatActivity {
         Cursor data = MdbCrtr.GetDBdata();
 
         if (data.getCount() == 0) {
-            PrintMessage("Alert","no data to show");
+            PrintMessage("Alert","no data in table");
         } else if (data.moveToNext()) {
             while (!data.isAfterLast())
                 do {

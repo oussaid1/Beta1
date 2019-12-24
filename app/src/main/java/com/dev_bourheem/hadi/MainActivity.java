@@ -266,6 +266,7 @@ public class MainActivity extends AppCompatActivity {
         boolean del = MDBC.deleteall();
         if (del) MsgBox("deleted all");
         else MsgBox("not deleted");
+        getTotal();
     }
 
     //this method gets the Sum of all elements in ItemPrice Column
