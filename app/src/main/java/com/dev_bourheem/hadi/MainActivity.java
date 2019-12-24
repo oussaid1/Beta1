@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.deleteTB_M:
                 DeleteTablecontent();
-                Main2Activity.mainList.clear();
                 return true;
             case R.id.about_M:
                 //funtion here
@@ -143,12 +142,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (PriceIn.length() != 0 && NameIn.length() != 0) {
-                    openDialogue();
+
                     LoadDatabase();
                   getTotal();
                   GetDbData();
                    TraficLight();
                     PriceIn.setText("");
+                    openDialogue();
                 }else MsgBox("Plz Insert Data");
             }
         });
@@ -197,6 +197,8 @@ public class MainActivity extends AppCompatActivity {
         Molhanot.add(" Hessina ");
         Molhanot.add(" Momo ");
         Molhanot.add(" Belaise ");
+        Molhanot.add(" Unknown ");
+        Molhanot.add(" Add New ");
         MolhntSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
         molhanotSpinner.setAdapter(MolhntSpinnerAdapter);
     }

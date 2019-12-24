@@ -21,7 +21,7 @@ public class Main2Activity extends AppCompatActivity {
     ListView list_VActivity2Var;
     Button ShowListBtn;
     String date2;
-    static ArrayList<String> mainList;
+    //static ArrayList<String> mainList;
     ArrayAdapter<String> mainListAdapter;
 
     @Override
@@ -33,12 +33,12 @@ public class Main2Activity extends AppCompatActivity {
         list_VActivity2Var = findViewById(R.id.list_VActivity2);
         refresh=findViewById(R.id.refreshV);
         ShowListBtn = findViewById(R.id.ShowList);
-        mainList = new ArrayList<>();
+
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mainListAdapter.notifyDataSetChanged();
-
+                MainActivity.dataBaselist.clear();
             }
         });
         back = findViewById(R.id.back);

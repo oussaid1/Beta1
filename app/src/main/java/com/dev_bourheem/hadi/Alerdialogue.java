@@ -16,7 +16,7 @@ public class Alerdialogue extends AppCompatDialogFragment {
         AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
         builder.setIcon(R.drawable.ic_error);
         builder.setTitle("Alert");
-        builder.setMessage("Are You Sure");
+        builder.setMessage("Congrats Item inserted");
                 builder.setPositiveButton("Sure", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
