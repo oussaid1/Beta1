@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         FillArrList();
         FillMolhanot();
         getTotal();
-        GetDbData();
+        //GetDbData();
         TraficLight();
         addBut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
                     LoadDatabase();
                   getTotal();
-                  GetDbData();
+                  // GetDbData();
                    TraficLight();
                     PriceIn.setText("");
                     openDialogue();
@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
 
     //this method gets Cursor data from table products
 //and fills an arraylist dataBaselist
-    public void GetDbData() {
+   /* public void GetDbData() {
         dataBaselist.clear();
         Cursor data = MDBC.GetDBdata();
 
@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         data.close();
-    }
+    }*/
 
     // this method controlls Traffic Light and the text with it
     public void TraficLight() {

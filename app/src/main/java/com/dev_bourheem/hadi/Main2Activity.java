@@ -1,6 +1,7 @@
 package com.dev_bourheem.hadi;
 
 import android.annotation.SuppressLint;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,13 +18,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.dev_bourheem.hadi.MyDataBaseCreator.MsgBox;
+
 public class Main2Activity extends AppCompatActivity {
+    MyDataBaseCreator MdbCrtr;
     TextView DateviewActvt2,refresh, back;
     ListView list_VActivity2Var;
     Button ShowListBtn;
-    String date2;
-    //static ArrayList<String> mainList;
-    ArrayAdapter<String> mainListAdapter;
+    String date2,itemId;
+    ArrayList<String> mainList;
+    ArrayAdapter mainListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,8 @@ public class Main2Activity extends AppCompatActivity {
         list_VActivity2Var = findViewById(R.id.list_VActivity2);
         refresh=findViewById(R.id.refreshV);
         ShowListBtn = findViewById(R.id.ShowList);
-
+        mainList=new ArrayList<>();
+        MdbCrtr=new MyDataBaseCreator(this);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,10 +57,12 @@ public class Main2Activity extends AppCompatActivity {
         ShowListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.dataBaselist.isEmpty())
-                    PrintMessage("Sorry","There is No Data");
-                else FillmainList();
-
+               if (mainList.isEmpty()) {
+                    PrintMessage("Sorry", "There is No Data");
+                }else
+                    GetDbData();
+                    //FillmainList();
+                //MainActivity.dataBaselist.clear();
             }
         });
         GetDate();
@@ -68,15 +75,34 @@ public class Main2Activity extends AppCompatActivity {
         DateviewActvt2.setText("" + date2);
     }
 
-    public void FillmainList() {
-        mainListAdapter = new ArrayAdapter<>(Main2Activity.this, android.R.layout.simple_list_item_1, MainActivity.dataBaselist);
+    /*public void FillmainList() {
+        /*mainListAdapter = new ArrayAdapter<>(Main2Activity.this, android.R.layout.simple_list_item_1, MainActivity.dataBaselist);
         list_VActivity2Var.setAdapter(mainListAdapter);
-    }
+    }*/
     private void PrintMessage(String title, String message) {
         AlertDialog.Builder newAlert = new AlertDialog.Builder(this);
         newAlert.setCancelable(true);
         newAlert.setTitle(title);
         newAlert.setMessage(message);
         newAlert.show();
+    }
+    public void GetDbData() {
+        mainList.clear();
+        Cursor data = MdbCrtr.GetDBdata();
+
+        if (data.getCount() == 0) {
+            PrintMessage("Alert","no data to show");
+        } else if (data.moveToNext()) {
+            while (!data.isAfterLast())
+                do {
+                    itemId = data.getString(data.getColumnIndex("FullItem"));
+
+                    mainList.add(itemId);
+                } while ((data.moveToNext()));
+
+        }
+        data.close();
+        mainListAdapter = new ArrayAdapter<>(Main2Activity.this, android.R.layout.simple_list_item_1,mainList);
+        list_VActivity2Var.setAdapter(mainListAdapter);
     }
 }
