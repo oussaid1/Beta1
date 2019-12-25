@@ -13,7 +13,8 @@ public class Main3Activity extends AppCompatActivity {
 Button loginBtn;
 EditText username,PasswordIn,register;
 String userNm,PassIn;
-String pass="tigmi",usr="ana";
+String pass="123ana",usr="ana";
+    TableCretorForlogin TCF;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ String pass="tigmi",usr="ana";
                 logIn();
             }
         });
+        TCF=new TableCretorForlogin(this);
     }
     public void OpentAvtivity3() {
         final Intent intent2;
@@ -47,5 +49,15 @@ String pass="tigmi",usr="ana";
     }
     public void MsgBox(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void pushUserData(){
+        boolean izdatainserted = TCF.Dirfihdata(userNm,PassIn);
+        if (izdatainserted) MsgBox("Successful registration");
+        else MsgBox("Sorry Couldn't register");
+    }
+    public void awidusrData(){
+
+
     }
 }

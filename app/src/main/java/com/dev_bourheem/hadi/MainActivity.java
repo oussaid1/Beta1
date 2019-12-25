@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.deleteTB_M:
-                DeleteTablecontent();
+                openDialogue();
                 return true;
             case R.id.about_M:
                 //funtion here
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                   // GetDbData();
                    TraficLight();
                     PriceIn.setText("");
-                    openDialogue();
+
                 }else MsgBox("Plz Insert Data");
             }
         });
@@ -277,9 +277,11 @@ public class MainActivity extends AppCompatActivity {
         else
             while (c.moveToNext()) {
                 double itemsSum = c.getInt(0);
+                //closing cursor so as not to bring anything else or ruin sth
                 c.close();
-                GetQuota();
-                TotalOut.setText(" " + itemsSum);
+
+                GetQuota();// she is here just cz we need to calculate total of left quota
+                TotalOut.setText(" " + itemsSum); // prints out total to the total-view
                 LeftOfQuota = Quota - itemsSum;
                 LeftOut.setText(" " + LeftOfQuota);
                 //localDatabase.close();
@@ -342,7 +344,7 @@ public class MainActivity extends AppCompatActivity {
         Alerdialogue AlrtDlg = new Alerdialogue();
         AlrtDlg.show(getSupportFragmentManager(), "Something");
     }
-    /*public class Alerdialogue extends AppCompatDialogFragment {
+    public class Alerdialogue extends AppCompatDialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
@@ -352,14 +354,11 @@ public class MainActivity extends AppCompatActivity {
             builder.setPositiveButton("Sure", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    LoadDatabase();
-                    getTotal();
-                    GetDbData();
-                    TraficLight();
+                    DeleteTablecontent();
                 }
             });
             return builder.create();
         }
-    }*/
+    }
 
 }
