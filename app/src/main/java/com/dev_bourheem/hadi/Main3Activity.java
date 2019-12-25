@@ -40,11 +40,11 @@ String pass="123ana",usr="ana";
     public void logIn(){
         userNm = username.getText().toString();
         PassIn=PasswordIn.getText().toString();
-        if (userNm.equals(usr) && PassIn.equals(pass) )
-
+        if (userNm.equals(usr) && PassIn.equals(pass) ) {
             OpentAvtivity3();
-
-         else    MsgBox("pass not correct");
+            username.setText("");
+            PasswordIn.setText("");
+        } else    MsgBox("pass not correct");
 
     }
     public void MsgBox(String message) {

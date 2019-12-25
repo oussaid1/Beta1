@@ -242,7 +242,6 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="28dp"
-                android:padding="4dp"
                 android:textColor="@color/edittextcolors"
                 app:layout_constraintLeft_toRightOf="@id/ItemNameIn"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -271,7 +270,6 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/edittextborders"
                 android:hint="@string/name_here"
-                android:padding="4dp"
                 android:maxLength="16"
                 android:textColor="@color/edittextcolors"
                 app:layout_constraintLeft_toRightOf="@id/molhanoutName"

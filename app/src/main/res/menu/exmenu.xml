@@ -19,7 +19,7 @@
         android:title="delete Table"
         app:showAsAction="never" />
     <item android:id="@+id/about_M"
-        android:title="about"
+        android:title="Exit"
         app:showAsAction="never">
     </item>
 

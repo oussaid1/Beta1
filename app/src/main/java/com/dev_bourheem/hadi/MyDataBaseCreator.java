@@ -70,13 +70,13 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();
         // Cursor c1 = db.rawQuery("select Item_Name  from " + TABLE_NAME, null);
-
-        return db.rawQuery("select (" +col1+"|| ' =>  ' || "+col2+" ||' From:  ' || "+person+") AS FullItem from "+ TABLE_NAME, null);
+//        return db.rawQuery("select (_ID "+"|| '. ' ||+"+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_NAME, null);
+        return db.rawQuery("select ("+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_NAME, null);
     }
 
     public boolean deleteall(){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("delete from "+ TABLE_NAME);
+        db.execSQL("delete from  "+ TABLE_NAME);
         return true;
     }
     public Cursor GetSum(){

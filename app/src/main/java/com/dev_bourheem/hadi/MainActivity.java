@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 openDialogue();
                 return true;
             case R.id.about_M:
-                //funtion here
+                finish();
                 return true;
             case R.id.ShowList_M:
                 OpentAvtivity2();
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 //function here
                 return true;
             case R.id.Statis_M:
-                OpentAvtivity3();
+                //OpentAvtivity3();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -142,12 +142,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (PriceIn.length() != 0 && NameIn.length() != 0) {
-
-                    LoadDatabase();
-                  getTotal();
-                  // GetDbData();
-                   TraficLight();
-                    PriceIn.setText("");
+                    onDialogue();
+                   // LoadDatabase();
+                 // getTotal();
+                  // TraficLight();
+                  //  PriceIn.setText("");
 
                 }else MsgBox("Plz Insert Data");
             }
@@ -341,24 +340,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openDialogue() {
-        Alerdialogue AlrtDlg = new Alerdialogue();
-        AlrtDlg.show(getSupportFragmentManager(), "Something");
-    }
-    public class Alerdialogue extends AppCompatDialogFragment {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
-            builder.setIcon(R.drawable.ic_error);
-            builder.setTitle("Alert");
-            builder.setMessage("Are You Sure");
-            builder.setPositiveButton("Sure", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    DeleteTablecontent();
-                }
-            });
-            return builder.create();
-        }
+        new AlertDialog.Builder(this)
+                .setTitle("Alert")
+                .setMessage("Do you really want to delete table ?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        DeleteTablecontent();
+                        MsgBox("shit !, you did it ");
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
     }
 
+    public void onDialogue() {
+        new AlertDialog.Builder(this)
+                .setTitle("Alert")
+                .setMessage("Do you really want to add item ?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        LoadDatabase();
+                        getTotal();
+                        TraficLight();
+                        PriceIn.setText("");
+                        //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
+    }
 }
