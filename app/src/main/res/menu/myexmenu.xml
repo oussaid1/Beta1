@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/Add_M"
+        android:title="Add Items To Table"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/SortBy_M"
+        android:title="Sort by"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/delete_M"
+        android:title="delete"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/del_M"
+                android:title="del"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/exit_M"
+        android:title="Exit"
+        app:showAsAction="never" />
 
 </menu>

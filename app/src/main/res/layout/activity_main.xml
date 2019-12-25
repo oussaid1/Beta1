@@ -28,29 +28,27 @@
             <TextView
                 android:id="@+id/dateView"
                 android:layout_width="120dp"
-                android:padding="4dp"
-                android:textAlignment="center"
                 android:layout_height="24dp"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_centerVertical="true"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/edittextborders"
-                />
+                android:padding="4dp"
+                android:textAlignment="center" />
 
             <Switch
                 android:id="@+id/SwitchGuest"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
-                android:textColor="@color/edittextcolors"
-                android:layout_marginTop="8dp"
-                android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/guest_mode"
-                 />
+                android:textColor="@color/edittextcolors" />
 
         </RelativeLayout>
 
@@ -62,9 +60,9 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/textborderz">
 
             <TextView
@@ -78,14 +76,14 @@
             <TextView
                 android:id="@+id/TotalTodayOut"
                 android:layout_width="80dp"
-                android:padding="4dp"
-                android:textAlignment="center"
                 android:layout_height="24dp"
-                android:textColor="@color/edittextcolors"
                 android:layout_below="@id/TotalTodayNm"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/edittextborders" />
+                android:background="@drawable/edittextborders"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/edittextcolors" />
 
             <TextView
                 android:id="@+id/QuotaLeftNm"
@@ -100,14 +98,14 @@
                 android:id="@+id/QuotaLeftOut"
                 android:layout_width="80dp"
                 android:layout_height="24dp"
-                android:padding="4dp"
-                android:textAlignment="center"
-                android:textColor="@color/edittextcolors"
                 android:layout_below="@id/QuotaLeftNm"
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="16dp"
                 android:layout_toRightOf="@id/TotalTodayOut"
-                android:background="@drawable/edittextborders" />
+                android:background="@drawable/edittextborders"
+                android:padding="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/edittextcolors" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -121,63 +119,63 @@
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_marginTop="16dp"
-                    android:visibility="invisible"
-                    android:background="@drawable/redlight" />
+                    android:background="@drawable/redlight"
+                    android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/BtnOrange"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
-                    android:visibility="invisible"
                     android:layout_below="@id/BtnRed"
                     android:layout_marginTop="22dp"
-                    android:background="@drawable/orangelight" />
+                    android:background="@drawable/orangelight"
+                    android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/BtnGreen"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_below="@id/BtnOrange"
-                    android:visibility="invisible"
                     android:layout_marginTop="22dp"
-                    android:background="@drawable/greenlight"> </Button>
+                    android:background="@drawable/greenlight"
+                    android:visibility="invisible"> </Button>
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/Limit"
                 android:layout_width="120dp"
                 android:layout_height="30dp"
-                android:textColor="@color/red"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
-                android:visibility="invisible"
                 android:layout_marginEnd="42dp"
-                android:text="Limit Exceeded" />
+                android:text="Limit Exceeded"
+                android:textColor="@color/red"
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/Carefull"
                 android:layout_width="120dp"
                 android:layout_height="30dp"
-                android:visibility="invisible"
                 android:layout_below="@id/Limit"
-                android:textColor="@color/orange"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="42dp"
-                android:text="Be Carefull " />
+                android:text="Be Carefull "
+                android:textColor="@color/orange"
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/Good"
                 android:layout_width="120dp"
                 android:layout_height="30dp"
-                android:visibility="invisible"
                 android:layout_below="@id/Carefull"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
-                android:textColor="@color/green"
                 android:layout_marginEnd="42dp"
                 android:layout_marginBottom="16dp"
-                android:text="Good To Go"> </TextView>
+                android:text="Good To Go"
+                android:textColor="@color/green"
+                android:visibility="invisible"> </TextView>
         </RelativeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -227,13 +225,13 @@
                 android:id="@+id/ItemNameIn"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
-                android:textColor="@color/edittextcolors"
                 android:layout_marginStart="26dp"
-                android:padding="4dp"
                 android:layout_marginTop="28dp"
                 android:background="@drawable/edittextborders"
                 android:hint="@string/name_here"
                 android:maxLength="16"
+                android:padding="4dp"
+                android:textColor="@color/edittextcolors"
                 app:layout_constraintLeft_toRightOf="@id/ItemNameNm"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -249,15 +247,15 @@
             <EditText
                 android:id="@+id/ItemPriceIn"
                 android:layout_width="140dp"
-                android:padding="4dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="36dp"
                 android:background="@drawable/edittextborders"
                 android:hint="Price in here"
-                android:textColor="@color/edittextcolors"
                 android:inputType="numberDecimal"
                 android:maxLength="8"
+                android:padding="4dp"
+                android:textColor="@color/edittextcolors"
                 app:layout_constraintLeft_toRightOf="@id/ItemPriceNm"
                 app:layout_constraintTop_toBottomOf="@id/ItemNameIn" />
 
@@ -283,8 +281,8 @@
                 android:layout_marginTop="72dp"
                 android:layout_marginEnd="96dp"
                 android:layout_marginBottom="10dp"
-                android:textAlignment="center"
                 android:padding="4dp"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

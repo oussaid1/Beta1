@@ -59,24 +59,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.deleteTB_M:
-                openDialogue();
-                return true;
-            case R.id.about_M:
-                finish();
-                return true;
+
+
             case R.id.ShowList_M:
                 OpentAvtivity2();
-                return true;
-            case R.id.Add_M:
-                //func
-                return true;
-            case R.id.RefreshTB_M:
-                //function here
                 return true;
             case R.id.Statis_M:
                 //OpentAvtivity3();
                 return true;
+            case R.id.contact_M:
+
+                return true;
+            case R.id.exit_M:
+                finish();
+                return true;
+
+
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -175,12 +175,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent1);
     }
 
-    public void OpentAvtivity3() {
-        final Intent intent2;
-        intent2 = new Intent(this, Main3Activity.class);
-        //intent1.putExtra("tarikh" ,date);
-        startActivity(intent2);
-    }
+
 
     public String GetDate() {
         Date currentTime = Calendar.getInstance().getTime();

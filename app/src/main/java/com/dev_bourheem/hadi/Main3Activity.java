@@ -13,7 +13,7 @@ public class Main3Activity extends AppCompatActivity {
 Button loginBtn;
 EditText username,PasswordIn,register;
 String userNm,PassIn;
-String pass="123ana",usr="ana";
+String pass="1234",usr="admin";
     TableCretorForlogin TCF;
 
     @Override
@@ -44,7 +44,7 @@ String pass="123ana",usr="ana";
             OpentAvtivity3();
             username.setText("");
             PasswordIn.setText("");
-        } else    MsgBox("pass not correct");
+       } else    MsgBox("pass not correct");
 
     }
     public void MsgBox(String message) {
