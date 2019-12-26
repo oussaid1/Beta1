@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     public Switch Guestmode;
     public boolean ischecked;
     public double LeftOfQuota, ItemPriceDbl;
-    public String date, ItemNameStr, itemId, Sir;
-    public int Quota;
+    public String date, ItemNameStr, Sir;
+    public double Quota;
     public ArrayList<String> allList;
     public ArrayList<String> Molhanot;
     public ArrayAdapter<String> MolhntSpinnerAdapter;
@@ -225,13 +225,13 @@ public class MainActivity extends AppCompatActivity {
         SpinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, allList);
         ItMSpinner.setAdapter(SpinnerAdapter);
     }
-
-    public int GetQuota() {
+// this method calculates the limit (Quota ) according to the switch and according to the user settings
+    public double GetQuota(double guesQt, double quta) {
         if (Guestmode.isChecked()) {
-            Quota = 600;
+            Quota = guesQt;
             // MsgBox(getString(R.string.guestmodeon));
         } else
-            Quota = 300;
+                Quota = quta;
         // MsgBox(getString(R.string.guestmodeoff));
         return Quota;
     }
@@ -265,32 +265,35 @@ public class MainActivity extends AppCompatActivity {
         boolean del = MDBC.deleteall();
         if (del) MsgBox("deleted all");
         else MsgBox("not deleted");
-        getTotal();
+        getTotal(0,0);
     }
 
     //this method gets the Sum of all elements in ItemPrice Column
-    public void getTotal() {
-
+    public void getTotal(double DefQuota, double DefGuestQuotq) {
+        double itemsSum;
         Cursor c = MDBC.GetSum();
-        if (c.getCount() == 0) MsgBox("No Sum");
-        else
+        if (c.getCount() == 0) {
+            MsgBox("No Sum");
+             itemsSum = 0;
+        } else{
             while (c.moveToNext()) {
-                double itemsSum = c.getInt(0);
+                itemsSum = c.getInt(0);
                 //closing cursor so as not to bring anything else or ruin sth
                 c.close();
-
-                GetQuota();// she is here just cz we need to calculate total of left quota
-                TotalOut.setText(" " + itemsSum); // prints out total to the total-view
+                TotalOut.setText("" + itemsSum);
+                GetQuota(DefQuota,DefGuestQuotq);// she is here just cz we need to calculate total of left quota
+                // prints out total to the total-view
                 LeftOfQuota = Quota - itemsSum;
                 LeftOut.setText(" " + LeftOfQuota);
                 //localDatabase.close();
             }
+        }
     }
 
     //this method gets Cursor data from table products
 //and fills an arraylist dataBaselist
-   /* public void GetDbData() {
-        dataBaselist.clear();
+    public void GetUserQuota() {
+
         Cursor data = MDBC.GetDBdata();
 
         if (data.getCount() == 0) {
@@ -298,14 +301,14 @@ public class MainActivity extends AppCompatActivity {
         } else if (data.moveToNext()) {
             while (!data.isAfterLast())
                 do {
-                    itemId = data.getString(data.getColumnIndex("FullItem"));
-
-                    dataBaselist.add(itemId);
+                   double quota = data.getDouble(data.getColumnIndex("FullItem"));
+                   double Userquota = data.getDouble(data.getColumnIndex("FullItem"));
+                    getTotal()
                 } while ((data.moveToNext()));
 
         }
         data.close();
-    }*/
+    }
 
     // this method controlls Traffic Light and the text with it
     public void TraficLight() {

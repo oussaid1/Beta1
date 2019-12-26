@@ -9,45 +9,41 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-
-public class MyDataBaseCreator extends SQLiteOpenHelper {
+public class UserDataTables extends SQLiteOpenHelper {
     public static final int database_version = 1;
     public static final int ID = 1;
     public static final String database_name= "Students.db";
-    public static final String TABLE_NAME = "Hugs";
-    public static final String col1 = "Item_Name";
-    public static final String col2 = "Item_Price";
+    public static final String TABLE_ISSM = "Hugs";
+    public static final String colon1 = "Item_Name";
+    public static final String colon2 = "Item_Price";
     public static final String person ="MoolHanout";
     public static final String SHOP_TABLE = "shopinfo";
     public static final String SHOP_NAME = "name";
     public static final String SHOP_PHONE = "phone";
     public static final String SHOP_EMAIL ="email";
 
-    public MyDataBaseCreator (Context context){
-        super(context,database_name,null,1);
-    }
+    public UserDataTables(@Nullable Context context) {
 
+        super(context, TABLE_ISSM, null, database_version);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (_ID INTEGER PRIMARY KEY AUTOINCREMENT," + col1 + " TEXT," + col2 + " DOUBLE," + person + " TEXT )");
-       // db.execSQL("CREATE TABLE "+ SHOP_TABLE + "(_ID INTEGER Primary key autoincrement,"+SHOP_NAME +" TEXT, " +SHOP_PHONE +" TEXT, "+SHOP_EMAIL+ " TEXT)");
-
+        db.execSQL("CREATE TABLE " + TABLE_ISSM + " (_ID INTEGER PRIMARY KEY AUTOINCREMENT," + colon1 + " TEXT," + colon2 + " DOUBLE," + person + " TEXT )");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("drop table if exists " + TABLE_NAME);
-       // db.execSQL("drop table if exists molhanotinfo");
-        onCreate(db);
+        db.execSQL("drop table if exists " + TABLE_ISSM);
     }
+
     public boolean InjectData(String Sir ,String name, double prix) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(col1, name);
-        values.put(col2, prix);
+        values.put(colon1, name);
+        values.put(colon2, prix);
         values.put(person,Sir);
-        long insertStaus = db.insert(this.TABLE_NAME, null, values);
+        long insertStaus = db.insert(this.TABLE_ISSM, null, values);
         if (insertStaus == -1)
             return false;
         else
@@ -70,23 +66,24 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();
         //Cursor c1 = db.rawQuery("select* from " + TABLE_NAME+" where MoolHanout ='Momo'",null);
- return db.rawQuery("select (_ID "+"|| '. ' ||+"+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_NAME+" where MoolHanout ='Momo'",null);
+        return db.rawQuery("select (_ID "+"|| '. ' ||+"+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_ISSM+" where MoolHanout ='Momo'",null);
         //return   c1 ;
         //db.rawQuery("select ("+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_NAME  ,null);
     }
 
     public boolean deleteall(){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("delete from  "+ TABLE_NAME);
+        db.execSQL("delete from  "+ TABLE_ISSM);
         return true;
     }
     public Cursor GetSum(){
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cr=db.rawQuery("SELECT SUM (Item_Price) FROM "+TABLE_NAME ,null);
+        Cursor cr=db.rawQuery("SELECT SUM (Item_Price) FROM "+TABLE_ISSM ,null);
         return cr;
     }
 
     public static void MsgBox(String message) {
         Toast.makeText(null, message, Toast.LENGTH_SHORT).show();
     }
+
 }

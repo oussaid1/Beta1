@@ -56,9 +56,8 @@ public class Main2Activity extends AppCompatActivity {
                 return true;
             case R.id.del_M:
                 //func
-                MdbCrtr=new MyDataBaseCreator(this);
-                MdbCrtr.deleteall();
-                PrintMessage("Alert","Oops deleted all");
+                onDialogue();
+
                 return true;
             case R.id.Settingsactvt2:
                 OpentSettings();
@@ -110,6 +109,7 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
         GetDate();
+        MdbCrtr=new MyDataBaseCreator(this);
     }
     public void OpentAvtivity3() {
         final Intent intent2;
@@ -168,6 +168,8 @@ public class Main2Activity extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
 
+                        MdbCrtr.deleteall();
+                        PrintMessage("Alert","Oops deleted all");
                         //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
                     }})
                 .setNegativeButton(android.R.string.no, null).show();
