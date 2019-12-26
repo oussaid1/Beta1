@@ -60,6 +60,9 @@ public class Main2Activity extends AppCompatActivity {
                 MdbCrtr.deleteall();
                 PrintMessage("Alert","Oops deleted all");
                 return true;
+            case R.id.Settingsactvt2:
+                OpentSettings();
+                return true;
 
             case R.id.exit_M:
                 finish();
@@ -111,6 +114,12 @@ public class Main2Activity extends AppCompatActivity {
     public void OpentAvtivity3() {
         final Intent intent2;
         intent2 = new Intent(this, MainActivity.class);
+        //intent1.putExtra("tarikh" ,date);
+        startActivity(intent2);
+    }
+    public void OpentSettings() {
+        final Intent intent2;
+        intent2 = new Intent(this, Settings.class);
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent2);
     }

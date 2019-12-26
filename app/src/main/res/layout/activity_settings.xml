@@ -38,21 +38,21 @@
                     android:text="Settings"
                     android:textAlignment="center"
                     android:textColor="@color/GreenP1" />
+
                 <TextView
                     android:id="@+id/saveBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/thinborders"
                     android:layout_marginBottom="16dp"
-                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/thinborders"
                     android:text=" Save "
                     android:textAlignment="center"
-                    android:textSize="16sp"
-                    />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -77,42 +77,43 @@
                         android:layout_gravity="top"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="4dp"
-                        android:text="Set Your Guest-mode Quota"> </TextView>
+                        android:text="Set Your Quota"> </TextView>
 
                     <EditText
-                        android:id="@+id/loginNmIn"
+                        android:id="@+id/limitQuotaDef"
                         android:layout_width="150dp"
                         android:layout_height="40dp"
                         android:layout_below="@id/loginNm"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/thinborders"
+                        android:hint="define limit here"
                         android:maxLines="1"
                         android:padding="4dp"
-                        android:hint="define your quota here "
+
                         android:textAlignment="center"> </EditText>
 
                     <TextView
                         android:id="@+id/PasswordNm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/loginNmIn"
+                        android:layout_below="@+id/limitQuotaDef"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="1dp"
-                        android:text="Set Your Quota"
+                        android:text="Set Your Guest-mode Quota"
                         android:textSize="16sp"> </TextView>
 
                     <EditText
-                        android:id="@+id/PasswordIn"
+                        android:id="@+id/limitGuestDef"
                         android:layout_width="150dp"
                         android:layout_height="40dp"
                         android:layout_below="@id/PasswordNm"
-                        android:hint="define limit here"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="2dp"
                         android:background="@drawable/thinborders"
+                        android:hint="Guest limit here  "
                         android:inputType="numberDecimal"
                         android:maxLines="1"
                         android:paddingStart="4dp"
@@ -132,54 +133,54 @@
                 android:layout_centerInParent="true"
                 android:layout_marginTop="276dp">
 
-                    <TextView
-                        android:id="@+id/loginNm1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="top"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="4dp"
-                        android:text="Set User-Name"> </TextView>
+                <TextView
+                    android:id="@+id/loginNm1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="Set User-Name"> </TextView>
 
-                    <EditText
-                        android:id="@+id/loginNmIn2"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:layout_below="@id/loginNm1"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="4dp"
-                        android:hint="put username here"
-                        android:background="@drawable/thinborders"
-                        android:maxLines="1"
-                        android:padding="4dp"
-                        android:textAlignment="center"> </EditText>
+                <EditText
+                    android:id="@+id/UserNameDef"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/loginNm1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/thinborders"
+                    android:hint="put username here"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textAlignment="center"> </EditText>
 
-                    <TextView
-                        android:id="@+id/PasswordNm3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/loginNmIn2"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="1dp"
-                        android:text="Set Password"
-                        android:textSize="16sp"> </TextView>
+                <TextView
+                    android:id="@+id/PasswordNm3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/UserNameDef"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="1dp"
+                    android:text="Set Password"
+                    android:textSize="16sp"> </TextView>
 
-                    <EditText
-                        android:id="@+id/PasswordIn4"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:layout_below="@id/PasswordNm3"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/thinborders"
-                        android:inputType="textPassword"
-                        android:hint="password"
-                        android:maxLines="1"
-                        android:paddingStart="4dp"
-                        android:textAlignment="center"> </EditText>
+                <EditText
+                    android:id="@+id/PasswordDef"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/PasswordNm3"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/thinborders"
+                    android:hint="password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:paddingStart="4dp"
+                    android:textAlignment="center"> </EditText>
 
 
             </RelativeLayout>

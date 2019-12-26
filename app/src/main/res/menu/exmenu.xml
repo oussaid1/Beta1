@@ -14,6 +14,10 @@
         android:title="Contact admin"
         app:showAsAction="never"/>
 
+    <item android:id="@+id/Settings"
+        android:title="Settings"
+        app:showAsAction="never"/>
+
     <item android:id="@+id/exit_M"
         android:title="Exit"
         app:showAsAction="never">

@@ -17,9 +17,14 @@
         <menu>
             <item
                 android:id="@+id/del_M"
-                android:title="del"/>
+                android:title="del" />
         </menu>
     </item>
+
+    <item
+        android:id="@+id/Settingsactvt2"
+        android:title="Settings"
+        app:showAsAction="never" />
     <item
         android:id="@+id/exit_M"
         android:title="Exit"

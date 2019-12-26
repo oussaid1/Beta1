@@ -68,7 +68,9 @@ public class MainActivity extends AppCompatActivity {
                 //OpentAvtivity3();
                 return true;
             case R.id.contact_M:
-
+                return true;
+            case R.id.Settings:
+                OpentSettings();
                 return true;
             case R.id.exit_M:
                 finish();
@@ -174,9 +176,12 @@ public class MainActivity extends AppCompatActivity {
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent1);
     }
-
-
-
+    public void OpentSettings() {
+        final Intent intent2;
+        intent2 = new Intent(this, Settings.class);
+        //intent1.putExtra("tarikh" ,date);
+        startActivity(intent2);
+    }
     public String GetDate() {
         Date currentTime = Calendar.getInstance().getTime();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat(" dd / MMM / yy");
