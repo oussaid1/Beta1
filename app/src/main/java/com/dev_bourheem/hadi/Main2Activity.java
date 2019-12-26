@@ -83,7 +83,7 @@ public class Main2Activity extends AppCompatActivity {
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainListAdapter.notifyDataSetChanged();
+               // mainListAdapter.notifyDataSetChanged();
                mainList.clear();
             }
         });
@@ -142,7 +142,6 @@ public class Main2Activity extends AppCompatActivity {
             while (!data.isAfterLast())
                 do {
                     itemId = data.getString(data.getColumnIndex("FullItem"));
-
                     mainList.add(itemId);
                 } while ((data.moveToNext()));
 

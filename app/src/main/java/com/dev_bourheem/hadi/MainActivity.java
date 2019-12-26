@@ -239,8 +239,8 @@ public class MainActivity extends AppCompatActivity {
 // get !!!!!!!!!edditext input to vars.
         String hiTp = PriceIn.getText().toString();
         ItemPriceDbl = Double.parseDouble(PriceIn.getText().toString().trim());
-        ItemNameStr = NameIn.getText().toString();
-        Sir = moolhanotNm.getText().toString();
+        ItemNameStr = NameIn.getText().toString().trim();
+        Sir = moolhanotNm.getText().toString().trim();
 // insert data to database's Table.
         boolean newRowAdded = MDBC.InjectData(Sir, ItemNameStr, ItemPriceDbl);
         if (newRowAdded) {

@@ -12,7 +12,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:verticalScrollbarPosition="right">
 
             <RelativeLayout
                 android:id="@+id/TopLayout"
@@ -22,7 +23,6 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/textborderz"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Info"
+                    android:layout_marginStart="8dp"
+                    android:text="Login Page"
                     android:textAlignment="center"
                     android:textColor="@color/GreenP1" />
 
@@ -46,7 +47,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/TopLayout">
+                android:layout_below="@id/TopLayout"
+                android:layout_marginTop="80dp"
+                android:layout_centerInParent="true">
 
                 <RelativeLayout
                     android:layout_width="180dp"

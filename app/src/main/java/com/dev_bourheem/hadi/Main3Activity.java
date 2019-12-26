@@ -13,7 +13,7 @@ public class Main3Activity extends AppCompatActivity {
 Button loginBtn;
 EditText username,PasswordIn,register;
 String userNm,PassIn;
-String pass="1234",usr="admin";
+String pass="",usr="";
     TableCretorForlogin TCF;
 
     @Override
