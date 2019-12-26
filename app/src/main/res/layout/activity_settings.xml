@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,12 +19,12 @@
                 android:id="@+id/TopLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true">
+                android:layout_marginBottom="16dp">
 
                 <TextView
                     android:id="@+id/back"
@@ -33,12 +32,27 @@
                     android:layout_height="25dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:layout_marginStart="8dp"
                     android:text="Settings"
                     android:textAlignment="center"
                     android:textColor="@color/GreenP1" />
+                <TextView
+                    android:id="@+id/saveBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/thinborders"
+                    android:layout_marginBottom="16dp"
+                    android:layout_centerHorizontal="true"
+                    android:text=" Save "
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    />
 
             </RelativeLayout>
 
@@ -47,14 +61,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/TopLayout"
-                android:layout_marginTop="16dp"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                   >
+                    android:layout_centerHorizontal="true">
 
                     <TextView
                         android:id="@+id/loginNm"
@@ -64,28 +77,21 @@
                         android:layout_gravity="top"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="4dp"
-                        android:text="Username"> </TextView>
+                        android:text="Set Your Guest-mode Quota"> </TextView>
 
                     <EditText
                         android:id="@+id/loginNmIn"
                         android:layout_width="150dp"
                         android:layout_height="40dp"
                         android:layout_below="@id/loginNm"
-                        android:maxLines="1"
-                        android:textAlignment="center"
                         android:layout_centerHorizontal="true"
-                        android:padding="4dp"
-                        android:drawableLeft="@drawable/ic_username"
                         android:layout_marginTop="4dp"
-                        android:background="@drawable/thinborders"> </EditText>
-                    <TextView
-                        android:id="@+id/logihnNm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toStartOf="@id/loginNmIn"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="4dp"
-                        android:text="Username"> </TextView>
+                        android:background="@drawable/thinborders"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:hint="define your quota here "
+                        android:textAlignment="center"> </EditText>
+
                     <TextView
                         android:id="@+id/PasswordNm"
                         android:layout_width="wrap_content"
@@ -95,71 +101,36 @@
                         android:layout_centerVertical="true"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="1dp"
-                        android:text="Password"
+                        android:text="Set Your Quota"
                         android:textSize="16sp"> </TextView>
 
                     <EditText
                         android:id="@+id/PasswordIn"
                         android:layout_width="150dp"
                         android:layout_height="40dp"
+                        android:layout_below="@id/PasswordNm"
+                        android:hint="define limit here"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/thinborders"
+                        android:inputType="numberDecimal"
                         android:maxLines="1"
                         android:paddingStart="4dp"
-                        android:textAlignment="center"
-                        android:layout_below="@id/PasswordNm"
-                        android:drawableStart="@drawable/ic_lock"
-                        android:layout_centerHorizontal="true"
-                        android:inputType="textPassword"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/thinborders"> </EditText>
-
-                    <Button
-                        android:id="@+id/loginBtn"
-                        android:layout_width="100dp"
-                        android:layout_height="28dp"
-                        android:paddingBottom="2dp"
-                        android:layout_below="@id/PasswordIn"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/buttonflat"
-                        android:text=" Login "
-                        android:textColor="@color/black"
-                        android:textSize="16sp">
-
-                    </Button>
+                        android:textAlignment="center"> </EditText>
 
 
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/Register"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="22dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="Register here !"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="10sp" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/layout3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/TopLayout"
+                android:layout_height="374dp"
+                android:layout_below="@id/layout2"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="80dp"
-                android:layout_centerInParent="true">
-
-                <RelativeLayout
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true">
+                android:layout_centerInParent="true"
+                android:layout_marginTop="276dp">
 
                     <TextView
                         android:id="@+id/loginNm1"
@@ -169,20 +140,20 @@
                         android:layout_gravity="top"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="4dp"
-                        android:text="Username"> </TextView>
+                        android:text="Set User-Name"> </TextView>
 
                     <EditText
                         android:id="@+id/loginNmIn2"
                         android:layout_width="150dp"
                         android:layout_height="40dp"
                         android:layout_below="@id/loginNm1"
-                        android:maxLines="1"
-                        android:textAlignment="center"
                         android:layout_centerHorizontal="true"
-                        android:padding="4dp"
-                        android:drawableLeft="@drawable/ic_username"
                         android:layout_marginTop="4dp"
-                        android:background="@drawable/thinborders"> </EditText>
+                        android:hint="put username here"
+                        android:background="@drawable/thinborders"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:textAlignment="center"> </EditText>
 
                     <TextView
                         android:id="@+id/PasswordNm3"
@@ -193,55 +164,24 @@
                         android:layout_centerVertical="true"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="1dp"
-                        android:text="Password"
+                        android:text="Set Password"
                         android:textSize="16sp"> </TextView>
 
                     <EditText
                         android:id="@+id/PasswordIn4"
                         android:layout_width="150dp"
                         android:layout_height="40dp"
+                        android:layout_below="@id/PasswordNm3"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/thinborders"
+                        android:inputType="textPassword"
+                        android:hint="password"
                         android:maxLines="1"
                         android:paddingStart="4dp"
-                        android:textAlignment="center"
-                        android:layout_below="@id/PasswordNm3"
-                        android:drawableStart="@drawable/ic_lock"
-                        android:layout_centerHorizontal="true"
-                        android:inputType="textPassword"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/thinborders"> </EditText>
-
-                    <Button
-                        android:id="@+id/loginBtn5"
-                        android:layout_width="100dp"
-                        android:layout_height="28dp"
-                        android:paddingBottom="2dp"
-                        android:layout_below="@id/PasswordIn4"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/buttonflat"
-                        android:text=" Login "
-                        android:textColor="@color/black"
-                        android:textSize="16sp">
-
-                    </Button>
+                        android:textAlignment="center"> </EditText>
 
 
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/Register1"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="22dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="Register here !"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="10sp" />
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
