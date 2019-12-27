@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         dataBaselist = new ArrayList<>();
         FillArrList();
         FillMolhanot();
-        getTotal();
+
         //GetDbData();
         TraficLight();
         addBut.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     MsgBox("Family Mode On");
                 }
-                getTotal();
+
                 TraficLight();
             }
         });
@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor c = MDBC.GetSum();
         if (c.getCount() == 0) {
             MsgBox("No Sum");
-             itemsSum = 0;
+
         } else{
             while (c.moveToNext()) {
                 itemsSum = c.getInt(0);
@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
                 do {
                    double quota = data.getDouble(data.getColumnIndex("FullItem"));
                    double Userquota = data.getDouble(data.getColumnIndex("FullItem"));
-                    getTotal()
+
                 } while ((data.moveToNext()));
 
         }
@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
 
     // this method controlls Traffic Light and the text with it
     public void TraficLight() {
-        float halfquota = Quota / 2;
+        double halfquota = Quota / 2;
         if (LeftOfQuota < Quota && LeftOfQuota > 0) {
             RedL.setVisibility(View.INVISIBLE);
             RedText.setText("");
@@ -342,7 +342,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void openDialogue() {
+   /* public void openDialogue() {
         new AlertDialog.Builder(this)
                 .setTitle("Alert")
                 .setMessage("Do you really want to delete table ?")
@@ -354,7 +354,7 @@ public class MainActivity extends AppCompatActivity {
                         MsgBox("shit !, you did it ");
                     }})
                 .setNegativeButton(android.R.string.no, null).show();
-    }
+    }*/
 
     public void onDialogue() {
         new AlertDialog.Builder(this)
@@ -365,7 +365,7 @@ public class MainActivity extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         LoadDatabase();
-                        getTotal();
+                        getTotal(400,  800);
                         TraficLight();
                         PriceIn.setText("");
                         //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();

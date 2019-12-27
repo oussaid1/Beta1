@@ -14,8 +14,8 @@ public class UserDataTables extends SQLiteOpenHelper {
     public static final int ID = 1;
     public static final String database_name= "Students.db";
     public static final String TABLE_ISSM = "Hugs";
-    public static final String colon1 = "Item_Name";
-    public static final String colon2 = "Item_Price";
+    public static final String colomnA = "UserQuota";
+    public static final String colomnB= "UserGuestQt";
     public static final String person ="MoolHanout";
     public static final String SHOP_TABLE = "shopinfo";
     public static final String SHOP_NAME = "name";
@@ -24,12 +24,12 @@ public class UserDataTables extends SQLiteOpenHelper {
 
     public UserDataTables(@Nullable Context context) {
 
-        super(context, TABLE_ISSM, null, database_version);
+        super(context, database_name, null, database_version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_ISSM + " (_ID INTEGER PRIMARY KEY AUTOINCREMENT," + colon1 + " TEXT," + colon2 + " DOUBLE," + person + " TEXT )");
+        db.execSQL("CREATE TABLE " + TABLE_ISSM + " (_ID INTEGER PRIMARY KEY AUTOINCREMENT," + colomnA + " Double," +  colomnB + " Double )");
     }
 
     @Override
@@ -37,12 +37,11 @@ public class UserDataTables extends SQLiteOpenHelper {
         db.execSQL("drop table if exists " + TABLE_ISSM);
     }
 
-    public boolean InjectData(String Sir ,String name, double prix) {
+    public boolean InjectData(double usrQt, double GustQt) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(colon1, name);
-        values.put(colon2, prix);
-        values.put(person,Sir);
+        values.put(colomnA, usrQt);
+        values.put(colomnB, GustQt);
         long insertStaus = db.insert(this.TABLE_ISSM, null, values);
         if (insertStaus == -1)
             return false;
@@ -50,25 +49,14 @@ public class UserDataTables extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean InjectDataIntable2(String name, String phone,String email) {
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(SHOP_NAME, name);
-        values.put(SHOP_PHONE, phone);
-        values.put(SHOP_EMAIL,email);
-        long insertStaus = db.insert(this.SHOP_TABLE, null, values);
-        if (insertStaus == -1)
-            return false;
-        else
-            return true;
-    }
 
-    public Cursor GetDBdata() {
+
+    public Cursor AwidQuotDBz() {
         SQLiteDatabase db = this.getReadableDatabase();
-        //Cursor c1 = db.rawQuery("select* from " + TABLE_NAME+" where MoolHanout ='Momo'",null);
-        return db.rawQuery("select (_ID "+"|| '. ' ||+"+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_ISSM+" where MoolHanout ='Momo'",null);
-        //return   c1 ;
+        Cursor Cur = db.rawQuery("select * from " + TABLE_ISSM , null);
+
         //db.rawQuery("select ("+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_NAME  ,null);
+        return Cur ;
     }
 
     public boolean deleteall(){
