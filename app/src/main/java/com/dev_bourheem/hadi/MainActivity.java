@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -25,6 +26,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.dev_bourheem.hadi.Login.ForQuotas;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,12 +38,12 @@ public class MainActivity extends AppCompatActivity {
     MyDataBaseCreator MDBC;
     public Button addBut;
     public EditText NameIn, PriceIn, moolhanotNm;
-    public TextView DateV1, RedL, OrangeL, GreenL, LeftOut, TotalOut, RedText, OrangeText, GreenText;
+    public TextView DateV1, RedL, OrangeL, GreenL, LeftOut, TotalOut, RedText, OrangeText, GreenText,hereisyourQuota;
     public Spinner ItMSpinner, molhanotSpinner;
     public ListView ListaOut;
     public Switch Guestmode;
     public boolean ischecked;
-    public double LeftOfQuota, ItemPriceDbl;
+    public double LeftOfQuota, ItemPriceDbl ,Quotafrom_database, GestQuotafrom_databse;
     public String date, ItemNameStr, Sir;
     public double Quota;
     public ArrayList<String> allList;
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public ArrayAdapter<String> MolhntSpinnerAdapter;
     public static ArrayList<String> dataBaselist;
     public ArrayAdapter<String> SpinnerAdapter;
-
+    ForQuotas forQutaOC;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -96,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         Guestmode = findViewById(R.id.SwitchGuest);
         ListaOut = findViewById(R.id.list_VActivity2);
         OrangeL = findViewById(R.id.BtnOrange);
+        hereisyourQuota = findViewById(R.id.hereisurqt);
         RedL = findViewById(R.id.BtnRed);
         ItMSpinner = findViewById(R.id.ItemNameInSp);
         NameIn = findViewById(R.id.ItemNameIn);
@@ -134,10 +138,10 @@ public class MainActivity extends AppCompatActivity {
         DateV1.setText("" + GetDate());
         MDBC = new MyDataBaseCreator(getApplicationContext());
         dataBaselist = new ArrayList<>();
+        forQutaOC = new ForQuotas(getApplicationContext());
         FillArrList();
         FillMolhanot();
-
-        //GetDbData();
+        GetQuotaFromDataBZ();
         TraficLight();
         addBut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,20 +158,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Guestmode.setOnClickListener(new View.OnClickListener() {
+        Guestmode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ischecked = Guestmode.isChecked();
                 if (ischecked) {
                     MsgBox("Guest Mode On");
                 } else {
                     MsgBox("Family Mode On");
                 }
-
+                GetQuotaFromDataBZ();
                 TraficLight();
             }
         });
-
     }
 
     public void OpentAvtivity2() {
@@ -228,10 +231,12 @@ public class MainActivity extends AppCompatActivity {
 // this method calculates the limit (Quota ) according to the switch and according to the user settings
     public double GetQuota(double guesQt, double quta) {
         if (Guestmode.isChecked()) {
-            Quota = guesQt;
+            Quota = quta;
+            hereisyourQuota.setText("" + quta);
             // MsgBox(getString(R.string.guestmodeon));
-        } else
-                Quota = quta;
+        } else {
+                Quota = guesQt;
+        hereisyourQuota.setText("" + guesQt);}
         // MsgBox(getString(R.string.guestmodeoff));
         return Quota;
     }
@@ -260,16 +265,9 @@ public class MainActivity extends AppCompatActivity {
         newAlert.setMessage(message);
         newAlert.show();
     }
-
-    public void DeleteTablecontent() {
-        boolean del = MDBC.deleteall();
-        if (del) MsgBox("deleted all");
-        else MsgBox("not deleted");
-        getTotal(0,0);
-    }
-
     //this method gets the Sum of all elements in ItemPrice Column
     public void getTotal(double DefQuota, double DefGuestQuotq) {
+
         double itemsSum;
         Cursor c = MDBC.GetSum();
         if (c.getCount() == 0) {
@@ -281,8 +279,7 @@ public class MainActivity extends AppCompatActivity {
                 //closing cursor so as not to bring anything else or ruin sth
                 c.close();
                 TotalOut.setText("" + itemsSum);
-                GetQuota(DefQuota,DefGuestQuotq);// she is here just cz we need to calculate total of left quota
-                // prints out total to the total-view
+                GetQuota(DefQuota,DefGuestQuotq);
                 LeftOfQuota = Quota - itemsSum;
                 LeftOut.setText(" " + LeftOfQuota);
                 //localDatabase.close();
@@ -365,11 +362,32 @@ public class MainActivity extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         LoadDatabase();
-                        getTotal(400,  800);
-                        TraficLight();
                         PriceIn.setText("");
+                        GetQuotaFromDataBZ();
+                        TraficLight();
                         //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
                     }})
                 .setNegativeButton(android.R.string.no, null).show();
     }
+
+    public void GetQuotaFromDataBZ() {
+        forQutaOC = new ForQuotas(getApplicationContext());
+
+        Cursor qfinder = forQutaOC.JibData();
+
+        if (qfinder.getCount() == 0) {
+            MsgBox("No Quota found ");
+
+        } else {
+            while (qfinder.moveToNext()) {
+                Quotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(forQutaOC.col11));
+                GestQuotafrom_databse = qfinder.getDouble(qfinder.getColumnIndex(forQutaOC.col22));
+                getTotal(Quotafrom_database, GestQuotafrom_databse);
+                // setusername.setText(""+GQttoDabz);
+                //setGuestQta.setText(""+QttoDabz);
+            }
+            qfinder.close();
+        }
+    }
+
 }

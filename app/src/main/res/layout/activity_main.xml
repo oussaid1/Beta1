@@ -138,7 +138,8 @@
                     android:layout_below="@id/BtnOrange"
                     android:layout_marginTop="22dp"
                     android:background="@drawable/greenlight"
-                    android:visibility="invisible"> </Button>
+                    android:visibility="invisible"></Button>
+
             </RelativeLayout>
 
             <TextView
@@ -175,7 +176,34 @@
                 android:layout_marginBottom="16dp"
                 android:text="Good To Go"
                 android:textColor="@color/green"
-                android:visibility="invisible"> </TextView>
+                android:visibility="invisible"></TextView>
+
+            <TextView
+                android:id="@+id/hereisurqt"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/QuotaLeftOut"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="42dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="18dp"
+                android:layout_toEndOf="@+id/hereisqt"
+                android:background="@drawable/thinborders"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/hereisqt"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/TotalTodayOut"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="42dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Your Liit is: "
+                android:textAlignment="center" />
+
         </RelativeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -309,6 +337,7 @@
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/buttonstyles"
                 android:text="Save"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/AddBtn" />
         </androidx.constraintlayout.widget.ConstraintLayout>

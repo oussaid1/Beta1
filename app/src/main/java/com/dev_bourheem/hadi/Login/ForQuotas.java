@@ -12,23 +12,23 @@ import androidx.annotation.Nullable;
 import com.dev_bourheem.hadi.Main3Activity;
 
 
-public class LoginClass extends SQLiteOpenHelper {
+public class ForQuotas extends SQLiteOpenHelper {
     public static final int database_version = 1;
     public static final int ID = 1;
-    public static final String database_name= "Teachers.db";
-    public static final String TABLE_NAME = "Hugs";
-    public static final String col1 = "Item_Name";
-    public static final String col2 = "Item_Price";
-    private Main3Activity M3Actvt;
+    public static final String database_name= "girls.db";
+    public static final String TABLE_NAME = "boys";
+    public static final String col11 = "userQuota";
+    public static final String col22 = "userGQuota";
+    //private Main3Activity M3Actvt;
 
-    public LoginClass (Context context){
+    public ForQuotas (Context context){
         super(context,database_name,null,1);
     }
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (_ID INTEGER PRIMARY KEY AUTOINCREMENT," + col1 + " TEXT," + col2 + " TEXT )");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT," + col11 + " DOUBLE," + col22 + " DOUBLE )");
         // db.execSQL("CREATE TABLE "+ SHOP_TABLE + "(_ID INTEGER Primary key autoincrement,"+SHOP_NAME +" TEXT, " +SHOP_PHONE +" TEXT, "+SHOP_EMAIL+ " TEXT)");
 
     }
@@ -39,11 +39,11 @@ public class LoginClass extends SQLiteOpenHelper {
         // db.execSQL("drop table if exists molhanotinfo");
         onCreate(db);
     }
-    public boolean InjectData(String name, String pass) {
+    public boolean InjectData(double Q1, double Q2) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(col1, name);
-        values.put(col2, pass);
+        values.put(col11, Q1);
+        values.put(col22, Q2);
 
         long insertStaus = db.insert(this.TABLE_NAME, null, values);
         if (insertStaus == -1)
@@ -53,10 +53,9 @@ public class LoginClass extends SQLiteOpenHelper {
     }
 
     public Cursor JibData (){
-        M3Actvt= new Main3Activity();
+       // M3Actvt= new Main3Activity();
         SQLiteDatabase db =getReadableDatabase();
-        //Cursor crs = db.rawQuery("select * from "+ usrdataTable , null);
-        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+col1+" ='"+ M3Actvt.userNm+"'" + "AND "+col2+" ='"+M3Actvt.PassIn+"'", null);
-        return c;
+        Cursor b1 = db.rawQuery("select * from " + TABLE_NAME +" ORDER BY id DESC limit 1" ,null );
+        return b1;
     }
 }

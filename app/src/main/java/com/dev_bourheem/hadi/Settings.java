@@ -1,78 +1,76 @@
 package com.dev_bourheem.hadi;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dev_bourheem.hadi.Login.ForQuotas;
 import com.dev_bourheem.hadi.Login.LoginClass;
-
-import static java.lang.Double.valueOf;
 
 public class Settings extends AppCompatActivity {
 
     EditText setQuota, setGuestQta, setusername, setpassword;
+    Button saveBtnforuserQuotas, getSaveBtnforuserdata;
     TextView saveBtnvar;
-    double userQuota, userguestQuota;
-    String Userusername, Userpassword , email ="email";
-    TableCretorForlogin MyTCF;
+    double user_defined_Quota, user_defined_guestQuota;
+    String Userusername, Userpassword, email = "email", text;
+    String filedata = "data";
     LoginClass Lgin;
+    ForQuotas forQutaOC;
+    MainActivity MainObj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
         setQuota = findViewById(R.id.limitQuotaDef);
         setGuestQta = findViewById(R.id.limitGuestDef);
         setusername = findViewById(R.id.UserNameDef);
         setpassword = findViewById(R.id.PasswordDef);
-        saveBtnvar = findViewById(R.id.saveBtn);
-        saveBtnvar.setOnClickListener(new View.OnClickListener() {
+        getSaveBtnforuserdata=findViewById(R.id.saveBtnforuserdata);
+        saveBtnforuserQuotas = findViewById(R.id.saveBtnforquotas);
+        getSaveBtnforuserdata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SetGetTotalandQuota();
-                if (setusername.length()==0 || setpassword.length()==0 || setQuota.length()==0 || setGuestQta.length()==0 )
-                    MsgBox( " Please Insert Data");
-                else
-                LoadDatabase();
-               // SetQuotaz();
+
             }
         });
-        Lgin = new LoginClass(getApplicationContext());
-        MyTCF = new TableCretorForlogin(getApplicationContext());
+        saveBtnforuserQuotas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadQuotatoDatabase(); // injects user defined quota to database ;
+                //GetQuotaFromDataBZ();
+
+            }
+        });
+
     }
 
-
+    // opens main activity where add and total
     public void OpenActiviti() {
         Intent myintent = new Intent(this, MainActivity.class);
         startActivity(myintent);
+
     }
 
-    public void SetQuotaz() {
-        userQuota = valueOf(setQuota.getText().toString().trim());
-        userguestQuota = valueOf(setGuestQta.getText().toString().trim());
-
-
-        Toast.makeText(this, " Quota set successfully" + userQuota, Toast.LENGTH_SHORT).show();
-    }
-
-    public void LoadDatabase() {
-// get !!!!!!!!!edditext input to vars.
-
-        Userusername = setusername.getText().toString().trim();
-        Userpassword = setpassword.getText().toString().trim();
-
-// insert data to database's Table.
-        boolean newRowAdded = Lgin.InjectData("dell", "dell");
+    public void LoadQuotatoDatabase() {
+        forQutaOC = new ForQuotas(getApplicationContext());
+        user_defined_Quota = Double.parseDouble(setQuota.getText().toString().trim());
+        user_defined_guestQuota = Double.parseDouble(setGuestQta.getText().toString().trim());
+        boolean newRowAdded = forQutaOC.InjectData(user_defined_Quota, user_defined_guestQuota);
         if (newRowAdded) {
-            MsgBox(" registered");
-        } else MsgBox("not registered");
+            MsgBox("data saved");
+        } else MsgBox("data not saved");
     }
+
+
     public void MsgBox(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

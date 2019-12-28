@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +15,9 @@ import com.dev_bourheem.hadi.Login.LoginClass;
 
 public class Main3Activity extends AppCompatActivity {
     Button loginBtn;
-    EditText username, PasswordIn, register;
-    public String userNm, PassIn, email;
-    public String usr = "dev", pass = "dev";
+    EditText username, PasswordIn;
+    public String userNm, PassIn;
+    public String usr = "", pass = "";
     LoginClass Lgin;
 
     @Override
@@ -29,49 +30,53 @@ public class Main3Activity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                logIn();
             }
         });
         Lgin = new LoginClass(getApplicationContext());
+        TextView back= findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpentAvtivityMain();
+            }
+        });
     }
 
-    public void OpentAvtivity3() {
+    public void OpentAvtivityMain() {
         final Intent intent2;
         intent2 = new Intent(this, MainActivity.class);
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent2);
     }
-    public void MasterLogin(View v){
+
+    public void MasterLogin(View v) {
 
         userNm = username.getText().toString().trim();
         PassIn = PasswordIn.getText().toString().trim();
         if (userNm.equals(usr) && PassIn.equals(pass)) {
-            OpentAvtivity3();
+            OpentAvtivityMain();
             MsgBox("welcome");
-        }else MsgBox("try again");
+        } else MsgBox("try again");
     }
-    /* public void logIn(){
+
+     public void logIn(){
          userNm = username.getText().toString().trim();
          PassIn=PasswordIn.getText().toString().trim();
          if (userNm.equals(usr) && PassIn.equals(pass) ) {
-             OpentAvtivity3();
+             OpentAvtivityMain();
              username.setText("");
              PasswordIn.setText("");
         } else    MsgBox("pass not correct");
 
-     }*/
+     }
     public void MsgBox(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+   public void pushUserData(){
+    }
 
-  /*  public void pushUserData(){
-        boolean izdatainserted = TCF.Dirfihdata(userNm,PassIn,email);
-        if (izdatainserted) MsgBox("Successful registration");
-        else MsgBox("Sorry Couldn't register");
-    }*/
-
-
-   /* public void CheckIn() {
+   public void CheckIn() {
         userNm = username.getText().toString().trim();
         PassIn = PasswordIn.getText().toString().trim();
         ///SQLiteDatabase db = TCF.getReadableDatabase();
@@ -92,7 +97,7 @@ public class Main3Activity extends AppCompatActivity {
                 String loginUsername = c.getString(1);
                 String loginPassword = c.getString(2);
                 // String loginEmail = c.getString(3);
-                DoIt(loginUsername, loginPassword);
+
                 // showMessage(loginUsername, loginPassword
                         MsgBox("welcome");
             } else {
@@ -103,12 +108,8 @@ public class Main3Activity extends AppCompatActivity {
         }
     }
 
-    public void DoIt(String usr, String pss) {
-        userNm = username.getText().toString().trim();
-        PassIn = PasswordIn.getText().toString().trim();
-        if (userNm.equals(usr)) MsgBox("welcome");
-        else MsgBox("try again");
-    }*/
+
+    }
 
 
-}
+
