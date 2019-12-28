@@ -176,7 +176,7 @@
                 android:layout_marginBottom="16dp"
                 android:text="Good To Go"
                 android:textColor="@color/green"
-                android:visibility="invisible"></TextView>
+                android:visibility="invisible"> </TextView>
 
             <TextView
                 android:id="@+id/hereisurqt"

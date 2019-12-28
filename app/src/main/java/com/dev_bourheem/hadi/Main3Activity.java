@@ -17,7 +17,7 @@ public class Main3Activity extends AppCompatActivity {
     Button loginBtn;
     EditText username, PasswordIn;
     public String userNm, PassIn;
-    public String usr = "", pass = "";
+    public String usr = "dev", pass = "dev";
     LoginClass Lgin;
 
     @Override

@@ -62,14 +62,18 @@ public class Settings extends AppCompatActivity {
 
     public void LoadQuotatoDatabase() {
         forQutaOC = new ForQuotas(getApplicationContext());
-        user_defined_Quota = Double.parseDouble(setQuota.getText().toString().trim());
-        user_defined_guestQuota = Double.parseDouble(setGuestQta.getText().toString().trim());
-        boolean newRowAdded = forQutaOC.InjectData(user_defined_Quota, user_defined_guestQuota);
-        if (newRowAdded) {
-            MsgBox("data saved");
-        } else MsgBox("data not saved");
-    }
+        if (setQuota.length() == 0 || setGuestQta.length() == 0) {
+            MsgBox("please insert data first");
 
+        } else {
+            user_defined_Quota = Double.parseDouble(setQuota.getText().toString().trim());
+            user_defined_guestQuota = Double.parseDouble(setGuestQta.getText().toString().trim());
+            boolean newRowAdded = forQutaOC.InjectData(user_defined_Quota, user_defined_guestQuota);
+            if (newRowAdded) {
+                MsgBox("data saved");
+            } else MsgBox("data not saved");
+        }
+    }
 
     public void MsgBox(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

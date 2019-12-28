@@ -70,8 +70,10 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();
         //Cursor c1 = db.rawQuery("select* from " + TABLE_NAME+" where MoolHanout ='Momo'",null);
- return db.rawQuery("select (_ID "+"|| '. ' ||+"+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_NAME+" where MoolHanout ='Momo'",null);
-        //return   c1 ;
+ // db.rawQuery("select (_ID "+"|| '. ' ||+"+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_NAME+" where MoolHanout ='Momo'",null);
+        Cursor c1= db.rawQuery("select (_ID "+"|| '. ' ||+"+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_NAME ,null);
+
+        return   c1 ;
         //db.rawQuery("select ("+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_NAME  ,null);
     }
 
