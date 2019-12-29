@@ -51,7 +51,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c1 = db.rawQuery("select ( '- ' ||+" + col1 + "|| ' =  ' || " + col2 + " ||'  from :  ' || " + person + ") AS FullItem from " + TABLE_NAME, null);
+        Cursor c1 = db.rawQuery("select ( '- ' ||+" + col1 + "|| ' =  ' || " + col2 + " ||'  من عند :  ' || " + person + ") AS FullItem from " + TABLE_NAME, null);
         return c1;
 
     }
