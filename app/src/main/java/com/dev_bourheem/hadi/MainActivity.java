@@ -354,6 +354,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void GetmolhanotFromdatabase() {
         Molhanot.clear();
+        MolhntSpinnerAdapter.notifyDataSetChanged();
         Molhanot = new ArrayList<>();
         Molhanot.add(getString(R.string.unknown));
 

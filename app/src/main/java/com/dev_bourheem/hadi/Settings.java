@@ -124,9 +124,10 @@ public class Settings extends AppCompatActivity {
             Confirmedpass = confirmpass.getText().toString().trim();
             if (Userpassword.equals(Confirmedpass)) {
                 boolean newRowAdded = Lgin.InjectData(Userusername, Userpassword);
-                if (newRowAdded)
+                if (newRowAdded) {
                     MsgBox("data saved");
-                else MsgBox("data not saved");
+                    OpenActiviti();
+                }else MsgBox("data not saved");
             } else MsgBox("passwords do not match");
         }
     }
