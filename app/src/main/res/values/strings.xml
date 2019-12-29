@@ -27,5 +27,7 @@
     <string name="rusure"> Are You Sure You want to Add this item</string>
     <string name="alertmsgtitle0"> Error</string>
     <string name="alertmsgtitle1"> Goood Job</string>
+    <string name="left_of_quota">Left of Quota</string>
+    <string name="total">Total</string>
 
 </resources>

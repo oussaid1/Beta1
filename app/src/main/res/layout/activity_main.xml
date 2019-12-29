@@ -67,11 +67,12 @@
 
             <TextView
                 android:id="@+id/TotalTodayNm"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:textAlignment="center"
                 android:layout_marginTop="16dp"
-                android:text="Total Today" />
+                android:text="@string/total" />
 
             <TextView
                 android:id="@+id/TotalTodayOut"
@@ -87,21 +88,22 @@
 
             <TextView
                 android:id="@+id/QuotaLeftNm"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:textAlignment="center"
                 android:layout_marginTop="16dp"
-                android:layout_toRightOf="@id/TotalTodayNm"
-                android:text=" Left Today" />
+                android:layout_toEndOf="@id/TotalTodayNm"
+                android:text="@string/left_of_quota" />
 
             <TextView
                 android:id="@+id/QuotaLeftOut"
                 android:layout_width="80dp"
                 android:layout_height="24dp"
                 android:layout_below="@id/QuotaLeftNm"
-                android:layout_marginStart="22dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="16dp"
-                android:layout_toRightOf="@id/TotalTodayOut"
+                android:layout_toEndOf="@id/TotalTodayOut"
                 android:background="@drawable/edittextborders"
                 android:padding="4dp"
                 android:textAlignment="center"
@@ -123,7 +125,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/redlight"
-                    android:visibility="visible" />
+                    android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/BtnOrange"
@@ -133,7 +135,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="22dp"
                     android:background="@drawable/orangelight"
-                    android:visibility="visible" />
+                    android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/BtnGreen"
@@ -143,7 +145,7 @@
                     android:layout_marginTop="22dp"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/greenlight"
-                    android:visibility="visible"> </Button>
+                    android:visibility="invisible"> </Button>
 
             </RelativeLayout>
 
@@ -156,7 +158,7 @@
                 android:layout_marginEnd="42dp"
                 android:text="Limit Exceeded"
                 android:textColor="@color/red"
-                android:visibility="visible"
+                android:visibility="invisible"
                 />
 
             <TextView
@@ -169,7 +171,7 @@
                 android:layout_marginEnd="42dp"
                 android:text="Be Carefull "
                 android:textColor="@color/orange"
-                android:visibility="visible" />
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/Good"
@@ -182,7 +184,7 @@
                 android:layout_marginBottom="16dp"
                 android:text="Good To Go"
                 android:textColor="@color/green"
-                android:visibility="visible"> </TextView>
+                android:visibility="invisible"> </TextView>
 
             <TextView
                 android:id="@+id/hereisurqt"

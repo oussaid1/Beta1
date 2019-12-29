@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         RedL = findViewById(R.id.BtnRed);
 
 
-    ItMSpinner = findViewById(R.id.ItemNameInSp);
+        ItMSpinner = findViewById(R.id.ItemNameInSp);
         NameIn = findViewById(R.id.ItemNameIn);
         moolhanotNm = findViewById(R.id.molhanoutNameIn);
         molhanotSpinner = findViewById(R.id.molhanoutNameInSp);
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void FillMolhanot() {
         Molhanot = new ArrayList<>();
-        Molhanot.add(" Hessina ");
+        Molhanot.add(" Mohamed ");
         Molhanot.add(" Momo ");
         Molhanot.add(" Omar ");
         Molhanot.add(" Unknown ");
@@ -204,23 +204,6 @@ public class MainActivity extends AppCompatActivity {
     public void FillArrList() {
         allList = new ArrayList<String>();
         allList.add(" Milk ");
-        allList.add(" Danon ");
-        allList.add(" Honey ");
-        allList.add(" Sugar ");
-        allList.add(" Bread ");
-        allList.add(" Butter ");
-        allList.add("Laban");
-        allList.add("Tea");
-        allList.add("Yeast");
-        allList.add("Eggs");
-        allList.add("Tuna");
-        allList.add("Oil");
-        allList.add("Jam");
-        allList.add("Tide");
-        allList.add("NoteBooks");
-        allList.add("Spaghetti");
-        allList.add("Pasta");
-        allList.add("Biscuit");
         SpinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, allList);
         ItMSpinner.setAdapter(SpinnerAdapter);
     }
@@ -319,7 +302,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     public void onDialogue() {
         new AlertDialog.Builder(this)
                 .setTitle("Alert")
@@ -329,6 +311,8 @@ public class MainActivity extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         LoadDatabase();
+                        GetItemNameFromdatabase();
+                        GetmolhanotFromdatabase();
                         PriceIn.setText("");
                         GetQuotaFromDataBZ();
                         TraficLight();
@@ -358,4 +342,32 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void GetItemNameFromdatabase() {
+        allList.clear();
+        MDBC = new MyDataBaseCreator(this);
+        Cursor itemNameCursor = MDBC.GetItemNames();
+
+        if (itemNameCursor.getCount() == 0) {
+            MsgBox("No itemNames found");
+
+        } else {
+            while (itemNameCursor.moveToNext()) {
+                allList.add ( itemNameCursor.getString(itemNameCursor.getColumnIndex(MDBC.col1)));
+            }
+        }
+    }
+    public void GetmolhanotFromdatabase() {
+        Molhanot.clear();
+        MDBC = new MyDataBaseCreator(this);
+        Cursor itemNameCursor = MDBC.GetMolhanot();
+
+        if (itemNameCursor.getCount() == 0) {
+            MsgBox("No Shop Name  found");
+
+        } else {
+            while (itemNameCursor.moveToNext()) {
+                Molhanot.add ( itemNameCursor.getString(itemNameCursor.getColumnIndex(MDBC.person)));
+            }
+        }
+    }
 }

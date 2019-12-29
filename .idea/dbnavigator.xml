@@ -81,7 +81,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="C:\Users\ibntoumart\Documents\AndroidStudio\DeviceExplorer\samsung-sm_j710f-52031a03ec7f945f\data\data\com.dev_bourheem.hadi\databases\girls.db" schema="main" />
+            <file path="C:\Users\ibntoumart\Documents\AndroidStudio\DeviceExplorer\samsung-sm_j710f-52031a03ec7f945f\data\data\com.dev_bourheem.hadi\databases\Students.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />

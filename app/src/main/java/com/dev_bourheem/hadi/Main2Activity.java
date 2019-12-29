@@ -81,8 +81,8 @@ public class Main2Activity extends AppCompatActivity {
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // mainListAdapter.notifyDataSetChanged();
                mainList.clear();
+              // mainListAdapter.notifyDataSetChanged();
             }
         });
         back = findViewById(R.id.back);
