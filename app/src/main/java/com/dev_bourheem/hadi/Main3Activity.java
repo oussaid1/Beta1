@@ -30,11 +30,15 @@ public class Main3Activity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logIn();
+                // calls the checking method
+                CheckIn();
             }
         });
-        Lgin = new LoginClass(getApplicationContext());
-        TextView back= findViewById(R.id.back);
+
+        Lgin = new LoginClass(getApplicationContext()); // initializing the LoginClass Object
+
+        // this is the button for the backdoor
+        TextView back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +46,7 @@ public class Main3Activity extends AppCompatActivity {
             }
         });
     }
+// this method opens the main Activity
 
     public void OpentAvtivityMain() {
         final Intent intent2;
@@ -49,67 +54,58 @@ public class Main3Activity extends AppCompatActivity {
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent2);
     }
-
+// this method is  a backdoor for master code incase anthing happens
     public void MasterLogin(View v) {
 
         userNm = username.getText().toString().trim();
         PassIn = PasswordIn.getText().toString().trim();
         if (userNm.equals(usr) && PassIn.equals(pass)) {
-            OpentAvtivityMain();
-            MsgBox("welcome");
-        } else MsgBox("try again");
+        OpentAvtivityMain();
+        MsgBox("welcome master");
+        } else MsgBox("really master");
     }
 
-     public void logIn(){
-         userNm = username.getText().toString().trim();
-         PassIn=PasswordIn.getText().toString().trim();
-         if (userNm.equals(usr) && PassIn.equals(pass) ) {
-             OpentAvtivityMain();
-             username.setText("");
-             PasswordIn.setText("");
-        } else    MsgBox("pass not correct");
-
-     }
     public void MsgBox(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-   public void pushUserData(){
-    }
 
-   public void CheckIn() {
+// this method verefies the Login Credencials
+
+    public void CheckIn() {
         userNm = username.getText().toString().trim();
         PassIn = PasswordIn.getText().toString().trim();
-        ///SQLiteDatabase db = TCF.getReadableDatabase();
-        Cursor c = Lgin.JibData();
-        // To read or show singel data
-        if (PasswordIn.getText().toString().trim().isEmpty() ||
-                username.getText().toString().trim().isEmpty()) {
+        Cursor loginCusor = Lgin.JibLoginCredencials();
+
+        if (username.length() == 0 || PassIn.length() == 0) {
 
             MsgBox("Oops Make Sure You entered both Username and Password");
 
         } else {
 
-            //To check wether the feed username and password match or not
 
+            if (loginCusor.getCount() == 0) {
+                MsgBox("User and Password not set");
+                OpentAvtivityMain();
+            } else
+//put the cursor data into strings ( this cursor gets only the limited fisrt column
+                while (loginCusor.moveToNext()) {
 
-            if (c.moveToNext()) {
+                    String loginUsername = loginCusor.getString(1).toLowerCase();
+                    String loginPassword = loginCusor.getString(2).toLowerCase();
+//To check wether the feed username and password match or not
+                    if (loginUsername.equals(userNm) && loginPassword.equals(PassIn)) {
 
-                String loginUsername = c.getString(1);
-                String loginPassword = c.getString(2);
-                // String loginEmail = c.getString(3);
-
-                // showMessage(loginUsername, loginPassword
+                        OpentAvtivityMain();
                         MsgBox("welcome");
-            } else {
+                    } else
+                        MsgBox("Oops Username and Password do not match");
 
-                MsgBox("Oops Username and Password does not match");
-
-            }
+                }
         }
     }
 
 
-    }
+}
 
 
 

@@ -12,7 +12,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:verticalScrollbarPosition="right">
 
             <RelativeLayout
@@ -52,6 +52,10 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/thinborders"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_centerHorizontal="true">
 
                     <TextView
@@ -72,7 +76,6 @@
                         android:layout_below="@id/userdefquotaNm"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="4dp"
-                        android:text="0"
                         android:background="@drawable/thinborders"
                         android:hint="define limit here"
                         android:maxLines="1"
@@ -98,25 +101,29 @@
                         android:layout_below="@id/PasswordNm"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="2dp"
+                        android:layout_marginBottom="8dp"
                         android:background="@drawable/thinborders"
-                        android:text="0"
                         android:hint="Guest limit here  "
                         android:inputType="numberDecimal"
                         android:maxLines="1"
                         android:paddingStart="4dp"
                         android:textAlignment="center"> </EditText>
 
+
                     <Button
                         android:id="@+id/saveBtnforquotas"
                         android:layout_width="70dp"
                         android:layout_height="30dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="8dp"
-                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="310dp"
+                        android:layout_marginTop="122dp"
+                        android:layout_marginEnd="16dp"
                         android:background="@drawable/buttonflat"
                         android:text=" Save "
-                        android:textColor="@color/black"
                         android:textAlignment="center"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
                 </RelativeLayout>
 
@@ -125,25 +132,15 @@
             <RelativeLayout
                 android:id="@+id/layout3"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="260dp"
                 android:layout_below="@id/layout2"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="276dp">
-
-                <Button
-                    android:id="@+id/saveBtnforuserdata"
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/buttonflat"
-                    android:text=" Save "
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/thinborders"
+                android:layout_marginTop="280dp">
                 <TextView
                     android:id="@+id/loginNm1"
                     android:layout_width="wrap_content"
@@ -162,7 +159,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/thinborders"
-                    android:hint="put username here"
+                    android:hint=" username here"
                     android:maxLines="1"
                     android:padding="4dp"
                     android:textAlignment="center"> </EditText>
@@ -173,7 +170,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/UserNameDef"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="1dp"
                     android:text="Set Password"
@@ -185,14 +181,53 @@
                     android:layout_height="40dp"
                     android:layout_below="@id/PasswordNm3"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/thinborders"
                     android:hint="password"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:paddingStart="4dp"
-                    android:textAlignment="center"> </EditText>
+                    android:textAlignment="center"/>
+                <TextView
+                    android:id="@+id/confirmPassnm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/PasswordDef"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="1dp"
+                    android:text="Confirm Password"
+                    android:textSize="16sp"> </TextView>
+                <EditText
+                    android:id="@+id/ConfirmPassDef"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/confirmPassnm"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/thinborders"
+                    android:hint="password"
+                    android:inputType="textPassword"
+                    android:layout_marginBottom="8dp"
+                    android:maxLines="1"
+                    android:paddingStart="4dp"
+                    android:textAlignment="center">
+                </EditText>
 
+                <Button
+                    android:id="@+id/saveBtnforuserdata"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/buttonflat"
+                    android:text=" Save "
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
             </RelativeLayout>
         </RelativeLayout>

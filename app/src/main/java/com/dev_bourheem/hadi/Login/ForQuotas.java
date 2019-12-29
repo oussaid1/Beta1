@@ -5,15 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-
-import com.dev_bourheem.hadi.Main3Activity;
 
 
 public class ForQuotas extends SQLiteOpenHelper {
-    public static final int database_version = 1;
     public static final int ID = 1;
     public static final String database_name= "girls.db";
     public static final String TABLE_NAME = "boys";

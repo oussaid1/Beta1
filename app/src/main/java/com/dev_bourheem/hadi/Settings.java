@@ -1,12 +1,10 @@
 package com.dev_bourheem.hadi;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,15 +14,12 @@ import com.dev_bourheem.hadi.Login.LoginClass;
 
 public class Settings extends AppCompatActivity {
 
-    EditText setQuota, setGuestQta, setusername, setpassword;
-    Button saveBtnforuserQuotas, getSaveBtnforuserdata;
-    TextView saveBtnvar;
+    EditText setQuota, setGuestQta, setusername, setpassword, confirmpass;
+    Button saveBtnforuserQuotas, SaveBtnforuserdata;
     double user_defined_Quota, user_defined_guestQuota;
-    String Userusername, Userpassword, email = "email", text;
-    String filedata = "data";
+    String Userusername, Userpassword, Confirmedpass;
     LoginClass Lgin;
     ForQuotas forQutaOC;
-    MainActivity MainObj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +29,20 @@ public class Settings extends AppCompatActivity {
         setGuestQta = findViewById(R.id.limitGuestDef);
         setusername = findViewById(R.id.UserNameDef);
         setpassword = findViewById(R.id.PasswordDef);
-        getSaveBtnforuserdata=findViewById(R.id.saveBtnforuserdata);
+        confirmpass = findViewById(R.id.ConfirmPassDef);
+        SaveBtnforuserdata = findViewById(R.id.saveBtnforuserdata);
         saveBtnforuserQuotas = findViewById(R.id.saveBtnforquotas);
-        getSaveBtnforuserdata.setOnClickListener(new View.OnClickListener() {
+        SaveBtnforuserdata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                LoadusertoDatabase();
             }
         });
         saveBtnforuserQuotas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoadQuotatoDatabase(); // injects user defined quota to database ;
-                //GetQuotaFromDataBZ();
+
 
             }
         });
@@ -80,4 +76,27 @@ public class Settings extends AppCompatActivity {
     }
 
 
+    public void LoadusertoDatabase() {
+        Lgin = new LoginClass(getApplicationContext());
+        if ((setusername.length() == 0 || setpassword.length() == 0)) {
+            MsgBox("plz insert user data first");
+
+        } else {
+
+            Userusername = setusername.getText().toString().trim();
+            Userpassword = setpassword.getText().toString().trim();
+            Confirmedpass = confirmpass.getText().toString().trim();
+            if (Userpassword.equals(Confirmedpass)) {
+                boolean newRowAdded = Lgin.InjectData(Userusername, Userpassword);
+                if (newRowAdded)
+                    MsgBox("data saved");
+                else MsgBox("data not saved");
+            } else MsgBox("passwords do not match");
+        }
+    }
 }
+
+/*
+if (setpassword.equals(confirmpass)) {
+                MsgBox("password match");
+ */

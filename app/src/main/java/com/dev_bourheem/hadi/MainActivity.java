@@ -1,7 +1,6 @@
 package com.dev_bourheem.hadi;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -24,7 +23,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.dev_bourheem.hadi.Login.ForQuotas;
 
@@ -33,17 +31,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 public class MainActivity extends AppCompatActivity {
     MyDataBaseCreator MDBC;
     public Button addBut;
     public EditText NameIn, PriceIn, moolhanotNm;
-    public TextView DateV1, RedL, OrangeL, GreenL, LeftOut, TotalOut, RedText, OrangeText, GreenText,hereisyourQuota;
+    public TextView DateV1, RedL, OrangeL, GreenL, LeftOut, TotalOut, RedText, OrangeText, GreenText, hereisyourQuota;
     public Spinner ItMSpinner, molhanotSpinner;
     public ListView ListaOut;
     public Switch Guestmode;
     public boolean ischecked;
-    public double LeftOfQuota, ItemPriceDbl ,Quotafrom_database, GestQuotafrom_databse;
+    public double LeftOfQuota, ItemPriceDbl, Quotafrom_database, GestQuotafrom_databse;
     public String date, ItemNameStr, Sir;
     public double Quota;
     public ArrayList<String> allList;
@@ -52,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<String> dataBaselist;
     public ArrayAdapter<String> SpinnerAdapter;
     ForQuotas forQutaOC;
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -67,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.ShowList_M:
                 OpentAvtivity2();
                 return true;
-            case R.id.Statis_M:
-                //OpentAvtivity3();
-                return true;
+            //case R.id.Statis_M:
+            //OpentAvtivity3();
+            // return true;
             case R.id.contact_M:
                 return true;
             case R.id.Settings:
@@ -78,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.exit_M:
                 finish();
                 return true;
-
-
 
 
             default:
@@ -101,7 +98,9 @@ public class MainActivity extends AppCompatActivity {
         OrangeL = findViewById(R.id.BtnOrange);
         hereisyourQuota = findViewById(R.id.hereisurqt);
         RedL = findViewById(R.id.BtnRed);
-        ItMSpinner = findViewById(R.id.ItemNameInSp);
+
+
+    ItMSpinner = findViewById(R.id.ItemNameInSp);
         NameIn = findViewById(R.id.ItemNameIn);
         moolhanotNm = findViewById(R.id.molhanoutNameIn);
         molhanotSpinner = findViewById(R.id.molhanoutNameInSp);
@@ -126,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String SpineerText = String.valueOf(parent.getItemAtPosition(position));
-                NameIn.setText(""+ SpineerText);
+                NameIn.setText("" + SpineerText);
             }
 
             @Override
@@ -149,12 +148,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (PriceIn.length() != 0 && NameIn.length() != 0) {
                     onDialogue();
-                   // LoadDatabase();
-                 // getTotal();
-                  // TraficLight();
-                  //  PriceIn.setText("");
 
-                }else MsgBox("Plz Insert Data");
+                } else MsgBox("Plz Insert Data");
             }
         });
 
@@ -179,12 +174,14 @@ public class MainActivity extends AppCompatActivity {
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent1);
     }
+
     public void OpentSettings() {
         final Intent intent2;
         intent2 = new Intent(this, Settings.class);
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent2);
     }
+
     public String GetDate() {
         Date currentTime = Calendar.getInstance().getTime();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat(" dd / MMM / yy");
@@ -198,9 +195,8 @@ public class MainActivity extends AppCompatActivity {
         Molhanot = new ArrayList<>();
         Molhanot.add(" Hessina ");
         Molhanot.add(" Momo ");
-        Molhanot.add(" Belaise ");
+        Molhanot.add(" Omar ");
         Molhanot.add(" Unknown ");
-        Molhanot.add(" Add New ");
         MolhntSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
         molhanotSpinner.setAdapter(MolhntSpinnerAdapter);
     }
@@ -228,15 +224,17 @@ public class MainActivity extends AppCompatActivity {
         SpinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, allList);
         ItMSpinner.setAdapter(SpinnerAdapter);
     }
-// this method calculates the limit (Quota ) according to the switch and according to the user settings
+
+    // this method calculates the limit (Quota ) according to the switch and according to the user settings
     public double GetQuota(double guesQt, double quta) {
         if (Guestmode.isChecked()) {
             Quota = quta;
             hereisyourQuota.setText("" + quta);
             // MsgBox(getString(R.string.guestmodeon));
         } else {
-                Quota = guesQt;
-        hereisyourQuota.setText("" + guesQt);}
+            Quota = guesQt;
+            hereisyourQuota.setText("" + guesQt);
+        }
         // MsgBox(getString(R.string.guestmodeoff));
         return Quota;
     }
@@ -265,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
         newAlert.setMessage(message);
         newAlert.show();
     }
+
     //this method gets the Sum of all elements in ItemPrice Column
     public void getTotal(double DefQuota, double DefGuestQuotq) {
 
@@ -273,38 +272,18 @@ public class MainActivity extends AppCompatActivity {
         if (c.getCount() == 0) {
             MsgBox("No Sum");
 
-        } else{
+        } else {
             while (c.moveToNext()) {
                 itemsSum = c.getInt(0);
                 //closing cursor so as not to bring anything else or ruin sth
                 c.close();
                 TotalOut.setText("" + itemsSum);
-                GetQuota(DefQuota,DefGuestQuotq);
+                GetQuota(DefQuota, DefGuestQuotq);
                 LeftOfQuota = Quota - itemsSum;
                 LeftOut.setText(" " + LeftOfQuota);
                 //localDatabase.close();
             }
         }
-    }
-
-    //this method gets Cursor data from table products
-//and fills an arraylist dataBaselist
-    public void GetUserQuota() {
-
-        Cursor data = MDBC.GetDBdata();
-
-        if (data.getCount() == 0) {
-            MsgBox("no data to show");
-        } else if (data.moveToNext()) {
-            while (!data.isAfterLast())
-                do {
-                   double quota = data.getDouble(data.getColumnIndex("FullItem"));
-                   double Userquota = data.getDouble(data.getColumnIndex("FullItem"));
-
-                } while ((data.moveToNext()));
-
-        }
-        data.close();
     }
 
     // this method controlls Traffic Light and the text with it
@@ -339,19 +318,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-   /* public void openDialogue() {
-        new AlertDialog.Builder(this)
-                .setTitle("Alert")
-                .setMessage("Do you really want to delete table ?")
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        DeleteTablecontent();
-                        MsgBox("shit !, you did it ");
-                    }})
-                .setNegativeButton(android.R.string.no, null).show();
-    }*/
 
     public void onDialogue() {
         new AlertDialog.Builder(this)
@@ -366,7 +333,8 @@ public class MainActivity extends AppCompatActivity {
                         GetQuotaFromDataBZ();
                         TraficLight();
                         //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
-                    }})
+                    }
+                })
                 .setNegativeButton(android.R.string.no, null).show();
     }
 

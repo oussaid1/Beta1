@@ -18,9 +18,9 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public static final String col1 = "Item_Name";
     public static final String col2 = "Item_Price";
     public static final String person ="MoolHanout";
-    public static final String SHOP_TABLE = "shopinfo";
-    public static final String SHOP_NAME = "name";
-    public static final String SHOP_PHONE = "phone";
+   // public static final String SHOP_TABLE = "shopinfo";
+   // public static final String SHOP_NAME = "name";
+   // public static final String SHOP_PHONE = "phone";
     public static final String SHOP_EMAIL ="email";
 
     public MyDataBaseCreator (Context context){
@@ -54,7 +54,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean InjectDataIntable2(String name, String phone,String email) {
+   /* public boolean InjectDataIntable2(String name, String phone,String email) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(SHOP_NAME, name);
@@ -65,7 +65,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
             return false;
         else
             return true;
-    }
+    }*/
 
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -74,9 +74,9 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         Cursor c1= db.rawQuery("select (_ID "+"|| '. ' ||+"+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_NAME ,null);
 
         return   c1 ;
-        //db.rawQuery("select ("+col1+"|| ' =  ' || "+col2+" ||'  from:  ' || "+person+") AS FullItem from "+ TABLE_NAME  ,null);
-    }
 
+    }
+//delete table
     public boolean deleteall(){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("delete from  "+ TABLE_NAME);

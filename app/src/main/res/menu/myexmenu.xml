@@ -17,7 +17,7 @@
         <menu>
             <item
                 android:id="@+id/del_M"
-                android:title="del" />
+                android:title="delete" />
         </menu>
     </item>
 

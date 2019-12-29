@@ -12,7 +12,7 @@
         android:topLeftRadius="8dp"
         android:topRightRadius="8dp">
     </corners>
-    <solid android:color="@color/GreenP1"
+    <solid android:color="@color/GreenP2"
         > </solid>
 
 </shape>

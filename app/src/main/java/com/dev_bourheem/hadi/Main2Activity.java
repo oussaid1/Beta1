@@ -24,11 +24,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.dev_bourheem.hadi.MyDataBaseCreator.MsgBox;
-
 public class Main2Activity extends AppCompatActivity {
     MyDataBaseCreator MdbCrtr;
-    MainActivity Mnactvt;
     TextView DateviewActvt2,refresh, back;
     ListView list_VActivity2Var;
     Button ShowListBtn;
@@ -49,11 +46,10 @@ public class Main2Activity extends AppCompatActivity {
             case R.id.Add_M:
                 //func here
                 OpentAvtivity3();
-                PrintMessage("Alert","working");
                 return true;
-            case R.id.SortBy_M:
+            /*case R.id.SortBy_M:
                 PrintMessage("Alert","yes working");
-                return true;
+                return true;*/
             case R.id.del_M:
                 //func
                 onDialogue();
@@ -104,8 +100,7 @@ public class Main2Activity extends AppCompatActivity {
                     PrintMessage("Sorry", "There is No Data");
                 }
 
-                    //FillmainList();
-                //MainActivity.dataBaselist.clear();
+
             }
         });
         GetDate();

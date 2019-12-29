@@ -25,13 +25,13 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="8b7340f5-d556-44c3-b6b0-f1f9da3a89e5">
-        <schema name="main" object-types="constraint, dataset trigger, table, index, view, column" />
+        <schema name="main" object-types="view, table" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="8b7340f5-d556-44c3-b6b0-f1f9da3a89e5">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select "userGQuota" from boys ORDER BY id DESC limit 1 ;]]></console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main">select &quot;userGQuota&quot; from boys ORDER BY id DESC limit 1 ;</console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
