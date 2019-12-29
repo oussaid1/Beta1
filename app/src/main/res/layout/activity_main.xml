@@ -214,13 +214,12 @@
                 android:layout_marginTop="42dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/your_limit_is"
+                android:text="  الكوطة التي حددت"
                 android:textAlignment="center" />
 
         </RelativeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/RelLout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/RelLout2"
@@ -237,7 +236,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="28dp"
-                android:text="@string/item_name"
+                android:text="إسم المنتوج"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -247,7 +246,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="56dp"
-                android:text="@string/item_price"
+                android:text="ثمن المنتوج"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ItemNameNm" />
 
@@ -279,8 +278,8 @@
 
             <Spinner
                 android:id="@+id/ItemNameInSp"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="28dp"
                 android:textColor="@color/edittextcolors"
                 app:layout_constraintLeft_toRightOf="@id/ItemNameIn"
@@ -295,7 +294,7 @@
                 android:background="@drawable/edittextborders"
                 android:hint="@string/price_in_here"
                 android:inputType="numberDecimal"
-                android:maxLength="8"
+                android:maxLength="10"
                 android:maxLines="1"
                 android:padding="4dp"
                 android:textColor="@color/edittextcolors"
@@ -320,8 +319,8 @@
 
             <Spinner
                 android:id="@+id/molhanoutNameInSp"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="72dp"
                 android:layout_marginEnd="96dp"

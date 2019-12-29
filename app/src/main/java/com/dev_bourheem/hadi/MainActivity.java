@@ -33,7 +33,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    public static ArrayList<String> dataBaselist;
     public Button addBut;
     public EditText NameIn, PriceIn, moolhanotNm;
     public TextView DateV1, RedL, OrangeL, GreenL, LeftOut, TotalOut, RedText, OrangeText, GreenText, hereisyourQuota;
@@ -129,20 +128,28 @@ public class MainActivity extends AppCompatActivity {
 
         DateV1.setText("" + GetDate());
         MDBC = new MyDataBaseCreator(getApplicationContext());
-        dataBaselist = new ArrayList<>();
+        Molhanot = new ArrayList<>();
+        allList = new ArrayList<String>();
         forQutaOC = new ForQuotas(getApplicationContext());
-        FillArrList();
-        FillMolhanot();
         GetQuotaFromDataBZ();
         TraficLight();
+        Molhanot.clear();
+        allList.clear();
+        allList.add(getString(R.string.milk));
+        Molhanot.add(getString(R.string.unknown));
+        SpinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, allList);
+        ItMSpinner.setAdapter(SpinnerAdapter);
+        MolhntSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
+        molhanotSpinner.setAdapter(MolhntSpinnerAdapter);
         addBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Molhanot.clear();
+                allList.clear();
                 if (PriceIn.length() != 0 && NameIn.length() != 0) {
                     onDialogue();
 
-                } else MsgBox("Plz Insert Data");
+                } else MsgBox("المرجو ادخال المعلومات");
             }
         });
 
@@ -151,9 +158,9 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ischecked = Guestmode.isChecked();
                 if (ischecked) {
-                    MsgBox("Guest Mode On");
+                    MsgBox("وضع (الضيوف )");
                 } else {
-                    MsgBox("Family Mode On");
+                    MsgBox("الوضع العائلي");
                 }
                 GetQuotaFromDataBZ();
                 TraficLight();
@@ -184,20 +191,7 @@ public class MainActivity extends AppCompatActivity {
         return date;
     }
 
-    public void FillMolhanot() {
-        Molhanot = new ArrayList<>();
-        Molhanot.add(getString(R.string.mohamed));
-        Molhanot.add("Unknown");
-        MolhntSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
-        molhanotSpinner.setAdapter(MolhntSpinnerAdapter);
-    }
 
-    public void FillArrList() {
-        allList = new ArrayList<String>();
-        allList.add(" Milk ");
-        SpinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, allList);
-        ItMSpinner.setAdapter(SpinnerAdapter);
-    }
 
     // this method calculates the limit (Quota ) according to the switch and according to the user settings
     public double GetQuota(double guesQt, double quta) {
@@ -226,17 +220,10 @@ public class MainActivity extends AppCompatActivity {
 // insert data to database's Table.
         boolean newRowAdded = MDBC.InjectData(Sir, ItemNameStr, ItemPriceDbl);
         if (newRowAdded) {
-            MsgBox("data inserted");
-        } else MsgBox("data not inserted");
+            MsgBox("المعلومات تسجلت");
+        } else MsgBox("المعلومات لم تسجل");
     }
 
-    private void PrintMessage(String title, String message) {
-        AlertDialog.Builder newAlert = new AlertDialog.Builder(this);
-        newAlert.setCancelable(true);
-        newAlert.setTitle(title);
-        newAlert.setMessage(message);
-        newAlert.show();
-    }
 
     //this method gets the Sum of all elements in ItemPrice Column
     public void getTotal(double DefQuota, double DefGuestQuotq) {
@@ -244,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         double itemsSum;
         Cursor c = MDBC.GetSum();
         if (c.getCount() == 0) {
-            MsgBox("No Sum");
+            MsgBox("لايوجد مجموع");
 
         } else {
             while (c.moveToNext()) {
@@ -295,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onDialogue() {
         new AlertDialog.Builder(this)
-                .setTitle("Alert")
+                .setTitle("تحذير")
                 .setMessage(getString (R.string.surewannaadd))
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -335,9 +322,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void GetItemNameFromdatabase() {
-        allList.clear();
-        allList = new ArrayList<String>();
-        allList.add(getString(R.string.milk));
+
 
         MDBC = new MyDataBaseCreator(this);
         Cursor itemNameCursor = MDBC.GetItemNames();
@@ -346,17 +331,12 @@ public class MainActivity extends AppCompatActivity {
         else {
             while (itemNameCursor.moveToNext()) {
                 allList.add(itemNameCursor.getString(itemNameCursor.getColumnIndex(MyDataBaseCreator.col1)));
-                SpinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, allList);
-                ItMSpinner.setAdapter(SpinnerAdapter);
+
             }
         }
     }
 
     public void GetmolhanotFromdatabase() {
-        Molhanot.clear();
-        MolhntSpinnerAdapter.notifyDataSetChanged();
-        Molhanot = new ArrayList<>();
-        Molhanot.add(getString(R.string.unknown));
 
         MDBC = new MyDataBaseCreator(this);
         Cursor itemNameCursor = MDBC.GetMolhanot();
@@ -367,8 +347,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             while (itemNameCursor.moveToNext()) {
                 Molhanot.add(itemNameCursor.getString(itemNameCursor.getColumnIndex(MyDataBaseCreator.person)));
-                MolhntSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
-                molhanotSpinner.setAdapter(MolhntSpinnerAdapter);
+
             }
         }
     }

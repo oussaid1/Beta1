@@ -95,15 +95,15 @@ public class Settings extends AppCompatActivity {
     public void LoadQuotatoDatabase() {
         forQutaOC = new ForQuotas(getApplicationContext());
         if (setQuota.length() == 0 || setGuestQta.length() == 0) {
-            MsgBox("please insert data first");
+            MsgBox("المرجو ادخال المعلومات اولا");
 
         } else {
             user_defined_Quota = Double.parseDouble(setQuota.getText().toString().trim());
             user_defined_guestQuota = Double.parseDouble(setGuestQta.getText().toString().trim());
             boolean newRowAdded = forQutaOC.InjectData(user_defined_Quota, user_defined_guestQuota);
             if (newRowAdded) {
-                MsgBox("data saved");
-            } else MsgBox("data not saved");
+                MsgBox("تم الحفظ");
+            } else MsgBox("لم يتم الحفظ");
         }
     }
 
@@ -115,7 +115,7 @@ public class Settings extends AppCompatActivity {
     public void LoadusertoDatabase() {
         Lgin = new LoginClass(getApplicationContext());
         if ((setusername.length() == 0 || setpassword.length() == 0)) {
-            MsgBox("plz insert user data first");
+            MsgBox("المرجو ادخال المعلومات اولا");
 
         } else {
 
@@ -125,10 +125,10 @@ public class Settings extends AppCompatActivity {
             if (Userpassword.equals(Confirmedpass)) {
                 boolean newRowAdded = Lgin.InjectData(Userusername, Userpassword);
                 if (newRowAdded) {
-                    MsgBox("data saved");
+                    MsgBox("تم الحفظ");
                     OpenActiviti();
-                }else MsgBox("data not saved");
-            } else MsgBox("passwords do not match");
+                }else MsgBox("لم يتم الحفظ");
+            } else MsgBox("الإسم والقن غير متطابقان");
         }
     }
 

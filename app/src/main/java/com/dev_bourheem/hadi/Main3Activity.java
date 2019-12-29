@@ -71,12 +71,12 @@ public class Main3Activity extends AppCompatActivity {
         PassIn = PasswordIn.getText().toString().trim();
         Cursor loginCusor = Lgin.JibLoginCredencials();
         if (loginCusor.getCount() == 0) {
-            MsgBox("User and Password not set");
+            MsgBox("اسم المستعمل لم يتم حفظه");
             OpentAvtivityMain();
         }
         if (username.length() == 0 || PassIn.length() == 0) {
 
-            MsgBox("Oops Make Sure You entered both Username and Password");
+            MsgBox("عذرا. لم تدخل المعلومات");
 
         } else {
 
@@ -89,9 +89,9 @@ public class Main3Activity extends AppCompatActivity {
                     if (loginUsername.equals(userNm) && loginPassword.equals(PassIn)) {
 
                         OpentAvtivityMain();
-                        MsgBox("welcome");
+                        MsgBox("مرحبا");
                     } else
-                        MsgBox("Oops Username and Password do not match");
+                        MsgBox("اسم المستخدم او القن غير صحيح / صحيحان");
 
                 }
         }
