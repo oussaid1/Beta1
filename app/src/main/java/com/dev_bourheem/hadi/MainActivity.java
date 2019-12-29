@@ -63,14 +63,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
 
-
             case R.id.ShowList_M:
                 OpentAvtivity2();
-                return true;
-            //case R.id.Statis_M:
-            //OpentAvtivity3();
-            // return true;
-            case R.id.contact_M:
                 return true;
             case R.id.Settings:
                 OpentSettings();
@@ -78,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.exit_M:
                 finish();
                 return true;
-
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -304,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
     public void onDialogue() {
         new AlertDialog.Builder(this)
                 .setTitle("Alert")
-                .setMessage("Do you really want to add item ?")
+                .setMessage(getString (R.string.surewannaadd))
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -327,8 +319,9 @@ public class MainActivity extends AppCompatActivity {
         Cursor qfinder = forQutaOC.JibData();
 
         if (qfinder.getCount() == 0) {
-            MsgBox("No Quota found ");
-
+            MsgBox(getString (R.string.noquotafound));
+            OpentSettings();
+            getTotal(0, 0);
         } else {
             while (qfinder.moveToNext()) {
                 Quotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col11));
@@ -343,15 +336,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void GetItemNameFromdatabase() {
         allList.clear();
+        allList = new ArrayList<String>();
+        allList.add(getString(R.string.milk));
+
         MDBC = new MyDataBaseCreator(this);
         Cursor itemNameCursor = MDBC.GetItemNames();
 
-        if (itemNameCursor.getCount() == 0) {
-            MsgBox("No itemNames found");
-
-        } else {
+        if (itemNameCursor.getCount() == 0) MsgBox(getString(R.string.noitemnamefound));
+        else {
             while (itemNameCursor.moveToNext()) {
                 allList.add(itemNameCursor.getString(itemNameCursor.getColumnIndex(MyDataBaseCreator.col1)));
+                SpinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, allList);
+                ItMSpinner.setAdapter(SpinnerAdapter);
             }
         }
     }
@@ -359,14 +355,13 @@ public class MainActivity extends AppCompatActivity {
     public void GetmolhanotFromdatabase() {
         Molhanot.clear();
         Molhanot = new ArrayList<>();
-        Molhanot.add(getString(R.string.mohamed));
-        Molhanot.add("Unknown");
+        Molhanot.add(getString(R.string.unknown));
 
         MDBC = new MyDataBaseCreator(this);
         Cursor itemNameCursor = MDBC.GetMolhanot();
 
         if (itemNameCursor.getCount() == 0) {
-            MsgBox("No Shop Name  found");
+            MsgBox(getString(R.string.noshopname));
 
         } else {
             while (itemNameCursor.moveToNext()) {

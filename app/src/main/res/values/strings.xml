@@ -64,5 +64,11 @@
     <string name="show_lists">Show Lists</string>
     <string name="settings">Settings</string>
     <string name="exit">Exit</string>
+    <string name="noshopname">No Shop Name  found</string>
+    <string name="unknown">Unknown</string>
+    <string name="noitemnamefound">No itemNames found</string>
+    <string name="milk">Milk</string>
+    <string name="noquotafound">No Quota found , please set your limit</string>
+    <string name="surewannaadd">Do you really want to add item ?</string>
 
 </resources>

@@ -76,6 +76,7 @@
                         android:layout_below="@id/userdefquotaNm"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="4dp"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/thinborders"
                         android:hint="@string/define_limit_here"
                         android:maxLines="1"
@@ -88,7 +89,6 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/limitQuotaDef"
                         android:layout_centerHorizontal="true"
-
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="1dp"
                         android:text="@string/set_your_guest_mode_quota"
