@@ -3,31 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/Add_M"
-        android:title="Add Items To Table"
+        android:title="@string/add_items_to_table"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/SortBy_M"
-        android:title="Sort by"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/delete_M"
-        android:title="Reset"
-        app:showAsAction="never">
-        <menu>
-            <item
-                android:id="@+id/del_M"
-                android:title="delete" />
-        </menu>
-    </item>
-
     <item
         android:id="@+id/Settingsactvt2"
-        android:title="Settings"
+        android:title="@string/settings"
         app:showAsAction="never" />
     <item
         android:id="@+id/exit_M"
-        android:title="Exit"
+        android:title="@string/exit"
         app:showAsAction="never" />
 
 </menu>

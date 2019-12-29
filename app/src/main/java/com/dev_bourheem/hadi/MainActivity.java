@@ -31,8 +31,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
-    MyDataBaseCreator MDBC;
+    public static ArrayList<String> dataBaselist;
     public Button addBut;
     public EditText NameIn, PriceIn, moolhanotNm;
     public TextView DateV1, RedL, OrangeL, GreenL, LeftOut, TotalOut, RedText, OrangeText, GreenText, hereisyourQuota;
@@ -46,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<String> allList;
     public ArrayList<String> Molhanot;
     public ArrayAdapter<String> MolhntSpinnerAdapter;
-    public static ArrayList<String> dataBaselist;
     public ArrayAdapter<String> SpinnerAdapter;
+    MyDataBaseCreator MDBC;
     ForQuotas forQutaOC;
 
 
@@ -193,10 +194,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void FillMolhanot() {
         Molhanot = new ArrayList<>();
-        Molhanot.add(" Mohamed ");
-        Molhanot.add(" Momo ");
-        Molhanot.add(" Omar ");
-        Molhanot.add(" Unknown ");
+        Molhanot.add(getString(R.string.mohamed));
+        Molhanot.add("Unknown");
         MolhntSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
         molhanotSpinner.setAdapter(MolhntSpinnerAdapter);
     }
@@ -332,8 +331,8 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             while (qfinder.moveToNext()) {
-                Quotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(forQutaOC.col11));
-                GestQuotafrom_databse = qfinder.getDouble(qfinder.getColumnIndex(forQutaOC.col22));
+                Quotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col11));
+                GestQuotafrom_databse = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col22));
                 getTotal(Quotafrom_database, GestQuotafrom_databse);
                 // setusername.setText(""+GQttoDabz);
                 //setGuestQta.setText(""+QttoDabz);
@@ -352,12 +351,17 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             while (itemNameCursor.moveToNext()) {
-                allList.add ( itemNameCursor.getString(itemNameCursor.getColumnIndex(MDBC.col1)));
+                allList.add(itemNameCursor.getString(itemNameCursor.getColumnIndex(MyDataBaseCreator.col1)));
             }
         }
     }
+
     public void GetmolhanotFromdatabase() {
         Molhanot.clear();
+        Molhanot = new ArrayList<>();
+        Molhanot.add(getString(R.string.mohamed));
+        Molhanot.add("Unknown");
+
         MDBC = new MyDataBaseCreator(this);
         Cursor itemNameCursor = MDBC.GetMolhanot();
 
@@ -366,7 +370,9 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             while (itemNameCursor.moveToNext()) {
-                Molhanot.add ( itemNameCursor.getString(itemNameCursor.getColumnIndex(MDBC.person)));
+                Molhanot.add(itemNameCursor.getString(itemNameCursor.getColumnIndex(MyDataBaseCreator.person)));
+                MolhntSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
+                molhanotSpinner.setAdapter(MolhntSpinnerAdapter);
             }
         }
     }

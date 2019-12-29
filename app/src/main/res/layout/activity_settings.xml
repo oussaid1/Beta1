@@ -35,7 +35,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Settings"
+                    android:text="@string/settings"
                     android:textAlignment="center"
                     android:textColor="@color/GreenP1" />
 
@@ -67,7 +67,7 @@
                         android:layout_gravity="top"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="4dp"
-                        android:text="Set Your Quota"> </TextView>
+                        android:text="@string/set_your_quota"> </TextView>
 
                     <EditText
                         android:id="@+id/limitQuotaDef"
@@ -77,7 +77,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/thinborders"
-                        android:hint="define limit here"
+                        android:hint="@string/define_limit_here"
                         android:maxLines="1"
                         android:padding="4dp"
                         android:textAlignment="center"> </EditText>
@@ -91,7 +91,7 @@
 
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="1dp"
-                        android:text="Set Your Guest-mode Quota"
+                        android:text="@string/set_your_guest_mode_quota"
                         android:textSize="16sp"> </TextView>
 
                     <EditText
@@ -103,7 +103,7 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/thinborders"
-                        android:hint="Guest limit here  "
+                        android:hint="@string/guest_limit_here"
                         android:inputType="numberDecimal"
                         android:maxLines="1"
                         android:paddingStart="4dp"
@@ -121,7 +121,7 @@
                         android:layout_marginTop="122dp"
                         android:layout_marginEnd="16dp"
                         android:background="@drawable/buttonflat"
-                        android:text=" Save "
+                        android:text="@string/save"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -149,7 +149,7 @@
                     android:layout_gravity="top"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="4dp"
-                    android:text="Set User-Name"> </TextView>
+                    android:text="@string/set_user_name"> </TextView>
 
                 <EditText
                     android:id="@+id/UserNameDef"
@@ -159,7 +159,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/thinborders"
-                    android:hint=" username here"
+                    android:hint="@string/username_here"
                     android:maxLines="1"
                     android:padding="4dp"
                     android:textAlignment="center"> </EditText>
@@ -172,7 +172,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="1dp"
-                    android:text="Set Password"
+                    android:text="@string/set_password"
                     android:textSize="16sp"> </TextView>
 
                 <EditText
@@ -183,7 +183,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/thinborders"
-                    android:hint="password"
+                    android:hint="@string/password"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:paddingStart="4dp"
@@ -196,7 +196,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="1dp"
-                    android:text="Confirm Password"
+                    android:text="@string/confirm_password"
                     android:textSize="16sp"> </TextView>
                 <EditText
                     android:id="@+id/ConfirmPassDef"
@@ -206,7 +206,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/thinborders"
-                    android:hint="password"
+                    android:hint="@string/password"
                     android:inputType="textPassword"
                     android:layout_marginBottom="8dp"
                     android:maxLines="1"
@@ -224,7 +224,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/buttonflat"
-                    android:text=" Save "
+                    android:text="@string/save"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="16sp" />

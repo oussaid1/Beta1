@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,10 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dev_bourheem.hadi.Login.LoginClass;
 
 public class Main3Activity extends AppCompatActivity {
-    Button loginBtn;
-    EditText username, PasswordIn;
     public String userNm, PassIn;
     public String usr = "dev", pass = "dev";
+    Button loginBtn;
+    EditText username, PasswordIn;
     LoginClass Lgin;
 
     @Override
@@ -38,13 +37,7 @@ public class Main3Activity extends AppCompatActivity {
         Lgin = new LoginClass(getApplicationContext()); // initializing the LoginClass Object
 
         // this is the button for the backdoor
-        TextView back = findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OpentAvtivityMain();
-            }
-        });
+
     }
 // this method opens the main Activity
 
@@ -54,14 +47,14 @@ public class Main3Activity extends AppCompatActivity {
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent2);
     }
-// this method is  a backdoor for master code incase anthing happens
-    public void MasterLogin(View v) {
 
+    // this method is  a backdoor for master code incase anthing happens
+    public void MasterLogin(View view) {
         userNm = username.getText().toString().trim();
         PassIn = PasswordIn.getText().toString().trim();
         if (userNm.equals(usr) && PassIn.equals(pass)) {
-        OpentAvtivityMain();
-        MsgBox("welcome master");
+            OpentAvtivityMain();
+            MsgBox("welcome master");
         } else MsgBox("really master");
     }
 

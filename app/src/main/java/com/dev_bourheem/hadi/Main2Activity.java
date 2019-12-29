@@ -26,12 +26,13 @@ import java.util.Date;
 
 public class Main2Activity extends AppCompatActivity {
     MyDataBaseCreator MdbCrtr;
-    TextView DateviewActvt2,refresh, back;
+    TextView DateviewActvt2, back;
     ListView list_VActivity2Var;
     Button ShowListBtn;
-    String date2,itemId;
+    String date2, itemId;
     ArrayList<String> mainList;
     ArrayAdapter mainListAdapter;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -47,18 +48,9 @@ public class Main2Activity extends AppCompatActivity {
                 //func here
                 OpentAvtivity3();
                 return true;
-            /*case R.id.SortBy_M:
-                PrintMessage("Alert","yes working");
-                return true;*/
-            case R.id.del_M:
-                //func
-                onDialogue();
-
-                return true;
             case R.id.Settingsactvt2:
                 OpentSettings();
                 return true;
-
             case R.id.exit_M:
                 finish();
                 return true;
@@ -74,17 +66,9 @@ public class Main2Activity extends AppCompatActivity {
         // Method prints date to dateview
         DateviewActvt2 = findViewById(R.id.DateviewActvt2);
         list_VActivity2Var = findViewById(R.id.list_VActivity2);
-        refresh=findViewById(R.id.refreshV);
         ShowListBtn = findViewById(R.id.ShowList);
-        mainList=new ArrayList<>();
-        MdbCrtr=new MyDataBaseCreator(this);
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               mainList.clear();
-              // mainListAdapter.notifyDataSetChanged();
-            }
-        });
+        mainList = new ArrayList<>();
+        MdbCrtr = new MyDataBaseCreator(this);
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,28 +80,31 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 GetDbData();
-               if (mainList.isEmpty()) {
-                    PrintMessage("Sorry", "There is No Data");
+                if (mainList.isEmpty()) {
+                    PrintMessage(getString(R.string.sorry), getString(R.string.thereisnodata));
                 }
 
 
             }
         });
         GetDate();
-        MdbCrtr=new MyDataBaseCreator(this);
+        MdbCrtr = new MyDataBaseCreator(this);
     }
+
     public void OpentAvtivity3() {
         final Intent intent2;
         intent2 = new Intent(this, MainActivity.class);
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent2);
     }
+
     public void OpentSettings() {
         final Intent intent2;
         intent2 = new Intent(this, Settings.class);
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent2);
     }
+
     public void GetDate() {
         Date currentTime = Calendar.getInstance().getTime();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat(" dd / MMM / yy");
@@ -136,13 +123,14 @@ public class Main2Activity extends AppCompatActivity {
         newAlert.setMessage(message);
         newAlert.show();
     }
+
     public void GetDbData() {
         mainList.clear();
         Cursor data = MdbCrtr.GetDBdata();
 
-        if (data.getCount() == 0) {
-            PrintMessage("Alert","no data in table");
-        } else if (data.moveToNext()) {
+        if (data.getCount() == 0)
+            PrintMessage(getString(R.string.alert), getString(R.string.nodataintable));
+        else if (data.moveToNext()) {
             while (!data.isAfterLast())
                 do {
                     itemId = data.getString(data.getColumnIndex("FullItem"));
@@ -151,22 +139,25 @@ public class Main2Activity extends AppCompatActivity {
 
         }
         data.close();
-        mainListAdapter = new ArrayAdapter<>(Main2Activity.this, android.R.layout.simple_list_item_1,mainList);
+        mainListAdapter = new ArrayAdapter<>(Main2Activity.this, android.R.layout.simple_list_item_1, mainList);
         list_VActivity2Var.setAdapter(mainListAdapter);
     }
+
     public void onDialogue() {
-        new AlertDialog.Builder(this)
-                .setTitle("Alert")
-                .setMessage("Do you really want to delete all data ?")
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.alert));
+        builder.setMessage(getString(R.string.doyourealywantdeletall));
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                    public void onClick(DialogInterface dialog, int whichButton) {
+            public void onClick(DialogInterface dialog, int whichButton) {
 
-                        MdbCrtr.deleteall();
-                        PrintMessage("Alert","Oops deleted all");
-                        //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
-                    }})
-                .setNegativeButton(android.R.string.no, null).show();
+                MdbCrtr.deleteall();
+                PrintMessage(getString(R.string.alert), getString(R.string.oopsdeletedall));
+                //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, null);
+        builder.show();
     }
 }

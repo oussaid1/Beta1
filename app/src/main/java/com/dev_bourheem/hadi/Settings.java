@@ -1,12 +1,18 @@
 package com.dev_bourheem.hadi;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev_bourheem.hadi.Login.ForQuotas;
@@ -20,7 +26,34 @@ public class Settings extends AppCompatActivity {
     String Userusername, Userpassword, Confirmedpass;
     LoginClass Lgin;
     ForQuotas forQutaOC;
+    MyDataBaseCreator MDBC;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.settingsmenu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.Additems:
+                OpenActiviti();
+                //func here
+                return true;
+            case R.id.ShowList_M:
+                OpenActivitilist();
+            case R.id.reset:
+                onDialogue2();
+                return true;
+            case R.id.exit_M:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +84,12 @@ public class Settings extends AppCompatActivity {
 
     // opens main activity where add and total
     public void OpenActiviti() {
-        Intent myintent = new Intent(this, MainActivity.class);
-        startActivity(myintent);
-
+        Intent myintdsent = new Intent(this, MainActivity.class);
+        startActivity(myintdsent);
+    }
+    public void OpenActivitilist() {
+        Intent myintenct = new Intent(this, Main2Activity.class);
+        startActivity(myintenct);
     }
 
     public void LoadQuotatoDatabase() {
@@ -94,9 +130,37 @@ public class Settings extends AppCompatActivity {
             } else MsgBox("passwords do not match");
         }
     }
+
+    public void ResetAll() {
+        Lgin = new LoginClass(getApplicationContext());
+        forQutaOC = new ForQuotas(getApplicationContext());
+        MDBC = new MyDataBaseCreator(getApplicationContext());
+        Lgin.deleteall();
+        forQutaOC.deleteall();
+        MDBC.deleteall();
+    }
+    private void PrintMessage(String title, String message) {
+        AlertDialog.Builder newAlert = new AlertDialog.Builder(this);
+        newAlert.setCancelable(true);
+        newAlert.setTitle(title);
+        newAlert.setMessage(message);
+        newAlert.show();
+    }
+    public void onDialogue2() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.alert));
+        builder.setMessage(getString(R.string.doyourealywantdeletall));
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int whichButton) {
+                ResetAll();
+                PrintMessage(getString(R.string.alert), getString(R.string.oopsdeletedall));
+
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, null);
+        builder.show();
+    }
 }
 
-/*
-if (setpassword.equals(confirmpass)) {
-                MsgBox("password match");
- */

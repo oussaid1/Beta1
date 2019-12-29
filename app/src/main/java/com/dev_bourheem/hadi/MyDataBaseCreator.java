@@ -44,11 +44,8 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         values.put(col1, name);
         values.put(col2, prix);
         values.put(person, Sir);
-        long insertStaus = db.insert(this.TABLE_NAME, null, values);
-        if (insertStaus == -1)
-            return false;
-        else
-            return true;
+        long insertStaus = db.insert(TABLE_NAME, null, values);
+        return insertStaus != -1;
     }
 
 
@@ -65,6 +62,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         db.execSQL("delete from  " + TABLE_NAME);
         return true;
     }
+
     // this mehotd gets the sum of all Item_price elements
     public Cursor GetSum() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -72,14 +70,15 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         return cr;
     }
 
-    public  Cursor GetItemNames() {
-       SQLiteDatabase db = this.getReadableDatabase();
-       Cursor cur = db.rawQuery("select distinct "+ col1 +" from "+TABLE_NAME,null);
-       return cur;
-    }
-    public  Cursor GetMolhanot() {
+    public Cursor GetItemNames() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cur = db.rawQuery("select distinct "+ person +" from "+TABLE_NAME,null);
+        Cursor cur = db.rawQuery("select distinct " + col1 + " from " + TABLE_NAME, null);
+        return cur;
+    }
+
+    public Cursor GetMolhanot() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cur = db.rawQuery("select distinct " + person + " from " + TABLE_NAME, null);
         return cur;
     }
 
