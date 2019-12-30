@@ -11,7 +11,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev_bourheem.hadi.Login.LoginClass;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 public class Main3Activity extends AppCompatActivity {
     public String userNm, PassIn;
@@ -19,7 +23,7 @@ public class Main3Activity extends AppCompatActivity {
     Button loginBtn;
     EditText username, PasswordIn;
     LoginClass Lgin;
-    AdView adView;
+    AdView adView,nAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,14 @@ public class Main3Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
         PasswordIn = findViewById(R.id.PasswordIn);
         username = findViewById(R.id.loginNmIn);
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        nAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        nAdView.loadAd(adRequest);
         loginBtn = findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:theme="@style/AppTheme">
 
         <RelativeLayout
@@ -31,11 +31,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
-                android:maxLines="1"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/edittextborders"
+                android:maxLines="1"
                 android:padding="4dp"
                 android:textAlignment="center" />
 
@@ -71,19 +71,19 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textAlignment="center"
                 android:layout_marginTop="16dp"
-                android:text="@string/total" />
+                android:text="@string/total"
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/TotalTodayOut"
                 android:layout_width="80dp"
                 android:layout_height="24dp"
-                android:maxLines="1"
                 android:layout_below="@id/TotalTodayNm"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edittextborders"
+                android:maxLines="1"
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/edittextcolors" />
@@ -93,10 +93,10 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:textAlignment="center"
                 android:layout_marginTop="16dp"
                 android:layout_toEndOf="@id/TotalTodayNm"
-                android:text="@string/left_of_quota" />
+                android:text="@string/left_of_quota"
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/QuotaLeftOut"
@@ -105,9 +105,9 @@
                 android:layout_below="@id/QuotaLeftNm"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="16dp"
-                android:maxLines="1"
                 android:layout_toEndOf="@id/TotalTodayOut"
                 android:background="@drawable/edittextborders"
+                android:maxLines="1"
                 android:padding="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/edittextcolors" />
@@ -116,8 +116,8 @@
                 android:layout_width="40dp"
                 android:layout_height="140dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="8dp"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/thinborders"
                 android:orientation="vertical">
 
@@ -125,8 +125,8 @@
                     android:id="@+id/BtnRed"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
-                    android:layout_marginTop="16dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/redlight"
                     android:visibility="invisible" />
 
@@ -145,10 +145,10 @@
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_below="@id/BtnOrange"
-                    android:layout_marginTop="22dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="22dp"
                     android:background="@drawable/greenlight"
-                    android:visibility="invisible"> </Button>
+                    android:visibility="invisible"></Button>
 
             </RelativeLayout>
 
@@ -158,12 +158,11 @@
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
-                android:textAlignment="center"
                 android:layout_marginEnd="52dp"
                 android:text="@string/limit_exceeded"
+                android:textAlignment="center"
                 android:textColor="@color/red"
-                android:visibility="invisible"
-                />
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/Carefull"
@@ -172,9 +171,9 @@
                 android:layout_below="@id/Limit"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
-                android:textAlignment="center"
                 android:layout_marginEnd="52dp"
                 android:text="@string/be_carefull"
+                android:textAlignment="center"
                 android:textColor="@color/orange"
                 android:visibility="invisible" />
 
@@ -185,12 +184,12 @@
                 android:layout_below="@id/Carefull"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
-                android:textAlignment="center"
                 android:layout_marginEnd="52dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/good_to_go"
+                android:textAlignment="center"
                 android:textColor="@color/green"
-                android:visibility="invisible"> </TextView>
+                android:visibility="invisible"></TextView>
 
             <TextView
                 android:id="@+id/hereisqt"
@@ -201,11 +200,11 @@
                 android:layout_marginTop="42dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="18dp"
-                android:textColor="@color/orange"
-                android:maxLines="1"
                 android:layout_toEndOf="@+id/hereisurqt"
+                android:maxLines="1"
                 android:text="  الكوطة  المحددة"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/orange" />
 
             <TextView
                 android:id="@+id/hereisurqt"
@@ -224,6 +223,7 @@
         </RelativeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/RelLout2"
@@ -271,14 +271,14 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="28dp"
-                android:maxLines="1"
-                android:textAlignment="center"
                 android:background="@drawable/edittextborders"
                 android:hint="@string/name_here"
                 android:maxLength="16"
+                android:maxLines="1"
                 android:padding="4dp"
-                android:paddingEnd="8dp"
                 android:paddingStart="4dp"
+                android:paddingEnd="8dp"
+                android:textAlignment="center"
                 android:textColor="@color/edittextcolors"
                 app:layout_constraintLeft_toRightOf="@id/ItemNameNm"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -313,14 +313,14 @@
                 android:layout_width="140dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="26dp"
-                android:padding="4dp"
                 android:layout_marginTop="36dp"
                 android:layout_marginBottom="12dp"
-                android:maxLines="1"
-                android:textAlignment="center"
                 android:background="@drawable/edittextborders"
                 android:hint="@string/name_here"
                 android:maxLength="16"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:textAlignment="center"
                 android:textColor="@color/edittextcolors"
                 app:layout_constraintLeft_toRightOf="@id/molhanoutName"
                 app:layout_constraintTop_toBottomOf="@id/ItemPriceIn" />
@@ -367,7 +367,27 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/main2"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_below="@id/mainl"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp">
 
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@color/GreenP2"
+                app:adSize="BANNER"
+                app:adUnitId="ca-app-pub-9838187586217611/4223171455"
+                app:layout_constraintBottom_toBottomOf="parent"> </com.google.android.gms.ads.AdView>
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </ScrollView>

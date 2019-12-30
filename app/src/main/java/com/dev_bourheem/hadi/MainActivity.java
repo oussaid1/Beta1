@@ -25,6 +25,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev_bourheem.hadi.Login.ForQuotas;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -49,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     public ArrayAdapter<String> SpinnerAdapter;
     MyDataBaseCreator MDBC;
     ForQuotas forQutaOC;
-
+AdView mAdView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,7 +95,14 @@ public class MainActivity extends AppCompatActivity {
         OrangeL = findViewById(R.id.BtnOrange);
         hereisyourQuota = findViewById(R.id.hereisurqt);
         RedL = findViewById(R.id.BtnRed);
-
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         ItMSpinner = findViewById(R.id.ItemNameInSp);
         NameIn = findViewById(R.id.ItemNameIn);
