@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
     public String GetDate() {
         Date currentTime = Calendar.getInstance().getTime();
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat(" dd / MMM / yy");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         date = dateFormat.format(currentTime);
         ///Intent dateIntent= new Intent(date);
         //startActivity(dateIntent);
@@ -213,12 +213,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void LoadDatabase() {
 // get !!!!!!!!!edditext input to vars.
+        String d = GetDate();
         String hiTp = PriceIn.getText().toString();
         ItemPriceDbl = Double.parseDouble(PriceIn.getText().toString().trim());
         ItemNameStr = NameIn.getText().toString().trim();
         Sir = moolhanotNm.getText().toString().trim();
 // insert data to database's Table.
-        boolean newRowAdded = MDBC.InjectData(Sir, ItemNameStr, ItemPriceDbl);
+        boolean newRowAdded = MDBC.InjectData(Sir, ItemNameStr, ItemPriceDbl,d);
         if (newRowAdded) {
             MsgBox("المعلومات تسجلت");
         } else MsgBox("المعلومات لم تسجل");
@@ -290,11 +291,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         LoadDatabase();
                         GetItemNameFromdatabase();
-                        GetmolhanotFromdatabase();
-                        PriceIn.setText("");
-                        GetQuotaFromDataBZ();
-                        TraficLight();
-                        //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+                       GetmolhanotFromdatabase();
+                       PriceIn.setText("");
+                       GetQuotaFromDataBZ();
+                       TraficLight();
+                       Toast.makeText(MainActivity.this, "تم", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(android.R.string.no, null).show();

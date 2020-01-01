@@ -82,7 +82,7 @@
                 android:maxLines="1"
                 android:layout_below="@id/TotalTodayNm"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="2dp"
                 android:background="@drawable/edittextborders"
                 android:padding="4dp"
                 android:textAlignment="center"
@@ -92,11 +92,11 @@
                 android:id="@+id/QuotaLeftNm"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:textAlignment="center"
+                android:layout_marginStart="23dp"
                 android:layout_marginTop="16dp"
                 android:layout_toEndOf="@id/TotalTodayNm"
-                android:text="@string/left_of_quota" />
+                android:text="@string/left_of_quota"
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/QuotaLeftOut"
@@ -104,7 +104,7 @@
                 android:layout_height="24dp"
                 android:layout_below="@id/QuotaLeftNm"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="2dp"
                 android:maxLines="1"
                 android:layout_toEndOf="@id/TotalTodayOut"
                 android:background="@drawable/edittextborders"
@@ -223,71 +223,92 @@
 
         </RelativeLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:layout_width="397dp"
+            android:layout_height="215dp"
             android:layout_below="@id/RelLout2"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="14dp"
             android:background="@drawable/textborderz">
 
             <TextView
-                android:id="@+id/ItemNameNm"
+                android:id="@+id/ItemNameNm1"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="28dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="156dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="139dp"
                 android:text="إسم المنتوج"
+                app:layout_constraintBottom_toTopOf="@+id/ItemNameIn"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/ItemPriceNm"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="56dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="156dp"
+                android:layout_marginTop="79dp"
+                android:layout_marginEnd="139dp"
+                android:layout_marginBottom="118dp"
                 android:text="ثمن المنتوج"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ItemNameNm" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/molhanoutName"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="52dp"
-                android:layout_marginBottom="12dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="156dp"
+                android:layout_marginTop="149dp"
+                android:layout_marginEnd="139dp"
+                android:layout_marginBottom="48dp"
                 android:text="@string/shop_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ItemPriceNm" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/ItemNameIn"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="26dp"
-                android:layout_marginTop="28dp"
-                android:maxLines="1"
-                android:textAlignment="center"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="134dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginEnd="121dp"
+                android:layout_marginBottom="140dp"
                 android:background="@drawable/edittextborders"
                 android:hint="@string/name_here"
                 android:maxLength="16"
+                android:maxLines="1"
                 android:padding="4dp"
-                android:paddingEnd="8dp"
                 android:paddingStart="4dp"
+                android:paddingEnd="8dp"
+                android:textAlignment="center"
                 android:textColor="@color/edittextcolors"
-                app:layout_constraintLeft_toRightOf="@id/ItemNameNm"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
                 android:id="@+id/ItemNameInSp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="28dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="33dp"
+                android:layout_marginEnd="96dp"
                 android:textColor="@color/edittextcolors"
                 app:layout_constraintLeft_toRightOf="@id/ItemNameIn"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -296,8 +317,10 @@
                 android:id="@+id/ItemPriceIn"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="26dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginStart="135dp"
+                android:layout_marginTop="98dp"
+                android:layout_marginEnd="120dp"
+                android:layout_marginBottom="70dp"
                 android:background="@drawable/edittextborders"
                 android:hint="@string/price_in_here"
                 android:inputType="numberDecimal"
@@ -305,67 +328,71 @@
                 android:maxLines="1"
                 android:padding="4dp"
                 android:textColor="@color/edittextcolors"
-                app:layout_constraintLeft_toRightOf="@id/ItemPriceNm"
-                app:layout_constraintTop_toBottomOf="@id/ItemNameIn" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <EditText
                 android:id="@+id/molhanoutNameIn"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="26dp"
-                android:padding="4dp"
-                android:layout_marginTop="36dp"
-                android:layout_marginBottom="12dp"
-                android:maxLines="1"
-                android:textAlignment="center"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="135dp"
+                android:layout_marginTop="168dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/edittextborders"
                 android:hint="@string/name_here"
                 android:maxLength="16"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:textAlignment="center"
                 android:textColor="@color/edittextcolors"
-                app:layout_constraintLeft_toRightOf="@id/molhanoutName"
-                app:layout_constraintTop_toBottomOf="@id/ItemPriceIn" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
                 android:id="@+id/molhanoutNameInSp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="72dp"
-                android:layout_marginEnd="96dp"
-                android:layout_marginBottom="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="275dp"
+                android:layout_marginTop="168dp"
+                android:layout_marginEnd="92dp"
+                android:layout_marginBottom="15dp"
                 android:padding="4dp"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/molhanoutNameIn"
-                app:layout_constraintTop_toBottomOf="@+id/SaveBtn"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <Button
                 android:id="@+id/AddBtn"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
+                android:layout_marginStart="323dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="12dp"
+                android:layout_marginBottom="150dp"
                 android:background="@drawable/buttonflat"
                 android:text="@string/add"
+
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/SaveBtn"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/buttonstyles"
-                android:text="@string/save"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/AddBtn" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
 

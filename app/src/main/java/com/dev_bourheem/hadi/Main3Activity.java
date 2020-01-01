@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev_bourheem.hadi.Login.LoginClass;
-import com.google.android.gms.ads.AdView;
 
 public class Main3Activity extends AppCompatActivity {
     public String userNm, PassIn;
@@ -19,7 +18,7 @@ public class Main3Activity extends AppCompatActivity {
     Button loginBtn;
     EditText username, PasswordIn;
     LoginClass Lgin;
-    AdView adView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class Main3Activity extends AppCompatActivity {
         });
 
         Lgin = new LoginClass(getApplicationContext()); // initializing the LoginClass Object
-        adView=findViewById(R.id.adView);
+
 
 
     }
@@ -76,7 +75,7 @@ public class Main3Activity extends AppCompatActivity {
         }
         if (username.length() == 0 || PassIn.length() == 0) {
 
-            MsgBox("عذرا. لم تدخل المعلومات");
+            MsgBox("عذرا. لم تقم باعداد اسم المسخدم");
 
         } else {
 

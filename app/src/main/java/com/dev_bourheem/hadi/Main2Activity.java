@@ -107,7 +107,7 @@ public class Main2Activity extends AppCompatActivity {
 
     public void GetDate() {
         Date currentTime = Calendar.getInstance().getTime();
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat(" dd / MMM / yy");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat(" dd / MM / yy");
         date2 = dateFormat.format(currentTime);
         DateviewActvt2.setText("" + date2);
     }

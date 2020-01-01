@@ -8,13 +8,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
 public class MyDataBaseCreator extends SQLiteOpenHelper {
-    public static final int database_version = 1;
-    public static final int ID = 1;
-    public static final String database_name = "Students.db";
-    public static final String TABLE_NAME = "Hugs";
+MainActivity mainac=new MainActivity();
+    public static final String database_name = "Trains.db";
+    public static final String TABLE_NAME = "Girls";
     public static final String col1 = "Item_Name";
     public static final String col2 = "Item_Price";
     public static final String person = "MoolHanout";
+    public static final String da = "history";
+    public  final String dat = mainac.GetDate().trim();
     // public static final String SHOP_NAME = "name";
     // public static final String SHOP_PHONE = "phone";
     //public static final String SHOP_EMAIL = "email";
@@ -26,7 +27,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (_ID INTEGER PRIMARY KEY AUTOINCREMENT," + col1 + " TEXT," + col2 + " DOUBLE," + person + " TEXT)");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (_ID INTEGER PRIMARY KEY AUTOINCREMENT," + col1 + " TEXT," + col2 + " DOUBLE," + person + " TEXT,"+ da + " TEXT )");
         // db.execSQL("CREATE TABLE "+ SHOP_TABLE + "(_ID INTEGER Primary key autoincrement,"+SHOP_NAME +" TEXT, " +SHOP_PHONE +" TEXT, "+SHOP_EMAIL+ " TEXT)");
 
     }
@@ -38,12 +39,13 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean InjectData(String Sir, String name, double prix) {
+    public boolean InjectData(String Sir, String name, double prix,String daat) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(person, Sir);
         values.put(col1, name);
         values.put(col2, prix);
-        values.put(person, Sir);
+        values.put(da, daat);
         long insertStaus = db.insert(TABLE_NAME, null, values);
         return insertStaus != -1;
     }
@@ -51,8 +53,16 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c1 = db.rawQuery("select ( '- ' ||+" + col1 + "|| ' =  ' || " + col2 + " ||'  من عند :  ' || " + person + ") AS FullItem from " + TABLE_NAME, null);
+        Cursor c1 = db.rawQuery("select ( '- ' ||+" + col1 + "|| ' =  ' || " + col2 + " ||'  من عند :  ' || " + person + "|| ' يوم '||"+ da + ") AS FullItem from " + TABLE_NAME,null);
         return c1;
+
+    }
+
+    public Cursor GetDaydata() {
+        mainac=new MainActivity();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c2 = db.rawQuery("select * from Girls where history = '2020-01-01' ", null);
+        return c2 ;
 
     }
 
@@ -65,8 +75,9 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
     // this mehotd gets the sum of all Item_price elements
     public Cursor GetSum() {
+
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cr = db.rawQuery("SELECT SUM (Item_Price) FROM " + TABLE_NAME, null);
+        Cursor cr = db.rawQuery("SELECT SUM (Item_Price) FROM " + TABLE_NAME , null);
         return cr;
     }
 
