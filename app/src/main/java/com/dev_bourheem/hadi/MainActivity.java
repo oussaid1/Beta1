@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +26,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev_bourheem.hadi.Login.ForQuotas;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -35,7 +41,7 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
     public Button addBut;
     public EditText NameIn, PriceIn, moolhanotNm;
-    public TextView DateV1, RedL, OrangeL, GreenL, LeftOut, TotalOut, RedText, OrangeText, GreenText, hereisyourQuota;
+    public TextView DateV1, RedL, OrangeL, GreenL,QuotaLeftNm, LeftOut, TotalOut,TotalallOut, RedText, OrangeText, GreenText, hereisyourQuota;
     public Spinner ItMSpinner, molhanotSpinner;
     public ListView ListaOut;
     public Switch Guestmode;
@@ -49,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     public ArrayAdapter<String> SpinnerAdapter;
     MyDataBaseCreator MDBC;
     ForQuotas forQutaOC;
-
+AdView admain;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,13 +90,22 @@ public class MainActivity extends AppCompatActivity {
         RedText = findViewById(R.id.Limit);
         OrangeText = findViewById(R.id.Carefull);
         GreenText = findViewById(R.id.Good);
+        QuotaLeftNm = findViewById(R.id.QuotaLeftNm);
         GreenL = findViewById(R.id.BtnGreen);
+        TotalallOut = findViewById(R.id.TotalallOut);
         Guestmode = findViewById(R.id.SwitchGuest);
         ListaOut = findViewById(R.id.list_VActivity2);
         OrangeL = findViewById(R.id.BtnOrange);
         hereisyourQuota = findViewById(R.id.hereisurqt);
         RedL = findViewById(R.id.BtnRed);
-
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        admain = findViewById(R.id.admain);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        admain.loadAd(adRequest);
 
         ItMSpinner = findViewById(R.id.ItemNameInSp);
         NameIn = findViewById(R.id.ItemNameIn);
@@ -238,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
             while (c.moveToNext()) {
                 itemsSum = c.getInt(0);
                 //closing cursor so as not to bring anything else or ruin sth
-                c.close();
+
                 TotalOut.setText("" + itemsSum);
                 GetQuota(DefQuota, DefGuestQuotq);
                 LeftOfQuota = Quota - itemsSum;
@@ -259,6 +274,7 @@ public class MainActivity extends AppCompatActivity {
             GreenL.setVisibility(View.VISIBLE);
             GreenText.setVisibility(View.VISIBLE);
             GreenText.setText(R.string.good);
+            QuotaLeftNm.setTextColor(Color.parseColor("#64DD17"));
         }
         if (LeftOfQuota < halfquota && LeftOfQuota > 0) {
             GreenL.setVisibility(View.INVISIBLE);
@@ -267,6 +283,7 @@ public class MainActivity extends AppCompatActivity {
             OrangeText.setText("");
             OrangeText.setVisibility(View.VISIBLE);
             OrangeText.setText(R.string.carefull);
+            QuotaLeftNm.setTextColor(Color.parseColor("#FF6D00"));
         }
         if (LeftOfQuota < 0) {
             GreenL.setVisibility(View.INVISIBLE);
@@ -276,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
             RedL.setVisibility(View.VISIBLE);
             RedText.setVisibility(View.VISIBLE);
             RedText.setText(R.string.limit_exceeded);
-
+            QuotaLeftNm.setTextColor(Color.parseColor("#D50000"));
         }
     }
 
@@ -315,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
                 Quotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col11));
                 GestQuotafrom_databse = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col22));
                 getTotal(Quotafrom_database, GestQuotafrom_databse);
+                getTotalAll();
                 // setusername.setText(""+GQttoDabz);
                 //setGuestQta.setText(""+QttoDabz);
             }
@@ -348,6 +366,24 @@ public class MainActivity extends AppCompatActivity {
         } else {
             while (itemNameCursor.moveToNext()) {
                 Molhanot.add(itemNameCursor.getString(itemNameCursor.getColumnIndex(MyDataBaseCreator.person)));
+
+            }
+        }
+    }
+
+    public void getTotalAll() {
+
+        double itemsSumall;
+        Cursor c = MDBC.GetSumall();
+        if (c.getCount() == 0) {
+            MsgBox("لايوجد مجموع");
+
+        } else {
+            while (c.moveToNext()) {
+                itemsSumall = c.getInt(0);
+                //closing cursor so as not to bring anything else or ruin sth
+
+                TotalallOut.setText("" + itemsSumall);
 
             }
         }

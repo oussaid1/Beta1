@@ -15,7 +15,7 @@ MainActivity mainac=new MainActivity();
     public static final String col2 = "Item_Price";
     public static final String person = "MoolHanout";
     public static final String da = "history";
-    public  final String dat = mainac.GetDate().trim();
+    public  final String dat = mainac.GetDate();
     // public static final String SHOP_NAME = "name";
     // public static final String SHOP_PHONE = "phone";
     //public static final String SHOP_EMAIL = "email";
@@ -53,18 +53,14 @@ MainActivity mainac=new MainActivity();
 
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c1 = db.rawQuery("select ( '- ' ||+" + col1 + "|| ' =  ' || " + col2 + " ||'  من عند :  ' || " + person + "|| ' يوم '||"+ da + ") AS FullItem from " + TABLE_NAME,null);
+        Cursor c1 = db.rawQuery("select ( '- ' ||+" + col1 + "|| ' =  ' || "
+                + col2 + " ||'  من عند :  ' || " + person + "|| ' يوم '||"+ da + ") " +
+                "AS FullItem from " + TABLE_NAME+" order by history ",null);
         return c1;
 
     }
 
-    public Cursor GetDaydata() {
-        mainac=new MainActivity();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c2 = db.rawQuery("select * from Girls where history = '2020-01-01' ", null);
-        return c2 ;
 
-    }
 
     //delete table
     public boolean deleteall() {
@@ -77,7 +73,7 @@ MainActivity mainac=new MainActivity();
     public Cursor GetSum() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cr = db.rawQuery("SELECT SUM (Item_Price) FROM " + TABLE_NAME , null);
+        Cursor cr = db.rawQuery("SELECT SUM (Item_Price) FROM " + TABLE_NAME +" group by history ", null);
         return cr;
     }
 
@@ -91,6 +87,12 @@ MainActivity mainac=new MainActivity();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cur = db.rawQuery("select distinct " + person + " from " + TABLE_NAME, null);
         return cur;
+    }
+    public Cursor GetSumall() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor crall = db.rawQuery("SELECT SUM (Item_Price) FROM " + TABLE_NAME , null);
+        return crall;
     }
 
 }

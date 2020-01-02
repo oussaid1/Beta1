@@ -5,13 +5,13 @@
     <color name="colorAccent">#D81B60</color>
     <color name="GreenP0">#08886E</color>
     <color name="GreenP1">#07B18B</color>
-    <color name="GreenP">#052B21</color>
     <color name="red">#D50000</color>
     <color name="green">#64DD17</color>
     <color name="orange">#FF6D00</color>
     <color name="edittextcolors">#07B18B</color>
-    <color name="black">#0B0C0C</color>
+    <color name="black">#011616</color>
     <color name="GreenP2">#48D5C3</color>
+
 
 
 </resources>

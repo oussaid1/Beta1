@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,7 +22,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/textborderz"
-            android:theme="@style/AppTheme">
+            >
 
             <TextView
                 android:id="@+id/dateView"
@@ -31,11 +30,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
-                android:maxLines="1"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/edittextborders"
+                android:maxLines="1"
                 android:padding="4dp"
                 android:textAlignment="center" />
 
@@ -65,59 +64,118 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/textborderz">
+<RelativeLayout
+    android:layout_width="220dp"
+    android:layout_height="140dp"
+    android:layout_alignParentStart="true">
 
-            <TextView
-                android:id="@+id/TotalTodayNm"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:textAlignment="center"
-                android:layout_marginTop="16dp"
-                android:text="@string/total" />
 
-            <TextView
-                android:id="@+id/TotalTodayOut"
-                android:layout_width="80dp"
-                android:layout_height="24dp"
-                android:maxLines="1"
-                android:layout_below="@id/TotalTodayNm"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/edittextborders"
-                android:padding="4dp"
-                android:textAlignment="center"
-                android:textColor="@color/edittextcolors" />
+    <TextView
+        android:id="@+id/TotalTodayNm"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="2dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:text="@string/totaltoday"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/TotalTodayOut"
+        android:layout_width="80dp"
+        android:layout_height="24dp"
+        android:layout_below="@id/TotalTodayNm"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/edittextborders"
+        android:maxLines="1"
+        android:padding="4dp"
+        android:textAlignment="center"
+        android:textColor="@color/edittextcolors" />
 
             <TextView
                 android:id="@+id/QuotaLeftNm"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="23dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="2dp"
+                android:layout_alignParentTop="true"
                 android:layout_toEndOf="@id/TotalTodayNm"
                 android:text="@string/left_of_quota"
                 android:textAlignment="center" />
 
-            <TextView
-                android:id="@+id/QuotaLeftOut"
-                android:layout_width="80dp"
-                android:layout_height="24dp"
-                android:layout_below="@id/QuotaLeftNm"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="2dp"
-                android:maxLines="1"
-                android:layout_toEndOf="@id/TotalTodayOut"
-                android:background="@drawable/edittextborders"
-                android:padding="4dp"
-                android:textAlignment="center"
-                android:textColor="@color/edittextcolors" />
+    <TextView
+        android:id="@+id/QuotaLeftOut"
+        android:layout_width="80dp"
+        android:layout_height="24dp"
+        android:layout_below="@id/QuotaLeftNm"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="22dp"
+        android:layout_toEndOf="@id/TotalTodayOut"
+        android:background="@drawable/edittextborders"
+        android:maxLines="1"
+        android:padding="4dp"
+        android:textAlignment="center"
+        android:textColor="@color/edittextcolors" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/TotalallOut"
+        android:layout_marginBottom="2dp"
+        android:text="@string/total"
+        android:textAlignment="center" />
 
+    <TextView
+        android:id="@+id/TotalallOut"
+        android:layout_width="80dp"
+        android:layout_height="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/edittextborders"
+        android:maxLines="1"
+        android:padding="4dp"
+        android:textAlignment="center"
+        android:textColor="@color/edittextcolors" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_above="@+id/hereisurqt"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="2dp"
+        android:maxLines="1"
+        android:text="  الكوطة  المحددة"
+        android:textAlignment="center"
+        android:textColor="@color/green" />
+
+    <TextView
+        android:id="@+id/hereisurqt"
+        android:layout_width="80dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edittextborders"
+        android:textAlignment="center" />
+</RelativeLayout>
             <RelativeLayout
                 android:layout_width="40dp"
                 android:layout_height="140dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="8dp"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/thinborders"
                 android:orientation="vertical">
 
@@ -125,8 +183,8 @@
                     android:id="@+id/BtnRed"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
-                    android:layout_marginTop="16dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/redlight"
                     android:visibility="invisible" />
 
@@ -145,8 +203,8 @@
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_below="@id/BtnOrange"
-                    android:layout_marginTop="22dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="22dp"
                     android:background="@drawable/greenlight"
                     android:visibility="invisible"> </Button>
 
@@ -158,12 +216,11 @@
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
-                android:textAlignment="center"
                 android:layout_marginEnd="52dp"
                 android:text="@string/limit_exceeded"
+                android:textAlignment="center"
                 android:textColor="@color/red"
-                android:visibility="invisible"
-                />
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/Carefull"
@@ -172,9 +229,9 @@
                 android:layout_below="@id/Limit"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
-                android:textAlignment="center"
                 android:layout_marginEnd="52dp"
                 android:text="@string/be_carefull"
+                android:textAlignment="center"
                 android:textColor="@color/orange"
                 android:visibility="invisible" />
 
@@ -185,215 +242,153 @@
                 android:layout_below="@id/Carefull"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
-                android:textAlignment="center"
                 android:layout_marginEnd="52dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/good_to_go"
+                android:textAlignment="center"
                 android:textColor="@color/green"
                 android:visibility="invisible"> </TextView>
 
-            <TextView
-                android:id="@+id/hereisqt"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_below="@+id/QuotaLeftOut"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="42dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="18dp"
-                android:textColor="@color/orange"
-                android:maxLines="1"
-                android:layout_toEndOf="@+id/hereisurqt"
-                android:text="  الكوطة  المحددة"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/hereisurqt"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_below="@+id/TotalTodayOut"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="42dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/edittextborders"
-
-                android:textAlignment="center" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="397dp"
-            android:layout_height="215dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/RelLout2"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="33dp"
-            android:layout_marginEnd="14dp"
+            android:layout_margin="8dp"
             android:background="@drawable/textborderz">
 
-            <TextView
-                android:id="@+id/ItemNameNm1"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="156dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginEnd="139dp"
-                android:text="إسم المنتوج"
-                app:layout_constraintBottom_toTopOf="@+id/ItemNameIn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="400dp"
+                android:layout_centerHorizontal="true"
+                >
 
-            <TextView
-                android:id="@+id/ItemPriceNm"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="156dp"
-                android:layout_marginTop="79dp"
-                android:layout_marginEnd="139dp"
-                android:layout_marginBottom="118dp"
-                android:text="ثمن المنتوج"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/ItemNameNm1"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:text="إسم المنتوج" />
 
-            <TextView
-                android:id="@+id/molhanoutName"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="156dp"
-                android:layout_marginTop="149dp"
-                android:layout_marginEnd="139dp"
-                android:layout_marginBottom="48dp"
-                android:text="@string/shop_name"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/ItemPriceNm"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ItemNameIn"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="ثمن المنتوج" />
 
-            <EditText
-                android:id="@+id/ItemNameIn"
-                android:layout_width="140dp"
-                android:layout_height="40dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="134dp"
-                android:layout_marginTop="29dp"
-                android:layout_marginEnd="121dp"
-                android:layout_marginBottom="140dp"
-                android:background="@drawable/edittextborders"
-                android:hint="@string/name_here"
-                android:maxLength="16"
-                android:maxLines="1"
-                android:padding="4dp"
-                android:paddingStart="4dp"
-                android:paddingEnd="8dp"
-                android:textAlignment="center"
-                android:textColor="@color/edittextcolors"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/molhanoutName"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ItemPriceIn"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="@string/shop_name" />
 
-            <Spinner
-                android:id="@+id/ItemNameInSp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="33dp"
-                android:layout_marginEnd="96dp"
-                android:textColor="@color/edittextcolors"
-                app:layout_constraintLeft_toRightOf="@id/ItemNameIn"
-                app:layout_constraintTop_toTopOf="parent" />
+                <EditText
+                    android:id="@+id/ItemNameIn"
+                    android:layout_width="140dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/ItemNameNm1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edittextborders"
+                    android:hint="@string/name_here"
+                    android:maxLength="16"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/edittextcolors" />
 
-            <EditText
-                android:id="@+id/ItemPriceIn"
-                android:layout_width="140dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="135dp"
-                android:layout_marginTop="98dp"
-                android:layout_marginEnd="120dp"
-                android:layout_marginBottom="70dp"
-                android:background="@drawable/edittextborders"
-                android:hint="@string/price_in_here"
-                android:inputType="numberDecimal"
-                android:maxLength="10"
-                android:maxLines="1"
-                android:padding="4dp"
-                android:textColor="@color/edittextcolors"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                <Spinner
+                    android:id="@+id/ItemNameInSp"
+                    android:layout_width="26dp"
+                    android:layout_height="35dp"
 
-            <EditText
-                android:id="@+id/molhanoutNameIn"
-                android:layout_width="140dp"
-                android:layout_height="40dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="135dp"
-                android:layout_marginTop="168dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/edittextborders"
-                android:hint="@string/name_here"
-                android:maxLength="16"
-                android:maxLines="1"
-                android:padding="4dp"
-                android:textAlignment="center"
-                android:textColor="@color/edittextcolors"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="44dp"
+                    android:layout_marginEnd="47dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_toEndOf="@+id/ItemNameIn" />
 
-            <Spinner
-                android:id="@+id/molhanoutNameInSp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="275dp"
-                android:layout_marginTop="168dp"
-                android:layout_marginEnd="92dp"
-                android:layout_marginBottom="15dp"
-                android:padding="4dp"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                <EditText
+                    android:id="@+id/ItemPriceIn"
+                    android:layout_width="140dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/ItemPriceNm"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edittextborders"
+                    android:hint="@string/price_in_here"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/edittextcolors" />
 
-            <Button
-                android:id="@+id/AddBtn"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="323dp"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="150dp"
-                android:background="@drawable/buttonflat"
-                android:text="@string/add"
+                <EditText
+                    android:id="@+id/molhanoutNameIn"
+                    android:layout_width="140dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/molhanoutName"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/edittextborders"
+                    android:hint="@string/name_here"
+                    android:maxLength="16"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/edittextcolors" />
 
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <Spinner
+                    android:id="@+id/molhanoutNameInSp"
+                    android:layout_width="20dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="197dp"
+                    android:layout_marginEnd="48dp"
+                    android:layout_toEndOf="@+id/molhanoutNameIn"
+                    android:padding="4dp"
+                    android:textAlignment="center" />
 
+                <Button
+                    android:id="@+id/AddBtn"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/molhanoutNameIn"
+                   android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/buttonflat"
+                    android:text="@string/add"
+                    />
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/admain"
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ads:adSize="BANNER"
+                    android:layout_alignParentBottom="true"
+                    ads:adUnitId="ca-app-pub-9838187586217611/6660652596">
+                </com.google.android.gms.ads.AdView>
+            </RelativeLayout>
         </RelativeLayout>
-
     </RelativeLayout>
 
 
