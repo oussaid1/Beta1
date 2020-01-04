@@ -123,6 +123,7 @@ AdView admain;
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Qnt= Double.valueOf(quantity.getText().toString().trim());
                 Qnt=Qnt+0.5;
                 quantity.setText(""+Qnt);
             }
@@ -131,6 +132,7 @@ AdView admain;
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Qnt= Double.valueOf(quantity.getText().toString().trim());
                if(Qnt>0) Qnt=Qnt-0.5;
                 quantity.setText(""+Qnt);
             }

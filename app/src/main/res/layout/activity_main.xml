@@ -334,6 +334,8 @@
                                 android:id="@+id/plus"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
+                                android:layout_margin="1dp"
+                                android:background="@drawable/buttonflat"
                                 android:layout_alignParentTop="true"
                                 android:text="+" />
 
@@ -347,6 +349,8 @@
                                 android:id="@+id/minus"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
+                                android:layout_margin="1dp"
+                                android:background="@drawable/buttonflat"
                                 android:layout_alignParentBottom="true"
                                 android:text="-" />
 
