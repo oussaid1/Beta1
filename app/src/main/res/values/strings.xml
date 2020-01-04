@@ -6,10 +6,10 @@
     <string name="back">العودة</string>
     <string name="guest_mode"> وضع (الضيوف ) ! </string>
     <string name="name_here">الإسم هنا</string>
-    <string name="left_of_quota">المتبقي من الكوطة</string>
+    <string name="left_of_quota">المتبقي من السقف</string>
     <string name="total">  المجموع العام </string>
     <string name="totaltoday">  المجموع اليوم </string>
-    <string name="limit_exceeded">تجاوؤت الكوطة</string>
+    <string name="limit_exceeded">تجاوزت السقف</string>
     <string name="be_carefull">احذر</string>
     <string name="good_to_go">لاحرج</string>
     <string name="shop_name">اسم المحل</string>
@@ -20,8 +20,8 @@
     <string name="username">اسم المستعمل</string>
     <string name="login_page">صفحة الولوج</string>
     <string name="set_your_quota">حدد السقف</string>
-    <string name="define_limit_here"> حدد الكوطة هنا </string>
-    <string name="set_your_guest_mode_quota">حدد الكوطة لوضع (الضيوف)</string>
+    <string name="define_limit_here"> حدد السقف هنا </string>
+    <string name="set_your_guest_mode_quota">حدد السقف لوضع (الضيوف)</string>
     <string name="guest_limit_here">حدد السقف</string>
     <string name="save">أحفظ</string>
     <string name="set_user_name">حدد اسم المستعمل</string>
@@ -45,7 +45,10 @@
     <string name="unknown">لاشئ</string>
     <string name="noitemnamefound">لايوجد منتوج</string>
     <string name="milk">الحليب</string>
-    <string name="noquotafound">لم يتم تحيد الكوطة بعد</string>
+    <string name="noquotafound">لم يتم تحيد السقف بعد</string>
     <string name="surewannaadd">هل فعلا تريد اظافة المنتوج ?</string>
+    <string name="limit">السقف المحدد</string>
+    <string name="productname">إسم المنتوج</string>
+    <string name="productprice">ثمن المنتوج</string>
 
 </resources>

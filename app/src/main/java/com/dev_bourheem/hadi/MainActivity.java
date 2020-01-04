@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -33,29 +34,33 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    public Button addBut;
-    public EditText NameIn, PriceIn, moolhanotNm;
+    public Button addBut,plus,minus;
+    public Spinner qtypSpinner;
+    AutoCompleteTextView NameIn ,moolhanotNm;
+    public EditText PriceIn,quantity;
     public TextView DateV1, RedL, OrangeL, GreenL,QuotaLeftNm, LeftOut, TotalOut,TotalallOut, RedText, OrangeText, GreenText, hereisyourQuota;
-    public Spinner ItMSpinner, molhanotSpinner;
     public ListView ListaOut;
     public Switch Guestmode;
     public boolean ischecked;
     public double LeftOfQuota, ItemPriceDbl, Quotafrom_database, GestQuotafrom_databse;
     public String date, ItemNameStr, Sir;
-    public double Quota;
+    public double Quota, Qnt;
     public ArrayList<String> allList;
     public ArrayList<String> Molhanot;
     public ArrayAdapter<String> MolhntSpinnerAdapter;
-    public ArrayAdapter<String> SpinnerAdapter;
+    public ArrayAdapter<String> SpinnerAdapter, QuanSpinAdapter;
     MyDataBaseCreator MDBC;
     ForQuotas forQutaOC;
 AdView admain;
+    String [] QTypes ={"كيلو","لتر","متر","صندوق","علبة"};
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -98,49 +103,39 @@ AdView admain;
         OrangeL = findViewById(R.id.BtnOrange);
         hereisyourQuota = findViewById(R.id.hereisurqt);
         RedL = findViewById(R.id.BtnRed);
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+       /**MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
         admain = findViewById(R.id.admain);
         AdRequest adRequest = new AdRequest.Builder().build();
-        admain.loadAd(adRequest);
+        admain.loadAd(adRequest);*/
 
-        ItMSpinner = findViewById(R.id.ItemNameInSp);
+        qtypSpinner = findViewById(R.id.QuanType);
         NameIn = findViewById(R.id.ItemNameIn);
         moolhanotNm = findViewById(R.id.molhanoutNameIn);
-        molhanotSpinner = findViewById(R.id.molhanoutNameInSp);
-        molhanotSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String molhanotname = String.valueOf(parent.getItemAtPosition(position));
-                moolhanotNm.setText("" + molhanotname);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         PriceIn = findViewById(R.id.ItemPriceIn);
         LeftOut = findViewById(R.id.QuotaLeftOut);
         TotalOut = findViewById(R.id.TotalTodayOut);
-        addBut = findViewById(R.id.AddBtn);
-        ItMSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        quantity=findViewById(R.id.quantity);
+        plus = findViewById(R.id.plus);
+        plus.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String SpineerText = String.valueOf(parent.getItemAtPosition(position));
-                NameIn.setText("" + SpineerText);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                Qnt=Qnt+0.5;
+                quantity.setText(""+Qnt);
             }
         });
-
+        minus = findViewById(R.id.minus);
+        minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if(Qnt>0) Qnt=Qnt-0.5;
+                quantity.setText(""+Qnt);
+            }
+        });
+        addBut = findViewById(R.id.AddBtn);
         DateV1.setText("" + GetDate());
         MDBC = new MyDataBaseCreator(getApplicationContext());
         Molhanot = new ArrayList<>();
@@ -152,10 +147,14 @@ AdView admain;
         allList.clear();
         allList.add(getString(R.string.milk));
         Molhanot.add(getString(R.string.unknown));
-        SpinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, allList);
-        ItMSpinner.setAdapter(SpinnerAdapter);
+        GetItemNameFromdatabase();
+        SpinnerAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, allList);
+        NameIn.setAdapter(SpinnerAdapter);
+        GetmolhanotFromdatabase();
         MolhntSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
-        molhanotSpinner.setAdapter(MolhntSpinnerAdapter);
+        moolhanotNm.setAdapter(MolhntSpinnerAdapter);
+        QuanSpinAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,QTypes);
+        qtypSpinner.setAdapter(QuanSpinAdapter);
         addBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +180,8 @@ AdView admain;
                 TraficLight();
             }
         });
+        GetQuotaFromDataBZ();
+        getTotalAll();
     }
 
     public void OpentAvtivity2() {
@@ -228,9 +229,11 @@ AdView admain;
 
     public void LoadDatabase() {
 // get !!!!!!!!!edditext input to vars.
+         Qnt= Double.valueOf(quantity.getText().toString().trim());
         String d = GetDate();
         String hiTp = PriceIn.getText().toString();
         ItemPriceDbl = Double.parseDouble(PriceIn.getText().toString().trim());
+        ItemPriceDbl = Qnt*ItemPriceDbl;
         ItemNameStr = NameIn.getText().toString().trim();
         Sir = moolhanotNm.getText().toString().trim();
 // insert data to database's Table.
@@ -243,7 +246,7 @@ AdView admain;
 
     //this method gets the Sum of all elements in ItemPrice Column
     public void getTotal(double DefQuota, double DefGuestQuotq) {
-
+NumberFormat mfr=new DecimalFormat("0.00");
         double itemsSum;
         Cursor c = MDBC.GetSum();
         if (c.getCount() == 0) {
@@ -251,13 +254,13 @@ AdView admain;
 
         } else {
             while (c.moveToNext()) {
-                itemsSum = c.getInt(0);
+                itemsSum = c.getDouble(0);
                 //closing cursor so as not to bring anything else or ruin sth
 
-                TotalOut.setText("" + itemsSum);
+                TotalOut.setText("" + mfr.format(itemsSum));
                 GetQuota(DefQuota, DefGuestQuotq);
                 LeftOfQuota = Quota - itemsSum;
-                LeftOut.setText(" " + LeftOfQuota);
+                LeftOut.setText(" " + mfr.format(LeftOfQuota));
                 //localDatabase.close();
             }
         }
@@ -310,6 +313,7 @@ AdView admain;
                         GetItemNameFromdatabase();
                        GetmolhanotFromdatabase();
                        PriceIn.setText("");
+                       NameIn.setText("");
                        GetQuotaFromDataBZ();
                        TraficLight();
                        Toast.makeText(MainActivity.this, "تم", Toast.LENGTH_SHORT).show();
@@ -325,7 +329,7 @@ AdView admain;
 
         if (qfinder.getCount() == 0) {
             MsgBox(getString (R.string.noquotafound));
-            OpentSettings();
+            //OpentSettings();
             getTotal(0, 0);
         } else {
             while (qfinder.moveToNext()) {
@@ -356,7 +360,7 @@ AdView admain;
     }
 
     public void GetmolhanotFromdatabase() {
-
+        Molhanot.clear();
         MDBC = new MyDataBaseCreator(this);
         Cursor itemNameCursor = MDBC.GetMolhanot();
 
@@ -372,7 +376,7 @@ AdView admain;
     }
 
     public void getTotalAll() {
-
+        NumberFormat mfr=new DecimalFormat("0.00");
         double itemsSumall;
         Cursor c = MDBC.GetSumall();
         if (c.getCount() == 0) {
@@ -380,10 +384,10 @@ AdView admain;
 
         } else {
             while (c.moveToNext()) {
-                itemsSumall = c.getInt(0);
+                itemsSumall = c.getDouble(0);
                 //closing cursor so as not to bring anything else or ruin sth
 
-                TotalallOut.setText("" + itemsSumall);
+                TotalallOut.setText("" + mfr.format(itemsSumall));
 
             }
         }

@@ -94,31 +94,28 @@ public class Settings extends AppCompatActivity {
 
     public void LoadQuotatoDatabase() {
         forQutaOC = new ForQuotas(getApplicationContext());
-        if (setQuota.length() == 0 || setGuestQta.length() == 0) {
-            MsgBox("المرجو ادخال المعلومات اولا");
+        if (setQuota.length() == 0 ) setQuota.setText("0");
+        if (setGuestQta.length() == 0) setGuestQta.setText("0");
+          if (setQuota.length() == 0 || setGuestQta.length() == 0) MsgBox("المرجو ادخال المعلومات اولا");
 
-        } else {
             user_defined_Quota = Double.parseDouble(setQuota.getText().toString().trim());
             user_defined_guestQuota = Double.parseDouble(setGuestQta.getText().toString().trim());
             boolean newRowAdded = forQutaOC.InjectData(user_defined_Quota, user_defined_guestQuota);
             if (newRowAdded) {
                 MsgBox("تم الحفظ");
             } else MsgBox("لم يتم الحفظ");
-        }
+
     }
 
     public void MsgBox(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-
     public void LoadusertoDatabase() {
         Lgin = new LoginClass(getApplicationContext());
         if ((setusername.length() == 0 || setpassword.length() == 0)) {
             MsgBox("المرجو ادخال المعلومات اولا");
-
         } else {
-
             Userusername = setusername.getText().toString().trim();
             Userpassword = setpassword.getText().toString().trim();
             Confirmedpass = confirmpass.getText().toString().trim();
