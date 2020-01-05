@@ -69,13 +69,14 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LoadusertoDatabase();
+                OpenActiviti();
             }
         });
         saveBtnforuserQuotas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoadQuotatoDatabase(); // injects user defined quota to database ;
-
+                OpenActiviti();
 
             }
         });

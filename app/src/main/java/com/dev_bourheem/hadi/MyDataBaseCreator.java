@@ -54,7 +54,7 @@ MainActivity mainac=new MainActivity();
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c1 = db.rawQuery("select ( '- ' ||+" + col1 + "|| ' =  ' || "
-                + col2 + " ||'  من عند :  ' || " + person + "|| ': يوم :'||"+ da + ") " +
+                + col2 + " ||'  من عند :  ' || " + person + " || ' : يوم : '||" + da + ") " +
                 "AS FullItem from " + TABLE_NAME+" order by history ",null);
         return c1;
 

@@ -42,9 +42,8 @@
     <string name="settings">إعدادات</string>
     <string name="exit">الخروج</string>
     <string name="noshopname">لايوجد اسم المحل</string>
-    <string name="unknown">لاشئ</string>
+    <string name="unknown">مجهول</string>
     <string name="noitemnamefound">لايوجد منتوج</string>
-    <string name="milk">الحليب</string>
     <string name="noquotafound">لم يتم تحيد السقف بعد</string>
     <string name="surewannaadd">هل فعلا تريد اظافة المنتوج ?</string>
     <string name="limit">السقف المحدد</string>

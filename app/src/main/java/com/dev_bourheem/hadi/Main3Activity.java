@@ -23,7 +23,7 @@ public class Main3Activity extends AppCompatActivity {
     Button loginBtn;
     EditText username, PasswordIn;
     LoginClass Lgin;
-AdView adlogin;
+    AdView adlogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,6 @@ AdView adlogin;
         adlogin = findViewById(R.id.adlogin);
         AdRequest adRequest = new AdRequest.Builder().build();
         adlogin.loadAd(adRequest);
-
         PasswordIn = findViewById(R.id.PasswordIn);
         username = findViewById(R.id.loginNmIn);
         loginBtn = findViewById(R.id.loginBtn);
@@ -89,7 +88,7 @@ AdView adlogin;
         }
         if (username.length() == 0 || PassIn.length() == 0) {
 
-            MsgBox("عذرا. لم تقم باعداد اسم المسخدم");
+            MsgBox("عذرا. لم تقم بادخال معلومات المسخدم");
 
         } else {
 

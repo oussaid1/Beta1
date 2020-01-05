@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
     public ArrayAdapter<String> SpinnerAdapter, QuanSpinAdapter;
     MyDataBaseCreator MDBC;
     ForQuotas forQutaOC;
-AdView admain;
-    String [] QTypes ={"كيلو","لتر","متر","صندوق","علبة"};
+    AdView admain;
+    String [] QTypes ={"واحدة","كيلو","لتر","متر","صندوق","علبة"};
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,15 +103,14 @@ AdView admain;
         OrangeL = findViewById(R.id.BtnOrange);
         hereisyourQuota = findViewById(R.id.hereisurqt);
         RedL = findViewById(R.id.BtnRed);
-       /**MobileAds.initialize(this, new OnInitializationCompleteListener() {
+       MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
         admain = findViewById(R.id.admain);
         AdRequest adRequest = new AdRequest.Builder().build();
-        admain.loadAd(adRequest);*/
-
+        admain.loadAd(adRequest);
         qtypSpinner = findViewById(R.id.QuanType);
         NameIn = findViewById(R.id.ItemNameIn);
         moolhanotNm = findViewById(R.id.molhanoutNameIn);
@@ -147,14 +146,8 @@ AdView admain;
         TraficLight();
         Molhanot.clear();
         allList.clear();
-        allList.add(getString(R.string.milk));
         Molhanot.add(getString(R.string.unknown));
-        GetItemNameFromdatabase();
-        SpinnerAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, allList);
-        NameIn.setAdapter(SpinnerAdapter);
-        GetmolhanotFromdatabase();
-        MolhntSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
-        moolhanotNm.setAdapter(MolhntSpinnerAdapter);
+        fillsugest();
         QuanSpinAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,QTypes);
         qtypSpinner.setAdapter(QuanSpinAdapter);
         addBut.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +157,7 @@ AdView admain;
                 allList.clear();
                 if (PriceIn.length() != 0 && NameIn.length() != 0) {
                     onDialogue();
-
+                    fillsugest();
                 } else MsgBox("المرجو ادخال المعلومات");
             }
         });
@@ -192,7 +185,14 @@ AdView admain;
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent1);
     }
-
+public void fillsugest(){
+    GetItemNameFromdatabase();
+    SpinnerAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, allList);
+    NameIn.setAdapter(SpinnerAdapter);
+    GetmolhanotFromdatabase();
+    MolhntSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
+    moolhanotNm.setAdapter(MolhntSpinnerAdapter);
+}
     public void OpentSettings() {
         final Intent intent2;
         intent2 = new Intent(this, Settings.class);
