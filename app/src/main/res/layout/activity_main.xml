@@ -62,13 +62,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/textborderz">
+            android:background="@drawable/justborderz">
 
             <RelativeLayout
                 android:layout_width="200dp"
                 android:layout_height="140dp"
                 android:layout_margin="8dp"
-                android:background="@drawable/justborderz"
+                android:background="@drawable/textborderz"
                 android:layout_alignParentStart="true">
 
 
@@ -96,7 +96,7 @@
                     android:maxLines="1"
                     android:padding="4dp"
                     android:textAlignment="center"
-                    android:textColor="@color/edittextcolors" />
+                    android:textColor="@color/GreenP" />
 
                 <TextView
                     android:id="@+id/QuotaLeftNm"
@@ -124,7 +124,7 @@
                     android:maxLines="1"
                     android:padding="4dp"
                     android:textAlignment="center"
-                    android:textColor="@color/edittextcolors" />
+                    android:textColor="@color/GreenP" />
 
                 <TextView
                     android:layout_width="80dp"
@@ -149,7 +149,7 @@
                     android:maxLines="1"
                     android:padding="4dp"
                     android:textAlignment="center"
-                    android:textColor="@color/edittextcolors" />
+                    android:textColor="@color/GreenP" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -162,7 +162,7 @@
                     android:maxLines="1"
                     android:text="@string/limit"
                     android:textAlignment="center"
-                    android:textColor="@color/green" />
+                    android:textColor="@color/Green" />
 
                 <TextView
                     android:id="@+id/hereisurqt"
@@ -183,7 +183,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_margin="8dp"
-                android:background="@drawable/thinborders"
+                android:background="@drawable/textborderz"
                 android:orientation="vertical">
 
                 <Button
@@ -225,12 +225,13 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="16dp"
                 android:padding="4dp"
+                android:background="@drawable/textborderz"
                 android:layout_marginBottom="8dp"
                 android:layout_toStartOf="@id/lighthouse"
                 android:text="@string/limit_exceeded"
                 android:textColor="@color/red"
                 android:textSize="12dp"
-                android:visibility="visible" />
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/Carefull"
@@ -240,6 +241,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:background="@drawable/textborderz"
                 android:layout_toStartOf="@id/lighthouse"
                 android:text="@string/be_carefull"
                 android:textAlignment="center"
@@ -252,6 +254,7 @@
                 android:layout_height="30dp"
                 android:layout_below="@id/Carefull"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/textborderz"
                 android:layout_toStartOf="@id/lighthouse"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
@@ -304,7 +307,7 @@
                         android:maxLines="1"
                         android:padding="4dp"
                         android:textAlignment="center"
-                        android:textColor="@color/edittextcolors" />
+                        android:textColor="@color/GreenP" />
                 </LinearLayout>
                 <RelativeLayout
                     android:id="@+id/ho1"
@@ -398,7 +401,7 @@
                             android:padding="4dp"
                             android:text="1"
                             android:textAlignment="center"
-                            android:textColor="@color/edittextcolors" />
+                            android:textColor="@color/GreenP" />
 
                         <Spinner
                             android:id="@+id/QuanType"
@@ -459,7 +462,7 @@
                             android:maxLength="10"
                             android:maxLines="1"
                             android:padding="4dp"
-                            android:textColor="@color/edittextcolors" />
+                            android:textColor="@color/GreenP" />
                     </RelativeLayout>
 
                 </RelativeLayout>
@@ -499,7 +502,7 @@
                         android:maxLines="1"
                         android:padding="4dp"
                         android:textAlignment="center"
-                        android:textColor="@color/edittextcolors" />
+                        android:textColor="@color/GreenP" />
                 </RelativeLayout>
 
                 <Button
