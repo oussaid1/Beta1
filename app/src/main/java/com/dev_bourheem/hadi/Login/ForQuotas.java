@@ -16,7 +16,7 @@ public class ForQuotas extends SQLiteOpenHelper {
     //private Main3Activity M3Actvt;
 
     public ForQuotas(Context context) {
-        super(context, database_name, null, 1);
+        super(context, database_name, null, 2);
     }
 
 

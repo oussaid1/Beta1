@@ -123,7 +123,7 @@
                         android:background="@drawable/buttonflat"
                         android:text="@string/save"
                         android:textAlignment="center"
-                        android:textColor="@color/black"
+                        android:textColor="@color/GreenP"
                         android:textSize="16sp" />
                 </RelativeLayout>
 
@@ -228,7 +228,7 @@
                     android:background="@drawable/buttonflat"
                     android:text="@string/save"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/GreenP"
                     android:textSize="16sp" />
 
             </RelativeLayout>

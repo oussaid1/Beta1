@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     AutoCompleteTextView NameIn ,moolhanotNm;
     public EditText PriceIn,quantity;
     public TextView DateV1, RedL, OrangeL, GreenL,QuotaLeftNm, LeftOut, TotalOut,TotalallOut, RedText, OrangeText, GreenText, hereisyourQuota;
-    public ListView ListaOut;
     public Switch Guestmode;
     public boolean ischecked;
     public double LeftOfQuota, ItemPriceDbl, Quotafrom_database, GestQuotafrom_databse;
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         GreenL = findViewById(R.id.BtnGreen);
         TotalallOut = findViewById(R.id.TotalallOut);
         Guestmode = findViewById(R.id.SwitchGuest);
-        ListaOut = findViewById(R.id.list_VActivity2);
+
         OrangeL = findViewById(R.id.BtnOrange);
         hereisyourQuota = findViewById(R.id.hereisurqt);
         RedL = findViewById(R.id.BtnRed);
@@ -155,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Molhanot.clear();
                 allList.clear();
-                if (PriceIn.length() != 0 && NameIn.length() != 0) {
+                if (PriceIn.getText().toString().trim().length() != 0 && NameIn.getText().toString().trim().length() != 0) {
                     onDialogue();
                     fillsugest();
                 } else MsgBox("المرجو ادخال المعلومات");
@@ -314,8 +313,8 @@ NumberFormat mfr=new DecimalFormat("0.00");
                         LoadDatabase();
                         GetItemNameFromdatabase();
                        GetmolhanotFromdatabase();
-                       PriceIn.setText("");
-                       NameIn.setText("");
+                       PriceIn.getText().clear();
+                       NameIn.getText().clear();
                        GetQuotaFromDataBZ();
                        TraficLight();
                        Toast.makeText(MainActivity.this, "تم", Toast.LENGTH_SHORT).show();
@@ -389,7 +388,7 @@ NumberFormat mfr=new DecimalFormat("0.00");
                 itemsSumall = c.getDouble(0);
                 //closing cursor so as not to bring anything else or ruin sth
 
-                TotalallOut.setText("" + mfr.format(itemsSumall));
+                TotalallOut.setText(String.valueOf(mfr.format(itemsSumall)));
 
             }
         }

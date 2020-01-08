@@ -86,7 +86,7 @@ public class Main3Activity extends AppCompatActivity {
             MsgBox("اسم المستعمل لم يتم حفظه");
             OpentAvtivityMain();
         }
-        if (username.length() == 0 || PassIn.length() == 0) {
+        if (username.getText().toString().trim().length() == 0 || PasswordIn.getText().toString().trim().length()== 0) {
 
             MsgBox("عذرا. لم تقم بادخال معلومات المسخدم");
 

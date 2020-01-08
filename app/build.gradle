@@ -7,8 +7,8 @@ android {
         applicationId "com.dev_bourheem.hadi"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 5
-        versionName "3.6"
+        versionCode 6
+        versionName "4.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -28,5 +28,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.firebase:firebase-ads:18.3.0'
+
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    // For control over item selection of both touch and mouse driven selection
+    implementation "androidx.recyclerview:recyclerview-selection:1.1.0-beta01"
+
 
 }

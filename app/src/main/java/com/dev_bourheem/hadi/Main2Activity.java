@@ -11,12 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,11 +28,17 @@ import java.util.Date;
 public class Main2Activity extends AppCompatActivity {
     MyDataBaseCreator MdbCrtr;
     TextView DateviewActvt2, back;
-    ListView list_VActivity2Var;
+
     Button ShowListBtn;
     String date2, itemId;
     ArrayList<String> mainList;
     ArrayAdapter mainListAdapter;
+
+    private ArrayList<exampleitem> mExampleList;
+    RecyclerView myrecycler;
+    RecyclerView.LayoutManager RecyLayManger;
+    RecyclerView.Adapter RecyclerAdap;
+    ArrayList<String> mContacts;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,7 +72,8 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         // Method prints date to dateview
         DateviewActvt2 = findViewById(R.id.DateviewActvt2);
-        list_VActivity2Var = findViewById(R.id.list_VActivity2);
+        myrecycler=findViewById(R.id.myrecycler);
+        myrecycler.setHasFixedSize(true);
         ShowListBtn = findViewById(R.id.ShowList);
         mainList = new ArrayList<>();
         MdbCrtr = new MyDataBaseCreator(this);
@@ -79,11 +87,11 @@ public class Main2Activity extends AppCompatActivity {
         ShowListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GetDbData();
-                if (mainList.isEmpty()) {
+               GetDbData();
+               /** if (mainList.isEmpty()) {
                     PrintMessage(getString(R.string.sorry), getString(R.string.thereisnodata));
-                }
-
+                }*/
+                //doIt();
 
             }
         });
@@ -125,22 +133,32 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public void GetDbData() {
-        mainList.clear();
-        Cursor data = MdbCrtr.GetDBdata();
+        mExampleList = new ArrayList<>();
+        Cursor data = MdbCrtr.GetDBdataAll();
 
         if (data.getCount() == 0)
             PrintMessage(getString(R.string.alert), getString(R.string.nodataintable));
         else if (data.moveToNext()) {
             while (!data.isAfterLast())
                 do {
-                    itemId = data.getString(data.getColumnIndex("FullItem"));
-                    mainList.add(itemId);
+                    itemId = data.getString(data.getColumnIndex(MdbCrtr.col1));
+                    String itemName = data.getString(data.getColumnIndex(MdbCrtr.col2));
+                    String shopNm = data.getString(data.getColumnIndex(MdbCrtr.person));
+                    String DateBout = data.getString(data.getColumnIndex(MdbCrtr.da));
+                    mExampleList.add(new exampleitem(R.drawable.ic_spa, itemId , itemName,shopNm,DateBout));
+                   // mainList.add(itemId);
                 } while ((data.moveToNext()));
 
         }
         data.close();
-        mainListAdapter = new ArrayAdapter<>(Main2Activity.this, android.R.layout.simple_list_item_1, mainList);
-        list_VActivity2Var.setAdapter(mainListAdapter);
+       // mainListAdapter = new ArrayAdapter<>(Main2Activity.this, android.R.layout.simple_list_item_1, mainList);
+
+
+       // mExampleList.add(new exampleitem(R.drawable.ic_spa, "Line 1", "Line 2","momo","20/20/20"));
+        RecyLayManger =new LinearLayoutManager(this);
+        RecyclerAdap= new ExampleAdapter(mExampleList);
+        myrecycler.setLayoutManager(RecyLayManger);
+        myrecycler.setAdapter(RecyclerAdap);
     }
 
     public void onDialogue() {
@@ -160,4 +178,12 @@ public class Main2Activity extends AppCompatActivity {
         builder.setNegativeButton(android.R.string.no, null);
         builder.show();
     }
+    /**public void doIt(){
+        mExampleList = new ArrayList<>();
+
+        RecyLayManger =new LinearLayoutManager(this);
+        RecyclerAdap= new ExampleAdapter(mExampleList);
+        myrecycler.setLayoutManager(RecyLayManger);
+        myrecycler.setAdapter(RecyclerAdap);
+    }*/
 }

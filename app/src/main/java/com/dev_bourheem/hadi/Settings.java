@@ -76,7 +76,7 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LoadQuotatoDatabase(); // injects user defined quota to database ;
-                OpenActiviti();
+
 
             }
         });
@@ -114,7 +114,7 @@ public class Settings extends AppCompatActivity {
 
     public void LoadusertoDatabase() {
         Lgin = new LoginClass(getApplicationContext());
-        if ((setusername.length() == 0 || setpassword.length() == 0)) {
+        if ((setusername.getText().toString().trim().length() == 0 || setpassword.getText().toString().trim().length() == 0)) {
             MsgBox("المرجو ادخال المعلومات اولا");
         } else {
             Userusername = setusername.getText().toString().trim();

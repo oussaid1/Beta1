@@ -8,20 +8,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
 public class MyDataBaseCreator extends SQLiteOpenHelper {
-MainActivity mainac=new MainActivity();
     public static final String database_name = "Trains.db";
     public static final String TABLE_NAME = "Girls";
     public static final String col1 = "Item_Name";
     public static final String col2 = "Item_Price";
     public static final String person = "MoolHanout";
     public static final String da = "history";
-    public  final String dat = mainac.GetDate();
+
     // public static final String SHOP_NAME = "name";
     // public static final String SHOP_PHONE = "phone";
     //public static final String SHOP_EMAIL = "email";
 
     public MyDataBaseCreator(Context context) {
-        super(context, database_name, null, 1);
+        super(context, database_name, null, 2);
     }
 
 
@@ -57,6 +56,12 @@ MainActivity mainac=new MainActivity();
                 + col2 + " ||'  من عند :  ' || " + person + " || ' : يوم : '||" + da + ") " +
                 "AS FullItem from " + TABLE_NAME+" order by history ",null);
         return c1;
+
+    }
+    public Cursor GetDBdataAll() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cu = db.rawQuery("select * from " + TABLE_NAME +" order by history ",null);
+        return cu;
 
     }
 

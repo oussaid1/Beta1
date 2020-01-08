@@ -1,0 +1,100 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:elevation="8dp"
+    app:cardCornerRadius="8dp"
+   >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/GreenP3"
+        android:layout_margin="8dp">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="8dp"
+            android:layout_alignParentEnd="true"
+            android:padding="2dp" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_toStartOf="@+id/imageView"
+            android:text="الحليب"
+            android:textColor="@color/GreenP"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="31dp"
+            android:layout_marginTop="4dp"
+            android:layout_toStartOf="@id/textView1"
+            android:text="من عند"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/shopname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="مومو"
+            android:layout_below="@id/from"
+            android:layout_alignEnd="@id/from"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fromDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="94dp"
+            android:layout_marginTop="4dp"
+            android:text="يوم"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/fromDate"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="12dp"
+            android:text="يوم"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_margin="4dp"
+            android:layout_below="@id/textView1"
+            android:layout_toStartOf="@id/imageView"
+            android:layout_marginStart="8dp"
+            android:text="120"
+            android:textStyle="italic"
+            android:textColorHighlight="@color/GreenP0"
+            android:textSize="16sp" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
