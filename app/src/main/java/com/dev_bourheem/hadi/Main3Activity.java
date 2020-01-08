@@ -83,7 +83,7 @@ public class Main3Activity extends AppCompatActivity {
         PassIn = PasswordIn.getText().toString().trim();
         Cursor loginCusor = Lgin.JibLoginCredencials();
         if (loginCusor.getCount() == 0) {
-            MsgBox("اسم المستعمل لم يتم حفظه");
+            MsgBox("اسم المستعمل لم يتم إعداده");
             OpentAvtivityMain();
         }
         if (username.getText().toString().trim().length() == 0 || PasswordIn.getText().toString().trim().length()== 0) {
