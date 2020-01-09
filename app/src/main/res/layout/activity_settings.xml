@@ -8,13 +8,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background=""
         android:fillViewport="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:verticalScrollbarPosition="right"
+            android:background="@drawable/textborderz"
             android:fillViewport="true">
 
             <RelativeLayout
@@ -25,7 +25,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/textborderz"
+                android:background="@drawable/justborderz"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp">
 
@@ -54,7 +54,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
-                    android:background="@drawable/textborderz"
+                    android:background="@drawable/justborderz"
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
@@ -142,7 +142,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/textborderz"
+                android:background="@drawable/justborderz"
                 android:layout_marginTop="280dp">
                 <TextView
                     android:id="@+id/loginNm1"

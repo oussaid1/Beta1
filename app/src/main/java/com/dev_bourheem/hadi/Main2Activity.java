@@ -37,7 +37,7 @@ public class Main2Activity extends AppCompatActivity {
     private ArrayList<exampleitem> mExampleList;
     RecyclerView myrecycler;
     RecyclerView.LayoutManager RecyLayManger;
-    RecyclerView.Adapter RecyclerAdap;
+    ExampleAdapter RecyclerAdap;
     ArrayList<String> mContacts;
 
     @Override
@@ -159,9 +159,15 @@ public class Main2Activity extends AppCompatActivity {
         RecyclerAdap= new ExampleAdapter(mExampleList);
         myrecycler.setLayoutManager(RecyLayManger);
         myrecycler.setAdapter(RecyclerAdap);
+        RecyclerAdap.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                DeletItem(position);
+            }
+        });
     }
 
-    public void onDialogue() {
+    /**public void onDialogue() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.alert));
         builder.setMessage(getString(R.string.doyourealywantdeletall));
@@ -186,4 +192,9 @@ public class Main2Activity extends AppCompatActivity {
         myrecycler.setLayoutManager(RecyLayManger);
         myrecycler.setAdapter(RecyclerAdap);
     }*/
+
+    public void DeletItem(int position){
+        mExampleList.remove(position);
+        RecyclerAdap.notifyItemRemoved(position);
+    }
 }

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public Spinner qtypSpinner;
     AutoCompleteTextView NameIn ,moolhanotNm;
     public EditText PriceIn,quantity;
-    public TextView DateV1, RedL, OrangeL, GreenL,QuotaLeftNm, LeftOut, TotalOut,TotalallOut, RedText, OrangeText, GreenText, hereisyourQuota;
+    public TextView DateV1, RedL, OrangeL, GreenL,QuotaLeftNm, LeftOut, TotalOut,TotalallOut, hereisyourQuota;
     public Switch Guestmode;
     public boolean ischecked;
     public double LeftOfQuota, ItemPriceDbl, Quotafrom_database, GestQuotafrom_databse;
@@ -91,14 +91,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DateV1 = findViewById(R.id.dateView);
-        RedText = findViewById(R.id.Limit);
-        OrangeText = findViewById(R.id.Carefull);
-        GreenText = findViewById(R.id.Good);
         QuotaLeftNm = findViewById(R.id.QuotaLeftNm);
         GreenL = findViewById(R.id.BtnGreen);
         TotalallOut = findViewById(R.id.TotalallOut);
         Guestmode = findViewById(R.id.SwitchGuest);
-
         OrangeL = findViewById(R.id.BtnOrange);
         hereisyourQuota = findViewById(R.id.hereisurqt);
         RedL = findViewById(R.id.BtnRed);
@@ -272,31 +268,19 @@ NumberFormat mfr=new DecimalFormat("0.00");
         double halfquota = Quota / 2;
         if (LeftOfQuota < Quota && LeftOfQuota > 0) {
             RedL.setVisibility(View.INVISIBLE);
-            RedText.setText("");
             OrangeL.setVisibility(View.INVISIBLE);
-            OrangeText.setText("");
             GreenL.setVisibility(View.VISIBLE);
-            GreenText.setVisibility(View.VISIBLE);
-            GreenText.setText(R.string.good);
             QuotaLeftNm.setTextColor(Color.parseColor("#64DD17"));
         }
         if (LeftOfQuota < halfquota && LeftOfQuota > 0) {
             GreenL.setVisibility(View.INVISIBLE);
-            GreenText.setText("");
             OrangeL.setVisibility(View.VISIBLE);
-            OrangeText.setText("");
-            OrangeText.setVisibility(View.VISIBLE);
-            OrangeText.setText(R.string.carefull);
             QuotaLeftNm.setTextColor(Color.parseColor("#FF6D00"));
         }
         if (LeftOfQuota < 0) {
             GreenL.setVisibility(View.INVISIBLE);
-            GreenText.setText("");
             OrangeL.setVisibility(View.INVISIBLE);
-            OrangeText.setText("");
             RedL.setVisibility(View.VISIBLE);
-            RedText.setVisibility(View.VISIBLE);
-            RedText.setText(R.string.limit_exceeded);
             QuotaLeftNm.setTextColor(Color.parseColor("#D50000"));
         }
     }

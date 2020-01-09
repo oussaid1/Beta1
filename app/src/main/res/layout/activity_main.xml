@@ -32,7 +32,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/edittextborders"
                 android:maxLines="1"
                 android:padding="4dp"
                 android:textAlignment="center" />
@@ -62,13 +61,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/justborderz">
+            android:background="@drawable/textborderz">
 
             <RelativeLayout
                 android:layout_width="200dp"
                 android:layout_height="140dp"
                 android:layout_margin="8dp"
-                android:background="@drawable/textborderz"
+                android:background="@drawable/justborderz"
                 android:layout_alignParentStart="true">
 
 
@@ -114,11 +113,13 @@
                     android:id="@+id/QuotaLeftOut"
                     android:layout_width="80dp"
                     android:layout_height="24dp"
+                    android:layout_above="@+id/hereisurqt"
                     android:layout_below="@id/QuotaLeftNm"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="11dp"
                     android:layout_marginTop="2dp"
-                    android:layout_marginEnd="22dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_marginBottom="54dp"
                     android:layout_toEndOf="@id/TotalTodayOut"
                     android:background="@drawable/edittextborders"
                     android:maxLines="1"
@@ -182,8 +183,11 @@
                 android:layout_height="140dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="8dp"
-                android:background="@drawable/textborderz"
+                android:layout_marginStart="139dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/justborderz"
                 android:orientation="vertical">
 
                 <Button
@@ -218,7 +222,6 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/Limit"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="8dp"
@@ -232,37 +235,6 @@
                 android:textColor="@color/red"
                 android:textSize="12dp"
                 android:visibility="invisible" />
-
-            <TextView
-                android:id="@+id/Carefull"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_below="@id/Limit"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/textborderz"
-                android:layout_toStartOf="@id/lighthouse"
-                android:text="@string/be_carefull"
-                android:textAlignment="center"
-                android:textColor="@color/orange"
-                android:visibility="invisible" />
-
-            <TextView
-                android:id="@+id/Good"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_below="@id/Carefull"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/textborderz"
-                android:layout_toStartOf="@id/lighthouse"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/good_to_go"
-                android:textAlignment="center"
-                android:textColor="@color/green"
-                android:visibility="invisible"> </TextView>
-
 
         </RelativeLayout>
 
@@ -281,6 +253,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:background="@drawable/justborderz"
                     android:layout_marginTop="6dp"
                     android:orientation="vertical">
                     <TextView
@@ -299,7 +272,7 @@
                         android:layout_gravity="bottom"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="8dp"
-                        android:background="@drawable/edittextborders"
+                        android:background="@drawable/justborderz"
                         android:completionThreshold="2"
                         android:gravity="center"
                         android:hint="@string/name_here"
@@ -315,7 +288,7 @@
                     android:layout_height="90dp"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/linearItemName"
-                    android:background="@drawable/thinborders"
+                    android:background="@drawable/justborderz"
                     android:orientation="horizontal">
 
                     <RelativeLayout
@@ -413,7 +386,6 @@
                             android:layout_marginEnd="7dp"
                             android:clipChildren="true"
                             android:popupElevation="4dp"
-
                             android:layout_toEndOf="@+id/icrequant"
                             android:dropDownWidth="70dp"
                             android:elevation="4dp" />
@@ -469,12 +441,12 @@
 
                 <RelativeLayout
                     android:id="@+id/linearshopname"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ho1"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/thinborders"
+                    android:background="@drawable/justborderz"
                     android:orientation="horizontal">
 
 
@@ -484,6 +456,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
+                        android:gravity="center_horizontal"
+                        android:layout_margin="4dp"
                         android:layout_marginTop="8dp"
                         android:text="@string/shop_name" />
 
@@ -495,7 +469,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="1dp"
                         android:layout_marginBottom="8dp"
-                        android:background="@drawable/edittextborders"
+                        android:background="@drawable/justborderz"
                         android:completionThreshold="2"
                         android:hint="@string/name_here"
                         android:maxLength="16"
