@@ -1,32 +1,27 @@
 package com.dev_bourheem.hadi;
 
 public class exampleitem {
-    private int mImageResource;
-    private String mText1;
-    private String mText2;
+
+    private String quantity;
+    private String quantifier;
+    private String ItemName;
+    private String ItemPrice;
     private String ShopName;
     private String dateBought;
 
-    public exampleitem(int imageResource, String text1, String text2,String ShopName1,String dateBought1) {
-        mImageResource = imageResource;
-        mText1 = text1;
-        mText2 = text2;
+
+    public exampleitem(String Qntt,String Quantif,String ITnm, String ITprix,String ShopName1,String dateBought1) {
+
+        quantity =Qntt;
+       quantifier=Quantif;
+        ItemName = ITnm;
+        ItemPrice = ITprix;
         ShopName = ShopName1;
         dateBought = dateBought1;
 
     }
 
-    public int getImageResource() {
-        return mImageResource;
-    }
 
-    public String getText1() {
-        return mText1;
-    }
-
-    public String getText2() {
-        return mText2;
-    }
 
     public String getShopName() {
         return ShopName;
@@ -34,5 +29,21 @@ public class exampleitem {
 
     public String getDateBought() {
         return dateBought;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public String getQuantifier() {
+        return quantifier;
+    }
+
+    public String getItemName() {
+        return ItemName;
+    }
+
+    public String getItemPrice() {
+        return ItemPrice;
     }
 }

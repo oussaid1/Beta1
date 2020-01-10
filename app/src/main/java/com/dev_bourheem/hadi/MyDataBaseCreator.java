@@ -8,25 +8,27 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
 public class MyDataBaseCreator extends SQLiteOpenHelper {
-    public static final String database_name = "Trains.db";
-    public static final String TABLE_NAME = "Girls";
+    public static final String database_name = "School.db";
+    public static final String TABLE_NAME = "Goods";
     public static final String col1 = "Item_Name";
     public static final String col2 = "Item_Price";
     public static final String person = "MoolHanout";
     public static final String da = "history";
+    public static final String Quantifier = "Quantifiers";
+    public static final String Quantity = "quantity";
 
     // public static final String SHOP_NAME = "name";
     // public static final String SHOP_PHONE = "phone";
     //public static final String SHOP_EMAIL = "email";
 
     public MyDataBaseCreator(Context context) {
-        super(context, database_name, null, 2);
+        super(context, database_name, null, 1);
     }
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (_ID INTEGER PRIMARY KEY AUTOINCREMENT," + col1 + " TEXT," + col2 + " DOUBLE," + person + " TEXT,"+ da + " TEXT )");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (_ID INTEGER PRIMARY KEY AUTOINCREMENT," + col1 + " TEXT," + Quantifier+" TEXT , " + Quantity + " DOUBLE ," + col2 + " DOUBLE," + person + " TEXT,"+ da + " TEXT )");
         // db.execSQL("CREATE TABLE "+ SHOP_TABLE + "(_ID INTEGER Primary key autoincrement,"+SHOP_NAME +" TEXT, " +SHOP_PHONE +" TEXT, "+SHOP_EMAIL+ " TEXT)");
 
     }
@@ -38,15 +40,20 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean InjectData(String Sir, String name, double prix,String daat) {
+    public boolean InjectData( double Quanty,String Quantif,String name, double prix, String Sir,String daat) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(person, Sir);
+
         values.put(col1, name);
         values.put(col2, prix);
+        values.put(Quantifier, Quantif);
+        values.put(Quantity, Quanty);
+        values.put(person, Sir);
         values.put(da, daat);
         long insertStaus = db.insert(TABLE_NAME, null, values);
-        return insertStaus != -1;
+        if (insertStaus >= 1)
+        return true;
+        else return false;
     }
 
 

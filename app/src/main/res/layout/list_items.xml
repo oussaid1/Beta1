@@ -1,103 +1,179 @@
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:elevation="8dp"
-    app:cardCornerRadius="8dp"
-   >
-    <RelativeLayout
+    android:orientation="vertical"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:id="@+id/f"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/GreenP3"
-        android:layout_margin="8dp">
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="8dp"
-            android:layout_alignParentEnd="true"
-            android:padding="2dp" />
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="8dp"
-            android:layout_toStartOf="@+id/imageView"
-            android:text="الحليب"
-            android:textColor="@color/GreenP"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        android:background="@color/GreenP3">
 
-        <TextView
-            android:id="@+id/from"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginEnd="31dp"
-            android:layout_marginTop="4dp"
-            android:layout_toStartOf="@id/textView1"
-            android:text="من عند"
-            android:textColor="@android:color/black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/GreenP3"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/shopname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="مومو"
-            android:layout_below="@id/from"
-            android:layout_alignEnd="@id/from"
-            android:layout_marginStart="22dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="4dp"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="8dp"
+                android:text=" يوم " />
 
-        <TextView
-            android:id="@+id/fromDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="94dp"
-            android:layout_marginTop="4dp"
-            android:text="يوم"
-            android:textColor="@android:color/black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/Date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/fromDate"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="12dp"
-            android:text="يوم"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/dateCV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                android:layout_marginBottom="4dp"
+                android:text="12/01/20"
+                android:textStyle="italic" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView2"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_margin="4dp"
-            android:layout_below="@id/textView1"
-            android:layout_toStartOf="@id/imageView"
-            android:layout_marginStart="8dp"
-            android:text="120"
-            android:textStyle="italic"
-            android:textColorHighlight="@color/GreenP0"
-            android:textSize="16sp" />
-    </RelativeLayout>
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/GreenP3"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="من عند" />
+
+            <TextView
+                android:id="@+id/molhanotCV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                android:layout_marginBottom="4dp"
+                android:text="مومو"
+                android:textStyle="italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@color/GreenP3"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/ItemNameCV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="الحليب"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/quantifierCv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_marginStart="8dp"
+                            android:text="كيلو"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/quantityCV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_marginEnd="6dp"
+                            android:textSize="16sp"
+                            android:layout_marginStart="16dp"
+                            android:text="1.5"
+                             />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/PriceCV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="180"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+
+
+                        <TextView
+                            android:id="@+id/quantityV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_marginStart="16dp"
+                            android:text="الثمن"
+                            android:textStyle="italic"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="26dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="4dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="2dp"
+
+                        android:src="@drawable/ic_shopping" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
