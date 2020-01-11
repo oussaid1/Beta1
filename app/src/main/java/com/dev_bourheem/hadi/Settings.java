@@ -69,7 +69,7 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LoadusertoDatabase();
-                OpenActiviti();
+
             }
         });
         saveBtnforuserQuotas.setOnClickListener(new View.OnClickListener() {
@@ -95,16 +95,21 @@ public class Settings extends AppCompatActivity {
 
     public void LoadQuotatoDatabase() {
         forQutaOC = new ForQuotas(getApplicationContext());
-        if (setQuota.length() == 0 ) setQuota.setText("0");
-        if (setGuestQta.length() == 0) setGuestQta.setText("0");
-          if (setQuota.length() == 0 || setGuestQta.length() == 0) MsgBox("المرجو ادخال المعلومات اولا");
 
+          if (setQuota.getText().toString().trim().length() == 0 || setGuestQta.getText().toString().trim().length() == 0) {
+             return;
+          }else
             user_defined_Quota = Double.parseDouble(setQuota.getText().toString().trim());
             user_defined_guestQuota = Double.parseDouble(setGuestQta.getText().toString().trim());
             boolean newRowAdded = forQutaOC.InjectData(user_defined_Quota, user_defined_guestQuota);
             if (newRowAdded) {
                 MsgBox("تم الحفظ");
-            } else MsgBox("لم يتم الحفظ");
+                OpenActiviti();
+            } else {
+                MsgBox("لم يتم الحفظ");
+                 setQuota.setText("0");
+                setGuestQta.setText("0");
+            }
 
     }
 
@@ -122,6 +127,7 @@ public class Settings extends AppCompatActivity {
             Confirmedpass = confirmpass.getText().toString().trim();
             if (Userpassword.equals(Confirmedpass)) {
                 boolean newRowAdded = Lgin.InjectData(Userusername, Userpassword);
+
                 if (newRowAdded) {
                     MsgBox("تم الحفظ");
                     OpenActiviti();

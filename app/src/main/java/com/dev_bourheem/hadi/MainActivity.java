@@ -42,16 +42,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    public Button addBut,plus,minus;
+    public Button addBut, plus, minus;
     public Spinner qtypSpinner;
-    AutoCompleteTextView NameIn ,moolhanotNm;
-    public EditText PriceIn,quantity;
-    public TextView DateV1, RedL, OrangeL, GreenL,QuotaLeftNm, LeftOut, TotalOut,TotalallOut, hereisyourQuota;
+    AutoCompleteTextView NameIn, moolhanotNm;
+    public EditText PriceIn, quantity;
+    public TextView DateV1, RedL, OrangeL, GreenL, QuotaLeftNm, LeftOut, TotalOut, TotalallOut, hereisyourQuota;
     public Switch Guestmode;
     public boolean ischecked;
     public double LeftOfQuota, ItemPriceDbl, Quotafrom_database, GestQuotafrom_databse;
-    public String date, ItemNameStr, Sir,Quantifier;
-    public double Quota, Qnt,Quantity;
+    public String date, ItemNameStr, Sir;
+    public double Quota, Qnt;
     public ArrayList<String> allList;
     public ArrayList<String> Molhanot;
     public ArrayAdapter<String> MolhntautoCompleteAdapter;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     MyDataBaseCreator MDBC;
     ForQuotas forQutaOC;
     AdView admain;
-    String [] QTypes ={"واحدة","كيلو","لتر","متر","صندوق","علبة"};
+    String[] QTypes = {"واحدة", " ساشي "," كيلو", "لتر", "متر", "صندوق", "علبة"};
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,11 +91,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButonsDeclare();
+        MDBC = new MyDataBaseCreator(getApplicationContext());
+        forQutaOC = new ForQuotas(getApplicationContext());
+        GetQuotaFromDataBZ();
+        TraficLight();
+        fillsugest();
 
-
-
-
-       MobileAds.initialize(this, new OnInitializationCompleteListener() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
@@ -108,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Qnt= Double.valueOf(quantity.getText().toString().trim());
-                Qnt=Qnt+0.5;
+                Qnt = Double.valueOf(quantity.getText().toString().trim());
+                Qnt = Qnt + 0.5;
                 quantity.setText(""+Qnt);
             }
         });
@@ -117,25 +119,14 @@ public class MainActivity extends AppCompatActivity {
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Qnt= Double.valueOf(quantity.getText().toString().trim());
-               if(Qnt>0) Qnt=Qnt-0.5;
-                quantity.setText(""+Qnt);
+                Qnt = Double.valueOf(quantity.getText().toString().trim());
+                if (Qnt > 0) Qnt = Qnt - 0.5;
+                quantity.setText("" + Qnt);
             }
         });
 
-        DateV1.setText("" + GetDate());
-        MDBC = new MyDataBaseCreator(getApplicationContext());
-        Molhanot = new ArrayList<>();
-        allList = new ArrayList<String>();
-        forQutaOC = new ForQuotas(getApplicationContext());
-        GetQuotaFromDataBZ();
-        TraficLight();
-        Molhanot.clear();
-        allList.clear();
-        Molhanot.add(getString(R.string.unknown));
-        fillsugest();
-        QuanSpinAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,QTypes);
-        qtypSpinner.setAdapter(QuanSpinAdapter);
+        DateV1.setText(GetDate());
+
 
         addBut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,15 +149,14 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     MsgBox("الوضع العائلي");
                 }
-                GetQuotaFromDataBZ();
-                TraficLight();
+
+
             }
         });
-        GetQuotaFromDataBZ();
-        getTotalAll();
+
     }
 
-    public void ButonsDeclare(){
+    public void ButonsDeclare() {
         DateV1 = findViewById(R.id.dateView);
         QuotaLeftNm = findViewById(R.id.QuotaLeftNm);
         GreenL = findViewById(R.id.BtnGreen);
@@ -178,13 +168,13 @@ public class MainActivity extends AppCompatActivity {
         plus = findViewById(R.id.plus);
         addBut = findViewById(R.id.AddBtn);
         minus = findViewById(R.id.minus);
-         qtypSpinner = findViewById(R.id.QuanType);
+        qtypSpinner = findViewById(R.id.QuanType);
         NameIn = findViewById(R.id.ItemNameIn);
         moolhanotNm = findViewById(R.id.molhanoutNameIn);
         PriceIn = findViewById(R.id.ItemPriceIn);
         LeftOut = findViewById(R.id.QuotaLeftOut);
         TotalOut = findViewById(R.id.TotalTodayOut);
-        quantity=findViewById(R.id.quantity);
+        quantity = findViewById(R.id.quantity);
         admain = findViewById(R.id.admain);
 
 
@@ -196,14 +186,23 @@ public class MainActivity extends AppCompatActivity {
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent1);
     }
-public void fillsugest(){
-    GetItemNameFromdatabase();
-    AutoCompleteAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, allList);
-    NameIn.setAdapter(AutoCompleteAdapter);
-    GetmolhanotFromdatabase();
-    MolhntautoCompleteAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
-    moolhanotNm.setAdapter(MolhntautoCompleteAdapter);
-}
+
+    public void fillsugest() {
+        Molhanot = new ArrayList<>();
+        allList = new ArrayList<String>();
+        allList.clear();
+        Molhanot.clear();
+        QuanSpinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, QTypes);
+        qtypSpinner.setAdapter(QuanSpinAdapter);
+        Molhanot.add(getString(R.string.unknown));
+        GetItemNameFromdatabase();
+        AutoCompleteAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, allList);
+        NameIn.setAdapter(AutoCompleteAdapter);
+        GetmolhanotFromdatabase();
+        MolhntautoCompleteAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, Molhanot);
+        moolhanotNm.setAdapter(MolhntautoCompleteAdapter);
+    }
+
     public void OpentSettings() {
         final Intent intent2;
         intent2 = new Intent(this, Settings.class);
@@ -219,7 +218,6 @@ public void fillsugest(){
         //startActivity(dateIntent);
         return date;
     }
-
 
 
     // this method calculates the limit (Quota ) according to the switch and according to the user settings
@@ -243,14 +241,14 @@ public void fillsugest(){
     public void LoadDatabase() {
 // get !!!!!!!!!edditext input to vars.
         String Quantifiier = qtypSpinner.getSelectedItem().toString().trim();
-         Qnt= Double.valueOf(quantity.getText().toString().trim());
+        Qnt = Double.valueOf(quantity.getText().toString().trim());
         String d = GetDate();
         ItemPriceDbl = Double.parseDouble(PriceIn.getText().toString().trim());
-        ItemPriceDbl = Qnt*ItemPriceDbl;
+        ItemPriceDbl = Qnt * ItemPriceDbl;
         ItemNameStr = NameIn.getText().toString().trim();
         Sir = moolhanotNm.getText().toString().trim();
 // insert data to database's Table.
-        boolean newRowAdded = MDBC.InjectData( Qnt,Quantifiier,ItemNameStr, ItemPriceDbl,Sir,d);
+        boolean newRowAdded = MDBC.InjectData(Qnt, Quantifiier, ItemNameStr, ItemPriceDbl, Sir, d);
         if (newRowAdded) {
             MsgBox("المعلومات تسجلت");
         } else MsgBox("المعلومات لم تسجل");
@@ -259,7 +257,8 @@ public void fillsugest(){
 
     //this method gets the Sum of all elements in ItemPrice Column
     public void getTotal(double DefQuota, double DefGuestQuotq) {
-NumberFormat mfr=new DecimalFormat("0.00");
+
+        NumberFormat mfr = new DecimalFormat("0.00");
         double itemsSum;
         Cursor c = MDBC.GetSum();
         if (c.getCount() == 0) {
@@ -305,18 +304,18 @@ NumberFormat mfr=new DecimalFormat("0.00");
     public void onDialogue() {
         new AlertDialog.Builder(this)
                 .setTitle("تحذير")
-                .setMessage(getString (R.string.surewannaadd))
+                .setMessage(getString(R.string.surewannaadd))
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         LoadDatabase();
-                       GetItemNameFromdatabase();
-                       GetmolhanotFromdatabase();
-                       PriceIn.getText().clear();
-                       NameIn.getText().clear();
-                       GetQuotaFromDataBZ();
-                     TraficLight();
+                        GetItemNameFromdatabase();
+                        GetmolhanotFromdatabase();
+                        GetQuotaFromDataBZ();
+                        TraficLight();
+                        PriceIn.getText().clear();
+                        NameIn.getText().clear();
 
                     }
                 })
@@ -329,7 +328,7 @@ NumberFormat mfr=new DecimalFormat("0.00");
         Cursor qfinder = forQutaOC.JibData();
 
         if (qfinder.getCount() == 0) {
-            MsgBox(getString (R.string.noquotafound));
+            MsgBox(getString(R.string.noquotafound));
             //OpentSettings();
             getTotal(0, 0);
         } else {
@@ -377,7 +376,7 @@ NumberFormat mfr=new DecimalFormat("0.00");
     }
 
     public void getTotalAll() {
-        NumberFormat mfr=new DecimalFormat("0.00");
+        NumberFormat mfr = new DecimalFormat("0.00");
         double itemsSumall;
         Cursor c = MDBC.GetSumall();
         if (c.getCount() == 0) {

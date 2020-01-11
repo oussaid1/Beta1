@@ -130,13 +130,7 @@ public class EdditActivity extends AppCompatActivity {
     public void MsgBox(String mess,int p) {
         Toast.makeText(EdditActivity.this, mess,p);
     }
-    private void PrintMessage(String title, String message) {
-        AlertDialog.Builder newAlert = new AlertDialog.Builder(this);
-        newAlert.setCancelable(true);
-        newAlert.setTitle(title);
-        newAlert.setMessage(message);
-        newAlert.show();
-    }
+
 
     public void onDialogueUpdate() {
         new AlertDialog.Builder(this)
