@@ -2,17 +2,16 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#80D8FF</color>
     <color name="GreenP0">#08886E</color>
     <color name="GreenP1">#07B18B</color>
     <color name="red">#D50000</color>
     <color name="green">#64DD17</color>
     <color name="orange">#FF6D00</color>
     <color name="GreenP">#011313</color>
-    <color name="GreenP2">#48D5C3</color>
     <color name="GreenP3">#A1E0C8</color>
-    <color name="Green">#09616B</color>
+    <color name="GreenP4">#ABEBD0</color>
+    <color name="Green">#087474</color>
     <color name="white">#F4F8F7</color>
-<color name="grey">#C9C5C5</color>
 
 </resources>

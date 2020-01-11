@@ -1,241 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".Main3Activity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:background="@color/white">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:verticalScrollbarPosition="right"
-            android:background="@drawable/textborderz"
-            android:fillViewport="true">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/TopLayout"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_margin="8dp"
+                android:elevation="4dp"
                 android:background="@drawable/justborderz"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="79dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:text="@string/settings"
                     android:textAlignment="center"
                     android:textColor="@color/GreenP1" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/layout2"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/TopLayout"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp">
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="6dp"
+                android:background="@drawable/justborderz"
+                android:elevation="8dp"
+                android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:background="@drawable/justborderz"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_centerHorizontal="true">
-
-                    <TextView
-                        android:id="@+id/userdefquotaNm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_gravity="top"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="4dp"
-                        android:textColor="@color/GreenP"
-                        android:text="@string/set_your_quota"> </TextView>
-
-                    <EditText
-                        android:id="@+id/limitQuotaDef"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:layout_below="@id/userdefquotaNm"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="4dp"
-                        android:inputType="numberDecimal"
-                        android:maxLength="10"
-                        android:background="@drawable/thinborders"
-                        android:hint="@string/define_limit_here"
-                        android:maxLines="1"
-                        android:padding="4dp"
-                        android:textAlignment="center"> </EditText>
-
-                    <TextView
-                        android:id="@+id/PasswordNm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/limitQuotaDef"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="1dp"
-                        android:text="@string/set_your_guest_mode_quota"
-                        android:textSize="16sp"> </TextView>
-
-                    <EditText
-                        android:id="@+id/limitGuestDef"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:layout_below="@id/PasswordNm"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="8dp"
-                        android:maxLength="10"
-                        android:background="@drawable/thinborders"
-                        android:hint="@string/guest_limit_here"
-                        android:inputType="numberDecimal"
-                        android:maxLines="1"
-                        android:paddingStart="4dp"
-                        android:textAlignment="center"> </EditText>
-
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical">
 
                     <Button
                         android:id="@+id/saveBtnforquotas"
                         android:layout_width="70dp"
                         android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_gravity="bottom"
+                        android:layout_margin="8dp"
                         android:background="@drawable/buttonflat"
                         android:text="@string/save"
                         android:textAlignment="center"
                         android:textColor="@color/GreenP"
                         android:textSize="16sp" />
-                </RelativeLayout>
+                </LinearLayout>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="260dp"
-                android:layout_below="@id/layout2"
-                android:layout_alignParentBottom="true"
-                android:layout_centerInParent="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/justborderz"
-                android:layout_marginTop="280dp">
-                <TextView
-                    android:id="@+id/loginNm1"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="top"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="4dp"
-                    android:text="@string/set_user_name"> </TextView>
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/UserNameDef"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
-                    android:layout_below="@id/loginNm1"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="4dp"
-                    android:maxLength="16"
-                    android:background="@drawable/thinborders"
-                    android:hint="@string/username_here"
-                    android:maxLines="1"
-                    android:padding="4dp"
-                    android:textAlignment="center"> </EditText>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/set_your_quota"
+                        android:textColor="@color/GreenP" />
 
-                <TextView
-                    android:id="@+id/PasswordNm3"
+                    <EditText
+                        android:id="@+id/limitQuotaDef"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="8dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/justborderz"
+                        android:hint="@string/define_limit_here"
+                        android:inputType="numberDecimal"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/UserNameDef"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="1dp"
-                    android:text="@string/set_password"
-                    android:textSize="16sp"> </TextView>
-
-                <EditText
-                    android:id="@+id/PasswordDef"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
-                    android:layout_below="@id/PasswordNm3"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/thinborders"
-                    android:hint="@string/password"
-                    android:maxLength="8"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:paddingStart="4dp"
-                    android:textAlignment="center"/>
-                <TextView
-                    android:id="@+id/confirmPassnm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/PasswordDef"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="1dp"
-                    android:text="@string/confirm_password"
-                    android:textSize="16sp"> </TextView>
-                <EditText
-                    android:id="@+id/ConfirmPassDef"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
-                    android:layout_below="@id/confirmPassnm"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/thinborders"
-                    android:hint="@string/password"
-                    android:maxLength="8"
-                    android:inputType="textPassword"
-                    android:layout_marginBottom="8dp"
-                    android:maxLines="1"
-                    android:paddingStart="4dp"
-                    android:textAlignment="center">
-                </EditText>
-
-                <Button
-                    android:id="@+id/saveBtnforuserdata"
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/buttonflat"
-                    android:text="@string/save"
-                    android:textAlignment="center"
-                    android:textColor="@color/GreenP"
-                    android:textSize="16sp" />
+                    android:orientation="vertical">
 
-            </RelativeLayout>
-        </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/GreenP"
+                        android:text="@string/set_your_guest_mode_quota"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/limitGuestDef"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/justborderz"
+                        android:hint="@string/guest_limit_here"
+                        android:inputType="numberDecimal"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/justborderz"
+                android:layout_margin="8dp"
+                android:elevation="8dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/saveBtnforuserdata"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/buttonflat"
+                        android:elevation="4dp"
+                        android:text="@string/save"
+                        android:textAlignment="center"
+                        android:textColor="@color/GreenP"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/justborderz"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/GreenP0"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/set_user_name" />
+
+                    <EditText
+                        android:id="@+id/UserNameDef"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/justborderz"
+                        android:hint="@string/username_here"
+                        android:maxLength="16"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/GreenP0"
+                        android:layout_marginBottom="1dp"
+                        android:text="@string/set_password"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/PasswordDef"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/justborderz"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:maxLength="8"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/GreenP0"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="1dp"
+                        android:text="@string/confirm_password"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/ConfirmPassDef"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/justborderz"
+                        android:hint="@string/confirm_password"
+                        android:inputType="textPassword"
+                        android:maxLength="8"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:textAlignment="center" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

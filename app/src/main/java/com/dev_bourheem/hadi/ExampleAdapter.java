@@ -27,7 +27,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     }
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
-
+        public TextView idTv;
         public TextView quantity;
         public TextView quantifier;
         public TextView ItemName;
@@ -36,6 +36,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         public TextView dateBought;
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
+            idTv = itemView.findViewById(R.id.id);
             quantity = itemView.findViewById(R.id.quantityCV);
             quantifier = itemView.findViewById(R.id.quantifierCv);
             ItemName = itemView.findViewById(R.id.ItemNameCV);
@@ -74,6 +75,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         exampleitem currentItem = mExampleList.get(position);
 
+        holder.idTv.setText(currentItem.getIdno());
         holder.quantity.setText(currentItem.getQuantity());
         holder.quantifier.setText(currentItem.getQuantifier());
         holder.ItemName.setText(currentItem.getItemName());

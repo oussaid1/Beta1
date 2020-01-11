@@ -6,4 +6,180 @@
     android:layout_height="match_parent"
     tools:context=".EdditActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:elevation="8dp"
+            android:background="@drawable/justborderz"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="16dp"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="2"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/orange"
+                    android:text="@string/productinfo" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="16dp"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/ItemNameMod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="2"
+                    android:textAlignment="center"
+                    android:maxLines="1"
+                    android:maxLength="16"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/productname" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/productname" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="16dp"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/quantityMod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="2"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:maxLength="16"
+                    android:inputType="numberDecimal"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/quantity" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:text="@string/quantity" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="16dp"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/priceMod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="2"
+                    android:textAlignment="center"
+                    android:hint="@string/price"
+                    android:inputType="numberDecimal"
+                    android:maxLength="16"
+                    android:maxLines="1" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/price" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="16dp"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/shopnameMod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="2"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:maxLength="16"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/shop_name" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/shop_name" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="16dp"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/dateMod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="2"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:maxLength="16"
+                    android:inputType="date"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/date" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/date" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

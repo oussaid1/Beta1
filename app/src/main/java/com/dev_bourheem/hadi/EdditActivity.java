@@ -1,14 +1,173 @@
 package com.dev_bourheem.hadi;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class EdditActivity extends AppCompatActivity {
+    EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
+    MyDataBaseCreator MDBCR;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.edditmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.save:
+                //func here
+                onDialogueUpdate();
+                return true;
+            case R.id.deletMod:
+                onDialogueDelete();
+
+                return true;
+            case R.id.exit_Mod:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eddit);
+
+        ItemNameMod = findViewById(R.id.ItemNameMod);
+        QuantityMod = findViewById(R.id.quantityMod);
+        PriceMod = findViewById(R.id.priceMod);
+        ShopNameMod = findViewById(R.id.shopnameMod);
+        DateMod = findViewById(R.id.dateMod);
+        GetThem();
+    }
+
+
+    public void GetThem() {
+        Intent intent = getIntent();
+        exampleitem exampleitem = intent.getParcelableExtra("exampleItem");
+        String quantity = null;
+        if (exampleitem != null) {
+            quantity = exampleitem.getQuantity();
+        }
+        // String quantifier = exampleitem.getQuantifier();
+        String ItemName = null;
+        if (exampleitem != null) {
+            ItemName = exampleitem.getItemName();
+        }
+        String ItemPrice = null;
+        if (exampleitem != null) {
+            ItemPrice = exampleitem.getItemPrice();
+        }
+        String ShopName = null;
+        if (exampleitem != null) {
+            ShopName = exampleitem.getShopName();
+        }
+        String dateBought = null;
+        if (exampleitem != null) {
+            dateBought = exampleitem.getDateBought();
+        }
+
+        ItemNameMod.setText(ItemName);
+        QuantityMod.setText(quantity);
+        PriceMod.setText(ItemPrice);
+        ShopNameMod.setText(ShopName);
+        DateMod.setText(dateBought);
+
+    }
+
+    public void UpdateDB() {
+        MDBCR = new MyDataBaseCreator(this);
+        Intent intent = getIntent();
+        exampleitem exampleitem = intent.getParcelableExtra("exampleItem");
+        String idd = null;
+        if (exampleitem != null) {
+            idd = exampleitem.getIdno();
+        }
+        String EdItemNameMod = ItemNameMod.getText().toString().trim();
+        double EdQuantityMod = Double.parseDouble(QuantityMod.getText().toString().trim());
+        double EdPriceMod =Double.parseDouble (PriceMod.getText().toString().trim());
+        EdPriceMod= EdQuantityMod*EdPriceMod;
+        String EdShopNameMod = ShopNameMod.getText().toString().trim();
+        String EdDateMod = DateMod.getText().toString().trim();
+
+        boolean updateStatus = MDBCR.updateData( idd,EdQuantityMod, EdItemNameMod, EdPriceMod, EdShopNameMod, EdDateMod);
+        if (updateStatus) {
+            MsgBox("تم الحفظ " ,1);
+        } else MsgBox("لم يتم الحفظ",1);
+    }
+    public void DelItem(){
+        MDBCR = new MyDataBaseCreator(this);
+        Intent intent = getIntent();
+        exampleitem exampleitem = intent.getParcelableExtra("exampleItem");
+        String idd = null;
+        if (exampleitem != null) {
+            idd = exampleitem.getIdno();
+        }
+        boolean updateStatus = MDBCR.DeleteItemSelected( idd);
+        if (updateStatus) {
+            MsgBox("تم الحذف " ,1);
+            OpenListItems();
+        } else MsgBox( "لم يتم الحذف" ,1);
+
+    }
+
+    public void MsgBox(String mess,int p) {
+        Toast.makeText(EdditActivity.this, mess,p);
+    }
+    private void PrintMessage(String title, String message) {
+        AlertDialog.Builder newAlert = new AlertDialog.Builder(this);
+        newAlert.setCancelable(true);
+        newAlert.setTitle(title);
+        newAlert.setMessage(message);
+        newAlert.show();
+    }
+
+    public void onDialogueUpdate() {
+        new AlertDialog.Builder(this)
+                .setTitle("تحذير")
+                .setMessage(getString (R.string.surewannaupdate))
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        UpdateDB();
+
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
+    }
+    public void onDialogueDelete() {
+        new AlertDialog.Builder(this)
+                .setTitle("تحذير")
+                .setMessage(getString (R.string.surewannadel))
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        DelItem();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
+    }
+    public void OpenListItems(){
+        Intent inte= new Intent(EdditActivity.this,Main2Activity.class);
+        startActivity(inte);
     }
 }

@@ -81,7 +81,7 @@ public class Main2Activity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+
             }
         });
         ShowListBtn.setOnClickListener(new View.OnClickListener() {
@@ -138,14 +138,14 @@ public class Main2Activity extends AppCompatActivity {
         else if (data.moveToNext()) {
             while (!data.isAfterLast())
                 do {
-
+                    String idnonit= data.getString(data.getColumnIndex(MdbCrtr.ID));
                     String quantity= data.getString(data.getColumnIndex(MdbCrtr.Quantity));
                     String qunatifier= data.getString(data.getColumnIndex(MdbCrtr.Quantifier));
                     String itemNm = data.getString(data.getColumnIndex(MdbCrtr.col1));
                     String itemName = data.getString(data.getColumnIndex(MdbCrtr.col2));
                     String shopNm = data.getString(data.getColumnIndex(MdbCrtr.person));
                     String DateBout = data.getString(data.getColumnIndex(MdbCrtr.da));
-                    mExampleList.add(new exampleitem( quantity,qunatifier ,itemNm, itemName,shopNm,DateBout));
+                    mExampleList.add(new exampleitem( idnonit,quantity,qunatifier ,itemNm, itemName,shopNm,DateBout));
                    // mainList.add(itemId);
                 } while ((data.moveToNext()));
 
@@ -159,6 +159,11 @@ public class Main2Activity extends AppCompatActivity {
         RecyclerAdap.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(int position) {
+
+                Intent intent =new Intent(Main2Activity.this,EdditActivity.class);
+                intent.putExtra("exampleItem",mExampleList.get(position));
+                startActivity(intent);
+
                 Toast.makeText(Main2Activity.this,"am clicked", Toast.LENGTH_SHORT).show();
             }
 

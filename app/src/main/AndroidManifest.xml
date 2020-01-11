@@ -12,7 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EdditActivity"></activity>
+        <activity
+            android:name=".splash"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".EdditActivity"
+            android:parentActivityName=".Main2Activity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -21,12 +32,12 @@
         <activity
             android:name=".Settings"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".Main3Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name=".Main3Activity"
+            android:parentActivityName=".splash"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Main2Activity"

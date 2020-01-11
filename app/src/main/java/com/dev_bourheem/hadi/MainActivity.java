@@ -311,12 +311,12 @@ NumberFormat mfr=new DecimalFormat("0.00");
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         LoadDatabase();
-                       // GetItemNameFromdatabase();
-                     //  GetmolhanotFromdatabase();
-                       //PriceIn.getText().clear();
-                       //NameIn.getText().clear();
-                      // GetQuotaFromDataBZ();
-                    //   TraficLight();
+                       GetItemNameFromdatabase();
+                       GetmolhanotFromdatabase();
+                       PriceIn.getText().clear();
+                       NameIn.getText().clear();
+                       GetQuotaFromDataBZ();
+                     TraficLight();
 
                     }
                 })

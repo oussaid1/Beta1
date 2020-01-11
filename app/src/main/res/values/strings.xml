@@ -1,13 +1,12 @@
 <resources>
-    <string name="app_name">حانوتي</string>
+    <string name="app_name">لكارني</string>
     <string name="show_today_items">أظهر الائحة</string>
     <string name="back">العودة</string>
-    <string name="guest_mode"> وضع (الضيوف ) ! </string>
+    <string name="guest_mode">  وضع ( الضيوف ! ) </string>
     <string name="name_here">الإسم هنا</string>
-    <string name="left_of_quota">المتبقي من السقف</string>
+    <string name="left_of_quota">الباقي من السقف</string>
     <string name="total">  المجموع العام </string>
     <string name="totaltoday">  المجموع اليوم </string>
-    <string name="limit_exceeded">تجاوزت السقف</string>
     <string name="shop_name">اسم المحل</string>
     <string name="price_in_here">الثمن هنا</string>
     <string name="add">أظف</string>
@@ -40,8 +39,19 @@
     <string name="noitemnamefound">لايوجد منتوج</string>
     <string name="noquotafound">لم يتم تحيد السقف بعد</string>
     <string name="surewannaadd">هل فعلا تريد اظافة المنتوج ?</string>
+    <string name="surewannadel">هل فعلا تريد حذف المنتوج ?</string>
+    <string name="surewannaupdate">هل فعلا تريد تعديل المنتوج ?</string>
     <string name="limit">السقف المحدد</string>
     <string name="productname">إسم المنتوج</string>
     <string name="productprice">ثمن المنتوج</string>
+    <string name="milk">الحليب</string>
+    <string name="kilo">كيلو</string>
+    <string name="_1_5">1.5</string>
+    <string name="_180">180</string>
+    <string name="price">الثمن</string>
+    <string name="date">التاريخ</string>
+    <string name="quantity">الكمية</string>
+    <string name="productinfo">معلومات السلعة</string>
+    <string name="delete">احذف</string>
 
 </resources>

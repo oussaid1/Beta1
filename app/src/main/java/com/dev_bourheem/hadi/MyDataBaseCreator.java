@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MyDataBaseCreator extends SQLiteOpenHelper {
     public static final String database_name = "School.db";
     public static final String TABLE_NAME = "Goods";
+    public static final String ID = "ID";
     public static final String col1 = "Item_Name";
     public static final String col2 = "Item_Price";
     public static final String person = "MoolHanout";
@@ -22,13 +23,13 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     //public static final String SHOP_EMAIL = "email";
 
     public MyDataBaseCreator(Context context) {
-        super(context, database_name, null, 1);
+        super(context, database_name, null, 2);
     }
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (_ID INTEGER PRIMARY KEY AUTOINCREMENT," + col1 + " TEXT," + Quantifier+" TEXT , " + Quantity + " DOUBLE ," + col2 + " DOUBLE," + person + " TEXT,"+ da + " TEXT )");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " ( "+ ID +" INTEGER PRIMARY KEY AUTOINCREMENT," + col1 + " TEXT," + Quantifier+" TEXT , " + Quantity + " DOUBLE ," + col2 + " DOUBLE," + person + " TEXT,"+ da + " TEXT )");
         // db.execSQL("CREATE TABLE "+ SHOP_TABLE + "(_ID INTEGER Primary key autoincrement,"+SHOP_NAME +" TEXT, " +SHOP_PHONE +" TEXT, "+SHOP_EMAIL+ " TEXT)");
 
     }
@@ -43,7 +44,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public boolean InjectData( double Quanty,String Quantif,String name, double prix, String Sir,String daat) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-
         values.put(col1, name);
         values.put(col2, prix);
         values.put(Quantifier, Quantif);
@@ -55,7 +55,23 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         return true;
         else return false;
     }
+    public boolean updateData(String id ,double Quanty,String name, double prix, String Sir,String daat) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(col1, name);
+        values.put(col2, prix);
+        values.put(Quantity, Quanty);
+        values.put(person, Sir);
+        values.put(da, daat);
+         db.update(TABLE_NAME, values,  ID + " = ?" , new String[]{id});
 
+         return true;
+    }
+    public boolean DeleteItemSelected(String id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAME,   ID + " = ?" , new String[]{id});
+        return true;
+    }
 
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();

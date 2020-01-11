@@ -8,7 +8,6 @@
     app:cardCornerRadius="8dp">
 
     <LinearLayout
-        android:id="@+id/f"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/GreenP3">
@@ -32,10 +31,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                android:textSize="16sp"
                 android:layout_marginBottom="4dp"
                 android:text="12/01/20"
+                android:textSize="16sp"
                 android:textStyle="italic" />
         </LinearLayout>
 
@@ -59,9 +59,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:textSize="16sp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="4dp"
                 android:text="مومو"
+                android:textSize="16sp"
                 android:textStyle="italic" />
         </LinearLayout>
 
@@ -84,8 +85,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -95,8 +96,8 @@
                             android:layout_margin="4dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="الحليب"
-                            android:textSize="30sp"
+                            android:text="@string/milk"
+                            android:textSize="26sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -104,8 +105,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
+                            android:layout_marginEnd="4dp"
                             android:layout_marginStart="8dp"
-                            android:text="كيلو"
+                            android:text="@string/kilo"
                             android:textSize="12sp" />
 
                         <TextView
@@ -113,13 +115,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
-                            android:layout_marginEnd="6dp"
-                            android:textSize="16sp"
                             android:layout_marginStart="16dp"
-                            android:text="1.5"
-                             />
+                            android:layout_marginEnd="6dp"
+                            android:text="@string/_1_5"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -132,21 +134,19 @@
                             android:layout_margin="4dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="180"
+                            android:text="@string/_180"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
 
-
                         <TextView
-                            android:id="@+id/quantityV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             android:layout_marginStart="16dp"
-                            android:text="الثمن"
-                            android:textStyle="italic"
-                            android:textSize="12sp" />
+                            android:text="@string/price"
+                            android:textSize="12sp"
+                            android:textStyle="italic" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -164,9 +164,13 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginTop="6dp"
                         android:layout_marginBottom="2dp"
-
                         android:src="@drawable/ic_shopping" />
 
+                    <TextView
+                        android:id="@+id/id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
                 </LinearLayout>
 
             </LinearLayout>
