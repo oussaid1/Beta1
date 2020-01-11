@@ -11,7 +11,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/GreenP4">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="6dp"
-                android:background="@drawable/justborderz"
+                android:background="@drawable/justborderzcolor"
                 android:elevation="8dp"
                 android:orientation="horizontal">
 
@@ -61,6 +61,7 @@
                         android:layout_margin="8dp"
                         android:background="@drawable/buttonflat"
                         android:text="@string/save"
+                        android:textStyle="bold"
                         android:textAlignment="center"
                         android:textColor="@color/GreenP"
                         android:textSize="16sp" />
@@ -119,7 +120,7 @@
                         android:layout_margin="8dp"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/justborderz"
-                        android:hint="@string/guest_limit_here"
+                        android:hint="@string/define_limit_here"
                         android:inputType="numberDecimal"
                         android:maxLength="10"
                         android:maxLines="1"
@@ -134,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/justborderz"
+                android:background="@drawable/justborderzcolor"
                 android:layout_margin="8dp"
                 android:elevation="8dp"
                 android:orientation="horizontal">
@@ -157,6 +158,7 @@
                         android:background="@drawable/buttonflat"
                         android:elevation="4dp"
                         android:text="@string/save"
+                        android:textStyle="bold"
                         android:textAlignment="center"
                         android:textColor="@color/GreenP"
                         android:textSize="16sp" />
@@ -164,13 +166,14 @@
 
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="end|center"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="4dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/justborderz"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/justborderzcolor"
                     android:orientation="vertical">
 
                     <TextView

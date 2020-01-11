@@ -11,8 +11,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev_bourheem.hadi.Login.LoginClass;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -24,6 +26,8 @@ public class Main3Activity extends AppCompatActivity {
     EditText username, PasswordIn;
     LoginClass Lgin;
     AdView adlogin;
+    private InterstitialAd mInterstitialAd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,19 @@ public class Main3Activity extends AppCompatActivity {
         adlogin = findViewById(R.id.adlogin);
         AdRequest adRequest = new AdRequest.Builder().build();
         adlogin.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-9838187586217611/3392960036");
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+        });
+
+
         PasswordIn = findViewById(R.id.PasswordIn);
         username = findViewById(R.id.loginNmIn);
         loginBtn = findViewById(R.id.loginBtn);

@@ -3,7 +3,6 @@
     <string name="show_today_items">أظهر الائحة</string>
     <string name="back">العودة</string>
     <string name="guest_mode">  وضع ( الضيوف ! ) </string>
-    <string name="name_here">الإسم هنا</string>
     <string name="left_of_quota">الباقي من السقف</string>
     <string name="total">  المجموع العام </string>
     <string name="totaltoday">  المجموع اليوم </string>
@@ -17,7 +16,6 @@
     <string name="set_your_quota">حدد السقف</string>
     <string name="define_limit_here"> حدد السقف هنا </string>
     <string name="set_your_guest_mode_quota">حدد السقف لوضع (الضيوف)</string>
-    <string name="guest_limit_here">حدد السقف</string>
     <string name="save">أحفظ</string>
     <string name="set_user_name">حدد اسم المستعمل</string>
     <string name="username_here">اسم المستعمل هنا </string>
@@ -50,8 +48,10 @@
     <string name="_180">180</string>
     <string name="price">الثمن</string>
     <string name="date">التاريخ</string>
-    <string name="quantity">الكمية</string>
     <string name="productinfo">معلومات السلعة</string>
     <string name="delete">احذف</string>
+    <string name="goodsname">اسم السلعة هنا</string>
+    <string name="shopnamehere">اسم المحل هنا</string>
+    <string name="quantity">الكمية</string>
 
 </resources>

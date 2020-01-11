@@ -329,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (qfinder.getCount() == 0) {
             MsgBox(getString(R.string.noquotafound));
-            //OpentSettings();
+            OpentSettings();
             getTotal(0, 0);
         } else {
             while (qfinder.moveToNext()) {

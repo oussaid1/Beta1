@@ -27,7 +27,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9838187586217611~2799722224" />
+            android:value="ca-app-pub-9838187586217611~7398464281" />
 
         <activity
             android:name=".Settings"
@@ -37,12 +37,17 @@
             android:parentActivityName=".splash"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             >
-
+            <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-9838187586217611~7398464281" />
         </activity>
         <activity
             android:name=".Main2Activity"
             android:parentActivityName=".MainActivity" />
+
+
         <activity android:name=".MainActivity" />
+
     </application>
 
 </manifest>

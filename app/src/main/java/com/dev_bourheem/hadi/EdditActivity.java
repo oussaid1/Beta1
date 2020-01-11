@@ -13,9 +13,16 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 public class EdditActivity extends AppCompatActivity {
     EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
     MyDataBaseCreator MDBCR;
+    AdView Edit_ad;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,7 +55,15 @@ public class EdditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eddit);
+        Edit_ad = findViewById(R.id.Edit_ad);
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
 
+        AdRequest adRequest = new AdRequest.Builder().build();
+        Edit_ad.loadAd(adRequest);
         ItemNameMod = findViewById(R.id.ItemNameMod);
         QuantityMod = findViewById(R.id.quantityMod);
         PriceMod = findViewById(R.id.priceMod);
