@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     MyDataBaseCreator MDBC;
     ForQuotas forQutaOC;
     AdView admain;
-    String[] QTypes = {"واحدة", " ساشي "," كيلو", "لتر", "متر", "صندوق", "علبة"};
+    String[] QTypes = {"","واحدة"," كيلو", "لتر", "متر", "صندوق","علبة"};
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -131,10 +131,14 @@ public class MainActivity extends AppCompatActivity {
         addBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Molhanot.clear();
-                allList.clear();
                 if (PriceIn.getText().toString().trim().length() != 0 && NameIn.getText().toString().trim().length() != 0) {
-                    onDialogue();
+                    LoadDatabase();
+                    GetItemNameFromdatabase();
+                    GetmolhanotFromdatabase();
+                    GetQuotaFromDataBZ();
+                    TraficLight();
+                    PriceIn.getText().clear();
+                    NameIn.getText().clear();
                     fillsugest();
                 } else MsgBox("المرجو ادخال المعلومات");
             }
@@ -146,8 +150,12 @@ public class MainActivity extends AppCompatActivity {
                 ischecked = Guestmode.isChecked();
                 if (ischecked) {
                     MsgBox("وضع (الضيوف )");
+                    GetQuotaFromDataBZ();
+                    TraficLight();
                 } else {
                     MsgBox("الوضع العائلي");
+                    GetQuotaFromDataBZ();
+                    TraficLight();
                 }
 
 
@@ -179,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+// this opens list activity
     public void OpentAvtivity2() {
         final Intent intent1;
         intent1 = new Intent(this, Main2Activity.class);
@@ -187,12 +195,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent1);
     }
 
+    /**
+     * this method fills the autocomplete Edittextview
+     */
     public void fillsugest() {
         Molhanot = new ArrayList<>();
         allList = new ArrayList<String>();
-        allList.clear();
-        Molhanot.clear();
-        QuanSpinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, QTypes);
+
+        QuanSpinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, QTypes);
+     //   qtypSpinner.
         qtypSpinner.setAdapter(QuanSpinAdapter);
         Molhanot.add(getString(R.string.unknown));
         GetItemNameFromdatabase();
@@ -343,10 +354,9 @@ public class MainActivity extends AppCompatActivity {
             qfinder.close();
         }
     }
-
+// this method gets product names from database
     public void GetItemNameFromdatabase() {
-
-
+        allList.clear();
         MDBC = new MyDataBaseCreator(this);
         Cursor itemNameCursor = MDBC.GetItemNames();
 
@@ -358,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
+// this method gets shop name from database
     public void GetmolhanotFromdatabase() {
         Molhanot.clear();
         MDBC = new MyDataBaseCreator(this);
@@ -374,7 +384,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
+//this method gets the total of all product items from data base
     public void getTotalAll() {
         NumberFormat mfr = new DecimalFormat("0.00");
         double itemsSumall;

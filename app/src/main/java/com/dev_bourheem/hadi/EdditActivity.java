@@ -124,6 +124,7 @@ public class EdditActivity extends AppCompatActivity {
         boolean updateStatus = MDBCR.updateData( idd,EdQuantityMod, EdItemNameMod, EdPriceMod, EdShopNameMod, EdDateMod);
         if (updateStatus) {
             MsgBox("تم الحفظ " ,1);
+            OpenListItems();
         } else MsgBox("لم يتم الحفظ",1);
     }
     public void DelItem(){
@@ -169,14 +170,14 @@ public class EdditActivity extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
-
                         DelItem();
+
                     }
                 })
                 .setNegativeButton(android.R.string.no, null).show();
     }
     public void OpenListItems(){
-        Intent inte= new Intent(EdditActivity.this,Main2Activity.class);
+        Intent inte= new Intent(EdditActivity.this,MainActivity.class);
         startActivity(inte);
     }
 }

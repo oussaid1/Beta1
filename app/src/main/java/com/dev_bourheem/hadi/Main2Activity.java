@@ -20,7 +20,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,14 +41,14 @@ public class Main2Activity extends AppCompatActivity {
     Button ShowListBtn;
     String date2;
     ArrayList<String> mainList;
-    ArrayAdapter mainListAdapter;
+
 
     private ArrayList<exampleitem> mExampleList;
     RecyclerView myrecycler;
     RecyclerView.LayoutManager RecyLayManger;
     ExampleAdapter RecyclerAdap;
 
-
+AdView listAd;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -73,10 +81,19 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         DateviewActvt2 = findViewById(R.id.DateviewActvt2);
         myrecycler=findViewById(R.id.myrecycler);
+        listAd=findViewById(R.id.listAd);
         myrecycler.setHasFixedSize(true);
         ShowListBtn = findViewById(R.id.ShowList);
         mainList = new ArrayList<>();
         MdbCrtr = new MyDataBaseCreator(this);
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        listAd.loadAd(adRequest);
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +147,7 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public void GetDbData() {
+
         mExampleList = new ArrayList<>();
         Cursor data = MdbCrtr.GetDBdataAll();
 
@@ -164,7 +182,6 @@ public class Main2Activity extends AppCompatActivity {
                 intent.putExtra("exampleItem",mExampleList.get(position));
                 startActivity(intent);
 
-                Toast.makeText(Main2Activity.this,"am clicked", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -175,17 +192,6 @@ public class Main2Activity extends AppCompatActivity {
     }
 
 
-    /**public void doIt(){
-        mExampleList = new ArrayList<>();
 
-        RecyLayManger =new LinearLayoutManager(this);
-        RecyclerAdap= new ExampleAdapter(mExampleList);
-        myrecycler.setLayoutManager(RecyLayManger);
-        myrecycler.setAdapter(RecyclerAdap);
-    }*/
 
-    public void DeletItem(int position){
-        mExampleList.remove(position);
-        RecyclerAdap.notifyItemRemoved(position);
-    }
 }

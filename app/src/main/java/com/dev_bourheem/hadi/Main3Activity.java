@@ -49,6 +49,7 @@ public class Main3Activity extends AppCompatActivity {
             public void onAdClosed() {
                 // Load the next interstitial.
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                CheckIn();
             }
 
         });
@@ -60,8 +61,14 @@ public class Main3Activity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    CheckIn();
+                }
+
                 // calls the checking method
-                CheckIn();
+
             }
         });
 
@@ -86,7 +93,7 @@ public class Main3Activity extends AppCompatActivity {
         if (userNm.equals(usr) && PassIn.equals(pass)) {
             OpentAvtivityMain();
             MsgBox("welcome master");
-        } else MsgBox("really master");
+        } else return;
     }
 
     public void MsgBox(String message) {

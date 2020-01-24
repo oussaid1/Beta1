@@ -23,7 +23,7 @@
     <string name="confirm_password">تاكيد القن السري</string>
     <string name="nodataintable">لا يوجد بيانات</string>
     <string name="alert">تحذير</string>
-    <string name="doyourealywantdeletall">هل فعلا تريد الحذف ?</string>
+    <string name="doyourealywantdeletall">حذف جميع البيانات , هل انت متاكد</string>
     <string name="oopsdeletedall">أوو. لقد تم الحذف</string>
     <string name="reset_all">حذف الكل</string>
     <string name="reset">Reset</string>
@@ -53,5 +53,6 @@
     <string name="goodsname">اسم السلعة هنا</string>
     <string name="shopnamehere">اسم المحل هنا</string>
     <string name="quantity">الكمية</string>
+    <string name="_12_01_20">12/01/20</string>
 
 </resources>

@@ -296,7 +296,7 @@
 
                         <AutoCompleteTextView
                             android:id="@+id/molhanoutNameIn"
-                            android:layout_width="140dp"
+                            android:layout_width="134dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
                             android:layout_marginStart="4dp"
@@ -336,7 +336,7 @@
 
                         <AutoCompleteTextView
                             android:id="@+id/ItemNameIn"
-                            android:layout_width="140dp"
+                            android:layout_width="134dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
                             android:layout_marginStart="4dp"
@@ -522,7 +522,7 @@
                 android:layout_margin="8dp"
                 android:layout_marginTop="8dp"
                 ads:adSize="BANNER"
-                ads:adUnitId="ca-app-pub-9838187586217611/6660652596" />
+                ads:adUnitId="ca-app-pub-9838187586217611/1394031397" />
         </RelativeLayout>
     </LinearLayout>
 
