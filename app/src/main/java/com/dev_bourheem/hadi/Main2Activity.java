@@ -64,6 +64,10 @@ AdView listAd;
                 //func here
                 OpentAvtivity3();
                 return true;
+            case R.id.stats_M:
+                //func here
+                OpentStats();
+                return true;
             case R.id.Settingsactvt2:
                 OpentSettings();
                 return true;
@@ -164,7 +168,7 @@ AdView listAd;
                     String shopNm = data.getString(data.getColumnIndex(MdbCrtr.person));
                     String DateBout = data.getString(data.getColumnIndex(MdbCrtr.da));
                     mExampleList.add(new exampleitem( idnonit,quantity,qunatifier ,itemNm, itemName,shopNm,DateBout));
-                   // mainList.add(itemId);
+
                 } while ((data.moveToNext()));
 
         }
@@ -191,7 +195,10 @@ AdView listAd;
         });
     }
 
-
+public void OpentStats(){
+        Intent intent = new Intent(this,stats.class);
+        startActivity(intent);
+}
 
 
 }

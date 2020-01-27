@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<item android:id="@+id/ShowList_M"
-    android:title="@string/show_lists"
-    app:showAsAction="never"/>
-<item android:id="@+id/Settings"
-    android:title="@string/settings"
-    app:showAsAction="never"/>
+    <item
+        android:id="@+id/ShowList_M"
+        android:title="@string/show_lists"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/stats"
+        android:title="@string/statistics"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/Settings"
+        android:title="@string/settings"
+        app:showAsAction="never" />
 
-<item android:id="@+id/exit_M"
-    android:title="@string/exit"
-    app:showAsAction="never">
-</item>
+    <item
+        android:id="@+id/exit_M"
+        android:title="@string/exit"
+        app:showAsAction="never"> </item>
 
 </menu>

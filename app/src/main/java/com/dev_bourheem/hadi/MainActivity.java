@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     MyDataBaseCreator MDBC;
     ForQuotas forQutaOC;
     AdView admain;
-    String[] QTypes = {"","واحدة"," كيلو", "لتر", "متر", "صندوق","علبة"};
+    String[] QTypes = {"واحدة"," كيلو", "لتر", "متر", "صندوق","علبة"};
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.ShowList_M:
                 OpentAvtivity2();
+                return true;
+            case R.id.stats:
+                OpenStats();
                 return true;
             case R.id.Settings:
                 OpentSettings();
@@ -204,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
         QuanSpinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, QTypes);
      //   qtypSpinner.
+        QuanSpinAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         qtypSpinner.setAdapter(QuanSpinAdapter);
         Molhanot.add(getString(R.string.unknown));
         GetItemNameFromdatabase();
@@ -217,7 +221,11 @@ public class MainActivity extends AppCompatActivity {
     public void OpentSettings() {
         final Intent intent2;
         intent2 = new Intent(this, Settings.class);
-        //intent1.putExtra("tarikh" ,date);
+        startActivity(intent2);
+    }
+    public void OpenStats() {
+        final Intent intent2;
+        intent2 = new Intent(this, stats.class);
         startActivity(intent2);
     }
 

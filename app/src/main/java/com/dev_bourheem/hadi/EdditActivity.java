@@ -80,7 +80,6 @@ public class EdditActivity extends AppCompatActivity {
         if (exampleitem != null) {
             quantity = exampleitem.getQuantity();
         }
-        // String quantifier = exampleitem.getQuantifier();
         String ItemName = null;
         if (exampleitem != null) {
             ItemName = exampleitem.getItemName();
@@ -135,7 +134,7 @@ public class EdditActivity extends AppCompatActivity {
         if (exampleitem != null) {
             idd = exampleitem.getIdno();
         }
-        boolean updateStatus = MDBCR.DeleteItemSelected( idd);
+        boolean updateStatus = MDBCR.DeleteItemSelected(idd);
         if (updateStatus) {
             MsgBox("تم الحذف " ,1);
             OpenListItems();

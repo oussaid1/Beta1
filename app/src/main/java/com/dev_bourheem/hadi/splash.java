@@ -25,6 +25,7 @@ public class splash extends AppCompatActivity {
                 .withLogo(R.mipmap.ic_launcher);
 
         config.getFooterTextView().setTextColor(Color.WHITE);
+        config.getFooterTextView().setTextSize(12);
         config.getAfterLogoTextView().setTextSize(36);
         config.getAfterLogoTextView().setTextColor(Color.WHITE);
 

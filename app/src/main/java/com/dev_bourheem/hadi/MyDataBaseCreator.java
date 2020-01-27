@@ -75,9 +75,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c1 = db.rawQuery("select ( '- ' ||+" + col1 + "|| ' =  ' || "
-                + col2 + " ||'  من عند :  ' || " + person + " || ' : يوم : '||" + da + ") " +
-                "AS FullItem from " + TABLE_NAME+" order by history ",null);
+        Cursor c1 = db.rawQuery("select "+col1+",sum("+col2+")as total from " + TABLE_NAME+" group  by Item_Name ",null);
         return c1;
 
     }

@@ -6,6 +6,10 @@
         android:title="@string/add_items_to_table"
         app:showAsAction="never" />
     <item
+        android:id="@+id/stats_M"
+        android:title="@string/statistics"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/Settingsactvt2"
         android:title="@string/settings"
         app:showAsAction="never" />

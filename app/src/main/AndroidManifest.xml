@@ -12,6 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".stats"
+            android:parentActivityName=".Main2Activity"></activity>
         <activity
             android:name=".splash"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -35,17 +37,11 @@
         <activity
             android:name=".Main3Activity"
             android:parentActivityName=".splash"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            >
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".Main2Activity"
             android:parentActivityName=".MainActivity" />
-
-
         <activity android:name=".MainActivity" />
-
     </application>
 
 </manifest>
