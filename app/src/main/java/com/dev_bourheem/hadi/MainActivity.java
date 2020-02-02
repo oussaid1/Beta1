@@ -41,7 +41,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     public Button addBut, plus, minus;
-    public Spinner qtypSpinner, Sumcategoryspinner, SumsearchSpinner;
+    public Spinner qtypSpinner, Sumcategoryspinner, SumsearchSpinner, SumsearchBydate;
     AutoCompleteTextView NameIn, moolhanotNm;
     public EditText PriceIn, quantity;
     public TextView DateV1, RedL, OrangeL, GreenL, QuotaLeftNm, LeftOut, SumOutBy, TotalallOut, hereisyourQuota;
@@ -50,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
     public double LeftOfQuota, ItemPriceDbl, Quotafrom_database, GestQuotafrom_databse;
     public String ItemNameStr, Sir;
     public double Quota, Qnt;
-    ArrayList<String> allList, sumcategoryList, sumsearchList;
+    ArrayList<String> allList, sumcategoryList, BydateList, sumsearchList;
     ArrayList<String> Molhanot;
-    ArrayAdapter<String> MolhntautoCompleteAdapter, sumcategoryAdapter, sumsearchAdapter;
+    ArrayAdapter<String> MolhntautoCompleteAdapter, sumcategoryAdapter, sumsearchAdapter, SumsearchBydateAdapter;
     ArrayAdapter<String> AutoCompleteAdapter, QuanSpinAdapter;
     MyDataBaseCreator MDBC;
     ForQuotas forQutaOC;
@@ -94,13 +94,14 @@ public class MainActivity extends AppCompatActivity {
         ButonsDeclare();
         sumcategoryList = new ArrayList<>();
         sumsearchList = new ArrayList<>();
+        BydateList = new ArrayList<>();
         MDBC = new MyDataBaseCreator(getApplicationContext());
         forQutaOC = new ForQuotas(getApplicationContext());
         TraficLight();
         fillsugest();
         sumcategoryAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, sumcategoryList);
         sumsearchAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, sumsearchList);
-
+        SumsearchBydateAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, BydateList);
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,9 +144,11 @@ public class MainActivity extends AppCompatActivity {
                 ischecked = Guestmode.isChecked();
                 if (ischecked) {
                     MsgBox("وضع (الضيوف )");
+                    GetLeftOut();
                     TraficLight();
                 } else {
                     MsgBox("الوضع العائلي");
+                    GetLeftOut();
                     TraficLight();
                 }
             }
@@ -157,9 +160,11 @@ public class MainActivity extends AppCompatActivity {
                 switch (sellection1) {
                     case "حسب المحل":
                         fillwithShopNm();
+
                         break;
                     case "حسب اليوم":
                         FillWithDays();
+                        FillWithDaysforShopEmpty();
                         break;
                     default:
                         return;
@@ -180,16 +185,65 @@ public class MainActivity extends AppCompatActivity {
                 String selection2 = SumsearchSpinner.getSelectedItem().toString().trim();
                 switch (sellection1) {
                     case "حسب المحل":
-                        GetSumByShop(selection2);
+                        if (!selection2.equals("*")) {
+                            FillWithDaysforShop();
+                        } else {
+                            FillWithDaysforShopEmpty();
+                        }
+
                         break;
+
                     case "حسب اليوم":
-                        GetSumByDate(selection2);
+
+                        if (selection2.equals("*")) {
+
+                        } else {
+                            GetSumByDate(selection2);
+                        }
                         break;
 
                     default:
                         return;
                 }
                 TraficLight();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        SumsearchBydate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
+                String selection2 = SumsearchSpinner.getSelectedItem().toString().trim();
+                String selection3 = SumsearchBydate.getSelectedItem().toString().trim();
+
+
+                switch (sellection1) {
+                    case "حسب المحل":
+                        if (selection2.equals("*")) {
+                            return;
+                        } else if (selection3.equals("*")) {
+                            GetSumByShop(selection2);
+                        } else {
+                            GetSumByShopDate(selection2, selection3);
+                        }
+                        break;
+
+                    case "حسب اليوم":
+
+                        if (selection2.equals("*")) {
+
+                        } else {
+                            GetSumByDate(selection2);
+                        }
+                        break;
+
+                    default:
+                        return;
+                }
             }
 
             @Override
@@ -219,7 +273,6 @@ public class MainActivity extends AppCompatActivity {
         Sumcategoryspinner.setAdapter(sumcategoryAdapter);
     }
 
-
     public void ButonsDeclare() {
         DateV1 = findViewById(R.id.dateView);
         QuotaLeftNm = findViewById(R.id.QuotaLeftNm);
@@ -242,6 +295,7 @@ public class MainActivity extends AppCompatActivity {
         admain = findViewById(R.id.admain);
         Sumcategoryspinner = findViewById(R.id.SumCategory);
         SumsearchSpinner = findViewById(R.id.Sumsearche);
+        SumsearchBydate = findViewById(R.id.SumsearchBydate);
 
     }
 
@@ -367,30 +421,40 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void GetQuotaFromDataBZ(double sum) {
+    public double GetQuotaFromDataBZ() {
         forQutaOC = new ForQuotas(getApplicationContext());
-        NumberFormat mfr = new DecimalFormat("0.00");
         Cursor qfinder = forQutaOC.JibData();
-
         if (qfinder.getCount() == 0) {
             MsgBox(getString(R.string.noquotafound));
             //OpentSettings();
-           /* GetQuota(0, 0);
-            SumOutBy.setText(mfr.format(sum));
-            LeftOfQuota = Quota - sum;
-            LeftOut.setText(String.valueOf( mfr.format(LeftOfQuota)));*/
+            Quota = 0;
+            hereisyourQuota.setText(String.valueOf(Quota));
+            return Quota;
         } else {
-            while (qfinder.moveToNext()) {
-                Quotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col11));
-                GestQuotafrom_databse = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col22));
+            qfinder.moveToFirst();
+            Quotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col11));
+            GestQuotafrom_databse = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col22));
 
-                GetQuota(GestQuotafrom_databse, Quotafrom_database);
-                SumOutBy.setText(mfr.format(sum));
-                LeftOfQuota = Quota - sum;
-                LeftOut.setText(mfr.format(LeftOfQuota));
-                //localDatabase.close();
-            }
             qfinder.close();
+            if (Guestmode.isChecked()) {
+                Quota = Quotafrom_database;
+                hereisyourQuota.setText(String.valueOf(Quota));
+            } else {
+                Quota = GestQuotafrom_databse;
+                hereisyourQuota.setText(String.valueOf(Quota));
+                return Quota;
+            }
+
+        }
+
+        return Quota;
+    }
+
+    public void GetLeftOut() {
+        if (SumOutBy.getText().toString().trim().length() != 0) {
+            double sumtoday = Double.valueOf(SumOutBy.getText().toString().trim());
+            double left = GetQuotaFromDataBZ() - sumtoday;
+            LeftOut.setText(String.valueOf(left));
         }
     }
 
@@ -435,13 +499,12 @@ public class MainActivity extends AppCompatActivity {
             MsgBox("لايوجد مجموع");
 
         } else {
-            while (c.moveToNext()) {
-                itemsSumall = c.getDouble(0);
-                //closing cursor so as not to bring anything else or ruin sth
+            c.moveToFirst();
+            itemsSumall = c.getDouble(0);
+            //closing cursor so as not to bring anything else or ruin sth
+            TotalallOut.setText(mfr.format(itemsSumall));
 
-                TotalallOut.setText(mfr.format(itemsSumall));
 
-            }
         }
     }
 
@@ -461,8 +524,32 @@ public class MainActivity extends AppCompatActivity {
         SumsearchSpinner.setAdapter(sumsearchAdapter);
     }
 
+    public void FillWithDaysforShop() {
+        BydateList.clear();
+        BydateList.add("*");
+        Cursor datecurs = MDBC.getDates();
+        if (datecurs.getCount() == 0) {
+            return;
+        } else
+            datecurs.moveToFirst();
+        while (!datecurs.isAfterLast()) {
+            String dts = datecurs.getString(datecurs.getColumnIndex(MyDataBaseCreator.da));
+            BydateList.add(dts);
+            datecurs.moveToNext();
+        }
+        datecurs.close();
+        SumsearchBydate.setAdapter(SumsearchBydateAdapter);
+    }
+
+    public void FillWithDaysforShopEmpty() {
+        BydateList.clear();
+        BydateList.add("*");
+        SumsearchBydate.setAdapter(SumsearchBydateAdapter);
+    }
+
     public void fillwithShopNm() {
         sumsearchList.clear();
+        sumsearchList.add("*");
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor molhanotCursor = db.rawQuery("select distinct " + MyDataBaseCreator.person + " from " + MyDataBaseCreator.TABLE_NAME + " order by " + MyDataBaseCreator.da + " asc", null);
         if (molhanotCursor.getCount() == 0) {
@@ -491,7 +578,6 @@ public class MainActivity extends AppCompatActivity {
             data.moveToFirst();
             SumbyDate = data.getDouble(data.getColumnIndex("Solo"));
             SumOutBy.setText((mfr.format(SumbyDate)));
-            GetQuotaFromDataBZ(SumbyDate);
         }
 
 
@@ -509,9 +595,26 @@ public class MainActivity extends AppCompatActivity {
 
             data.moveToFirst();
             SumbyDate = data.getDouble(data.getColumnIndex("So"));
-            GetQuotaFromDataBZ(SumbyDate);
+            SumOutBy.setText((mfr.format(SumbyDate)));
+        }
+        data.close();
+    }
+
+    public void GetSumByShopDate(String mohamed, String dat) {
+        NumberFormat mfr = new DecimalFormat("0.00");
+        double SumbyDate;
+        SQLiteDatabase db = MDBC.getReadableDatabase();
+        Cursor data = db.rawQuery("select Sum(" + MyDataBaseCreator.col2 + ")as Soa from " + MyDataBaseCreator.TABLE_NAME + " where  " + MyDataBaseCreator.person + " like '%" + mohamed + "%' and " + MyDataBaseCreator.da + " like '%" + dat + "%' group by history ", null);
+        if (data.getCount() == 0) {
+
+        } else if (!data.isAfterLast()) {
+
+            data.moveToFirst();
+            SumbyDate = data.getDouble(data.getColumnIndex("Soa"));
+            SumOutBy.setText((mfr.format(SumbyDate)));
         }
         data.close();
     }
 
 }
+
