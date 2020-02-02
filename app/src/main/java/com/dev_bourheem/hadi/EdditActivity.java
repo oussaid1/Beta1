@@ -1,9 +1,5 @@
 package com.dev_bourheem.hadi;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +8,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -56,6 +56,18 @@ public class EdditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eddit);
         Edit_ad = findViewById(R.id.Edit_ad);
+
+        ItemNameMod = findViewById(R.id.ItemNameMod);
+        QuantityMod = findViewById(R.id.quantityMod);
+        PriceMod = findViewById(R.id.priceMod);
+        ShopNameMod = findViewById(R.id.shopnameMod);
+        DateMod = findViewById(R.id.dateMod);
+        GetThem();
+
+        // AdsEditActivity();
+    }
+
+    public void AdsEditActivity() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -64,14 +76,7 @@ public class EdditActivity extends AppCompatActivity {
 
         AdRequest adRequest = new AdRequest.Builder().build();
         Edit_ad.loadAd(adRequest);
-        ItemNameMod = findViewById(R.id.ItemNameMod);
-        QuantityMod = findViewById(R.id.quantityMod);
-        PriceMod = findViewById(R.id.priceMod);
-        ShopNameMod = findViewById(R.id.shopnameMod);
-        DateMod = findViewById(R.id.dateMod);
-        GetThem();
     }
-
 
     public void GetThem() {
         Intent intent = getIntent();
@@ -115,18 +120,19 @@ public class EdditActivity extends AppCompatActivity {
         }
         String EdItemNameMod = ItemNameMod.getText().toString().trim();
         double EdQuantityMod = Double.parseDouble(QuantityMod.getText().toString().trim());
-        double EdPriceMod =Double.parseDouble (PriceMod.getText().toString().trim());
-        EdPriceMod= EdQuantityMod*EdPriceMod;
+        double EdPriceMod = Double.parseDouble(PriceMod.getText().toString().trim());
+        EdPriceMod = EdQuantityMod * EdPriceMod;
         String EdShopNameMod = ShopNameMod.getText().toString().trim();
         String EdDateMod = DateMod.getText().toString().trim();
 
-        boolean updateStatus = MDBCR.updateData( idd,EdQuantityMod, EdItemNameMod, EdPriceMod, EdShopNameMod, EdDateMod);
+        boolean updateStatus = MDBCR.updateData(idd, EdQuantityMod, EdItemNameMod, EdPriceMod, EdShopNameMod, EdDateMod);
         if (updateStatus) {
-            MsgBox("تم الحفظ " ,1);
+            MsgBox("تم الحفظ ", 1);
             OpenListItems();
-        } else MsgBox("لم يتم الحفظ",1);
+        } else MsgBox("لم يتم الحفظ", 1);
     }
-    public void DelItem(){
+
+    public void DelItem() {
         MDBCR = new MyDataBaseCreator(this);
         Intent intent = getIntent();
         exampleitem exampleitem = intent.getParcelableExtra("exampleItem");
@@ -136,21 +142,21 @@ public class EdditActivity extends AppCompatActivity {
         }
         boolean updateStatus = MDBCR.DeleteItemSelected(idd);
         if (updateStatus) {
-            MsgBox("تم الحذف " ,1);
+            MsgBox("تم الحذف ", 1);
             OpenListItems();
-        } else MsgBox( "لم يتم الحذف" ,1);
+        } else MsgBox("لم يتم الحذف", 1);
 
     }
 
-    public void MsgBox(String mess,int p) {
-        Toast.makeText(EdditActivity.this, mess,p);
+    public void MsgBox(String mess, int p) {
+        Toast.makeText(EdditActivity.this, mess, p);
     }
 
 
     public void onDialogueUpdate() {
         new AlertDialog.Builder(this)
                 .setTitle("تحذير")
-                .setMessage(getString (R.string.surewannaupdate))
+                .setMessage(getString(R.string.surewannaupdate))
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -161,10 +167,11 @@ public class EdditActivity extends AppCompatActivity {
                 })
                 .setNegativeButton(android.R.string.no, null).show();
     }
+
     public void onDialogueDelete() {
         new AlertDialog.Builder(this)
                 .setTitle("تحذير")
-                .setMessage(getString (R.string.surewannadel))
+                .setMessage(getString(R.string.surewannadel))
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -175,8 +182,9 @@ public class EdditActivity extends AppCompatActivity {
                 })
                 .setNegativeButton(android.R.string.no, null).show();
     }
-    public void OpenListItems(){
-        Intent inte= new Intent(EdditActivity.this,MainActivity.class);
+
+    public void OpenListItems() {
+        Intent inte = new Intent(EdditActivity.this, MainActivity.class);
         startActivity(inte);
     }
 }

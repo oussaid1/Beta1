@@ -89,7 +89,7 @@ public class Settings extends AppCompatActivity {
         startActivity(myintdsent);
     }
     public void OpenActivitilist() {
-        Intent myintenct = new Intent(this, Main2Activity.class);
+        Intent myintenct = new Intent(this, ListActivity.class);
         startActivity(myintenct);
     }
 

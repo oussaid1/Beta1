@@ -30,14 +30,12 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " ( "+ ID +" INTEGER PRIMARY KEY AUTOINCREMENT," + col1 + " TEXT," + Quantifier+" TEXT , " + Quantity + " DOUBLE ," + col2 + " DOUBLE," + person + " TEXT,"+ da + " TEXT )");
-        // db.execSQL("CREATE TABLE "+ SHOP_TABLE + "(_ID INTEGER Primary key autoincrement,"+SHOP_NAME +" TEXT, " +SHOP_PHONE +" TEXT, "+SHOP_EMAIL+ " TEXT)");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists " + TABLE_NAME);
-        // db.execSQL("drop table if exists molhanotinfo");
         onCreate(db);
     }
 
@@ -51,9 +49,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         values.put(person, Sir);
         values.put(da, daat);
         long insertStaus = db.insert(TABLE_NAME, null, values);
-        if (insertStaus >= 1)
-        return true;
-        else return false;
+        return insertStaus >= 1;
     }
     public boolean updateData(String id ,double Quanty,String name, double prix, String Sir,String daat) {
         SQLiteDatabase db = getWritableDatabase();
@@ -95,13 +91,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         return true;
     }
 
-    // this mehotd gets the sum of all Item_price elements
-    public Cursor GetSum() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cr = db.rawQuery("SELECT SUM (Item_Price) FROM " + TABLE_NAME +" group by history ", null);
-        return cr;
-    }
 
     public Cursor GetItemNames() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -115,10 +104,15 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         return cur;
     }
     public Cursor GetSumall() {
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor crall = db.rawQuery("SELECT SUM (Item_Price) FROM " + TABLE_NAME , null);
         return crall;
+    }
+
+    public Cursor getDates() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor datesCursor = db.rawQuery(" Select distinct " + da + " from " + TABLE_NAME + " order by " + da + "", null);
+        return datesCursor;
     }
 
 }

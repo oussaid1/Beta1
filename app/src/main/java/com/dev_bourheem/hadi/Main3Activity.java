@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev_bourheem.hadi.Login.LoginClass;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -33,6 +32,23 @@ public class Main3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        PasswordIn = findViewById(R.id.PasswordIn);
+        username = findViewById(R.id.loginNmIn);
+        loginBtn = findViewById(R.id.loginBtn);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    CheckIn();
+                // calls the checking method
+            }
+        });
+
+        Lgin = new LoginClass(getApplicationContext()); // initializing the LoginClass Object
+
+        // AdsActivity3();
+    }
+
+    public void AdsActivity3() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -42,47 +58,12 @@ public class Main3Activity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         adlogin.loadAd(adRequest);
 
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-9838187586217611/3392960036");
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                // Load the next interstitial.
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                CheckIn();
-            }
-
-        });
-
-
-        PasswordIn = findViewById(R.id.PasswordIn);
-        username = findViewById(R.id.loginNmIn);
-        loginBtn = findViewById(R.id.loginBtn);
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-                    CheckIn();
-                }
-
-                // calls the checking method
-
-            }
-        });
-
-        Lgin = new LoginClass(getApplicationContext()); // initializing the LoginClass Object
-
-
-
     }
 // this method opens the main Activity
 
     public void OpentAvtivityMain() {
         final Intent intent2;
         intent2 = new Intent(this, MainActivity.class);
-        //intent1.putExtra("tarikh" ,date);
         startActivity(intent2);
     }
 
@@ -92,7 +73,7 @@ public class Main3Activity extends AppCompatActivity {
         PassIn = PasswordIn.getText().toString().trim();
         if (userNm.equals(usr) && PassIn.equals(pass)) {
             OpentAvtivityMain();
-            MsgBox("welcome master");
+            MsgBox("Master");
         } else return;
     }
 

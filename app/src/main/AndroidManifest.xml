@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".stats"
-            android:parentActivityName=".Main2Activity"></activity>
+            android:parentActivityName=".ListActivity"></activity>
         <activity
             android:name=".splash"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -25,7 +25,7 @@
         </activity>
         <activity
             android:name=".EdditActivity"
-            android:parentActivityName=".Main2Activity" />
+            android:parentActivityName=".ListActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -39,7 +39,7 @@
             android:parentActivityName=".splash"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
-            android:name=".Main2Activity"
+            android:name=".ListActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity" />
     </application>

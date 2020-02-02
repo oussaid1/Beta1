@@ -1,9 +1,9 @@
 package com.dev_bourheem.hadi;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,14 +16,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev_bourheem.hadi.Login.ForQuotas;
@@ -43,23 +41,23 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     public Button addBut, plus, minus;
-    public Spinner qtypSpinner;
+    public Spinner qtypSpinner, Sumcategoryspinner, SumsearchSpinner;
     AutoCompleteTextView NameIn, moolhanotNm;
     public EditText PriceIn, quantity;
-    public TextView DateV1, RedL, OrangeL, GreenL, QuotaLeftNm, LeftOut, TotalOut, TotalallOut, hereisyourQuota;
+    public TextView DateV1, RedL, OrangeL, GreenL, QuotaLeftNm, LeftOut, SumOutBy, TotalallOut, hereisyourQuota;
     public Switch Guestmode;
     public boolean ischecked;
     public double LeftOfQuota, ItemPriceDbl, Quotafrom_database, GestQuotafrom_databse;
-    public String date, ItemNameStr, Sir;
+    public String ItemNameStr, Sir;
     public double Quota, Qnt;
-    public ArrayList<String> allList;
-    public ArrayList<String> Molhanot;
-    public ArrayAdapter<String> MolhntautoCompleteAdapter;
-    public ArrayAdapter<String> AutoCompleteAdapter, QuanSpinAdapter;
+    ArrayList<String> allList, sumcategoryList, sumsearchList;
+    ArrayList<String> Molhanot;
+    ArrayAdapter<String> MolhntautoCompleteAdapter, sumcategoryAdapter, sumsearchAdapter;
+    ArrayAdapter<String> AutoCompleteAdapter, QuanSpinAdapter;
     MyDataBaseCreator MDBC;
     ForQuotas forQutaOC;
     AdView admain;
-    String[] QTypes = {"واحدة"," كيلو", "لتر", "متر", "صندوق","علبة"};
+    String[] QTypes = {"واحدة", " كيلو", "لتر", "متر", "صندوق", "علبة"};
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,28 +92,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButonsDeclare();
+        sumcategoryList = new ArrayList<>();
+        sumsearchList = new ArrayList<>();
         MDBC = new MyDataBaseCreator(getApplicationContext());
         forQutaOC = new ForQuotas(getApplicationContext());
-        GetQuotaFromDataBZ();
         TraficLight();
         fillsugest();
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        admain.loadAd(adRequest);
-
+        sumcategoryAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, sumcategoryList);
+        sumsearchAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, sumsearchList);
 
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Qnt = Double.valueOf(quantity.getText().toString().trim());
                 Qnt = Qnt + 0.5;
-                quantity.setText(""+Qnt);
+                quantity.setText("" + Qnt);
             }
         });
 
@@ -138,10 +129,9 @@ public class MainActivity extends AppCompatActivity {
                     LoadDatabase();
                     GetItemNameFromdatabase();
                     GetmolhanotFromdatabase();
-                    GetQuotaFromDataBZ();
                     TraficLight();
-                    PriceIn.getText().clear();
-                    NameIn.getText().clear();
+                    // PriceIn.getText().clear();
+                    // NameIn.getText().clear();
                     fillsugest();
                 } else MsgBox("المرجو ادخال المعلومات");
             }
@@ -153,19 +143,82 @@ public class MainActivity extends AppCompatActivity {
                 ischecked = Guestmode.isChecked();
                 if (ischecked) {
                     MsgBox("وضع (الضيوف )");
-                    GetQuotaFromDataBZ();
                     TraficLight();
                 } else {
                     MsgBox("الوضع العائلي");
-                    GetQuotaFromDataBZ();
                     TraficLight();
                 }
+            }
+        });
+        Sumcategoryspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
+                switch (sellection1) {
+                    case "حسب المحل":
+                        fillwithShopNm();
+                        break;
+                    case "حسب اليوم":
+                        FillWithDays();
+                        break;
+                    default:
+                        return;
+                }
+                TraficLight();
+                getTotalAll();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+        SumsearchSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
+                String selection2 = SumsearchSpinner.getSelectedItem().toString().trim();
+                switch (sellection1) {
+                    case "حسب المحل":
+                        GetSumByShop(selection2);
+                        break;
+                    case "حسب اليوم":
+                        GetSumByDate(selection2);
+                        break;
 
+                    default:
+                        return;
+                }
+                TraficLight();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        fillcategory();
+        // ADSmainActivity();
+        getTotalAll();
     }
+
+    public void ADSmainActivity() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        admain.loadAd(adRequest);
+    }
+
+    public void fillcategory() {
+        sumcategoryList.add("حسب المحل");
+        sumcategoryList.add("حسب اليوم");
+        Sumcategoryspinner.setAdapter(sumcategoryAdapter);
+    }
+
 
     public void ButonsDeclare() {
         DateV1 = findViewById(R.id.dateView);
@@ -184,16 +237,18 @@ public class MainActivity extends AppCompatActivity {
         moolhanotNm = findViewById(R.id.molhanoutNameIn);
         PriceIn = findViewById(R.id.ItemPriceIn);
         LeftOut = findViewById(R.id.QuotaLeftOut);
-        TotalOut = findViewById(R.id.TotalTodayOut);
+        SumOutBy = findViewById(R.id.TotalTodayOut);
         quantity = findViewById(R.id.quantity);
         admain = findViewById(R.id.admain);
-
+        Sumcategoryspinner = findViewById(R.id.SumCategory);
+        SumsearchSpinner = findViewById(R.id.Sumsearche);
 
     }
-// this opens list activity
+
+    // this opens list activity
     public void OpentAvtivity2() {
         final Intent intent1;
-        intent1 = new Intent(this, Main2Activity.class);
+        intent1 = new Intent(this, ListActivity.class);
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent1);
     }
@@ -204,9 +259,7 @@ public class MainActivity extends AppCompatActivity {
     public void fillsugest() {
         Molhanot = new ArrayList<>();
         allList = new ArrayList<String>();
-
         QuanSpinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, QTypes);
-     //   qtypSpinner.
         QuanSpinAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         qtypSpinner.setAdapter(QuanSpinAdapter);
         Molhanot.add(getString(R.string.unknown));
@@ -223,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
         intent2 = new Intent(this, Settings.class);
         startActivity(intent2);
     }
+
     public void OpenStats() {
         final Intent intent2;
         intent2 = new Intent(this, stats.class);
@@ -230,26 +284,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String GetDate() {
-        Date currentTime = Calendar.getInstance().getTime();
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
-        date = dateFormat.format(currentTime);
-        ///Intent dateIntent= new Intent(date);
-        //startActivity(dateIntent);
-        return date;
+        Date currenttime = Calendar.getInstance().getTime();
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        return dateFormat.format(currenttime);
     }
-
 
     // this method calculates the limit (Quota ) according to the switch and according to the user settings
     public double GetQuota(double guesQt, double quta) {
         if (Guestmode.isChecked()) {
             Quota = quta;
-            hereisyourQuota.setText("" + quta);
-            // MsgBox(getString(R.string.guestmodeon));
+            hereisyourQuota.setText(String.valueOf(quta));
         } else {
             Quota = guesQt;
-            hereisyourQuota.setText("" + guesQt);
+            hereisyourQuota.setText(String.valueOf(guesQt));
         }
-        // MsgBox(getString(R.string.guestmodeoff));
         return Quota;
     }
 
@@ -258,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void LoadDatabase() {
-// get !!!!!!!!!edditext input to vars.
+//
         String Quantifiier = qtypSpinner.getSelectedItem().toString().trim();
         Qnt = Double.valueOf(quantity.getText().toString().trim());
         String d = GetDate();
@@ -269,13 +317,13 @@ public class MainActivity extends AppCompatActivity {
 // insert data to database's Table.
         boolean newRowAdded = MDBC.InjectData(Qnt, Quantifiier, ItemNameStr, ItemPriceDbl, Sir, d);
         if (newRowAdded) {
-            MsgBox("المعلومات تسجلت");
-        } else MsgBox("المعلومات لم تسجل");
+            MsgBox("تم");
+        } else MsgBox("لم يتم");
     }
 
 
     //this method gets the Sum of all elements in ItemPrice Column
-    public void getTotal(double DefQuota, double DefGuestQuotq) {
+    /*public void getTotal(double DefQuota, double DefGuestQuotq) {
 
         NumberFormat mfr = new DecimalFormat("0.00");
         double itemsSum;
@@ -288,14 +336,14 @@ public class MainActivity extends AppCompatActivity {
                 itemsSum = c.getDouble(0);
                 //closing cursor so as not to bring anything else or ruin sth
 
-                TotalOut.setText("" + mfr.format(itemsSum));
+                SumOutBy.setText(mfr.format(itemsSum));
                 GetQuota(DefQuota, DefGuestQuotq);
                 LeftOfQuota = Quota - itemsSum;
-                LeftOut.setText(" " + mfr.format(LeftOfQuota));
+                LeftOut.setText(String.valueOf( mfr.format(LeftOfQuota)));
                 //localDatabase.close();
             }
         }
-    }
+    }*/
 
     // this method controlls Traffic Light and the text with it
     public void TraficLight() {
@@ -319,50 +367,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    public void onDialogue() {
-        new AlertDialog.Builder(this)
-                .setTitle("تحذير")
-                .setMessage(getString(R.string.surewannaadd))
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        LoadDatabase();
-                        GetItemNameFromdatabase();
-                        GetmolhanotFromdatabase();
-                        GetQuotaFromDataBZ();
-                        TraficLight();
-                        PriceIn.getText().clear();
-                        NameIn.getText().clear();
-
-                    }
-                })
-                .setNegativeButton(android.R.string.no, null).show();
-    }
-
-    public void GetQuotaFromDataBZ() {
+    public void GetQuotaFromDataBZ(double sum) {
         forQutaOC = new ForQuotas(getApplicationContext());
-
+        NumberFormat mfr = new DecimalFormat("0.00");
         Cursor qfinder = forQutaOC.JibData();
 
         if (qfinder.getCount() == 0) {
             MsgBox(getString(R.string.noquotafound));
-            OpentSettings();
-            getTotal(0, 0);
+            //OpentSettings();
+           /* GetQuota(0, 0);
+            SumOutBy.setText(mfr.format(sum));
+            LeftOfQuota = Quota - sum;
+            LeftOut.setText(String.valueOf( mfr.format(LeftOfQuota)));*/
         } else {
             while (qfinder.moveToNext()) {
                 Quotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col11));
                 GestQuotafrom_databse = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col22));
-                getTotal(Quotafrom_database, GestQuotafrom_databse);
-                getTotalAll();
-                // setusername.setText(""+GQttoDabz);
-                //setGuestQta.setText(""+QttoDabz);
+
+                GetQuota(GestQuotafrom_databse, Quotafrom_database);
+                SumOutBy.setText(mfr.format(sum));
+                LeftOfQuota = Quota - sum;
+                LeftOut.setText(mfr.format(LeftOfQuota));
+                //localDatabase.close();
             }
             qfinder.close();
         }
     }
-// this method gets product names from database
+
+    // this method gets product names from database
     public void GetItemNameFromdatabase() {
         allList.clear();
         MDBC = new MyDataBaseCreator(this);
@@ -376,7 +408,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-// this method gets shop name from database
+
+    // this method gets shop name from database
     public void GetmolhanotFromdatabase() {
         Molhanot.clear();
         MDBC = new MyDataBaseCreator(this);
@@ -392,7 +425,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-//this method gets the total of all product items from data base
+
+    //this method gets the total of all product items from data base
     public void getTotalAll() {
         NumberFormat mfr = new DecimalFormat("0.00");
         double itemsSumall;
@@ -405,9 +439,79 @@ public class MainActivity extends AppCompatActivity {
                 itemsSumall = c.getDouble(0);
                 //closing cursor so as not to bring anything else or ruin sth
 
-                TotalallOut.setText(String.valueOf(mfr.format(itemsSumall)));
+                TotalallOut.setText(mfr.format(itemsSumall));
 
             }
         }
     }
+
+    public void FillWithDays() {
+        sumsearchList.clear();
+        Cursor datecurs = MDBC.getDates();
+        if (datecurs.getCount() == 0) {
+            return;
+        } else
+            datecurs.moveToFirst();
+        while (!datecurs.isAfterLast()) {
+            String dts = datecurs.getString(datecurs.getColumnIndex(MyDataBaseCreator.da));
+            sumsearchList.add(dts);
+            datecurs.moveToNext();
+        }
+        datecurs.close();
+        SumsearchSpinner.setAdapter(sumsearchAdapter);
+    }
+
+    public void fillwithShopNm() {
+        sumsearchList.clear();
+        SQLiteDatabase db = MDBC.getReadableDatabase();
+        Cursor molhanotCursor = db.rawQuery("select distinct " + MyDataBaseCreator.person + " from " + MyDataBaseCreator.TABLE_NAME + " order by " + MyDataBaseCreator.da + " asc", null);
+        if (molhanotCursor.getCount() == 0) {
+            return;
+        } else
+            molhanotCursor.moveToFirst();
+        while (!molhanotCursor.isAfterLast()) {
+            String Mlhanot = molhanotCursor.getString(molhanotCursor.getColumnIndex(MyDataBaseCreator.person));
+            sumsearchList.add(Mlhanot);
+            molhanotCursor.moveToNext();
+        }
+        molhanotCursor.close();
+        SumsearchSpinner.setAdapter(sumsearchAdapter);
+        //db.close();
+    }
+
+    public void GetSumByShop(String mohamed) {
+        NumberFormat mfr = new DecimalFormat("0.00");
+        double SumbyDate;
+        SQLiteDatabase db = MDBC.getReadableDatabase();
+        Cursor data = db.rawQuery("select Sum(" + MyDataBaseCreator.col2 + ")as Solo from " + MyDataBaseCreator.TABLE_NAME + " where  " + MyDataBaseCreator.person + " like '%" + mohamed + "%' group by MoolHanout ", null);
+        if (data.getCount() == 0) {
+
+        } else if (!data.isAfterLast()) {
+
+            data.moveToFirst();
+            SumbyDate = data.getDouble(data.getColumnIndex("Solo"));
+            SumOutBy.setText((mfr.format(SumbyDate)));
+            GetQuotaFromDataBZ(SumbyDate);
+        }
+
+
+        data.close();
+    }
+
+    public void GetSumByDate(String mohamed) {
+        NumberFormat mfr = new DecimalFormat("0.00");
+        double SumbyDate;
+        SQLiteDatabase db = MDBC.getReadableDatabase();
+        Cursor data = db.rawQuery("select Sum(" + MyDataBaseCreator.col2 + ")as So from " + MyDataBaseCreator.TABLE_NAME + " where  " + MyDataBaseCreator.da + " like '%" + mohamed + "%' group by history ", null);
+        if (data.getCount() == 0) {
+
+        } else if (!data.isAfterLast()) {
+
+            data.moveToFirst();
+            SumbyDate = data.getDouble(data.getColumnIndex("So"));
+            GetQuotaFromDataBZ(SumbyDate);
+        }
+        data.close();
+    }
+
 }

@@ -26,42 +26,27 @@
 
             <TextView
                 android:id="@+id/dateView"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
                 android:maxLines="1"
                 android:padding="4dp"
+                android:layout_margin="4dp"
+                android:text="2020-02-02"
                 android:textAlignment="center"
-                android:textColor="@color/GreenP" />
+                android:textColor="@color/GreenP1" />
 
-            <RelativeLayout
-                android:layout_width="182dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="end"
-                android:layout_marginStart="16dp"
-                android:orientation="horizontal">
-
-                <Switch
+            <Switch
                     android:id="@+id/SwitchGuest"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="4dp"
                     android:padding="8dp"
                     android:text="@string/guest_mode"
                     android:textAlignment="center"
                     android:textColor="@color/GreenP" />
 
-            </RelativeLayout>
         </RelativeLayout>
 
         <RelativeLayout
@@ -76,131 +61,10 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="43dp"
+                android:layout_height="169dp"
                 android:layout_alignParentStart="true"
-                android:layout_margin="8dp"
-                android:background="@drawable/justborderz"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="22dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="2dp"
-                        android:text="@string/totaltoday"
-                        android:textAlignment="center"
-                        android:textColor="@color/orange" />
-
-                    <TextView
-                        android:id="@+id/TotalTodayOut"
-                        android:layout_width="80dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/edittextborders"
-                        android:maxLines="1"
-                        android:padding="4dp"
-                        android:textAlignment="center"
-                        android:textColor="@color/GreenP" />
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="2dp"
-                        android:text="@string/total"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:id="@+id/TotalallOut"
-                        android:layout_width="80dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/edittextborders"
-                        android:maxLines="1"
-                        android:padding="4dp"
-                        android:textAlignment="center"
-                        android:textColor="@color/GreenP" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/QuotaLeftNm"
-                        android:layout_width="100dp"
-                        android:layout_height="22dp"
-                        android:layout_marginStart="11dp"
-                        android:layout_marginTop="9dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="2dp"
-                        android:text="@string/left_of_quota"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:id="@+id/QuotaLeftOut"
-                        android:layout_width="80dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/edittextborders"
-                        android:maxLines="1"
-                        android:padding="4dp"
-                        android:textAlignment="center"
-                        android:textColor="@color/GreenP" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="2dp"
-                        android:maxLines="1"
-                        android:text="@string/limit"
-                        android:textAlignment="center"
-                        android:textColor="@color/Green" />
-
-                    <TextView
-                        android:id="@+id/hereisurqt"
-                        android:layout_width="80dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="8dp"
-                        android:background="@drawable/edittextborders"
-                        android:textAlignment="center" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -211,29 +75,167 @@
 
                 <Button
                     android:id="@+id/BtnRed"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                   android:layout_margin="8dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/redlight"
                     android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/BtnOrange"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_margin="8dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/orangelight"
                     android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/BtnGreen"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_margin="8dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/greenlight"
                     android:visibility="invisible" />
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/justborderz"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="161dp"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/QuotaLeftNm"
+                        android:layout_width="100dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="11dp"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="@string/left_of_quota"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/QuotaLeftOut"
+                        android:layout_width="80dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/edittextborders"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/GreenP" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:maxLines="1"
+                        android:text="@string/limit"
+                        android:textAlignment="center"
+                        android:textColor="@color/Green" />
+
+                    <TextView
+                        android:id="@+id/hereisurqt"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/edittextborders"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+
+                    android:orientation="vertical">
+
+                    <Spinner
+                        android:id="@+id/SumCategory"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="@string/totaltoday"
+                        android:textAlignment="center"
+                        android:textColor="@color/orange" />
+
+                    <Spinner
+                        android:id="@+id/Sumsearche"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="8dp"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/GreenP" />
+
+                    <TextView
+                        android:id="@+id/TotalTodayOut"
+                        android:layout_width="100dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/edittextborders"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/green" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/total"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/TotalallOut"
+                        android:layout_width="100dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/edittextborders"
+                        android:maxLines="1"
+                        android:padding="4dp"
+                        android:text="10000"
+                        android:textAlignment="center"
+                        android:textColor="@color/GreenP" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
 
 
         </RelativeLayout>
