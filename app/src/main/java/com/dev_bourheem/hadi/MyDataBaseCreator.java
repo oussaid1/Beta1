@@ -5,6 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
 
 
 public class MyDataBaseCreator extends SQLiteOpenHelper {
@@ -113,6 +119,57 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor datesCursor = db.rawQuery(" Select distinct " + da + " from " + TABLE_NAME + " order by " + da + "", null);
         return datesCursor;
+    }
+
+    public static void backUp() {
+        try {
+            File sd = Environment.getExternalStorageDirectory();
+            File data = Environment.getDataDirectory();
+
+            if (sd.canWrite()) {
+                String currentDBPath = "//data//com.dev_bourheem.hadi//databases//School.db";
+                String backupDBPath = "School.db";
+
+                File currentDB = new File( data, currentDBPath );
+                File backupDB = new File( sd, backupDBPath );
+
+                if (currentDB.exists()) {
+                    FileChannel src = new FileInputStream( currentDB ).getChannel();
+                    FileChannel dst = new FileOutputStream( backupDB ).getChannel();
+                    dst.transferFrom( src, 0, src.size() );
+                    src.close();
+                    dst.close();
+                    //Toast.makeText(MyDataBaseCreator.this , "Backup is successful to SD card", Toast.LENGTH_SHORT).show();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void restore() {
+        try {
+            File sd = Environment.getExternalStorageDirectory();
+            File data = Environment.getDataDirectory();
+
+            if (sd.canWrite()) {
+                String currentDBPath = "//data//com.dev_bourheem.hadi//databases//School.db";
+                String backupDBPath = "School.db";
+                File currentDB = new File( data, currentDBPath );
+                File backupDB = new File( sd, backupDBPath );
+
+                if (currentDB.exists()) {
+                    FileChannel src = new FileInputStream( backupDB ).getChannel();
+                    FileChannel dst = new FileOutputStream( currentDB ).getChannel();
+                    dst.transferFrom( src, 0, src.size() );
+                    src.close();
+                    dst.close();
+                    //  Toast.makeText(getApplicationContext(), "Database Restored successfully", Toast.LENGTH_SHORT).show();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
