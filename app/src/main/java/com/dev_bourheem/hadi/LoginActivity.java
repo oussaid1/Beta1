@@ -13,19 +13,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dev_bourheem.hadi.Login.LoginClass;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
-public class Main3Activity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     public String userNm, PassIn;
     public String usr = "dev", pass = "dev";
     Button loginBtn;
     EditText username, PasswordIn;
     LoginClass Lgin;
     AdView adlogin;
-    private InterstitialAd mInterstitialAd;
+
 
 
     @Override
@@ -45,10 +44,10 @@ public class Main3Activity extends AppCompatActivity {
 
         Lgin = new LoginClass(getApplicationContext()); // initializing the LoginClass Object
 
-        // AdsActivity3();
+        //   AdsLogin();
     }
 
-    public void AdsActivity3() {
+    public void AdsLogin() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {

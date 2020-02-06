@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -35,7 +34,6 @@ import java.util.Date;
 
 public class ListActivity extends AppCompatActivity {
     MyDataBaseCreator MdbCrtr;
-    TextView DateviewActvt2;
 
     Spinner categoryspinner, searchspinner;
     ArrayList<String> mainList;
@@ -101,6 +99,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String sellection1 = categoryspinner.getSelectedItem().toString().trim();
+
                 switch (sellection1) {
                     case "الكل":
                         fillwithStar();
@@ -108,8 +107,8 @@ public class ListActivity extends AppCompatActivity {
                     case "حسب المحل":
                         FillWithMolhanot();
                         break;
-                    case " حسب التاريخ":
-                        FillWithDate();
+                    case "حسب التاريخ":
+                        FillWithDates();
                         break;
                     case "حسب السلعة":
                         FillWithItems();
@@ -138,7 +137,7 @@ public class ListActivity extends AppCompatActivity {
                     case "حسب المحل":
                         ShowlistByMolhanot(selection2);
                         break;
-                    case " حسب التاريخ":
+                    case "حسب التاريخ":
                         ShowlistByDate(selection2);
                         break;
                     case "حسب السلعة":
@@ -173,7 +172,7 @@ public class ListActivity extends AppCompatActivity {
         });
 
 
-        //Adslist();
+        //  Adslist();
     }
 
     public void Adslist() {
@@ -338,19 +337,22 @@ public class ListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void FillWithDate() {
+    public void FillWithDates() {
         searchspinerList.clear();
-        Cursor datecurs = MdbCrtr.getDates();
-        if (datecurs.getCount() == 0) {
+        SQLiteDatabase db = MdbCrtr.getReadableDatabase();
+        Cursor datescursor = db.rawQuery(" Select distinct " + MyDataBaseCreator.da + " from " + MyDataBaseCreator.TABLE_NAME + " order by " + MyDataBaseCreator.da + " asc ", null);
+
+        if (datescursor.getCount() == 0) {
             return;
-        } else
-            datecurs.moveToFirst();
-        while (!datecurs.isAfterLast()) {
-            String dts = datecurs.getString(datecurs.getColumnIndex(MyDataBaseCreator.da));
-            searchspinerList.add(dts);
-            datecurs.moveToNext();
+        } else {
+            datescursor.moveToFirst();
+            while (!datescursor.isAfterLast()) {
+                String dts = datescursor.getString(datescursor.getColumnIndex(MyDataBaseCreator.da));
+                searchspinerList.add(dts);
+                datescursor.moveToNext();
+            }
         }
-        datecurs.close();
+        datescursor.close();
         searchspinner.setAdapter(searchAdapter);
     }
 
@@ -390,6 +392,7 @@ public class ListActivity extends AppCompatActivity {
         //searchAdapter.notifyDataSetChanged();
     }
 
+
     public void fillwithStar() {
         searchspinerList.clear();
         searchspinerList.add("*");
@@ -399,7 +402,7 @@ public class ListActivity extends AppCompatActivity {
     public void addtoCategoryList() {
         categoryspinnerList.add("الكل");
         categoryspinnerList.add("حسب المحل");
-        categoryspinnerList.add(" حسب التاريخ");
+        categoryspinnerList.add("حسب التاريخ");
         categoryspinnerList.add("حسب السلعة");
 
 

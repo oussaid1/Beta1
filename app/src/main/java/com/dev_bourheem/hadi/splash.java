@@ -1,10 +1,10 @@
 package com.dev_bourheem.hadi;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import gr.net.maroulis.library.EasySplashScreen;
 
@@ -16,7 +16,7 @@ public class splash extends AppCompatActivity {
 
         EasySplashScreen config = new EasySplashScreen(splash.this)
                 .withFullScreen()
-                .withTargetActivity(Main3Activity.class)
+                .withTargetActivity(LoginActivity.class)
                 .withSplashTimeOut(3000)
                 .withBackgroundColor(Color.parseColor("#64DEC5"))
                // .withBackgroundResource(R.drawable.lkarnetp)

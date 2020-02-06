@@ -23,7 +23,6 @@ public class EdditActivity extends AppCompatActivity {
     EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
     MyDataBaseCreator MDBCR;
     AdView Edit_ad;
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -64,7 +63,7 @@ public class EdditActivity extends AppCompatActivity {
         DateMod = findViewById(R.id.dateMod);
         GetThem();
 
-        // AdsEditActivity();
+        //    AdsEditActivity();
     }
 
     public void AdsEditActivity() {

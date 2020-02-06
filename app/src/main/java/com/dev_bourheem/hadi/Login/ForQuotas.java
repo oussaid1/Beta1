@@ -13,7 +13,7 @@ public class ForQuotas extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "boys";
     public static final String col11 = "userQuota";
     public static final String col22 = "userGQuota";
-    //private Main3Activity M3Actvt;
+    //private LoginActivity M3Actvt;
 
     public ForQuotas(Context context) {
         super(context, database_name, null, 2);
@@ -45,7 +45,7 @@ public class ForQuotas extends SQLiteOpenHelper {
     }
 
     public Cursor JibData() {
-        // M3Actvt= new Main3Activity();
+        // M3Actvt= new LoginActivity();
         SQLiteDatabase db = getReadableDatabase();
         Cursor b1 = db.rawQuery("select * from " + TABLE_NAME + " ORDER BY id DESC limit 1", null);
         return b1;

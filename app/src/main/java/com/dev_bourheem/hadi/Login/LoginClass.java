@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.dev_bourheem.hadi.Main3Activity;
+import com.dev_bourheem.hadi.LoginActivity;
 
 
 public class LoginClass extends SQLiteOpenHelper {
@@ -16,7 +16,7 @@ public class LoginClass extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "User";
     public static final String col33 = "username";
     public static final String col44 = "password";
-    private Main3Activity M3Actvt;
+    private LoginActivity M3Actvt;
 
     public LoginClass(Context context) {
         super(context, database_name, null, 1);
@@ -48,7 +48,7 @@ public class LoginClass extends SQLiteOpenHelper {
     }
 
     public Cursor JibLoginCredencials() {
-        M3Actvt = new Main3Activity();
+        M3Actvt = new LoginActivity();
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " order by ID Desc limit 1 ", null);
         return c;
