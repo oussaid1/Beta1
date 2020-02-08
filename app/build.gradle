@@ -7,8 +7,8 @@ android {
         applicationId "com.dev_bourheem.hadi"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 14
-        versionName "14"
+        versionCode 15
+        versionName "15"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -34,5 +34,6 @@ dependencies {
     // For control over item selection of both touch and mouse driven selection
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0-beta01"
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 }

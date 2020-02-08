@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/GreenP4"
+    android:background="@color/white"
     android:theme="@style/AppTheme"
     tools:context=".MainActivity">
 
@@ -50,6 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_margin="2dp"
                     android:background="@drawable/edittextborders"
                     android:textAlignment="center" />
 
@@ -88,7 +89,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="2dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/thinborders"
             android:elevation="8dp"
             android:orientation="vertical">
 
@@ -101,49 +101,68 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_margin="4dp"
-                    android:background="@drawable/thinborders"
                     android:orientation="horizontal">
 
-                    <Spinner
-                        android:id="@+id/SumCategory"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="2dp"
-                        android:layout_marginBottom="2dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:popupBackground="@color/GreenP3"
-                        android:text="@string/totaltoday"
-                        android:textAlignment="center"
-                        android:textColor="@color/orange" />
+                        android:background="@drawable/thinborders">
 
-                    <Spinner
-                        android:id="@+id/Sumsearche"
+                        <Spinner
+                            android:id="@+id/SumCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:popupBackground="@color/GreenP4"
+                            android:text="@string/totaltoday"
+                            android:textAlignment="center"
+                            android:textColor="@color/orange" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="2dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:clipChildren="true"
-                        android:maxLines="1"
-                        android:popupBackground="@color/GreenP3"
-                        android:textAlignment="center"
-                        android:textColor="@color/GreenP" />
+                        android:background="@drawable/thinborders">
 
-                    <Spinner
-                        android:id="@+id/SumsearchBydate"
+                        <Spinner
+                            android:id="@+id/Sumsearche"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="2dp"
+                            android:clipChildren="true"
+                            android:maxLines="1"
+                            android:popupBackground="@color/GreenP4"
+                            android:textAlignment="center"
+                            android:textColor="@color/GreenP" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="2dp"
+                        android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:maxLines="1"
-                        android:popupBackground="@color/GreenP3"
-                        android:textAlignment="center"
-                        android:textColor="@color/GreenP" />
+                        android:background="@drawable/thinborders">
 
+                        <Spinner
+                            android:id="@+id/SumsearchBydate"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="2dp"
+                            android:maxLines="1"
+                            android:popupBackground="@color/GreenP4"
+                            android:textAlignment="center"
+                            android:textColor="@color/GreenP" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -207,8 +226,8 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
                             android:text="@string/left_of_quota"
+                            android:textColor="@color/orange"
                             android:textAlignment="center" />
-
                         <TextView
                             android:id="@+id/QuotaLeftOut"
                             android:layout_width="100dp"
@@ -267,9 +286,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
@@ -348,7 +367,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="4dp"
                     android:background="@drawable/greenlight"
-                    android:visibility="visible" />
+                    android:visibility="invisible" />
 
 
             </LinearLayout>
@@ -366,7 +385,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/thinborders"
+                android:background="@drawable/justborderz"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -494,34 +513,59 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="40dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             android:orientation="vertical">
 
-                            <Button
-                                android:id="@+id/plus"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="2dp"
-                                android:background="@drawable/buttonflat"
-                                android:text="+" />
+                                android:layout_margin="4dp">
 
-                            <Button
-                                android:id="@+id/minus"
+                                <Spinner
+                                    android:id="@+id/QuanType"
+                                    android:layout_width="118dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_margin="2dp"
+                                    android:dropDownWidth="wrap_content"
+                                    android:dropDownSelector="@color/GreenP4"
+                                    android:elevation="4dp"
+                                    android:fadingEdgeLength="4dp"
+                                    android:hapticFeedbackEnabled="true"
+                                    android:paddingBottom="8dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="2dp"
-                                android:background="@drawable/buttonflat"
-                                android:text="-" />
+                                android:layout_margin="4dp"
+                                android:orientation="horizontal">
 
+                                <Button
+                                    android:id="@+id/plus"
+                                    android:layout_width="40dp"
+                                    android:layout_height="20dp"
+                                    android:layout_margin="2dp"
+                                    android:background="@drawable/buttonflat"
+                                    android:text="+" />
+
+                                <Button
+                                    android:id="@+id/minus"
+                                    android:layout_width="40dp"
+                                    android:layout_height="20dp"
+                                    android:layout_margin="2dp"
+                                    android:background="@drawable/buttonflat"
+                                    android:text="-" />
+
+                            </LinearLayout>
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/thinborders"
+                            android:layout_margin="4dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -549,20 +593,6 @@
                                 android:text="1"
                                 android:textAlignment="center"
                                 android:textColor="@color/GreenP" />
-
-                            <Spinner
-                                android:id="@+id/QuanType"
-                                android:layout_width="118dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_margin="2dp"
-                                android:dropDownWidth="wrap_content"
-                                android:dropDownSelector="@color/GreenP4"
-                                android:elevation="4dp"
-                                android:fadingEdgeLength="4dp"
-                                android:hapticFeedbackEnabled="true"
-                                android:paddingBottom="8dp" />
-
                         </LinearLayout>
 
 
@@ -572,7 +602,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="11dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="4dp"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="2"
                         android:background="@drawable/thinborders"
@@ -602,7 +632,7 @@
                             android:layout_marginBottom="16dp"
                             android:background="@drawable/edittextborders"
                             android:hint="@string/price_in_here"
-                            android:inputType="numberDecimal"
+                            android:inputType="numberSigned"
                             android:maxLength="10"
                             android:maxLines="1"
                             android:padding="4dp"

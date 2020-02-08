@@ -23,6 +23,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public static final String da = "history";
     public static final String Quantifier = "Quantifiers";
     public static final String Quantity = "quantity";
+    public Context context;
 
     // public static final String SHOP_NAME = "name";
     // public static final String SHOP_PHONE = "phone";
@@ -77,13 +78,14 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c1 = db.rawQuery("select "+col1+",sum("+col2+")as total from " + TABLE_NAME+" group  by Item_Name ",null);
+        Cursor c1 = db.rawQuery( "select " + col1 + ",sum(" + col2 + ")as total from " + TABLE_NAME + " group  by Item_Name order by total asc limit 5", null );
         return c1;
 
     }
-    public Cursor GetDBdataAll() {
+
+    public Cursor GetdataByDate() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cu = db.rawQuery("select * from " + TABLE_NAME +" order by history ",null);
+        Cursor cu = db.rawQuery( "select " + da + ",sum(" + col2 + ")as total from " + TABLE_NAME + " group  by " + da + " order by total asc limit 5", null );
         return cu;
 
     }
@@ -121,31 +123,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         return datesCursor;
     }
 
-    public static void backUp() {
-        try {
-            File sd = Environment.getExternalStorageDirectory();
-            File data = Environment.getDataDirectory();
 
-            if (sd.canWrite()) {
-                String currentDBPath = "//data//com.dev_bourheem.hadi//databases//School.db";
-                String backupDBPath = "School.db";
-
-                File currentDB = new File( data, currentDBPath );
-                File backupDB = new File( sd, backupDBPath );
-
-                if (currentDB.exists()) {
-                    FileChannel src = new FileInputStream( currentDB ).getChannel();
-                    FileChannel dst = new FileOutputStream( backupDB ).getChannel();
-                    dst.transferFrom( src, 0, src.size() );
-                    src.close();
-                    dst.close();
-                    //Toast.makeText(MyDataBaseCreator.this , "Backup is successful to SD card", Toast.LENGTH_SHORT).show();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void restore() {
         try {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#04AF9B</color>
+    <color name="colorPrimaryDark">#017E6D</color>
     <color name="colorAccent">#80D8FF</color>
     <color name="GreenP0">#08886E</color>
     <color name="GreenP1">#07B18B</color>
@@ -9,7 +9,7 @@
     <color name="green">#64DD17</color>
     <color name="orange">#FF6D00</color>
     <color name="yellow">#FFC107</color>
-    <color name="GreenP">#011313</color>
+    <color name="GreenP">#022222</color>
     <color name="GreenP3">#A1E0C8</color>
     <color name="GreenP4">#D3F1E8</color>
     <color name="Green">#087474</color>

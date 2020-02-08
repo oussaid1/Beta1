@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,6 +32,12 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -125,7 +132,8 @@ public class MainActivity extends AppCompatActivity {
         DateV1.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyDataBaseCreator.backUp();
+                Fuck();
+
             }
         } );
         addBut.setOnClickListener( new View.OnClickListener() {
@@ -140,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                     PriceIn.getText().clear();
                     NameIn.getText().clear();
                     fillsugest();
+                    TraficLight( sumtoday );
                 } else MsgBox( "المرجو ادخال المعلومات" );
             }
         } );
@@ -152,30 +161,29 @@ public class MainActivity extends AppCompatActivity {
                 if (ischecked) {
                     MsgBox( "وضع (الضيوف )" );
                     showQuota();
+                    TraficLight( sumtoday );
                 } else {
                     MsgBox( "الوضع العائلي" );
                     showQuota();
+                    TraficLight( sumtoday );
                 }
             }
         } );
         Sumcategoryspinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (DbisEmpty()) {
-                    String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
 
-                    switch (sellection1) {
-                        case "حسب المحل":
-                            fillwithShopNm();
+                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
 
-                            break;
-                        case "حسب اليوم":
-                            FillWithDays();
-                            FillWithDaysforShopEmpty();
-                            break;
+                switch (sellection1) {
+                    case "حسب المحل":
+                        fillwithShopNm();
 
-                    }
-
+                        break;
+                    case "حسب اليوم":
+                        FillWithDays();
+                        FillWithDaysforShopEmpty();
+                        break;
                 }
             }
 
@@ -187,20 +195,18 @@ public class MainActivity extends AppCompatActivity {
         SumsearchSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (DbisEmpty()) {
-                    String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
-                    String sellection2 = SumsearchSpinner.getSelectedItem().toString().trim();
+                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
+                String sellection2 = SumsearchSpinner.getSelectedItem().toString().trim();
 
-                    switch (sellection1) {
+                switch (sellection1) {
 
-                        case "حسب المحل":
-                            FillWithDaysforShop( sellection2 );
-                            break;
-                        case "حسب اليوم":
-                            GetSumByDate( sellection2 );
-                            //FillWithDaysforShopEmpty();
-                            break;
-                    }
+                    case "حسب المحل":
+                        FillWithDaysforShop( sellection2 );
+                        break;
+                    case "حسب اليوم":
+                        GetSumByDate( sellection2 );
+                        //FillWithDaysforShopEmpty();
+                        break;
                 }
             }
 
@@ -212,24 +218,21 @@ public class MainActivity extends AppCompatActivity {
         SumsearchBydate.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                if (DbisEmpty()) {
-                    String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
-                    String sellection2 = SumsearchSpinner.getSelectedItem().toString().trim();
-                    String sellection3 = SumsearchBydate.getSelectedItem().toString().trim();
+                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
+                String sellection2 = SumsearchSpinner.getSelectedItem().toString().trim();
+                String sellection3 = SumsearchBydate.getSelectedItem().toString().trim();
 
 
-                    switch (sellection1) {
-                        case "حسب المحل":
-                            if (sellection3.equals( "*" )) {
-                                GetSumByShop( sellection2 );
-                            } else
-                                GetSumByShopDate( sellection2, sellection3 );
-                            break;
-                        case "حسب اليوم":
-                            FillWithDaysforShopEmpty();
-                            break;
-                    }
+                switch (sellection1) {
+                    case "حسب المحل":
+                        if (sellection3.equals( "*" )) {
+                            GetSumByShop( sellection2 );
+                        } else
+                            GetSumByShopDate( sellection2, sellection3 );
+                        break;
+                    case "حسب اليوم":
+                        FillWithDaysforShopEmpty();
+                        break;
                 }
             }
 
@@ -240,9 +243,9 @@ public class MainActivity extends AppCompatActivity {
         } );
         fillcategory();
         TotalallOut.setText( String.valueOf( getTotalAll() ) );
-
-
-        //ADSmainActivity();
+        showQuota();
+        TraficLight( sumtoday );
+        //  ADSmainActivity();
     }
 
     public void ADSmainActivity() {
@@ -365,24 +368,64 @@ public class MainActivity extends AppCompatActivity {
     public void TraficLight(Double sum2day) {
         leftOfQuota = Quota - sum2day;
         LeftOut.setText( String.valueOf( leftOfQuota ) );
-        double SemiQuota = GetQuota() / 2;
-        switch (Quota) {
-            case (sum2day <= SemiQuota):
 
-                RedL.setVisibility( View.INVISIBLE );
-                OrangeL.setVisibility( View.INVISIBLE );
-                GreenL.setVisibility( View.VISIBLE );
-                QuotaLeftNm.setTextColor( Color.parseColor( "#64DD17" ) );
-
-                GreenL.setVisibility( View.INVISIBLE );
-                OrangeL.setVisibility( View.VISIBLE );
-                QuotaLeftNm.setTextColor( Color.parseColor( "#FF6D00" ) );
-
-                GreenL.setVisibility( View.INVISIBLE );
-                OrangeL.setVisibility( View.INVISIBLE );
-                RedL.setVisibility( View.VISIBLE );
-                QuotaLeftNm.setTextColor( Color.parseColor( "#D50000" ) );
+        if (sum2day <= Quota / 3) {
+            Greenlight();
+        } else if ((sum2day < Quota / 2 && sum2day > Quota / 3)) {
+            Yellowlight();
+        } else if (sum2day < Quota && sum2day > Quota / 2) {
+            OrangeLight();
+        } else if (sum2day >= Quota) {
+            Redlight();
         }
+    }
+
+    public void Greenlight() {
+        RedL.setVisibility( View.INVISIBLE );
+        RedL2.setVisibility( View.INVISIBLE );
+        OrangeL.setVisibility( View.INVISIBLE );
+        OrangeL2.setVisibility( View.INVISIBLE );
+        yellowL.setVisibility( View.INVISIBLE );
+        yellowL2.setVisibility( View.INVISIBLE );
+        GreenL.setVisibility( View.VISIBLE );
+        GreenL2.setVisibility( View.VISIBLE );
+        QuotaLeftNm.setTextColor( Color.parseColor( "#64DD17" ) );
+    }
+
+    public void Yellowlight() {
+        RedL.setVisibility( View.INVISIBLE );
+        RedL2.setVisibility( View.INVISIBLE );
+        OrangeL.setVisibility( View.INVISIBLE );
+        OrangeL2.setVisibility( View.INVISIBLE );
+        GreenL.setVisibility( View.VISIBLE );
+        GreenL2.setVisibility( View.VISIBLE );
+        yellowL.setVisibility( View.VISIBLE );
+        yellowL2.setVisibility( View.VISIBLE );
+        QuotaLeftNm.setTextColor( Color.parseColor( "#FFC107" ) );
+    }
+
+    public void OrangeLight() {
+        GreenL.setVisibility( View.VISIBLE );
+        GreenL2.setVisibility( View.VISIBLE );
+        yellowL.setVisibility( View.VISIBLE );
+        yellowL2.setVisibility( View.VISIBLE );
+        RedL.setVisibility( View.INVISIBLE );
+        RedL2.setVisibility( View.INVISIBLE );
+        OrangeL.setVisibility( View.VISIBLE );
+        OrangeL2.setVisibility( View.VISIBLE );
+        QuotaLeftNm.setTextColor( Color.parseColor( "#FF6D00" ) );
+    }
+
+    public void Redlight() {
+        GreenL.setVisibility( View.VISIBLE );
+        GreenL2.setVisibility( View.VISIBLE );
+        yellowL.setVisibility( View.VISIBLE );
+        yellowL2.setVisibility( View.VISIBLE );
+        OrangeL.setVisibility( View.VISIBLE );
+        OrangeL2.setVisibility( View.VISIBLE );
+        RedL.setVisibility( View.VISIBLE );
+        RedL2.setVisibility( View.VISIBLE );
+        QuotaLeftNm.setTextColor( Color.parseColor( "#D50000" ) );
     }
 
     public double GetQuota() {
@@ -469,12 +512,13 @@ public class MainActivity extends AppCompatActivity {
             return;
         } else {
             datecurs.moveToFirst();
+            sumsearchList.add( "*" );
             while (!datecurs.isAfterLast()) {
                 String dts = datecurs.getString( datecurs.getColumnIndex( MyDataBaseCreator.da ) );
                 sumsearchList.add( dts );
                 datecurs.moveToNext();
             }
-            sumsearchList.add( "*" );
+
             datecurs.close();
             SumsearchSpinner.setAdapter( sumsearchAdapter );
         }
@@ -488,32 +532,33 @@ public class MainActivity extends AppCompatActivity {
             return;
         } else {
             datecurs.moveToFirst();
+            BydateList.add( "*" );
             while (!datecurs.isAfterLast()) {
                 String dts = datecurs.getString( datecurs.getColumnIndex( MyDataBaseCreator.da ) );
                 BydateList.add( dts );
                 datecurs.moveToNext();
             }
             datecurs.close();
-            BydateList.add( "*" );
+
             SumsearchBydate.setAdapter( SumsearchBydateAdapter );
         }
     }
 
     public void FillWithDaysforShopEmpty() {
         BydateList.clear();
-        BydateList.add( "*****" );
         SumsearchBydate.setAdapter( SumsearchBydateAdapter );
     }
 
     public void fillwithShopNm() {
         sumsearchList.clear();
-        sumsearchList.add( "*" );
+
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor molhanotCursor = db.rawQuery( "select distinct " + MyDataBaseCreator.person + " from " + MyDataBaseCreator.TABLE_NAME + "  order by " + MyDataBaseCreator.da + " asc", null );
         if (molhanotCursor.getCount() == 0) {
             return;
         } else
             molhanotCursor.moveToFirst();
+        sumsearchList.add( "*" );
         while (!molhanotCursor.isAfterLast()) {
             String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( MyDataBaseCreator.person ) );
             sumsearchList.add( Mlhanot );
@@ -585,6 +630,70 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public void backUpDataBase() {
+        String pkg = "com.dev_bourheem.hadi";
+        try {
+            File sd = Environment.getExternalStorageDirectory();
+            File data = Environment.getDataDirectory();
+            sd.mkdir();
+            if (sd.canWrite()) {
+                String currentDBPath = "/data/data/com.dev_bourheem.hadi/databases/School.db";
+                String backupDBPath = "School.db";
+                File currentDB = new File( data, currentDBPath );
+                File backupDB = new File( sd, backupDBPath );
 
+                if (currentDB.exists()) {
+                    FileChannel src = new FileInputStream( currentDB ).getChannel();
+                    FileChannel dst = new FileOutputStream( backupDB ).getChannel();
+                    dst.transferFrom( src, 0, src.size() );
+                    src.close();
+                    dst.close();
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public void Fuck() {
+        String dstPath = Environment.getExternalStorageDirectory() + File.separator + "myApp" + File.separator;
+        File dst = new File( dstPath );
+
+
+    }
+
+    private void exportFile(File src, File dst) throws IOException {
+
+        //if folder does not exist
+        if (!dst.exists()) {
+            if (!dst.mkdir()) {
+            }
+        }
+
+        String timeStamp = new SimpleDateFormat( "yyyyMMdd_HHmmss" ).format( new Date() );
+        File expFile = new File( dst.getPath() + File.separator + "IMG_" + timeStamp + ".jpg" );
+        FileChannel inChannel = null;
+        FileChannel outChannel = null;
+
+        try {
+            inChannel = new FileInputStream( src ).getChannel();
+            outChannel = new FileOutputStream( expFile ).getChannel();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            inChannel.transferTo( 0, inChannel.size(), outChannel );
+        } finally {
+            if (inChannel != null)
+                inChannel.close();
+            if (outChannel != null)
+                outChannel.close();
+        }
+
+    }
 }
+/*
+/data/data/com.dev_bourheem.hadi/databases/School.db
 
+"/data/"+ "com.dev_bourheem.hadi" +"/databases/School.db";
+*/

@@ -21,8 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:elevation="4dp"
                 android:background="@drawable/justborderz"
+                android:elevation="4dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -54,90 +54,142 @@
 
                     <Button
                         android:id="@+id/saveBtnforquotas"
-                        android:layout_width="70dp"
-                        android:layout_height="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:layout_margin="8dp"
                         android:background="@drawable/buttonflat"
                         android:text="@string/save"
-                        android:textStyle="bold"
                         android:textAlignment="center"
                         android:textColor="@color/GreenP"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="8dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="8dp"
-                        android:text="@string/set_your_quota"
-                        android:textColor="@color/GreenP" />
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/limitQuotaDef"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_margin="8dp"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/justborderz"
-                        android:hint="@string/define_limit_here"
-                        android:inputType="numberDecimal"
-                        android:maxLength="10"
-                        android:maxLines="1"
-                        android:padding="4dp"
-                        android:textAlignment="center" />
-                </LinearLayout>
+                        <EditText
+                            android:id="@+id/limitQuotaDef"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/justborderz"
+                            android:hint="@string/define_limit_here"
+                            android:inputType="numberDecimal"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:padding="4dp"
+                            android:textAlignment="center" />
+                    </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="16dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/GreenP"
-                        android:text="@string/set_your_guest_mode_quota"
-                        android:textSize="16sp" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/limitGuestDef"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_margin="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="@drawable/justborderz"
-                        android:hint="@string/define_limit_here"
-                        android:inputType="numberDecimal"
-                        android:maxLength="10"
-                        android:maxLines="1"
-                        android:padding="4dp"
-                        android:textAlignment="center" />
+                        <EditText
+                            android:id="@+id/limitGuestDef"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/justborderz"
+                            android:hint="@string/set_your_guest_mode_quota"
+                            android:inputType="numberDecimal"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:padding="4dp"
+                            android:textAlignment="center" />
+                    </LinearLayout>
                 </LinearLayout>
-
-
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/thinborders"
                 android:layout_margin="8dp"
+                android:background="@drawable/thinborders"
                 android:elevation="8dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center"
+                    android:layout_margin="4dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/UserNameDef"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/justborderz"
+                            android:hint="@string/username_here"
+                            android:maxLength="16"
+                            android:maxLines="1"
+                            android:padding="4dp"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/PasswordDef"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/justborderz"
+                            android:hint="@string/password"
+                            android:inputType="textPassword"
+                            android:maxLength="8"
+                            android:maxLines="1"
+                            android:padding="4dp"
+                            android:textAlignment="center" />
+
+                        <EditText
+                            android:id="@+id/ConfirmPassDef"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/justborderz"
+                            android:hint="@string/confirm_password"
+                            android:inputType="textPassword"
+                            android:maxLength="8"
+                            android:maxLines="1"
+                            android:padding="4dp"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -147,106 +199,17 @@
 
                     <Button
                         android:id="@+id/saveBtnforuserdata"
-                        android:layout_width="70dp"
-                        android:layout_height="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_margin="4dp"
                         android:background="@drawable/buttonflat"
                         android:elevation="4dp"
                         android:text="@string/save"
-                        android:textStyle="bold"
                         android:textAlignment="center"
                         android:textColor="@color/GreenP"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/justborderzcolor"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        android:textColor="@color/GreenP0"
-                        android:layout_marginBottom="4dp"
-                        android:text="@string/set_user_name" />
-
-                    <EditText
-                        android:id="@+id/UserNameDef"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/justborderz"
-                        android:hint="@string/username_here"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:padding="4dp"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        android:textColor="@color/GreenP0"
-                        android:layout_marginBottom="1dp"
-                        android:text="@string/set_password"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/PasswordDef"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/justborderz"
-                        android:hint="@string/password"
-                        android:inputType="textPassword"
-                        android:maxLength="8"
-                        android:maxLines="1"
-                        android:padding="4dp"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/GreenP0"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="1dp"
-                        android:text="@string/confirm_password"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/ConfirmPassDef"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:background="@drawable/justborderz"
-                        android:hint="@string/confirm_password"
-                        android:inputType="textPassword"
-                        android:maxLength="8"
-                        android:maxLines="1"
-                        android:padding="4dp"
-                        android:textAlignment="center" />
-
-
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>

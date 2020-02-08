@@ -13,8 +13,8 @@
     <string name="username">اسم المستعمل</string>
     <string name="login_page">صفحة الولوج</string>
     <string name="set_your_quota">حدد السقف</string>
-    <string name="define_limit_here"> حدد السقف هنا </string>
-    <string name="set_your_guest_mode_quota">حدد السقف لوضع (الضيوف)</string>
+    <string name="define_limit_here"> السقف هنا </string>
+    <string name="set_your_guest_mode_quota"> السقف(الضيوف)</string>
     <string name="save">أحفظ</string>
     <string name="set_user_name">حدد اسم المستعمل</string>
     <string name="username_here">اسم المستعمل هنا </string>

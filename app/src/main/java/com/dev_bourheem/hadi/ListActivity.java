@@ -1,7 +1,6 @@
 package com.dev_bourheem.hadi;
 
 import android.R.layout;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,11 +25,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class ListActivity extends AppCompatActivity {
     MyDataBaseCreator MdbCrtr;
@@ -170,9 +165,7 @@ public class ListActivity extends AppCompatActivity {
                 //DeletItem(position);
             }
         });
-
-
-        //  Adslist();
+        //Adslist();
     }
 
     public void Adslist() {
@@ -197,14 +190,6 @@ public class ListActivity extends AppCompatActivity {
         intent2 = new Intent(this, Settings.class);
         startActivity(intent2);
     }
-
-    public Date GetDate() {
-        Date datex = Calendar.getInstance().getTime();
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat(" dd / MM / yy");
-        dateFormat.format(datex);
-        return datex;
-    }
-
 
     private void PrintMessage(String title, String message) {
         AlertDialog.Builder newAlert = new AlertDialog.Builder(this);

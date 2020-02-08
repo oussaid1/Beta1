@@ -63,7 +63,7 @@ public class EdditActivity extends AppCompatActivity {
         DateMod = findViewById(R.id.dateMod);
         GetThem();
 
-        //    AdsEditActivity();
+        // AdsEditActivity();
     }
 
     public void AdsEditActivity() {
