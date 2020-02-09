@@ -18,6 +18,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dev_bourheem.hadi.Login.ForQuotas;
 import com.dev_bourheem.hadi.Login.LoginClass;
 
+import java.io.IOException;
+
+import static com.dev_bourheem.hadi.MainActivity.Backup;
+import static com.dev_bourheem.hadi.MainActivity.Restore;
+
 public class Settings extends AppCompatActivity {
 
     EditText setQuota, setGuestQta, setusername, setpassword, confirmpass;
@@ -44,6 +49,21 @@ public class Settings extends AppCompatActivity {
                 return true;
             case R.id.ShowList_M:
                 OpenActivitilist();
+                return true;
+            case R.id.backup:
+                try {
+                    if (Backup()) {
+                        PrintMessage( "تم" );
+                    } else {
+                        PrintMessage( "لم يتم" );
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            case R.id.restore:
+                RestoreِConferm();
+                return true;
             case R.id.reset:
                 onDialogue2();
                 return true;
@@ -144,10 +164,10 @@ public class Settings extends AppCompatActivity {
         forQutaOC.deleteall();
         MDBC.deleteall();
     }
-    private void PrintMessage(String title, String message) {
+
+    private void PrintMessage(String message) {
         AlertDialog.Builder newAlert = new AlertDialog.Builder(this);
         newAlert.setCancelable(true);
-        newAlert.setTitle(title);
         newAlert.setMessage(message);
         newAlert.show();
     }
@@ -155,12 +175,31 @@ public class Settings extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.alert));
         builder.setMessage(getString(R.string.doyourealywantdeletall));
-        builder.setIcon(android.R.drawable.ic_dialog_alert);
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int whichButton) {
                 ResetAll();
-                PrintMessage(getString(R.string.alert), getString(R.string.oopsdeletedall));
+
+
+            }
+        } );
+        builder.setNegativeButton( android.R.string.no, null );
+        builder.show();
+    }
+
+    public void RestoreِConferm() {
+        AlertDialog.Builder builder = new AlertDialog.Builder( this );
+        builder.setTitle( getString( R.string.alert ) );
+        builder.setMessage( getString( R.string.doyourealywantdeletall ) );
+        builder.setPositiveButton( android.R.string.yes, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                if (Restore()) {
+                    MsgBox( "تم" );
+                } else {
+                    MsgBox( "لم يتم" );
+                }
 
             }
         });

@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Lgin = new LoginClass(getApplicationContext()); // initializing the LoginClass Object
 
-        //AdsLogin();
+        AdsLogin();
     }
 
     public void AdsLogin() {

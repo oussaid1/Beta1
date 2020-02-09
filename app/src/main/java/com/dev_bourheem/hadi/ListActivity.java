@@ -165,7 +165,7 @@ public class ListActivity extends AppCompatActivity {
                 //DeletItem(position);
             }
         });
-        //Adslist();
+        Adslist();
     }
 
     public void Adslist() {

@@ -51,7 +51,7 @@ public class stats extends AppCompatActivity {
             }
         } );*/
         PieThatThing();
-        // Adds();
+        Adds();
 
         PieThat();
     }

@@ -34,9 +34,9 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -96,156 +96,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_main );
-        ButonsDeclare();
-        sumcategoryList = new ArrayList<>();
-        sumsearchList = new ArrayList<>();
-        BydateList = new ArrayList<>();
-        MDBC = new MyDataBaseCreator( getApplicationContext() );
-        forQutaOC = new ForQuotas( getApplicationContext() );
-        fillsugest();
-        sumcategoryAdapter = new ArrayAdapter<>( this, R.layout.support_simple_spinner_dropdown_item, sumcategoryList );
-        sumsearchAdapter = new ArrayAdapter<>( this, R.layout.support_simple_spinner_dropdown_item, sumsearchList );
-        SumsearchBydateAdapter = new ArrayAdapter<>( this, R.layout.support_simple_spinner_dropdown_item, BydateList );
-        plus.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Qnt = Double.valueOf( quantity.getText().toString().trim() );
-                Qnt = Qnt + 0.5;
-                quantity.setText( String.valueOf( Qnt ) );
-            }
-        } );
-        minus.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    public static boolean Backup() throws IOException {
 
-                Qnt = Double.valueOf( quantity.getText().toString().trim() );
-                if (Qnt > 0) Qnt = Qnt - 0.5;
-                quantity.setText( String.valueOf( Qnt ) );
-            }
-        } );
+        final String inFileName = "/data/data/com.dev_bourheem.hadi/databases/School.db";
+        File dbFile = new File( inFileName );
+        FileInputStream fis = new FileInputStream( dbFile );
 
-        DateV1.setText( GetDate() );
-        DateV1.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fuck();
+        String outFileName = Environment.getExternalStorageDirectory() + "/School.db";
 
-            }
-        } );
-        addBut.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        // Open the empty db as the output stream
+        OutputStream output = new FileOutputStream( outFileName );
 
-
-                if (PriceIn.getText().toString().trim().length() != 0 && NameIn.getText().toString().trim().length() != 0) {
-                    LoadDatabase();
-                    GetItemNameFromdatabase();
-                    GetmolhanotFromdatabase();
-                    PriceIn.getText().clear();
-                    NameIn.getText().clear();
-                    fillsugest();
-                    TraficLight( sumtoday );
-                } else MsgBox( "المرجو ادخال المعلومات" );
-            }
-        } );
-
-        Guestmode.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                ischecked = Guestmode.isChecked();
-                if (ischecked) {
-                    MsgBox( "وضع (الضيوف )" );
-                    showQuota();
-                    TraficLight( sumtoday );
-                } else {
-                    MsgBox( "الوضع العائلي" );
-                    showQuota();
-                    TraficLight( sumtoday );
-                }
-            }
-        } );
-        Sumcategoryspinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
-
-                switch (sellection1) {
-                    case "حسب المحل":
-                        fillwithShopNm();
-
-                        break;
-                    case "حسب اليوم":
-                        FillWithDays();
-                        FillWithDaysforShopEmpty();
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        } );
-        SumsearchSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
-                String sellection2 = SumsearchSpinner.getSelectedItem().toString().trim();
-
-                switch (sellection1) {
-
-                    case "حسب المحل":
-                        FillWithDaysforShop( sellection2 );
-                        break;
-                    case "حسب اليوم":
-                        GetSumByDate( sellection2 );
-                        //FillWithDaysforShopEmpty();
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        } );
-        SumsearchBydate.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
-                String sellection2 = SumsearchSpinner.getSelectedItem().toString().trim();
-                String sellection3 = SumsearchBydate.getSelectedItem().toString().trim();
-
-
-                switch (sellection1) {
-                    case "حسب المحل":
-                        if (sellection3.equals( "*" )) {
-                            GetSumByShop( sellection2 );
-                        } else
-                            GetSumByShopDate( sellection2, sellection3 );
-                        break;
-                    case "حسب اليوم":
-                        FillWithDaysforShopEmpty();
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        } );
-        fillcategory();
-        TotalallOut.setText( String.valueOf( getTotalAll() ) );
-        showQuota();
-        TraficLight( sumtoday );
-        //  ADSmainActivity();
+        // Transfer bytes from the inputfile to the outputfile
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = fis.read( buffer )) > 0) {
+            output.write( buffer, 0, length );
+        }
+        // Close the streams
+        output.flush();
+        output.close();
+        fis.close();
+        return true;
     }
 
     public void ADSmainActivity() {
@@ -630,70 +502,178 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void backUpDataBase() {
-        String pkg = "com.dev_bourheem.hadi";
+    public static boolean Restore() {
         try {
             File sd = Environment.getExternalStorageDirectory();
             File data = Environment.getDataDirectory();
-            sd.mkdir();
+
             if (sd.canWrite()) {
-                String currentDBPath = "/data/data/com.dev_bourheem.hadi/databases/School.db";
+                String currentDBPath = "//data//com.dev_bourheem.hadi//databases//School.db";
                 String backupDBPath = "School.db";
                 File currentDB = new File( data, currentDBPath );
                 File backupDB = new File( sd, backupDBPath );
 
                 if (currentDB.exists()) {
-                    FileChannel src = new FileInputStream( currentDB ).getChannel();
-                    FileChannel dst = new FileOutputStream( backupDB ).getChannel();
+                    FileChannel src = new FileInputStream( backupDB ).getChannel();
+                    FileChannel dst = new FileOutputStream( currentDB ).getChannel();
                     dst.transferFrom( src, 0, src.size() );
                     src.close();
                     dst.close();
                 }
+                return true;
             }
         } catch (Exception e) {
-        }
-    }
-
-    public void Fuck() {
-        String dstPath = Environment.getExternalStorageDirectory() + File.separator + "myApp" + File.separator;
-        File dst = new File( dstPath );
-
-
-    }
-
-    private void exportFile(File src, File dst) throws IOException {
-
-        //if folder does not exist
-        if (!dst.exists()) {
-            if (!dst.mkdir()) {
-            }
-        }
-
-        String timeStamp = new SimpleDateFormat( "yyyyMMdd_HHmmss" ).format( new Date() );
-        File expFile = new File( dst.getPath() + File.separator + "IMG_" + timeStamp + ".jpg" );
-        FileChannel inChannel = null;
-        FileChannel outChannel = null;
-
-        try {
-            inChannel = new FileInputStream( src ).getChannel();
-            outChannel = new FileOutputStream( expFile ).getChannel();
-        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        return true;
+    }
 
-        try {
-            inChannel.transferTo( 0, inChannel.size(), outChannel );
-        } finally {
-            if (inChannel != null)
-                inChannel.close();
-            if (outChannel != null)
-                outChannel.close();
-        }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_main );
+        ButonsDeclare();
+        sumcategoryList = new ArrayList<>();
+        sumsearchList = new ArrayList<>();
+        BydateList = new ArrayList<>();
+        MDBC = new MyDataBaseCreator( getApplicationContext() );
+        forQutaOC = new ForQuotas( getApplicationContext() );
+        fillsugest();
+        sumcategoryAdapter = new ArrayAdapter<>( this, R.layout.support_simple_spinner_dropdown_item, sumcategoryList );
+        sumsearchAdapter = new ArrayAdapter<>( this, R.layout.support_simple_spinner_dropdown_item, sumsearchList );
+        SumsearchBydateAdapter = new ArrayAdapter<>( this, R.layout.support_simple_spinner_dropdown_item, BydateList );
+        plus.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Qnt = Double.valueOf( quantity.getText().toString().trim() );
+                Qnt = Qnt + 0.5;
+                quantity.setText( String.valueOf( Qnt ) );
+            }
+        } );
+        minus.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Qnt = Double.valueOf( quantity.getText().toString().trim() );
+                if (Qnt > 0) Qnt = Qnt - 0.5;
+                quantity.setText( String.valueOf( Qnt ) );
+            }
+        } );
 
+        DateV1.setText( GetDate() );
+       /* DateV1.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        } );*/
+        addBut.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (PriceIn.getText().toString().trim().length() != 0 && NameIn.getText().toString().trim().length() != 0 && moolhanotNm.getText().toString().trim().length() != 0) {
+                    LoadDatabase();
+                    GetItemNameFromdatabase();
+                    GetmolhanotFromdatabase();
+                    PriceIn.getText().clear();
+                    NameIn.getText().clear();
+                    fillsugest();
+                    TraficLight( sumtoday );
+                    fillwithShopNm();
+                } else MsgBox( "المرجو ادخال المعلومات" );
+            }
+        } );
+
+        Guestmode.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                ischecked = Guestmode.isChecked();
+                if (ischecked) {
+                    MsgBox( "وضع (الضيوف )" );
+                    showQuota();
+                    TraficLight( sumtoday );
+                } else {
+                    MsgBox( "الوضع العائلي" );
+                    showQuota();
+                    TraficLight( sumtoday );
+                }
+            }
+        } );
+        Sumcategoryspinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
+
+                switch (sellection1) {
+                    case "حسب المحل":
+                        fillwithShopNm();
+
+                        break;
+                    case "حسب اليوم":
+                        FillWithDays();
+                        //  FillWithDaysforShopEmpty();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        } );
+        SumsearchSpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
+                String sellection2 = SumsearchSpinner.getSelectedItem().toString().trim();
+
+                switch (sellection1) {
+
+                    case "حسب المحل":
+                        FillWithDaysforShop( sellection2 );
+                        break;
+                    case "حسب اليوم":
+                        GetSumByDate( sellection2 );
+                        //FillWithDaysforShopEmpty();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        } );
+        SumsearchBydate.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
+                String sellection2 = SumsearchSpinner.getSelectedItem().toString().trim();
+                String sellection3 = SumsearchBydate.getSelectedItem().toString().trim();
+
+
+                switch (sellection1) {
+                    case "حسب المحل":
+                        if (sellection3.equals( "*" )) {
+                            GetSumByShop( sellection2 );
+                        } else
+                            GetSumByShopDate( sellection2, sellection3 );
+                        break;
+                    case "حسب اليوم":
+                        FillWithDaysforShopEmpty();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        } );
+        fillcategory();
+        TotalallOut.setText( String.valueOf( getTotalAll() ) );
+        showQuota();
+        TraficLight( sumtoday );
+        ADSmainActivity();
     }
 }
-/*
-/data/data/com.dev_bourheem.hadi/databases/School.db
-
-"/data/"+ "com.dev_bourheem.hadi" +"/databases/School.db";
-*/

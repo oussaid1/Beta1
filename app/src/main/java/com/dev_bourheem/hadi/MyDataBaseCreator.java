@@ -5,12 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Environment;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.nio.channels.FileChannel;
 
 
 public class MyDataBaseCreator extends SQLiteOpenHelper {
@@ -78,19 +72,17 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c1 = db.rawQuery( "select " + col1 + ",sum(" + col2 + ")as total from " + TABLE_NAME + " group  by Item_Name order by total asc limit 5", null );
+        Cursor c1 = db.rawQuery( "select " + col1 + ",sum(" + col2 + ")as total from " + TABLE_NAME + " group  by Item_Name order by total asc limit 8", null );
         return c1;
 
     }
 
     public Cursor GetdataByDate() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cu = db.rawQuery( "select " + da + ",sum(" + col2 + ")as total from " + TABLE_NAME + " group  by " + da + " order by total asc limit 5", null );
+        Cursor cu = db.rawQuery( "select " + da + ",sum(" + col2 + ")as total from " + TABLE_NAME + " group  by " + da + " order by total asc limit 8", null );
         return cu;
 
     }
-
-
 
     //delete table
     public boolean deleteall() {
@@ -122,32 +114,4 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         Cursor datesCursor = db.rawQuery(" Select distinct " + da + " from " + TABLE_NAME + " order by " + da + "", null);
         return datesCursor;
     }
-
-
-
-    public static void restore() {
-        try {
-            File sd = Environment.getExternalStorageDirectory();
-            File data = Environment.getDataDirectory();
-
-            if (sd.canWrite()) {
-                String currentDBPath = "//data//com.dev_bourheem.hadi//databases//School.db";
-                String backupDBPath = "School.db";
-                File currentDB = new File( data, currentDBPath );
-                File backupDB = new File( sd, backupDBPath );
-
-                if (currentDB.exists()) {
-                    FileChannel src = new FileInputStream( backupDB ).getChannel();
-                    FileChannel dst = new FileOutputStream( currentDB ).getChannel();
-                    dst.transferFrom( src, 0, src.size() );
-                    src.close();
-                    dst.close();
-                    //  Toast.makeText(getApplicationContext(), "Database Restored successfully", Toast.LENGTH_SHORT).show();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }

@@ -14,7 +14,6 @@ class MyBackupAgent extends BackupAgentHelper {
         FileBackupHelper dbs = new FileBackupHelper( this, DB_NAME );
         addHelper( "dbs", dbs );
     }
-
     @Override
     public File getFilesDir() {
         File path = getDatabasePath( DB_NAME );
