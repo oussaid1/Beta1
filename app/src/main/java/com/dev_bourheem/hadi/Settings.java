@@ -1,7 +1,10 @@
 package com.dev_bourheem.hadi;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.dev_bourheem.hadi.Login.ForQuotas;
 import com.dev_bourheem.hadi.Login.LoginClass;
@@ -97,7 +101,7 @@ public class Settings extends AppCompatActivity {
             public void onClick(View v) {
                 LoadQuotatoDatabase(); // injects user defined quota to database ;
 
-
+                isStoragePermissionGranted();
             }
         });
 
@@ -205,6 +209,24 @@ public class Settings extends AppCompatActivity {
         });
         builder.setNegativeButton(android.R.string.no, null);
         builder.show();
+    }
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+
+                return true;
+            } else {
+
+
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+
+            return true;
+        }
     }
 }
 

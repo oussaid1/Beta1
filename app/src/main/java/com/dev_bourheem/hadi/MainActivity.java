@@ -492,15 +492,7 @@ public class MainActivity extends AppCompatActivity {
         return sumtoday;
     }
 
-    public boolean DbisEmpty() {
-        SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor cursor = db.rawQuery( "select * from " + MyDataBaseCreator.TABLE_NAME + "", null );
-        if (cursor.getCount() == 0) {
-            return false;
-        }
-        cursor.close();
-        return true;
-    }
+
 
     public static boolean Restore() {
         try {
