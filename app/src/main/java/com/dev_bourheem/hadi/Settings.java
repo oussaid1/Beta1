@@ -55,15 +55,17 @@ public class Settings extends AppCompatActivity {
                 OpenActivitilist();
                 return true;
             case R.id.backup:
-                try {
-                    if (Backup()) {
-                        PrintMessage( "تم" );
-                    } else {
-                        PrintMessage( "لم يتم" );
+
+                    try {
+                        if (Backup()) {
+                            PrintMessage("تم");
+                        } else {
+                            PrintMessage("لم يتم");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
                 return true;
             case R.id.restore:
                 RestoreِConferm();
@@ -101,7 +103,7 @@ public class Settings extends AppCompatActivity {
             public void onClick(View v) {
                 LoadQuotatoDatabase(); // injects user defined quota to database ;
 
-                isStoragePermissionGranted();
+
             }
         });
 
@@ -116,6 +118,7 @@ public class Settings extends AppCompatActivity {
         Intent myintenct = new Intent(this, ListActivity.class);
         startActivity(myintenct);
     }
+
 
     public void LoadQuotatoDatabase() {
         forQutaOC = new ForQuotas(getApplicationContext());
@@ -209,24 +212,6 @@ public class Settings extends AppCompatActivity {
         });
         builder.setNegativeButton(android.R.string.no, null);
         builder.show();
-    }
-    public  boolean isStoragePermissionGranted() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-
-                return true;
-            } else {
-
-
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                return false;
-            }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
-
-            return true;
-        }
     }
 }
 

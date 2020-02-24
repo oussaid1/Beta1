@@ -79,7 +79,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
     public Cursor GetdataByDate() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cu = db.rawQuery( "select " + da + ",sum(" + col2 + ")as total from " + TABLE_NAME + " group  by " + da + " order by total asc limit 8", null );
+        Cursor cu = db.rawQuery( "select " + da + ",sum(" + col2 + ")as totalbydate from " + TABLE_NAME + " group  by " + da + " order by totalbydate asc limit 8", null );
         return cu;
 
     }

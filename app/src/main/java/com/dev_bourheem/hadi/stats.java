@@ -4,9 +4,26 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.anychart.APIlib;
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.chart.common.listener.Event;
+import com.anychart.chart.common.listener.ListenersInterface;
+import com.anychart.charts.Cartesian;
+import com.anychart.charts.Pie;
+import com.anychart.core.cartesian.series.Column;
+import com.anychart.enums.Align;
+import com.anychart.enums.Anchor;
+import com.anychart.enums.HoverMode;
+import com.anychart.enums.LegendLayout;
+import com.anychart.enums.Position;
+import com.anychart.enums.TooltipPositionMode;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
@@ -21,137 +38,171 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class stats extends AppCompatActivity {
-    PieChart pieChartv1, pieChartv2;
-    ArrayList<PieEntry> data;
-    MyDataBaseCreator MBC = new MyDataBaseCreator( this );
-    TextView tester, tester2;
-    ArrayList<PieEntry> data2;
 
+    MyDataBaseCreator MBC = new MyDataBaseCreator(this);
+    TextView  tester2;
+    List<DataEntry> datax;
+    AnyChartView anyChartView;
+    List<DataEntry> data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_stats );
-        pieChartv1 = findViewById( R.id.pichartView );
-        pieChartv2 = findViewById( R.id.pichartView2 );
-        data2 = new ArrayList<>();
-        data = new ArrayList<>();
-        tester2 = findViewById( R.id.testerV );
-       /* tester2.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PieThatThing();
-            }
-        } );
-        tester.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_stats);
+        anyChartView = findViewById(R.id.chart2);
+        APIlib.getInstance().setActiveAnyChartView(anyChartView);
 
-            }
-        } );*/
-        PieThatThing();
-        Adds();
+        data = new ArrayList<>();
+        datax = new ArrayList<>();
+        tester2 = findViewById(R.id.testerV);
+        Cartesian cartesian = AnyChart.column();
 
         PieThat();
+       /* datax.add(new ValueDataEntry("Rouge", 80540));
+        datax.add(new ValueDataEntry("Foundation", 94190));*/
+
+
+        Column column = cartesian.column(datax);
+
+        column.tooltip()
+                .titleFormat("{%X}")
+                .position(Position.CENTER_BOTTOM)
+                .anchor(Anchor.CENTER_BOTTOM)
+                .offsetX(0d)
+                .offsetY(5d)
+                .format("${%Value}{groupsSeparator: }");
+
+        cartesian.animation(true);
+        cartesian.title("حجم الإستهلاك حسب الأيام");
+
+        cartesian.yScale().minimum(0d);
+
+        cartesian.yAxis(0).labels().format("${%Value}{groupsSeparator: }");
+
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+        cartesian.interactivity().hoverMode(HoverMode.BY_X);
+
+        cartesian.xAxis(0).title("الأيام");
+        cartesian.yAxis(0).title("الثمن");
+
+        anyChartView.setChart(cartesian);
+        AnyChartView anyChartView2= findViewById(R.id.chartPie);
+        APIlib.getInstance().setActiveAnyChartView(anyChartView2);
+
+        Pie pie = AnyChart.pie();
+
+        PieThatThing();
+        /*data.add(new ValueDataEntry("Apples", 6371664));
+        data.add(new ValueDataEntry("Pears", 789622));*/
+
+
+        pie.data(data);
+
+        pie.title("استهلاك المواد");
+
+        pie.labels().position("outside");
+
+        pie.legend().title().enabled(true);
+        pie.legend().title()
+                .text(" حسب السلعة")
+                .padding(0d, 0d, 10d, 0d);
+
+        pie.legend()
+                .position("center-bottom")
+                .itemsLayout(LegendLayout.HORIZONTAL)
+                .align(Align.CENTER);
+
+        anyChartView2.setChart(pie);
+
+
+      Adds();
+
     }
 
     public void Adds() {
-        MobileAds.initialize( this, new OnInitializationCompleteListener() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
-        } );
-        AdView mAdView = findViewById( R.id.adViewstats );
+        });
+        AdView mAdView = findViewById(R.id.adViewstats);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd( adRequest );
+        mAdView.loadAd(adRequest);
     }
 
     public void PiesIt() {
 
+        Cartesian cartesian = AnyChart.column();
 
+
+        datax.add(new ValueDataEntry("Rouge", 80540));
+        datax.add(new ValueDataEntry("Foundation", 94190));
+        datax.add(new ValueDataEntry("Mascara", 102610));
+        datax.add(new ValueDataEntry("Lip gloss", 110430));
+        datax.add(new ValueDataEntry("Lipstick", 128000));
+        datax.add(new ValueDataEntry("Nail polish", 143760));
+        datax.add(new ValueDataEntry("Eyebrow pencil", 170670));
+        datax.add(new ValueDataEntry("Eyeliner", 213210));
+        datax.add(new ValueDataEntry("Eyeshadows", 249980));
+
+        Column column = cartesian.column(datax);
+
+        column.tooltip()
+                .titleFormat("{%X}")
+                .position(Position.CENTER_BOTTOM)
+                .anchor(Anchor.CENTER_BOTTOM)
+                .offsetX(0d)
+                .offsetY(5d)
+                .format("${%Value}{groupsSeparator: }");
+
+        cartesian.animation(true);
+        cartesian.title("Top 10 Cosmetic Products by Revenue");
+
+        cartesian.yScale().minimum(0d);
+
+        cartesian.yAxis(0).labels().format("${%Value}{groupsSeparator: }");
+
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+        cartesian.interactivity().hoverMode(HoverMode.BY_X);
+
+        cartesian.xAxis(0).title("Product");
+        cartesian.yAxis(0).title("Revenue");
+
+        anyChartView.setChart(cartesian);
     }
 
 
     public void PieThatThing() {
         data.clear();
-        pieChartv2.setUsePercentValues( true );
-        pieChartv2.getDescription().setEnabled( true );
-        pieChartv2.setExtraOffsets( 5, 10, 5, 5 );
-        pieChartv2.setDragDecelerationFrictionCoef( 0.95f );
-        pieChartv2.setDrawHoleEnabled( true );
-        pieChartv2.setCenterText( "السلع" );
-        pieChartv2.setDrawEntryLabels( true );
-        pieChartv2.setCenterTextSizePixels( 16 );
-        pieChartv2.setHoleColor( Color.WHITE );
-        pieChartv2.setTransparentCircleRadius( 61f );
+
         Cursor cu = MBC.GetDBdata();
         if (cu.getCount() == 0) {
             return;
         } else {
             while (cu.moveToNext()) {
-                String item = cu.getString( cu.getColumnIndex( MyDataBaseCreator.col1 ) );
-                int price = cu.getInt( cu.getColumnIndex( "total" ) );
-                data.add( new PieEntry( price, item ) );
+                String item = cu.getString(cu.getColumnIndex(MyDataBaseCreator.col1));
+                int price = cu.getInt(cu.getColumnIndex("total"));
+                data.add(new ValueDataEntry(item, price));
             }
             cu.close();
         }
-        Description des = pieChartv2.getDescription();
-        des.setEnabled( false );
-        Legend leg = pieChartv2.getLegend();
-        leg.setEnabled( true );
-        PieDataSet pieDataSet = new PieDataSet( data, "" );
-
-        pieDataSet.setSliceSpace( 3f );
-        pieDataSet.setSelectionShift( 8f );
-        pieDataSet.setColors( ColorTemplate.COLORFUL_COLORS );
-
-        PieData pieData = new PieData( pieDataSet );
-        pieData.setValueTextColor( Color.YELLOW );
-        pieData.setValueTextSize( 10f );
-        pieChartv2.setData( pieData );
-
     }
 
     public void PieThat() {
-        data2.clear();
-        pieChartv1.setUsePercentValues( true );
-        pieChartv1.getDescription().setEnabled( true );
-        pieChartv1.setExtraOffsets( 5, 6, 5, 5 );
-        pieChartv1.setDragDecelerationFrictionCoef( 0.95f );
-        pieChartv1.setDrawHoleEnabled( true );
-        pieChartv1.setCenterText( "السلع" );
-        pieChartv1.setDrawEntryLabels( true );
-        pieChartv1.setCenterTextSizePixels( 16 );
-        pieChartv1.setHoleColor( Color.WHITE );
-        pieChartv1.setTransparentCircleRadius( 41f );
+        datax.clear();
+
         Cursor cu = MBC.GetdataByDate();
         if (cu.getCount() == 0) {
-            return;
+            Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         } else {
             while (cu.moveToNext()) {
-                String item = cu.getString( cu.getColumnIndex( MyDataBaseCreator.da ) );
-                int price = cu.getInt( cu.getColumnIndex( "total" ) );
-                data2.add( new PieEntry( price, item ) );
+                String date = cu.getString(cu.getColumnIndex(MyDataBaseCreator.da));
+                int price = cu.getInt(cu.getColumnIndex("totalbydate"));
+                datax.add(new ValueDataEntry(date, price));
             }
             cu.close();
         }
-        Description des = pieChartv1.getDescription();
-        des.setEnabled( false );
-        Legend leg = pieChartv1.getLegend();
-        leg.setEnabled( true );
-        PieDataSet pieDataSet = new PieDataSet( data2, "" );
-
-        pieDataSet.setSliceSpace( 3f );
-        pieDataSet.setSelectionShift( 8f );
-        pieDataSet.setColors( ColorTemplate.COLORFUL_COLORS );
-
-        PieData pieData = new PieData( pieDataSet );
-        pieData.setValueTextColor( Color.YELLOW );
-        pieData.setValueTextSize( 10f );
-        pieChartv1.setData( pieData );
-
     }
-
-
 }

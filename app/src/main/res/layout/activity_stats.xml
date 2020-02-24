@@ -15,13 +15,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="4dp"
-            android:elevation="8dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/testerV"
                 android:layout_width="wrap_content"
@@ -36,16 +35,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/pichartView"
+                <com.anychart.AnyChartView
+                    android:id="@+id/chartPie"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:elevation="6dp"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -53,17 +48,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/pichartView2"
+                <com.anychart.AnyChartView
+                    android:id="@+id/chart2"
                     android:layout_width="match_parent"
+                    android:elevation="4dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                  />
             </LinearLayout>
+
             <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/adViewstats"
                 android:layout_width="match_parent"

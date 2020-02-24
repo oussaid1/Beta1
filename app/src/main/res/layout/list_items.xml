@@ -2,23 +2,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:background="@color/GreenP4"
+    android:layout_margin="2dp"
+    android:background="@color/GreenP3"
     android:elevation="8dp"
     android:orientation="vertical"
     app:cardCornerRadius="8dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:background="@drawable/justborderzcolor"
-        android:orientation="vertical">
-
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
+            android:background="@color/GreenP4"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
@@ -27,30 +20,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
-                android:layout_margin="4dp"
+                android:layout_marginTop="4dp"
                 android:padding="4dp"
                 android:src="@drawable/ic_shopping" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="6dp"
+                android:layout_marginTop="4dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="2dp"
-                    android:text="الكمية" />
 
                 <TextView
                     android:id="@+id/quantityCV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_margin="4dp"
-                    android:maxWidth="60dp"
-                    android:maxHeight="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="2dp"
                     android:maxLines="1"
                     android:text="@string/_1_5"
                     android:textAlignment="center"
@@ -58,82 +43,60 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="6dp"
+                android:layout_marginTop="4dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="2dp"
-                    android:text="المعيار" />
-
-                <TextView
                     android:id="@+id/quantifierCv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="4dp"
-                    android:maxWidth="100dp"
-                    android:maxHeight="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:maxLines="1"
+                    android:textAlignment="center"
+                    android:padding="2dp"
                     android:text="@string/kilo"
                     android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:layout_marginTop="4dp"
+
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="2dp"
-                    android:text="السلعة" />
-
-                <TextView
                     android:id="@+id/ItemNameCV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:layout_margin="4dp"
                     android:maxWidth="140dp"
                     android:maxHeight="40dp"
                     android:maxLines="1"
+                    android:padding="2dp"
                     android:text="@string/milk"
-                    android:textSize="18sp"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="4dp"
+
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="2dp"
-                    android:text="الثمن" />
-
-                <TextView
                     android:id="@+id/PriceCV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:maxWidth="140dp"
-                    android:maxHeight="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:maxLines="1"
-                    android:padding="4dp"
+                    android:padding="2dp"
                     android:text="@string/_180"
                     android:textAlignment="center"
                     android:textSize="14sp"
@@ -141,55 +104,39 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="4dp"
+
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="2dp"
-                    android:text="اسم المحل" />
-
-                <TextView
                     android:id="@+id/molhanotCV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_margin="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layoutDirection="inherit"
-                    android:maxWidth="100dp"
-                    android:maxHeight="40dp"
                     android:maxLines="1"
-                    android:paddingEnd="3dp"
+                    android:padding="2dp"
                     android:text="مومو"
-                    android:textAlignment="viewStart"
+                    android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="italic" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="4dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="2dp"
-                    android:text="التاريخ" />
-
-                <TextView
                     android:id="@+id/dateCV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_margin="4dp"
-                    android:maxWidth="110dp"
-                    android:maxHeight="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:maxLines="1"
+                    android:padding="2dp"
                     android:text="@string/_12_01_20"
                     android:textAlignment="center"
                     android:textSize="12sp"
@@ -202,5 +149,4 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
         </LinearLayout>
-    </LinearLayout>
 </androidx.cardview.widget.CardView>
