@@ -39,7 +39,7 @@ public class ListActivity extends AppCompatActivity {
     private ArrayList<exampleitem> mExampleList;
     RecyclerView myrecycler;
     RecyclerView.LayoutManager RecyLayManger;
-    ExampleAdapter RecyclerAdap;
+    public ExampleAdapter RecyclerAdap;
 
     AdView listAd;
 

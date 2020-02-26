@@ -72,7 +72,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
     public Cursor GetDBdata() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c1 = db.rawQuery( "select " + col1 + ",sum(" + col2 + ")as total from " + TABLE_NAME + " group  by Item_Name order by total asc limit 8", null );
+        Cursor c1 = db.rawQuery( "select " + col1 + ",count(" + col1 + ")as countIt from " + TABLE_NAME + " group  by Item_Name order by countIt desc limit 8", null );
         return c1;
 
     }

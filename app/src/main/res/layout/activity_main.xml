@@ -37,7 +37,7 @@
                 android:maxLines="1"
                 android:padding="2dp"
                 android:text="2020-02-02"
-                android:textAlignment="center"
+                android:textAlignment="gravity"
                 android:textColor="@color/GreenP1" />
 
 
@@ -73,7 +73,8 @@
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/edittextborders"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                tools:ignore="RtlCompat" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -92,8 +93,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="@drawable/thinborders"
-            android:elevation="8dp"
+            android:background="@drawable/edittextborders"
+            android:elevation="12dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -204,9 +205,10 @@
                         android:layout_margin="2dp"
                         android:clipChildren="true"
                         android:dropDownWidth="200dp"
+                        android:dropDownHeight="100dp"
                         android:popupBackground="@color/GreenP4"
                         android:text="@string/totaltoday"
-                        android:textAlignment="center"
+                        android:textAlignment="gravity"
                         android:textColor="@color/orange" />
                 </LinearLayout>
 
@@ -223,14 +225,15 @@
                     <Spinner
                         android:id="@+id/Sumsearche"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="2dp"
                         android:clipChildren="true"
                         android:dropDownWidth="200dp"
+                        android:dropDownHeight="80dp"
                         android:maxLines="1"
                         android:popupBackground="@color/GreenP4"
-                        android:textAlignment="center"
+                        android:textAlignment="gravity"
                         android:textColor="@color/GreenP" />
                 </LinearLayout>
 
@@ -249,9 +252,10 @@
                         android:layout_gravity="center_vertical"
                         android:layout_margin="2dp"
                         android:dropDownWidth="200dp"
+                        android:dropDownHeight="200dp"
                         android:maxLines="1"
                         android:popupBackground="@color/GreenP4"
-                        android:textAlignment="center"
+                        android:textAlignment="gravity"
                         android:textColor="@color/GreenP" />
                 </LinearLayout>
             </LinearLayout>

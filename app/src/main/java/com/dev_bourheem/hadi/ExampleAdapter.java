@@ -22,11 +22,11 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         void OnItemDelete(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
-    public static class ExampleViewHolder extends RecyclerView.ViewHolder {
+    static class ExampleViewHolder extends RecyclerView.ViewHolder {
         public TextView idTv;
         public TextView quantity;
         public TextView quantifier;
@@ -60,15 +60,15 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         }
     }
 
-    public ExampleAdapter(ArrayList<exampleitem> exampleList) {
+    ExampleAdapter(ArrayList<exampleitem> exampleList) {
         mExampleList = exampleList;
     }
 
+    @NonNull
     @Override
     public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_items, parent, false);
-        ExampleViewHolder evh = new ExampleViewHolder(v, mListener);
-        return evh;
+        return new ExampleViewHolder(v, mListener);
     }
 
     @Override

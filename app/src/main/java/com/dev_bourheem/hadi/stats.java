@@ -100,19 +100,11 @@ public class stats extends AppCompatActivity {
 
         pie.data(data);
 
-        pie.title("استهلاك المواد");
+        pie.title("استهلاك المواد حسب السلعة");
 
         pie.labels().position("outside");
 
-        pie.legend().title().enabled(true);
-        pie.legend().title()
-                .text(" حسب السلعة")
-                .padding(0d, 0d, 10d, 0d);
-
-        pie.legend()
-                .position("center-bottom")
-                .itemsLayout(LegendLayout.HORIZONTAL)
-                .align(Align.CENTER);
+        pie.legend().title().enabled(false);
 
         anyChartView2.setChart(pie);
 
@@ -183,7 +175,7 @@ public class stats extends AppCompatActivity {
         } else {
             while (cu.moveToNext()) {
                 String item = cu.getString(cu.getColumnIndex(MyDataBaseCreator.col1));
-                int price = cu.getInt(cu.getColumnIndex("total"));
+                int price = cu.getInt(cu.getColumnIndex("countIt"));
                 data.add(new ValueDataEntry(item, price));
             }
             cu.close();

@@ -54,18 +54,18 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    public Spinner Sumcategoryspinner, SumsearchSpinner, SumsearchBydate;
+    public Spinner SearchSpinerSub1, SearchSpinerSub2, SearchSpinerSub3;
     public TextView DateV1, RedL, RedL2, yellowL, yellowL2, OrangeL, OrangeL2, GreenL, GreenL2, QuotaLeftNm, LeftOut, SumOutBy, TotalallOut, hereisyourQuota;
     public Switch Guestmode;
     public boolean ischecked;
     public double Quotafrom_database, GestQuotafrom_databse;
     public double Quota = 0, sumtoday = 0, leftOfQuota = 0, Qnt1 = 1;
     ArrayList<String> allList;
-    ArrayList<String> sumcategoryList;
-    ArrayList<String> BydateList;
-    ArrayList<String> sumsearchList;
+    ArrayList<String> CategoryList;
+    ArrayList<String> Sub2List;
+    ArrayList<String> Sub1List;
     ArrayList<String> Molhanot;
-    ArrayAdapter<String> MolhntautoCompleteAdapter, sumcategoryAdapter, sumsearchAdapter, SumsearchBydateAdapter;
+    ArrayAdapter<String> MolhntautoCompleteAdapter, SearchSpinnerAdapter, SearchSpinnerSub2Adapter, SearchSpinnerSub3Adapter;
     ArrayAdapter<String> AutoCompleteAdapter;
     ArrayAdapter<String> QuanSpinAdapter;
     MyDataBaseCreator MDBC;
@@ -97,14 +97,14 @@ public class MainActivity extends AppCompatActivity {
         LeftOut = findViewById(R.id.QuotaLeftOut);
         SumOutBy = findViewById(R.id.TotalTodayOut);
         admain = findViewById(R.id.admain);
-        Sumcategoryspinner = findViewById(R.id.SumCategory);
-        SumsearchSpinner = findViewById(R.id.Sumsearche);
-        SumsearchBydate = findViewById(R.id.SumsearchBydate);
+        SearchSpinerSub1 = findViewById(R.id.SumCategory);
+        SearchSpinerSub2 = findViewById(R.id.Sumsearche);
+        SearchSpinerSub3 = findViewById(R.id.SumsearchBydate);
         Molhanot = new ArrayList<>();
         allList = new ArrayList<String>();
-        sumcategoryList = new ArrayList<>();
-        sumsearchList = new ArrayList<>();
-        BydateList = new ArrayList<>();
+        CategoryList = new ArrayList<>();
+        Sub1List = new ArrayList<>();
+        Sub2List = new ArrayList<>();
         MDBC = new MyDataBaseCreator(getApplicationContext());
         forQutaOC = new ForQuotas(getApplicationContext());
 
@@ -115,9 +115,9 @@ public class MainActivity extends AppCompatActivity {
         GetmolhanotFromdatabase();
 
 
-        sumcategoryAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, sumcategoryList);
-        sumsearchAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, sumsearchList);
-        SumsearchBydateAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, BydateList);
+        SearchSpinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, CategoryList);
+        SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, Sub1List);
+        SearchSpinnerSub3Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, Sub2List);
 
         DateV1.setText(GetDate());
 
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 PopupDialogue();
             }
         });
-        Sumcategoryspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        SearchSpinerSub1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -155,11 +155,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        SumsearchSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        SearchSpinerSub2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
-                String sellection2 = SumsearchSpinner.getSelectedItem().toString().trim();
+                String sellection1 = SearchSpinerSub1.getSelectedItem().toString().trim();
+                String sellection2 = SearchSpinerSub2.getSelectedItem().toString().trim();
 
                 switch (sellection1) {
 
@@ -170,6 +170,11 @@ public class MainActivity extends AppCompatActivity {
                         GetSumByDate(sellection2);
                         //FillWithDaysforShopEmpty();
                         break;
+                    case "حسب السلعة":
+                    FillWithItemsDates(sellection2);
+                      //  GetSumByItem(sellection2);
+                        //  FillWithDaysforShopEmpty();
+                        break;
                 }
             }
 
@@ -178,23 +183,33 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        SumsearchBydate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        SearchSpinerSub3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
-                String sellection2 = SumsearchSpinner.getSelectedItem().toString().trim();
-                String sellection3 = SumsearchBydate.getSelectedItem().toString().trim();
+                String sellection1 = SearchSpinerSub1.getSelectedItem().toString().trim();
+                String sellection2 = SearchSpinerSub2.getSelectedItem().toString().trim();
+                String sellection3 = SearchSpinerSub3.getSelectedItem().toString().trim();
 
-
+                //this is the mai serach spinner to seach by category
                 switch (sellection1) {
                     case "حسب المحل":
+                        //this is for getting sum of all items if * is selected in spinner 3
+                        //otherwise it will get the sum by shopName and Date
                         if (sellection3.equals("*")) {
                             GetSumByShop(sellection2);
                         } else
                             GetSumByShopDate(sellection2, sellection3);
                         break;
                     case "حسب اليوم":
+                        // this fills it with with empty so that it shows the sum of all days in
                         FillWithDaysforShopEmpty();
+                        break;
+                    case "حسب السلعة":
+                        if (sellection3.equals("*")) {
+                         GetSumByItem(sellection2);
+                        } else
+                       GetSumByItemsByDate(sellection2,sellection3);
+                        //  FillWithDaysforShopEmpty();
                         break;
                 }
             }
@@ -295,13 +310,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fillcategory() {
-        sumcategoryList.add("حسب المحل");
-        sumcategoryList.add("حسب اليوم");
-        Sumcategoryspinner.setAdapter(sumcategoryAdapter);
+        CategoryList.add("حسب المحل");
+        CategoryList.add("حسب اليوم");
+        CategoryList.add("حسب السلعة");
+        SearchSpinerSub1.setAdapter(SearchSpinnerAdapter);
     }
 
     public void Spinner1Fill() {
-        String sellection1 = Sumcategoryspinner.getSelectedItem().toString().trim();
+        String sellection1 = SearchSpinerSub1.getSelectedItem().toString().trim();
 
         switch (sellection1) {
             case "حسب المحل":
@@ -310,6 +326,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "حسب اليوم":
                 FillWithDays();
+                //  FillWithDaysforShopEmpty();
+                break;
+            case "حسب السلعة":
+                FillWithItems();
                 //  FillWithDaysforShopEmpty();
                 break;
         }
@@ -506,51 +526,51 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void FillWithDays() {
-        sumsearchList.clear();
+        Sub1List.clear();
         Cursor datecurs = MDBC.getDates();
         if (datecurs.getCount() == 0) {
             return;
         } else {
             datecurs.moveToFirst();
-            sumsearchList.add("*");
+            Sub1List.add("*");
             while (!datecurs.isAfterLast()) {
                 String dts = datecurs.getString(datecurs.getColumnIndex(MyDataBaseCreator.da));
-                sumsearchList.add(dts);
+                Sub1List.add(dts);
                 datecurs.moveToNext();
             }
 
             datecurs.close();
-            SumsearchSpinner.setAdapter(sumsearchAdapter);
+            SearchSpinerSub2.setAdapter(SearchSpinnerSub2Adapter);
         }
     }
 
     public void FillWithDaysforShop(String shop) {
-        BydateList.clear();
+        Sub2List.clear();
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor datecurs = db.rawQuery(" Select distinct " + MyDataBaseCreator.da + " from " + MyDataBaseCreator.TABLE_NAME + " where " + MyDataBaseCreator.person + " like '%" + shop + "%' order by " + MyDataBaseCreator.da + "", null);
         if (datecurs.getCount() == 0) {
             return;
         } else {
             datecurs.moveToFirst();
-            BydateList.add("*");
+            Sub2List.add("*");
             while (!datecurs.isAfterLast()) {
                 String dts = datecurs.getString(datecurs.getColumnIndex(MyDataBaseCreator.da));
-                BydateList.add(dts);
+                Sub2List.add(dts);
                 datecurs.moveToNext();
             }
             datecurs.close();
 
-            SumsearchBydate.setAdapter(SumsearchBydateAdapter);
+            SearchSpinerSub3.setAdapter(SearchSpinnerSub3Adapter);
         }
     }
 
     public void FillWithDaysforShopEmpty() {
-        BydateList.clear();
-        SumsearchBydate.setAdapter(SumsearchBydateAdapter);
+        Sub2List.clear();
+        SearchSpinerSub3.setAdapter(SearchSpinnerSub3Adapter);
     }
 
     public void fillwithShopNm() {
-        sumsearchList.clear();
+        Sub1List.clear();
 
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor molhanotCursor = db.rawQuery("select distinct " + MyDataBaseCreator.person + " from " + MyDataBaseCreator.TABLE_NAME + "  order by " + MyDataBaseCreator.da + " asc", null);
@@ -558,14 +578,52 @@ public class MainActivity extends AppCompatActivity {
             return;
         } else
             molhanotCursor.moveToFirst();
-        sumsearchList.add("*");
+        Sub1List.add("*");
         while (!molhanotCursor.isAfterLast()) {
             String Mlhanot = molhanotCursor.getString(molhanotCursor.getColumnIndex(MyDataBaseCreator.person));
-            sumsearchList.add(Mlhanot);
+            Sub1List.add(Mlhanot);
             molhanotCursor.moveToNext();
         }
         molhanotCursor.close();
-        SumsearchSpinner.setAdapter(sumsearchAdapter);
+        SearchSpinerSub2.setAdapter(SearchSpinnerSub2Adapter);
+
+    }
+
+    public void FillWithItems() {
+        Sub1List.clear();
+
+        SQLiteDatabase db = MDBC.getReadableDatabase();
+        Cursor ItemCursor = db.rawQuery("select distinct " + MyDataBaseCreator.col1 + " from " + MyDataBaseCreator.TABLE_NAME + "  order by " + MyDataBaseCreator.da + " asc", null);
+        if (ItemCursor.getCount() == 0) {
+            return;
+        } else
+            ItemCursor.moveToFirst();
+        while (!ItemCursor.isAfterLast()) {
+            String Items = ItemCursor.getString(ItemCursor.getColumnIndex(MyDataBaseCreator.col1));
+            Sub1List.add(Items);
+            ItemCursor.moveToNext();
+        }
+        ItemCursor.close();
+        SearchSpinerSub2.setAdapter(SearchSpinnerSub2Adapter);
+
+    }
+    public void FillWithItemsDates(String goods) {
+        Sub2List.clear();
+
+        SQLiteDatabase db = MDBC.getReadableDatabase();
+        Cursor ItemCursor = db.rawQuery("select  " + MyDataBaseCreator.da + " from " + MyDataBaseCreator.TABLE_NAME + " where " + MyDataBaseCreator.col1 + " like '%"+goods+"%'group by " + MyDataBaseCreator.col1 + "  order by " + MyDataBaseCreator.da + " desc ", null);
+        if (ItemCursor.getCount() == 0) {
+            return;
+        } else
+            ItemCursor.moveToFirst();
+        Sub2List.add("*");
+        while (!ItemCursor.isAfterLast()) {
+            String Items = ItemCursor.getString(ItemCursor.getColumnIndex(MyDataBaseCreator.da));
+            Sub2List.add(Items);
+            ItemCursor.moveToNext();
+        }
+        ItemCursor.close();
+        SearchSpinerSub3.setAdapter(SearchSpinnerSub3Adapter);
 
     }
 
@@ -586,10 +644,10 @@ public class MainActivity extends AppCompatActivity {
         return sumtoday;
     }
 
-    public double GetSumByDate(String mohamed) {
+    public double GetSumByDate(String ladat) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor data = db.rawQuery("select Sum(" + MyDataBaseCreator.col2 + ")as So from " + MyDataBaseCreator.TABLE_NAME + " where  " + MyDataBaseCreator.da + " like '%" + mohamed + "%' group by history ", null);
+        Cursor data = db.rawQuery("select Sum(" + MyDataBaseCreator.col2 + ")as So from " + MyDataBaseCreator.TABLE_NAME + " where  " + MyDataBaseCreator.da + " like '%" + ladat + "%' group by history ", null);
         if (data.getCount() == 0) {
 
         } else if (!data.isAfterLast()) {
@@ -620,7 +678,39 @@ public class MainActivity extends AppCompatActivity {
         return sumtoday;
     }
 
+    public double GetSumByItem(String ItemName) {
+        NumberFormat mfr = new DecimalFormat("0.00");
+        SQLiteDatabase db = MDBC.getReadableDatabase();
+        Cursor data = db.rawQuery("select Sum(" + MyDataBaseCreator.col2 + ")as SumItems from " + MyDataBaseCreator.TABLE_NAME + " where  " + MyDataBaseCreator.col1 + " like '%"+ItemName+"%' group by " + MyDataBaseCreator.col1 + " order by " + MyDataBaseCreator.da + " desc ", null);
+        if (data.getCount() == 0) {
 
+        } else if (!data.isAfterLast()) {
+
+            data.moveToFirst();
+            sumtoday = data.getDouble(data.getColumnIndex("SumItems"));
+            SumOutBy.setText((mfr.format(sumtoday)));
+            TraficLight(sumtoday);
+        }
+        data.close();
+        return sumtoday;
+    }
+
+    public double GetSumByItemsByDate(String item, String dat) {
+        NumberFormat mfr = new DecimalFormat("0.00");
+        SQLiteDatabase db = MDBC.getReadableDatabase();
+        Cursor data = db.rawQuery("select Sum(" + MyDataBaseCreator.col2 + ")as Soa from " + MyDataBaseCreator.TABLE_NAME + " where  " + MyDataBaseCreator.col1 + " like '%"+item+"%' and " + MyDataBaseCreator.da + " like '%"+dat+"%' group by " + MyDataBaseCreator.da + "  ", null);
+        if (data.getCount() == 0) {
+
+        } else if (!data.isAfterLast()) {
+
+            data.moveToFirst();
+            sumtoday = data.getDouble(data.getColumnIndex("Soa"));
+            SumOutBy.setText((mfr.format(sumtoday)));
+            TraficLight(sumtoday);
+        }
+        data.close();
+        return sumtoday;
+    }
     public static boolean Restore() {
         try {
             File sd = Environment.getExternalStorageDirectory();
@@ -699,7 +789,7 @@ public class MainActivity extends AppCompatActivity {
                     ItemPriceDbl = Qnt * ItemPriceDbl;
                     String ItemNameStr = ItemNameIn.getText().toString().trim();
                     String Sir = molhanotNmIn.getText().toString().trim();
-                    if(LoadDatabase(Qnt, Quantifiier, ItemNameStr, ItemPriceDbl, Sir)) {
+                    if (LoadDatabase(Qnt, Quantifiier, ItemNameStr, ItemPriceDbl, Sir)) {
                         GetItemNameFromdatabase();
                         GetmolhanotFromdatabase();
                         PriceIn.getText().clear();
