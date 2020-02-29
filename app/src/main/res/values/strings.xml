@@ -23,6 +23,7 @@
     <string name="nodataintable">لا يوجد بيانات</string>
     <string name="alert">تحذير</string>
     <string name="doyourealywantdeletall">حذف جميع البيانات , هل انت متاكد</string>
+    <string name="doyourealywantorestore">نسخ جميع البيانات هل انت متاكد سيتم تعويض البيانات السابقة</string>
     <string name="oopsdeletedall">أوو. لقد تم الحذف</string>
     <string name="reset_all">حذف الكل</string>
     <string name="reset">Reset</string>
@@ -36,7 +37,10 @@
     <string name="noitemnamefound">لايوجد منتوج</string>
     <string name="noquotafound">لم يتم تحيد السقف بعد</string>
     <string name="surewannadel">هل فعلا تريد حذف المنتوج ?</string>
+    <string name="surewannadelall">هل فعلا تريد الحذف ?</string>
     <string name="surewannaupdate">هل فعلا تريد تعديل المنتوج ?</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
     <string name="limit">السقف المحدد</string>
     <string name="productname">إسم المنتوج</string>
     <string name="productprice">ثمن المنتوج</string>

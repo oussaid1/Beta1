@@ -2,11 +2,17 @@ package com.dev_bourheem.hadi;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,10 +25,19 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.dev_bourheem.hadi.MyDataBaseCreator.ID;
+import static com.dev_bourheem.hadi.MyDataBaseCreator.TABLE_NAME;
+
 public class EdditActivity extends AppCompatActivity {
     EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
     MyDataBaseCreator MDBCR;
     AdView Edit_ad;
+    Button delete;
+    Spinner delSpinner;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -55,14 +70,32 @@ public class EdditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eddit);
         Edit_ad = findViewById(R.id.Edit_ad);
-
         ItemNameMod = findViewById(R.id.ItemNameMod);
         QuantityMod = findViewById(R.id.quantityMod);
         PriceMod = findViewById(R.id.priceMod);
+        delSpinner = findViewById(R.id.spinnerDelete);
+        delete = findViewById(R.id.dele);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(EdditActivity.this)
+                        .setTitle("تحذير")
+                        .setMessage(getString(R.string.surewannadelall))
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                DeleteBy(delSpinner.getSelectedItem().toString());
+                            }
+                        })
+                        .setNegativeButton(R.string.no, null).show();
+
+            }
+        });
         ShopNameMod = findViewById(R.id.shopnameMod);
         DateMod = findViewById(R.id.dateMod);
+        MDBCR = new MyDataBaseCreator(this);
         GetThem();
-
+        FillWithByShop();
         AdsEditActivity();
     }
 
@@ -110,7 +143,6 @@ public class EdditActivity extends AppCompatActivity {
     }
 
     public void UpdateDB() {
-        MDBCR = new MyDataBaseCreator(this);
         Intent intent = getIntent();
         exampleitem exampleitem = intent.getParcelableExtra("exampleItem");
         String idd = null;
@@ -132,7 +164,7 @@ public class EdditActivity extends AppCompatActivity {
     }
 
     public void DelItem() {
-        MDBCR = new MyDataBaseCreator(this);
+
         Intent intent = getIntent();
         exampleitem exampleitem = intent.getParcelableExtra("exampleItem");
         String idd = null;
@@ -157,14 +189,32 @@ public class EdditActivity extends AppCompatActivity {
                 .setTitle("تحذير")
                 .setMessage(getString(R.string.surewannaupdate))
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         UpdateDB();
 
                     }
                 })
-                .setNegativeButton(android.R.string.no, null).show();
+                .setNegativeButton(R.string.no, null).show();
+    }
+
+    public void FillWithByShop() {
+        List<String> persons = new ArrayList<>();
+        SQLiteDatabase db = MDBCR.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select distinct " + MyDataBaseCreator.person + " from " + TABLE_NAME + " ", null);
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                String shopName = cursor.getString(cursor.getColumnIndex(MyDataBaseCreator.person));
+                persons.add(shopName);
+                cursor.moveToNext();
+            }
+            ArrayAdapter<String> Arada = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, persons);
+            delSpinner = findViewById(R.id.spinnerDelete);
+            delSpinner.setAdapter(Arada);
+        }
+        cursor.close();
     }
 
     public void onDialogueDelete() {
@@ -172,18 +222,28 @@ public class EdditActivity extends AppCompatActivity {
                 .setTitle("تحذير")
                 .setMessage(getString(R.string.surewannadel))
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         DelItem();
 
                     }
                 })
-                .setNegativeButton(android.R.string.no, null).show();
+                .setNegativeButton(R.string.no, null).show();
     }
 
     public void OpenListItems() {
         Intent inte = new Intent(EdditActivity.this, MainActivity.class);
         startActivity(inte);
+    }
+
+    public void DeleteBy(String molhanot) {
+        SQLiteDatabase db = MDBCR.getWritableDatabase();
+        long deleted = db.delete(TABLE_NAME, MyDataBaseCreator.person + " = ?", new String[]{molhanot});
+        if (deleted > 0) {
+            Toast.makeText(this, "deleted", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "not deleted", Toast.LENGTH_SHORT).show();
+        }
     }
 }

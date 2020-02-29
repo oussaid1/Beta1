@@ -182,7 +182,7 @@ public class Settings extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.alert));
         builder.setMessage(getString(R.string.doyourealywantdeletall));
-        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int whichButton) {
                 ResetAll();
@@ -190,15 +190,15 @@ public class Settings extends AppCompatActivity {
 
             }
         } );
-        builder.setNegativeButton( android.R.string.no, null );
+        builder.setNegativeButton(R.string.no, null );
         builder.show();
     }
 
     public void RestoreِConferm() {
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
         builder.setTitle( getString( R.string.alert ) );
-        builder.setMessage( getString( R.string.doyourealywantdeletall ) );
-        builder.setPositiveButton( android.R.string.yes, new DialogInterface.OnClickListener() {
+        builder.setMessage( getString( R.string.doyourealywantorestore ) );
+        builder.setPositiveButton( R.string.yes, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int whichButton) {
 
@@ -210,7 +210,7 @@ public class Settings extends AppCompatActivity {
 
             }
         });
-        builder.setNegativeButton(android.R.string.no, null);
+        builder.setNegativeButton(R.string.no, null);
         builder.show();
     }
 }

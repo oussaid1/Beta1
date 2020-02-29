@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
 public class ForQuotas extends SQLiteOpenHelper {
-    public static final int ID = 1;
+
     public static final String database_name = "girls.db";
     public static final String TABLE_NAME = "boys";
     public static final String col11 = "userQuota";
@@ -39,7 +39,6 @@ public class ForQuotas extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(col11, Q1);
         values.put(col22, Q2);
-
         long insertStaus = db.insert(TABLE_NAME, null, values);
         return insertStaus != -1;
     }
