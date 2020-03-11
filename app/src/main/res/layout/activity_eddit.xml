@@ -194,43 +194,43 @@
 
 
             </LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layoutDirection="rtl"
-    android:layout_margin="4dp"
-    android:elevation="6dp"
-    android:background="@drawable/justborderz"
-    android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layoutDirection="inherit"
-        android:layout_margin="4dp"
-        android:text="حذف الكل لــ"
-        android:textSize="16sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:layout_margin="4dp"
+                android:elevation="6dp"
+                android:background="@drawable/justborderz"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layoutDirection="inherit"
+                    android:layout_margin="4dp"
+                    android:text="حذف الكل لــ"
+                    android:textSize="16sp"/>
 
-    <Spinner
-        android:id="@+id/spinnerDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:dropDownWidth="200dp"
-        android:textAlignment="gravity"
-        android:layout_margin="4dp"
-        android:padding="2dp"
-        android:layoutDirection="rtl"
-        android:layout_weight="1"/>
-    <Button
-        android:id="@+id/dele"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttonflat"
-        android:layout_margin="4dp"
-        android:textStyle="bold"
-        android:text="حذف"/>
-</LinearLayout>
+                <Spinner
+                    android:id="@+id/spinnerDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:dropDownWidth="200dp"
+                    android:textAlignment="gravity"
+                    android:layout_margin="4dp"
+                    android:padding="2dp"
+                    android:layoutDirection="rtl"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/dele"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/buttonflat"
+                    android:layout_margin="4dp"
+                    android:textStyle="bold"
+                    android:text="حذف"/>
+            </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
