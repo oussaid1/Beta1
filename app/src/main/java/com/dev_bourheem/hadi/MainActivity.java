@@ -53,6 +53,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
+
 public class MainActivity extends AppCompatActivity {
     public Spinner SearchSpinerSub1, SearchSpinerSub2, SearchSpinerSub3;
     public TextView DateV1, RedL, RedL2, yellowL, yellowL2, OrangeL, OrangeL2, GreenL, GreenL2, QuotaLeftNm, LeftOut, SumOutBy, TotalallOut, hereisyourQuota;
@@ -274,29 +276,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static boolean Backup() throws IOException {
 
-        final String inFileName = "/data/data/com.dev_bourheem.hadi/databases/School.db";
-        File dbFile = new File(inFileName);
-        FileInputStream fis = new FileInputStream(dbFile);
-
-        String outFileName = Environment.getExternalStorageDirectory() + "/" + GetDate() + ".db";
-
-        // Open the empty db as the output stream
-        OutputStream output = new FileOutputStream(outFileName);
-
-        // Transfer bytes from the inputfile to the outputfile
-        byte[] buffer = new byte[1024];
-        int length;
-        while ((length = fis.read(buffer)) > 0) {
-            output.write(buffer, 0, length);
-        }
-        // Close the streams
-        output.flush();
-        output.close();
-        fis.close();
-        return true;
-    }
 
     public void ADSmainActivity() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -711,11 +691,32 @@ public class MainActivity extends AppCompatActivity {
         data.close();
         return sumtoday;
     }
-    public static boolean Restore() {
-        try {
-            File sd = Environment.getExternalStorageDirectory();
-            File data = Environment.getDataDirectory();
+    public boolean Backup() throws IOException {
 
+        final String inFileName =Environment.getExternalStoragePublicDirectory( DIRECTORY_DOWNLOADS ) + "/"+"School.db";
+        File dbFile = new File( inFileName );
+        FileInputStream fis = new FileInputStream( dbFile );
+
+        String outFileName = "/data/data/com.dev_bourheem.hadi/databases/School.db";
+        // Open the empty db as the output stream
+        OutputStream output = new FileOutputStream( outFileName );
+
+        // Transfer bytes from the inputfile to the outputfile
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = fis.read( buffer )) > 0) {
+            output.write( buffer, 0, length );
+        }
+        // Close the streams
+        output.flush();
+        output.close();
+        fis.close();
+        return true;
+    }
+    public  boolean Restore() {
+        try {
+            File sd = Environment.getExternalStoragePublicDirectory( DIRECTORY_DOWNLOADS );
+            File data = Environment.getDataDirectory();
             if (sd.canWrite()) {
                 String currentDBPath = "//data//com.dev_bourheem.hadi//databases//School.db";
                 String backupDBPath = "School.db";

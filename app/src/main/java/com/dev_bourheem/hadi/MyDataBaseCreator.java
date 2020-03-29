@@ -50,6 +50,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         values.put(person, Sir);
         values.put(da, daat);
         long insertStaus = db.insert(TABLE_NAME, null, values);
+
         return insertStaus >= 1;
     }
     public boolean updateData(String id ,double Quanty,String name, double prix, String Sir,String daat) {

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,8 +25,7 @@ import com.dev_bourheem.hadi.Login.LoginClass;
 
 import java.io.IOException;
 
-import static com.dev_bourheem.hadi.MainActivity.Backup;
-import static com.dev_bourheem.hadi.MainActivity.Restore;
+
 
 public class Settings extends AppCompatActivity {
 
@@ -55,20 +55,10 @@ public class Settings extends AppCompatActivity {
                 OpenActivitilist();
                 return true;
             case R.id.backup:
-
-                    try {
-                        if (Backup()) {
-                            PrintMessage("تم");
-                        } else {
-                            PrintMessage("لم يتم");
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
+              sharedmethods.backitUp(this);
                 return true;
             case R.id.restore:
-                RestoreِConferm();
+                sharedmethods.restoreItUp(this);
                 return true;
             case R.id.reset:
                 onDialogue2();
@@ -194,7 +184,7 @@ public class Settings extends AppCompatActivity {
         builder.show();
     }
 
-    public void RestoreِConferm() {
+    public void RestoreConferm() {
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
         builder.setTitle( getString( R.string.alert ) );
         builder.setMessage( getString( R.string.doyourealywantorestore ) );
@@ -202,11 +192,11 @@ public class Settings extends AppCompatActivity {
 
             public void onClick(DialogInterface dialog, int whichButton) {
 
-                if (Restore()) {
+                /*if (Restore()) {
                     MsgBox( "تم" );
                 } else {
                     MsgBox( "لم يتم" );
-                }
+                }*/
 
             }
         });

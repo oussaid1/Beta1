@@ -76,6 +76,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="4dp"
+                        android:background="@drawable/justborderz"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -85,7 +86,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_margin="4dp"
-                            android:background="@drawable/justborderz"
                             android:hint="@string/define_limit_here"
                             android:inputType="numberDecimal"
                             android:maxLength="10"
@@ -99,6 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="4dp"
+                        android:background="@drawable/justborderz"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -108,7 +109,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_margin="4dp"
-                            android:background="@drawable/justborderz"
                             android:hint="@string/set_your_guest_mode_quota"
                             android:inputType="numberDecimal"
                             android:maxLength="10"
@@ -135,6 +135,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:background="@drawable/justborderz"
                         android:layout_height="wrap_content">
 
                         <EditText
@@ -143,7 +144,6 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
                             android:layout_margin="4dp"
-                            android:background="@drawable/justborderz"
                             android:hint="@string/username_here"
                             android:maxLength="16"
                             android:maxLines="1"
@@ -155,6 +155,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
+                        android:background="@drawable/justborderz"
                         android:orientation="vertical">
 
                         <EditText
@@ -163,7 +164,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_margin="4dp"
-                            android:background="@drawable/justborderz"
                             android:hint="@string/password"
                             android:inputType="textPassword"
                             android:maxLength="8"
