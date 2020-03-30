@@ -31,6 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.dev_bourheem.hadi.Archieve.ArchieveList;
 import com.dev_bourheem.hadi.Login.ForQuotas;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -56,25 +57,25 @@ import java.util.Date;
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class MainActivity extends AppCompatActivity {
-    public Spinner SearchSpinerSub1, SearchSpinerSub2, SearchSpinerSub3;
-    public TextView DateV1, RedL, RedL2, yellowL, yellowL2, OrangeL, OrangeL2, GreenL, GreenL2, QuotaLeftNm, LeftOut, SumOutBy, TotalallOut, hereisyourQuota;
-    public Switch Guestmode;
-    public boolean ischecked;
-    public double Quotafrom_database, GestQuotafrom_databse;
-    public double Quota = 0, sumtoday = 0, leftOfQuota = 0, Qnt1 = 1;
-    ArrayList<String> allList;
-    ArrayList<String> CategoryList;
-    ArrayList<String> Sub2List;
-    ArrayList<String> Sub1List;
-    ArrayList<String> Molhanot;
-    ArrayAdapter<String> MolhntautoCompleteAdapter, SearchSpinnerAdapter, SearchSpinnerSub2Adapter, SearchSpinnerSub3Adapter;
-    ArrayAdapter<String> AutoCompleteAdapter;
-    ArrayAdapter<String> QuanSpinAdapter;
-    MyDataBaseCreator MDBC;
-    ForQuotas forQutaOC;
-    AdView admain;
-    FloatingActionButton floatingButon;
-    String[] QTypes = {"واحدة", " كيلو", "لتر", "متر", "صندوق", "علبة"};
+    private Spinner SearchSpinerSub1, SearchSpinerSub2, SearchSpinerSub3;
+    private TextView DateV1, RedL, RedL2, yellowL, yellowL2, OrangeL, OrangeL2, GreenL, GreenL2, QuotaLeftNm, LeftOut, SumOutBy, TotalallOut, hereisyourQuota;
+    private Switch Guestmode;
+    private boolean ischecked;
+    private double Quotafrom_database, GestQuotafrom_databse;
+    private double Quota = 0, sumtoday = 0, leftOfQuota = 0, Qnt1 = 1;
+    private ArrayList<String> allList;
+    private ArrayList<String> CategoryList;
+    private ArrayList<String> Sub2List;
+    private ArrayList<String> Sub1List;
+    private  ArrayList<String> Molhanot;
+    private ArrayAdapter<String> MolhntautoCompleteAdapter, SearchSpinnerAdapter, SearchSpinnerSub2Adapter, SearchSpinnerSub3Adapter;
+    private ArrayAdapter<String> AutoCompleteAdapter;
+    private ArrayAdapter<String> QuanSpinAdapter;
+    private  MyDataBaseCreator MDBC;
+    private  ForQuotas forQutaOC;
+    private AdView admain;
+    private FloatingActionButton floatingButon;
+    private String[] QTypes = {"واحدة", " كيلو", "لتر", "متر", "صندوق", "علبة"};
     private double SumAll = 0;
 
     @Override
@@ -239,6 +240,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
 
+            case R.id.openArch:
+                OpenArch();
+                return true;
             case R.id.ShowList_M:
                 OpentAvtivity2();
                 return true;
@@ -319,6 +323,12 @@ public class MainActivity extends AppCompatActivity {
     public void OpentAvtivity2() {
         final Intent intent1;
         intent1 = new Intent(this, ListActivity.class);
+        //intent1.putExtra("tarikh" ,date);
+        startActivity(intent1);
+    }
+    public void OpenArch() {
+        final Intent intent1;
+        intent1 = new Intent(this, ArchieveList.class);
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent1);
     }

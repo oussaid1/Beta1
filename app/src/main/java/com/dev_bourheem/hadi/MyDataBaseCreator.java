@@ -17,6 +17,14 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public static final String da = "history";
     public static final String Quantifier = "Quantifiers";
     public static final String Quantity = "quantity";
+    public static final String TABLE_NAMEArch = "GoodsArch";
+    public static final String IDArch = "ID";
+    public static final String col1Arch = "Item_Name";
+    public static final String col2Arch = "Item_Price";
+    public static final String personArch = "MoolHanout";
+    public static final String daArch = "history";
+    public static final String QuantifierArch = "Quantifiers";
+    public static final String QuantityArch = "quantity";
     public Context context;
 
     // public static final String SHOP_NAME = "name";
@@ -31,12 +39,14 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " ( "+ ID +" INTEGER PRIMARY KEY AUTOINCREMENT," + col1 + " TEXT," + Quantifier+" TEXT , " + Quantity + " DOUBLE ," + col2 + " DOUBLE," + person + " TEXT,"+ da + " TEXT )");
+        db.execSQL("CREATE TABLE " + TABLE_NAMEArch + " ( "+ IDArch +" INTEGER PRIMARY KEY AUTOINCREMENT," + col1Arch + " TEXT," + QuantifierArch+ " TEXT , " + QuantityArch + " DOUBLE ," + col2Arch + " DOUBLE," + personArch + " TEXT,"+ daArch + " TEXT )");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists " + TABLE_NAME);
+        db.execSQL("drop table if exists " + TABLE_NAMEArch);
         onCreate(db);
     }
 
@@ -53,6 +63,10 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
         return insertStaus >= 1;
     }
+    public void PutInArchive(){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL( "insert into "+TABLE_NAMEArch+" select * from "+TABLE_NAME +"  order by "+da );
+    }
     public boolean updateData(String id ,double Quanty,String name, double prix, String Sir,String daat) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -65,9 +79,28 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
          return true;
     }
+    public boolean updateDataArch(String id ,double Quanty,String name, double prix, String Sir,String daat) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(col1, name);
+        values.put(col2, prix);
+        values.put(Quantity, Quanty);
+        values.put(person, Sir);
+        values.put(da, daat);
+        db.update(TABLE_NAMEArch, values,  IDArch + " = ?" , new String[]{id});
+
+        return true;
+    }
+
     public boolean DeleteItemSelected(String id){
         SQLiteDatabase db = getWritableDatabase();
         db.delete(TABLE_NAME,   ID + " = ?" , new String[]{id});
+        return true;
+    }
+
+    public boolean DeleteItemSelectedArch(String id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAMEArch,   IDArch + " = ?" , new String[]{id});
         return true;
     }
 

@@ -55,7 +55,7 @@ public class ArchieveList extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate( R.menu.myexmenu, menu );
+        inflater.inflate( R.menu.archmenu, menu );
         return true;
     }
 
@@ -63,18 +63,18 @@ public class ArchieveList extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
 
-            case R.id.Add_M:
+            case R.id.mainArch:
                 //func here
-                OpentAvtivity3();
+                OpentMainActivity();
                 return true;
-            case R.id.stats_M:
+            case R.id.statsArch:
                 //func here
                 OpentStats();
                 return true;
-            case R.id.Settingsactvt2:
+            case R.id.SettingsArch:
                 OpentSettings();
                 return true;
-            case R.id.exit_M:
+            case R.id.exitArch:
                 finish();
                 return true;
             default:
@@ -188,7 +188,7 @@ public class ArchieveList extends AppCompatActivity {
         listAd.loadAd( adRequest );
     }
 
-    public void OpentAvtivity3() {
+    public void OpentMainActivity() {
         final Intent intent2;
         intent2 = new Intent( this, MainActivity.class );
         startActivity( intent2 );

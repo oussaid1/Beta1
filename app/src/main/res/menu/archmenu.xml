@@ -3,24 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/openArch"
-        android:title="الأرشيف"
+        android:id="@+id/mainArch"
+        android:title="الرئيسية"
         app:showAsAction="never" />
     <item
-        android:id="@+id/ShowList_M"
-        android:title="@string/show_lists"
+        android:id="@+id/statsArch"
+        android:title="اصائيات الأرشيف"
         app:showAsAction="never" />
     <item
-        android:id="@+id/stats"
-        android:title="@string/statistics"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/Settings"
-        android:title="@string/settings"
+        android:id="@+id/SettingsArch"
+        android:title="اعدادات الأرشيف"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/exit_M"
+        android:id="@+id/exitArch"
         android:title="@string/exit"
         app:showAsAction="never"> </item>
 
