@@ -201,22 +201,12 @@ public class EdditActivity extends AppCompatActivity {
     }
 
     public void FillWithByShop() {
-        List<String> persons = new ArrayList<>();
-        SQLiteDatabase db = MDBCR.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select distinct " + DbContractor.TableColumns.person + " from " + DbContractor.TableColumns.TABLE_NAME + " ", null);
-        if (cursor.getCount() != 0) {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                String shopName = cursor.getString(cursor.getColumnIndex(DbContractor.TableColumns.person));
-                persons.add(shopName);
-                cursor.moveToNext();
-            }
+        ArrayList<String> persons ;
+        persons = MDBCR.GetDistinctFromTable(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MShopName,DbContractor.TableColumns.MShopName);
             ArrayAdapter<String> Arada = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, persons);
             delSpinner = findViewById(R.id.spinnerDelete);
             delSpinner.setAdapter(Arada);
         }
-        cursor.close();
-    }
 
     public void onDialogueDelete() {
         new AlertDialog.Builder(this)
@@ -240,7 +230,7 @@ public class EdditActivity extends AppCompatActivity {
 
     public void DeleteBy(String molhanot) {
         SQLiteDatabase db = MDBCR.getWritableDatabase();
-        long deleted = db.delete(DbContractor.TableColumns.TABLE_NAME, DbContractor.TableColumns.person + " = ?", new String[]{molhanot});
+        long deleted = db.delete(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName + " = ?", new String[]{molhanot});
         if (deleted > 0) {
             Toast.makeText(this, "deleted", Toast.LENGTH_SHORT).show();
         } else {

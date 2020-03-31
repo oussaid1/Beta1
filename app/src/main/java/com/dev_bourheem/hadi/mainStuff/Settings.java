@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.DatabaseClass.ForQuotas;
 import com.dev_bourheem.hadi.Login.LoginClass;
@@ -159,7 +160,12 @@ public class Settings extends AppCompatActivity {
         Lgin = new LoginClass( getApplicationContext() );
         MDBC = new MyDataBaseCreator( getApplicationContext() );
         Lgin.deleteall();
-        MDBC.deleteall();
+        MDBC.deletAllInTable(DbContractor.TableColumns.MainTable);
+        MDBC.deletAllInTable(DbContractor.TableColumns.InfoTable);
+        MDBC.deletAllInTable(DbContractor.TableColumns.ArchiveTable);
+        MDBC.deletAllInTable(DbContractor.TableColumns.PaymentTable);
+        MDBC.deletAllInTable(DbContractor.TableColumns.ArchivePaymentTable);
+
     }
 
     private void PrintMessage(String message) {

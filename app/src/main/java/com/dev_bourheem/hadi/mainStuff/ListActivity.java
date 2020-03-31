@@ -205,8 +205,8 @@ public class ListActivity extends AppCompatActivity {
     public void ShowlistByMolhanot(String mohamed) {
         mExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery("select * from " + DbContractor.TableColumns.TABLE_NAME +
-                " where  " + DbContractor.TableColumns.person +
+        Cursor data = db.rawQuery("select * from " + DbContractor.TableColumns.MainTable +
+                " where  " + DbContractor.TableColumns.MShopName +
                 " like '%" + mohamed + "%' order by history asc", null);
 
         if (data.getCount() == 0) {
@@ -218,12 +218,12 @@ public class ListActivity extends AppCompatActivity {
         while (!data.isAfterLast())
             do {
                 String idnonit = data.getString(data.getColumnIndex(DbContractor.TableColumns._ID));
-                String quantity = data.getString(data.getColumnIndex(DbContractor.TableColumns.Quantity));
-                String qunatifier = data.getString(data.getColumnIndex(DbContractor.TableColumns.Quantifier));
-                String itemNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.col1));
-                String itemName = data.getString(data.getColumnIndex(DbContractor.TableColumns.col2));
-                String shopNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.person));
-                String DateBout = data.getString(data.getColumnIndex(DbContractor.TableColumns.da));
+                String quantity = data.getString(data.getColumnIndex(DbContractor.TableColumns.MQuantity));
+                String qunatifier = data.getString(data.getColumnIndex(DbContractor.TableColumns.MQuantifier));
+                String itemNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.MItem_Name));
+                String itemName = data.getString(data.getColumnIndex(DbContractor.TableColumns.MItem_Price));
+                String shopNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.MShopName));
+                String DateBout = data.getString(data.getColumnIndex(DbContractor.TableColumns.MDate));
                 mExampleList.add(new exampleitem(idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout));
 
             } while ((data.moveToNext()));
@@ -237,8 +237,8 @@ public class ListActivity extends AppCompatActivity {
     public void ShowlistByDate(String datatata) {
         mExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery("select * from " + DbContractor.TableColumns.TABLE_NAME +
-                " where  " + DbContractor.TableColumns.da +
+        Cursor data = db.rawQuery("select * from " + DbContractor.TableColumns.MainTable +
+                " where  " + DbContractor.TableColumns.MDate +
                 " like '%" + datatata + "%' order by history asc", null);
 
         if (data.getCount() == 0) {
@@ -250,12 +250,12 @@ public class ListActivity extends AppCompatActivity {
         while (!data.isAfterLast())
             do {
                 String idnonit = data.getString(data.getColumnIndex(DbContractor.TableColumns._ID));
-                String quantity = data.getString(data.getColumnIndex(DbContractor.TableColumns.Quantity));
-                String qunatifier = data.getString(data.getColumnIndex(DbContractor.TableColumns.Quantifier));
-                String itemNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.col1));
-                String itemName = data.getString(data.getColumnIndex(DbContractor.TableColumns.col2));
-                String shopNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.person));
-                String DateBout = data.getString(data.getColumnIndex(DbContractor.TableColumns.da));
+                String quantity = data.getString(data.getColumnIndex(DbContractor.TableColumns.MQuantity));
+                String qunatifier = data.getString(data.getColumnIndex(DbContractor.TableColumns.MQuantifier));
+                String itemNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.MItem_Name));
+                String itemName = data.getString(data.getColumnIndex(DbContractor.TableColumns.MItem_Price));
+                String shopNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.MShopName));
+                String DateBout = data.getString(data.getColumnIndex(DbContractor.TableColumns.MDate));
                 mExampleList.add(new exampleitem(idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout));
 
             } while ((data.moveToNext()));
@@ -269,8 +269,8 @@ public class ListActivity extends AppCompatActivity {
     public void ShowlistByItem(String goods) {
         mExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery("select * from " + DbContractor.TableColumns.TABLE_NAME +
-                " where  " + DbContractor.TableColumns.col1 + " like '%" + goods + "%' order by history asc", null);
+        Cursor data = db.rawQuery("select * from " + DbContractor.TableColumns.MainTable +
+                " where  " + DbContractor.TableColumns.MItem_Name + " like '%" + goods + "%' order by history asc", null);
         if (data.getCount() == 0) {
             PrintMessage(getString(R.string.alert), getString(R.string.nodataintable));
         } else
@@ -280,12 +280,12 @@ public class ListActivity extends AppCompatActivity {
         while (!data.isAfterLast())
             do {
                 String idnonit = data.getString(data.getColumnIndex(DbContractor.TableColumns._ID));
-                String quantity = data.getString(data.getColumnIndex(DbContractor.TableColumns.Quantity));
-                String qunatifier = data.getString(data.getColumnIndex(DbContractor.TableColumns.Quantifier));
-                String itemNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.col1));
-                String itemName = data.getString(data.getColumnIndex(DbContractor.TableColumns.col2));
-                String shopNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.person));
-                String DateBout = data.getString(data.getColumnIndex(DbContractor.TableColumns.da));
+                String quantity = data.getString(data.getColumnIndex(DbContractor.TableColumns.MQuantity));
+                String qunatifier = data.getString(data.getColumnIndex(DbContractor.TableColumns.MQuantifier));
+                String itemNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.MItem_Name));
+                String itemName = data.getString(data.getColumnIndex(DbContractor.TableColumns.MItem_Price));
+                String shopNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.MShopName));
+                String DateBout = data.getString(data.getColumnIndex(DbContractor.TableColumns.MDate));
                 mExampleList.add(new exampleitem(idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout));
 
             } while ((data.moveToNext()));
@@ -299,7 +299,7 @@ public class ListActivity extends AppCompatActivity {
     public void ShowlistAll() {
         mExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery("select * from " + DbContractor.TableColumns.TABLE_NAME +
+        Cursor data = db.rawQuery("select * from " + DbContractor.TableColumns.MainTable +
                 " order by history asc", null);
         if (data.getCount() == 0) {
             PrintMessage(getString(R.string.alert), getString(R.string.nodataintable));
@@ -310,12 +310,12 @@ public class ListActivity extends AppCompatActivity {
         while (!data.isAfterLast())
             do {
                 String idnonit = data.getString(data.getColumnIndex(DbContractor.TableColumns._ID));
-                String quantity = data.getString(data.getColumnIndex(DbContractor.TableColumns.Quantity));
-                String qunatifier = data.getString(data.getColumnIndex(DbContractor.TableColumns.Quantifier));
-                String itemNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.col1));
-                String itemName = data.getString(data.getColumnIndex(DbContractor.TableColumns.col2));
-                String shopNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.person));
-                String DateBout = data.getString(data.getColumnIndex(DbContractor.TableColumns.da));
+                String quantity = data.getString(data.getColumnIndex(DbContractor.TableColumns.MQuantity));
+                String qunatifier = data.getString(data.getColumnIndex(DbContractor.TableColumns.MQuantifier));
+                String itemNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.MItem_Name));
+                String itemName = data.getString(data.getColumnIndex(DbContractor.TableColumns.MItem_Price));
+                String shopNm = data.getString(data.getColumnIndex(DbContractor.TableColumns.MShopName));
+                String DateBout = data.getString(data.getColumnIndex(DbContractor.TableColumns.MDate));
                 mExampleList.add(new exampleitem(idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout));
 
             } while ((data.moveToNext()));
@@ -333,63 +333,17 @@ public class ListActivity extends AppCompatActivity {
 
     public void FillWithDates() {
         searchspinerList.clear();
-        SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor datescursor = db.rawQuery(" Select distinct " + DbContractor.TableColumns.da +
-                " from " + DbContractor.TableColumns.TABLE_NAME + " order by "
-                + DbContractor.TableColumns.da + " asc ", null);
-
-        if (datescursor.getCount() == 0) {
-            return;
-        } else {
-            datescursor.moveToFirst();
-            while (!datescursor.isAfterLast()) {
-                String dts = datescursor.getString(datescursor.getColumnIndex(DbContractor.TableColumns.da));
-                searchspinerList.add(dts);
-                datescursor.moveToNext();
-            }
-        }
-        datescursor.close();
-        searchspinner.setAdapter(searchAdapter);
+        searchspinerList = MdbCrtr.GetDistinctFromTable(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MDate,DbContractor.TableColumns.MDate);
     }
 
     public void FillWithMolhanot() {
         searchspinerList.clear();
-        SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor molhanotCursor = db.rawQuery("select distinct " + DbContractor.TableColumns.person +
-                " from " + DbContractor.TableColumns.TABLE_NAME + " order by " + DbContractor.TableColumns.da +
-                " asc", null);
-        if (molhanotCursor.getCount() == 0) {
-            return;
-        } else
-            molhanotCursor.moveToFirst();
-        while (!molhanotCursor.isAfterLast()) {
-            String Mlhanot = molhanotCursor.getString(molhanotCursor.getColumnIndex(DbContractor.TableColumns.person));
-            searchspinerList.add(Mlhanot);
-            molhanotCursor.moveToNext();
-        }
-        molhanotCursor.close();
-        searchspinner.setAdapter(searchAdapter);
-        //db.close();
+        searchspinerList = MdbCrtr.GetDistinctFromTable(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MShopName,DbContractor.TableColumns.MShopName);
     }
 
     public void FillWithItems() {
         searchspinerList.clear();
-        SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor itemcursor = db.rawQuery("select distinct "
-                + DbContractor.TableColumns.col1 + " from " + DbContractor.TableColumns.TABLE_NAME +
-                " order by " + DbContractor.TableColumns.da + " asc", null);
-        if (itemcursor.getCount() == 0) {
-            return;
-        } else
-            itemcursor.moveToFirst();
-        while (!itemcursor.isAfterLast()) {
-            String dts = itemcursor.getString(itemcursor.getColumnIndex(DbContractor.TableColumns.col1));
-            searchspinerList.add(dts);
-            itemcursor.moveToNext();
-        }
-        itemcursor.close();
-        searchspinner.setAdapter(searchAdapter);
-        //searchAdapter.notifyDataSetChanged();
+        searchspinerList = MdbCrtr.GetDistinctFromTable(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MItem_Name,DbContractor.TableColumns.MItem_Name);
     }
 
 

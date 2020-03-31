@@ -160,14 +160,14 @@ public class ArchievStats extends AppCompatActivity {
     private void PieThatThing() {
         data.clear();
 
-        Cursor cu = MBC.GetDBdataArch();
+        Cursor cu = MBC.Get8MostFrequentItemsBought(DbContractor.TableColumns.ArchiveTable,DbContractor.TableColumns.ArItem_Name);
         if (cu.getCount() == 0) {
             return;
         } else {
             while (cu.moveToNext()) {
-                String item = cu.getString(cu.getColumnIndex(DbContractor.TableColumns.col1Arch));
-                int price = cu.getInt(cu.getColumnIndex("countIt"));
-                data.add(new ValueDataEntry(item, price));
+                String item = cu.getString(cu.getColumnIndex( DbContractor.TableColumns.ArItem_Name));
+                int timesBought = cu.getInt(cu.getColumnIndex("countIt"));
+                data.add(new ValueDataEntry(item, timesBought));
             }
             cu.close();
         }
@@ -175,13 +175,12 @@ public class ArchievStats extends AppCompatActivity {
 
     private void PieThat() {
         datax.clear();
-
-        Cursor cu = MBC.GetdataByDateArch();
+        Cursor cu = MBC.Get15HighDays(DbContractor.TableColumns.ArchiveTable,DbContractor.TableColumns.ArDate,DbContractor.TableColumns.ArItem_Price);
         if (cu.getCount() == 0) {
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         } else {
             while (cu.moveToNext()) {
-                String date = cu.getString(cu.getColumnIndex(DbContractor.TableColumns.daArch));
+                String date = cu.getString(cu.getColumnIndex(DbContractor.TableColumns.ArDate));
                 int price = cu.getInt(cu.getColumnIndex("totalbydateArch"));
                 datax.add(new ValueDataEntry(date, price));
             }

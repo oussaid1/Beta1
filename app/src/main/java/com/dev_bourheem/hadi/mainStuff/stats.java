@@ -50,7 +50,7 @@ public class stats extends AppCompatActivity {
         tester2 = findViewById(R.id.testerV);
         Cartesian cartesian = AnyChart.column();
 
-        PieThat();
+        Pie15HighDates();
        /* datax.add(new ValueDataEntry("Rouge", 80540));
         datax.add(new ValueDataEntry("Foundation", 94190));*/
 
@@ -84,7 +84,7 @@ public class stats extends AppCompatActivity {
 
         Pie pie = AnyChart.pie();
 
-        PieThatThing();
+        Pie8MostBoughtItems();
         /*data.add(new ValueDataEntry("Apples", 6371664));
         data.add(new ValueDataEntry("Pears", 789622));*/
 
@@ -157,32 +157,31 @@ public class stats extends AppCompatActivity {
     }
 
 
-    public void PieThatThing() {
+    public void Pie8MostBoughtItems() {
         data.clear();
 
-        Cursor cu = MBC.GetDBdata();
+        Cursor cu = MBC.Get8MostFrequentItemsBought(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MItem_Name);
         if (cu.getCount() == 0) {
             return;
         } else {
             while (cu.moveToNext()) {
-                String item = cu.getString(cu.getColumnIndex( DbContractor.TableColumns.col1));
-                int price = cu.getInt(cu.getColumnIndex("countIt"));
-                data.add(new ValueDataEntry(item, price));
+                String item = cu.getString(cu.getColumnIndex( DbContractor.TableColumns.MItem_Name));
+                int timesBought = cu.getInt(cu.getColumnIndex("countIt"));
+                data.add(new ValueDataEntry(item, timesBought));
             }
             cu.close();
         }
     }
 
-    public void PieThat() {
+    public void Pie15HighDates() {
         datax.clear();
-
-        Cursor cu = MBC.GetdataByDate();
+        Cursor cu = MBC.Get15HighDays(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MDate,DbContractor.TableColumns.MItem_Price);
         if (cu.getCount() == 0) {
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         } else {
             while (cu.moveToNext()) {
-                String date = cu.getString(cu.getColumnIndex(DbContractor.TableColumns.da));
-                int price = cu.getInt(cu.getColumnIndex("totalbydate"));
+                String date = cu.getString(cu.getColumnIndex(DbContractor.TableColumns.MDate));
+                int price = cu.getInt(cu.getColumnIndex("totalbydateArch"));
                 datax.add(new ValueDataEntry(date, price));
             }
             cu.close();

@@ -70,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> CategoryList;
     private ArrayList<String> Sub2List;
     private ArrayList<String> Sub1List;
-    private  ArrayList<String> Molhanot;
+    private ArrayList<String> Molhanot;
     private ArrayAdapter<String> MolhntautoCompleteAdapter, SearchSpinnerAdapter, SearchSpinnerSub2Adapter, SearchSpinnerSub3Adapter;
     private ArrayAdapter<String> AutoCompleteAdapter;
     private ArrayAdapter<String> QuanSpinAdapter;
     private MyDataBaseCreator MDBC;
-    private  ForQuotas forQutaOC;
+    private ForQuotas forQutaOC;
     private AdView admain;
     private FloatingActionButton floatingButon;
     private String[] QTypes = {"واحدة", " كيلو", "لتر", "متر", "صندوق", "علبة"};
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView( R.layout.activity_main);
+        setContentView(R.layout.activity_main);
         DateV1 = findViewById(R.id.dateView);
         floatingButon = findViewById(R.id.fab);
         QuotaLeftNm = findViewById(R.id.QuotaLeftNm);
@@ -177,8 +177,8 @@ public class MainActivity extends AppCompatActivity {
                         //FillWithDaysforShopEmpty();
                         break;
                     case "حسب السلعة":
-                    FillWithItemsDates(sellection2);
-                      //  GetSumByItem(sellection2);
+                        FillWithItemsDates(sellection2);
+                        //  GetSumByItem(sellection2);
                         //  FillWithDaysforShopEmpty();
                         break;
                 }
@@ -212,9 +212,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "حسب السلعة":
                         if (sellection3.equals("*")) {
-                         GetSumByItem(sellection2);
+                            GetSumByItem(sellection2);
                         } else
-                       GetSumByItemsByDate(sellection2,sellection3);
+                            GetSumByItemsByDate(sellection2, sellection3);
                         //  FillWithDaysforShopEmpty();
                         break;
                 }
@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
         TotalallOut.setText(String.valueOf(getTotalAll()));
         showQuota();
         TraficLight(sumtoday);
-        if(isFirstDayOfMonth(Calendar.getInstance())){
+        if (isFirstDayOfMonth(Calendar.getInstance())) {
             ArchiveIt();
         }
         ADSmainActivity();
@@ -287,7 +287,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     public void ADSmainActivity() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -332,6 +331,7 @@ public class MainActivity extends AppCompatActivity {
         //intent1.putExtra("tarikh" ,date);
         startActivity(intent1);
     }
+
     public void OpenArch() {
         final Intent intent1;
         intent1 = new Intent(this, ArchieveList.class);
@@ -478,32 +478,13 @@ public class MainActivity extends AppCompatActivity {
     public void GetItemNameFromdatabase() {
         allList.clear();
         MDBC = new MyDataBaseCreator(this);
-        Cursor itemNameCursor = MDBC.GetItemNames();
-
-        if (itemNameCursor.getCount() == 0) MsgBox(getString(R.string.noitemnamefound));
-        else {
-            while (itemNameCursor.moveToNext()) {
-                allList.add(itemNameCursor.getString(itemNameCursor.getColumnIndex( DbContractor.TableColumns.MItem_Name)));
-
-            }
-        }
+        allList = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MItem_Name);
     }
 
     // this method gets shop name from database
     public void GetmolhanotFromdatabase() {
         Molhanot.clear();
-        MDBC = new MyDataBaseCreator(this);
-        Cursor itemNameCursor = MDBC.GetMolhanot();
-
-        if (itemNameCursor.getCount() == 0) {
-            MsgBox(getString(R.string.noshopname));
-
-        } else {
-            while (itemNameCursor.moveToNext()) {
-                Molhanot.add(itemNameCursor.getString(itemNameCursor.getColumnIndex(DbContractor.TableColumns.MShopName)));
-
-            }
-        }
+        Molhanot = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName);
     }
 
     //this method gets the total of all product items from data base
@@ -523,21 +504,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void FillWithDays() {
         Sub1List.clear();
-        Cursor datecurs = MDBC.getDates();
-        if (datecurs.getCount() == 0) {
-            return;
-        } else {
-            datecurs.moveToFirst();
-            Sub1List.add("*");
-            while (!datecurs.isAfterLast()) {
-                String dts = datecurs.getString(datecurs.getColumnIndex(DbContractor.TableColumns.da));
-                Sub1List.add(dts);
-                datecurs.moveToNext();
-            }
-
-            datecurs.close();
-            SearchSpinerSub2.setAdapter(SearchSpinnerSub2Adapter);
-        }
+                Sub1List= MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MDate);
     }
 
     public void FillWithDaysforShop(String shop) {
@@ -552,7 +519,7 @@ public class MainActivity extends AppCompatActivity {
             datecurs.moveToFirst();
             Sub2List.add("*");
             while (!datecurs.isAfterLast()) {
-                String dts = datecurs.getString(datecurs.getColumnIndex(DbContractor.TableColumns.da));
+                String dts = datecurs.getString(datecurs.getColumnIndex(DbContractor.TableColumns.MDate));
                 Sub2List.add(dts);
                 datecurs.moveToNext();
             }
@@ -571,15 +538,15 @@ public class MainActivity extends AppCompatActivity {
         Sub1List.clear();
 
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor molhanotCursor = db.rawQuery("select distinct " + DbContractor.TableColumns.person +
-                " from " + DbContractor.TableColumns.TABLE_NAME + "  order by " + DbContractor.TableColumns.da + " asc", null);
+        Cursor molhanotCursor = db.rawQuery("select distinct " + DbContractor.TableColumns.MShopName +
+                " from " + DbContractor.TableColumns.MainTable + "  order by " + DbContractor.TableColumns.MDate + " asc", null);
         if (molhanotCursor.getCount() == 0) {
             return;
         } else
             molhanotCursor.moveToFirst();
         Sub1List.add("*");
         while (!molhanotCursor.isAfterLast()) {
-            String Mlhanot = molhanotCursor.getString(molhanotCursor.getColumnIndex(DbContractor.TableColumns.person));
+            String Mlhanot = molhanotCursor.getString(molhanotCursor.getColumnIndex(DbContractor.TableColumns.MShopName));
             Sub1List.add(Mlhanot);
             molhanotCursor.moveToNext();
         }
@@ -592,14 +559,14 @@ public class MainActivity extends AppCompatActivity {
         Sub1List.clear();
 
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor ItemCursor = db.rawQuery("select distinct " + DbContractor.TableColumns.col1 +
-                " from " + DbContractor.TableColumns.TABLE_NAME + "  order by " + DbContractor.TableColumns.da + " asc", null);
+        Cursor ItemCursor = db.rawQuery("select distinct " + DbContractor.TableColumns.MItem_Name +
+                " from " + DbContractor.TableColumns.MainTable + "  order by " + DbContractor.TableColumns.MDate + " asc", null);
         if (ItemCursor.getCount() == 0) {
             return;
         } else
             ItemCursor.moveToFirst();
         while (!ItemCursor.isAfterLast()) {
-            String Items = ItemCursor.getString(ItemCursor.getColumnIndex(DbContractor.TableColumns.col1));
+            String Items = ItemCursor.getString(ItemCursor.getColumnIndex(DbContractor.TableColumns.MItem_Name));
             Sub1List.add(Items);
             ItemCursor.moveToNext();
         }
@@ -607,20 +574,21 @@ public class MainActivity extends AppCompatActivity {
         SearchSpinerSub2.setAdapter(SearchSpinnerSub2Adapter);
 
     }
+
     public void FillWithItemsDates(String goods) {
         Sub2List.clear();
 
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor ItemCursor = db.rawQuery("select  " + DbContractor.TableColumns.da + " from" +
-                " " + DbContractor.TableColumns.TABLE_NAME + " where " + DbContractor.TableColumns.col1 +
-                " like '%"+goods+"%'group by " + DbContractor.TableColumns.col1 + "  order by " + DbContractor.TableColumns.da + " desc ", null);
+        Cursor ItemCursor = db.rawQuery("select  " + DbContractor.TableColumns.MDate + " from" +
+                " " + DbContractor.TableColumns.MainTable + " where " + DbContractor.TableColumns.MItem_Name +
+                " like '%" + goods + "%'group by " + DbContractor.TableColumns.MItem_Name + "  order by " + DbContractor.TableColumns.MDate + " desc ", null);
         if (ItemCursor.getCount() == 0) {
             return;
         } else
             ItemCursor.moveToFirst();
         Sub2List.add("*");
         while (!ItemCursor.isAfterLast()) {
-            String Items = ItemCursor.getString(ItemCursor.getColumnIndex(DbContractor.TableColumns.da));
+            String Items = ItemCursor.getString(ItemCursor.getColumnIndex(DbContractor.TableColumns.MDate));
             Sub2List.add(Items);
             ItemCursor.moveToNext();
         }
@@ -632,8 +600,8 @@ public class MainActivity extends AppCompatActivity {
     public double GetSumByShop(String mohamed) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.col2 + ")as Solo from " +
-                "" + DbContractor.TableColumns.TABLE_NAME + " where  " + DbContractor.TableColumns.person +
+        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Solo from " +
+                "" + DbContractor.TableColumns.MainTable + " where  " + DbContractor.TableColumns.MShopName +
                 " like '%" + mohamed + "%' group by MoolHanout ", null);
         if (data.getCount() == 0) {
 
@@ -651,8 +619,8 @@ public class MainActivity extends AppCompatActivity {
     public double GetSumByDate(String ladat) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.col2 + ")as So from "
-                + DbContractor.TableColumns.TABLE_NAME + " where  " + DbContractor.TableColumns.da + " like '%" + ladat + "%' group by history ", null);
+        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as So from "
+                + DbContractor.TableColumns.MainTable + " where  " + DbContractor.TableColumns.MDate + " like '%" + ladat + "%' group by history ", null);
         if (data.getCount() == 0) {
 
         } else if (!data.isAfterLast()) {
@@ -669,9 +637,9 @@ public class MainActivity extends AppCompatActivity {
     public double GetSumByShopDate(String mohamed, String dat) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.col2 + ")as Soa from "
-                + DbContractor.TableColumns.TABLE_NAME + " where  " + DbContractor.TableColumns.person +
-                " like '%" + mohamed + "%' and " + DbContractor.TableColumns.da + " like '%" + dat + "%' group by history ", null);
+        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Soa from "
+                + DbContractor.TableColumns.MainTable + " where  " + DbContractor.TableColumns.MShopName +
+                " like '%" + mohamed + "%' and " + DbContractor.TableColumns.MDate + " like '%" + dat + "%' group by history ", null);
         if (data.getCount() == 0) {
 
         } else if (!data.isAfterLast()) {
@@ -688,9 +656,9 @@ public class MainActivity extends AppCompatActivity {
     public double GetSumByItem(String ItemName) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.col2 + ")as SumItems from "
-                + DbContractor.TableColumns.TABLE_NAME + " where  " + DbContractor.TableColumns.col1 +
-                " like '%"+ItemName+"%' group by " + DbContractor.TableColumns.col1 + " order by " + DbContractor.TableColumns.da + " desc ", null);
+        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as SumItems from "
+                + DbContractor.TableColumns.MainTable + " where  " + DbContractor.TableColumns.MItem_Name +
+                " like '%" + ItemName + "%' group by " + DbContractor.TableColumns.MItem_Name + " order by " + DbContractor.TableColumns.MDate + " desc ", null);
         if (data.getCount() == 0) {
 
         } else if (!data.isAfterLast()) {
@@ -707,10 +675,10 @@ public class MainActivity extends AppCompatActivity {
     public double GetSumByItemsByDate(String item, String dat) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.col2 + ")as Soa from "
-                + DbContractor.TableColumns.TABLE_NAME + " where  " + DbContractor.TableColumns.col1 +
-                " like '%"+item+"%' and " + DbContractor.TableColumns.da + " like '%"+dat+"%' group by "
-                + DbContractor.TableColumns.da + "  ", null);
+        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Soa from "
+                + DbContractor.TableColumns.MainTable + " where  " + DbContractor.TableColumns.MItem_Name +
+                " like '%" + item + "%' and " + DbContractor.TableColumns.MDate + " like '%" + dat + "%' group by "
+                + DbContractor.TableColumns.MDate + "  ", null);
         if (data.getCount() == 0) {
 
         } else if (!data.isAfterLast()) {
@@ -723,21 +691,22 @@ public class MainActivity extends AppCompatActivity {
         data.close();
         return sumtoday;
     }
+
     public boolean Backup() throws IOException {
 
-        final String inFileName =Environment.getExternalStoragePublicDirectory( DIRECTORY_DOWNLOADS ) + "/"+"School.db";
-        File dbFile = new File( inFileName );
-        FileInputStream fis = new FileInputStream( dbFile );
+        final String inFileName = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS) + "/" + "School.db";
+        File dbFile = new File(inFileName);
+        FileInputStream fis = new FileInputStream(dbFile);
 
         String outFileName = "/data/data/com.dev_bourheem.hadi/databases/School.db";
         // Open the empty db as the output stream
-        OutputStream output = new FileOutputStream( outFileName );
+        OutputStream output = new FileOutputStream(outFileName);
 
         // Transfer bytes from the inputfile to the outputfile
         byte[] buffer = new byte[1024];
         int length;
-        while ((length = fis.read( buffer )) > 0) {
-            output.write( buffer, 0, length );
+        while ((length = fis.read(buffer)) > 0) {
+            output.write(buffer, 0, length);
         }
         // Close the streams
         output.flush();
@@ -745,9 +714,10 @@ public class MainActivity extends AppCompatActivity {
         fis.close();
         return true;
     }
-    public  boolean Restore() {
+
+    public boolean Restore() {
         try {
-            File sd = Environment.getExternalStoragePublicDirectory( DIRECTORY_DOWNLOADS );
+            File sd = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
             File data = Environment.getDataDirectory();
             if (sd.canWrite()) {
                 String currentDBPath = "//data//com.dev_bourheem.hadi//databases//School.db";
@@ -848,13 +818,13 @@ public class MainActivity extends AppCompatActivity {
         if (calendar == null) {
             throw new IllegalArgumentException("Calendar cannot be null.");
         }
-       int maxDayOfMonth= calendar.getActualMaximum(Calendar.DATE);
+        int maxDayOfMonth = calendar.getActualMaximum(Calendar.DATE);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         return dayOfMonth == 1;
     }
 
-    public void ArchiveIt(){
-        SQLiteDatabase db =MDBC.getWritableDatabase();
-        db.execSQL( "insert into "+DbContractor.TableColumns.TABLE_NAMEArch+" select * from "+DbContractor.TableColumns.TABLE_NAME +"  order by " +DbContractor.TableColumns.da );
+    public void ArchiveIt() {
+        SQLiteDatabase db = MDBC.getWritableDatabase();
+        db.execSQL("insert into " + DbContractor.TableColumns.ArchiveTable + " select * from " + DbContractor.TableColumns.MainTable + "  order by " + DbContractor.TableColumns.MDate);
     }
 }

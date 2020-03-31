@@ -205,11 +205,11 @@ public class ArchEddit extends AppCompatActivity {
     private void FillWithByShop() {
         List<String> persons = new ArrayList<>();
         SQLiteDatabase db = MDBCR.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select distinct " + DbContractor.TableColumns.person + " from " + DbContractor.TableColumns.TABLE_NAME + " ", null);
+        Cursor cursor = db.rawQuery("select distinct " + DbContractor.TableColumns.MShopName + " from " + DbContractor.TableColumns.MainTable + " ", null);
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                String shopName = cursor.getString(cursor.getColumnIndex(DbContractor.TableColumns.person));
+                String shopName = cursor.getString(cursor.getColumnIndex(DbContractor.TableColumns.MShopName));
                 persons.add(shopName);
                 cursor.moveToNext();
             }
@@ -242,7 +242,7 @@ public class ArchEddit extends AppCompatActivity {
 
     private void DeleteBy(String molhanot) {
         SQLiteDatabase db = MDBCR.getWritableDatabase();
-        long deleted = db.delete( DbContractor.TableColumns.TABLE_NAME, DbContractor.TableColumns.person + " = ?", new String[]{molhanot});
+        long deleted = db.delete( DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName + " = ?", new String[]{molhanot});
         if (deleted > 0) {
             Toast.makeText(this, "deleted", Toast.LENGTH_SHORT).show();
         } else {

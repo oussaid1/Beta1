@@ -21,7 +21,6 @@ public final class DbContractor  {
         /*************************************************************/
 
         public static final String ArchiveTable = "StuffArch";
-
         public static final String ArItem_Name = "Item_Name";
         public static final String ArItem_Price = "Item_Price";
         public static final String ArShopName = "ShopName";
@@ -29,6 +28,12 @@ public final class DbContractor  {
         public static final String ArQuantifier = "Quantifiers";
         public static final String ArQuantity = "quantity";
 
+
+        public static final String ArchivePaymentTable = "ArchivePaymentTable";
+        public static final String ArPayDate = "ArPayDate";
+        public static final String ArshopName = "ArpaidAmount";
+        public static final String ArpaidAmount = "ArpaidAmount";
+        public static final String ArpaymentDate = "ArpaymentDate";
         /**************************************************************/
 
         public static final String PaymentTable = "Payment";
