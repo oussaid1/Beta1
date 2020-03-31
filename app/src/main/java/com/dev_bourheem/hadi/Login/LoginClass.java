@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.dev_bourheem.hadi.LoginActivity;
+import com.dev_bourheem.hadi.mainStuff.LoginActivity;
 
 
 public class LoginClass extends SQLiteOpenHelper {

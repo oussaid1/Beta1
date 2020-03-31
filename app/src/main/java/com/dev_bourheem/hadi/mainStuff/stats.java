@@ -1,7 +1,6 @@
-package com.dev_bourheem.hadi;
+package com.dev_bourheem.hadi.mainStuff;
 
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,24 +12,16 @@ import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.chart.common.listener.Event;
-import com.anychart.chart.common.listener.ListenersInterface;
 import com.anychart.charts.Cartesian;
 import com.anychart.charts.Pie;
 import com.anychart.core.cartesian.series.Column;
-import com.anychart.enums.Align;
 import com.anychart.enums.Anchor;
 import com.anychart.enums.HoverMode;
-import com.anychart.enums.LegendLayout;
 import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
+import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
+import com.dev_bourheem.hadi.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -50,7 +41,7 @@ public class stats extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stats);
+        setContentView( R.layout.activity_stats);
         anyChartView = findViewById(R.id.chart2);
         APIlib.getInstance().setActiveAnyChartView(anyChartView);
 
@@ -174,7 +165,7 @@ public class stats extends AppCompatActivity {
             return;
         } else {
             while (cu.moveToNext()) {
-                String item = cu.getString(cu.getColumnIndex(MyDataBaseCreator.col1));
+                String item = cu.getString(cu.getColumnIndex( DbContractor.TableColumns.col1));
                 int price = cu.getInt(cu.getColumnIndex("countIt"));
                 data.add(new ValueDataEntry(item, price));
             }
@@ -190,7 +181,7 @@ public class stats extends AppCompatActivity {
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         } else {
             while (cu.moveToNext()) {
-                String date = cu.getString(cu.getColumnIndex(MyDataBaseCreator.da));
+                String date = cu.getString(cu.getColumnIndex(DbContractor.TableColumns.da));
                 int price = cu.getInt(cu.getColumnIndex("totalbydate"));
                 datax.add(new ValueDataEntry(date, price));
             }

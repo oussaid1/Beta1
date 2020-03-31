@@ -1,4 +1,5 @@
-package com.dev_bourheem.hadi.Archieve;
+package com.dev_bourheem.hadi.mainStuff;
+
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,17 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dev_bourheem.hadi.ExampleAdapter;
 import com.dev_bourheem.hadi.R;
-import com.dev_bourheem.hadi.exampleitem;
 
 import java.util.ArrayList;
 
-
-public class ArchRecyclerView extends RecyclerView.Adapter<ArchRecyclerView.ArchSubRecycler> {
-
-    private ArrayList<ArchexampleItem> mExampleList;
-    private ArchRecyclerView.OnItemClickListener mListener;
+public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder> {
+    private ArrayList<exampleitem> mExampleList;
+    private OnItemClickListener mListener;
 
 
     public interface OnItemClickListener {
@@ -27,11 +24,11 @@ public class ArchRecyclerView extends RecyclerView.Adapter<ArchRecyclerView.Arch
         void OnItemDelete(int position);
     }
 
-    void setOnItemClickListener(ArchRecyclerView.OnItemClickListener listener) {
+    void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
-    static class ArchSubRecycler extends RecyclerView.ViewHolder {
+    static class ExampleViewHolder extends RecyclerView.ViewHolder {
         public TextView idTv;
         public TextView quantity;
         public TextView quantifier;
@@ -39,7 +36,7 @@ public class ArchRecyclerView extends RecyclerView.Adapter<ArchRecyclerView.Arch
         public TextView ItemPrice;
         public TextView ShopName;
         public TextView dateBought;
-        public ArchSubRecycler(View itemView, final ArchRecyclerView.OnItemClickListener listener) {
+        public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             idTv = itemView.findViewById( R.id.id);
             quantity = itemView.findViewById(R.id.quantityCV);
@@ -65,20 +62,20 @@ public class ArchRecyclerView extends RecyclerView.Adapter<ArchRecyclerView.Arch
         }
     }
 
-    ArchRecyclerView(ArrayList<ArchexampleItem> exampleList) {
+    ExampleAdapter(ArrayList<exampleitem> exampleList) {
         mExampleList = exampleList;
     }
 
     @NonNull
     @Override
-    public ArchRecyclerView.ArchSubRecycler onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_items, parent, false);
-        return new ArchRecyclerView.ArchSubRecycler(v, mListener);
+        return new ExampleViewHolder(v, mListener);
     }
 
     @Override
-    public void onBindViewHolder(ArchRecyclerView.ArchSubRecycler holder, int position) {
-        ArchexampleItem currentItem = mExampleList.get(position);
+    public void onBindViewHolder(ExampleViewHolder holder, int position) {
+        exampleitem currentItem = mExampleList.get(position);
 
         holder.idTv.setText(currentItem.getIdno());
         holder.quantity.setText(currentItem.getQuantity());

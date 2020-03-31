@@ -19,11 +19,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.dev_bourheem.hadi.EdditActivity;
-import com.dev_bourheem.hadi.MainActivity;
-import com.dev_bourheem.hadi.MyDataBaseCreator;
+import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
+import com.dev_bourheem.hadi.mainStuff.MainActivity;
+import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.R;
-import com.dev_bourheem.hadi.exampleitem;
+import com.dev_bourheem.hadi.mainStuff.exampleitem;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -33,7 +33,6 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dev_bourheem.hadi.MyDataBaseCreator.TABLE_NAME;
 
 public class ArchEddit extends AppCompatActivity {
     EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
@@ -116,7 +115,7 @@ public class ArchEddit extends AppCompatActivity {
 
     public void GetThem() {
         Intent intent = getIntent();
-        exampleitem exampleitem = intent.getParcelableExtra("exampleItem");
+        exampleitem exampleitem = intent.getParcelableExtra("ArchExampleItem");
         String quantity = null;
         if (exampleitem != null) {
             quantity = exampleitem.getQuantity();
@@ -148,7 +147,7 @@ public class ArchEddit extends AppCompatActivity {
 
     public void UpdateDB() {
         Intent intent = getIntent();
-        exampleitem exampleitem = intent.getParcelableExtra("exampleItem");
+        exampleitem exampleitem = intent.getParcelableExtra("ArchExampleItem");
         String idd = null;
         if (exampleitem != null) {
             idd = exampleitem.getIdno();
@@ -170,7 +169,7 @@ public class ArchEddit extends AppCompatActivity {
     public void DelItem() {
 
         Intent intent = getIntent();
-        exampleitem exampleitem = intent.getParcelableExtra("exampleItem");
+        exampleitem exampleitem = intent.getParcelableExtra("ArchExampleItem");
         String idd = null;
         if (exampleitem != null) {
             idd = exampleitem.getIdno();
@@ -206,11 +205,11 @@ public class ArchEddit extends AppCompatActivity {
     public void FillWithByShop() {
         List<String> persons = new ArrayList<>();
         SQLiteDatabase db = MDBCR.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select distinct " + MyDataBaseCreator.person + " from " + TABLE_NAME + " ", null);
+        Cursor cursor = db.rawQuery("select distinct " + DbContractor.TableColumns.person + " from " + DbContractor.TableColumns.TABLE_NAME + " ", null);
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                String shopName = cursor.getString(cursor.getColumnIndex(MyDataBaseCreator.person));
+                String shopName = cursor.getString(cursor.getColumnIndex(DbContractor.TableColumns.person));
                 persons.add(shopName);
                 cursor.moveToNext();
             }
@@ -243,7 +242,7 @@ public class ArchEddit extends AppCompatActivity {
 
     public void DeleteBy(String molhanot) {
         SQLiteDatabase db = MDBCR.getWritableDatabase();
-        long deleted = db.delete(TABLE_NAME, MyDataBaseCreator.person + " = ?", new String[]{molhanot});
+        long deleted = db.delete( DbContractor.TableColumns.TABLE_NAME, DbContractor.TableColumns.person + " = ?", new String[]{molhanot});
         if (deleted > 0) {
             Toast.makeText(this, "deleted", Toast.LENGTH_SHORT).show();
         } else {

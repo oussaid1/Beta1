@@ -1,4 +1,4 @@
-package com.dev_bourheem.hadi;
+package com.dev_bourheem.hadi.mainStuff;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
+import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
+import com.dev_bourheem.hadi.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -28,8 +31,6 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dev_bourheem.hadi.MyDataBaseCreator.ID;
-import static com.dev_bourheem.hadi.MyDataBaseCreator.TABLE_NAME;
 
 public class EdditActivity extends AppCompatActivity {
     EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
@@ -41,7 +42,7 @@ public class EdditActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.edditmenu, menu);
+        inflater.inflate( R.menu.edditmenu, menu);
         return true;
     }
 
@@ -202,11 +203,11 @@ public class EdditActivity extends AppCompatActivity {
     public void FillWithByShop() {
         List<String> persons = new ArrayList<>();
         SQLiteDatabase db = MDBCR.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select distinct " + MyDataBaseCreator.person + " from " + TABLE_NAME + " ", null);
+        Cursor cursor = db.rawQuery("select distinct " + DbContractor.TableColumns.person + " from " + DbContractor.TableColumns.TABLE_NAME + " ", null);
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                String shopName = cursor.getString(cursor.getColumnIndex(MyDataBaseCreator.person));
+                String shopName = cursor.getString(cursor.getColumnIndex(DbContractor.TableColumns.person));
                 persons.add(shopName);
                 cursor.moveToNext();
             }
@@ -239,7 +240,7 @@ public class EdditActivity extends AppCompatActivity {
 
     public void DeleteBy(String molhanot) {
         SQLiteDatabase db = MDBCR.getWritableDatabase();
-        long deleted = db.delete(TABLE_NAME, MyDataBaseCreator.person + " = ?", new String[]{molhanot});
+        long deleted = db.delete(DbContractor.TableColumns.TABLE_NAME, DbContractor.TableColumns.person + " = ?", new String[]{molhanot});
         if (deleted > 0) {
             Toast.makeText(this, "deleted", Toast.LENGTH_SHORT).show();
         } else {

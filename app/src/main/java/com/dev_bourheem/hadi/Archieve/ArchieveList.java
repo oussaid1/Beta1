@@ -18,15 +18,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.dev_bourheem.hadi.EdditActivity;
-import com.dev_bourheem.hadi.ExampleAdapter;
-import com.dev_bourheem.hadi.ListActivity;
-import com.dev_bourheem.hadi.MainActivity;
-import com.dev_bourheem.hadi.MyDataBaseCreator;
+import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
+import com.dev_bourheem.hadi.mainStuff.EdditActivity;
+import com.dev_bourheem.hadi.mainStuff.MainActivity;
+import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.R;
-import com.dev_bourheem.hadi.Settings;
-import com.dev_bourheem.hadi.exampleitem;
-import com.dev_bourheem.hadi.stats;
+import com.dev_bourheem.hadi.mainStuff.Settings;
+import com.dev_bourheem.hadi.mainStuff.stats;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -45,10 +43,10 @@ public class ArchieveList extends AppCompatActivity {
     private ArrayAdapter<String> categoryAdapter, searchAdapter;
 
 
-    private ArrayList<ArchexampleItem> mExampleList;
-    private RecyclerView myrecycler;
-    private RecyclerView.LayoutManager RecyLayManger;
-    private ArchRecyclerView RecyclerAdap;
+    private ArrayList<ArchexampleItem> ArchmExampleList;
+    private RecyclerView Archmyrecycler;
+    private RecyclerView.LayoutManager ArchRecyLayManger;
+    private ArchRecyclerViewAdapter ArchRecyclerAdap;
 
     AdView listAd;
 
@@ -86,12 +84,12 @@ public class ArchieveList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_archieve_list );
-        myrecycler = findViewById( R.id.myrecyclerArch );
+        Archmyrecycler = findViewById( R.id.myrecyclerArch );
         listAd = findViewById( R.id.listAdArch );
-        myrecycler.setHasFixedSize( true );
+        Archmyrecycler.setHasFixedSize( true );
         categoryspinner = findViewById( R.id.CategorySpinArch );
         searchspinner = findViewById( R.id.searchSpinArch );
-        mExampleList = new ArrayList<>();
+        ArchmExampleList = new ArrayList<>();
         mainList = new ArrayList<>();
         MdbCrtr = new MyDataBaseCreator( this );
         categoryspinnerList = new ArrayList<>();
@@ -157,14 +155,14 @@ public class ArchieveList extends AppCompatActivity {
 
             }
         } );
-        RecyLayManger = new LinearLayoutManager( this );
-        RecyclerAdap = new ArchRecyclerView( mExampleList );
-        RecyclerAdap.setOnItemClickListener( new ArchRecyclerView.OnItemClickListener() {
+        ArchRecyLayManger = new LinearLayoutManager( this );
+        ArchRecyclerAdap = new ArchRecyclerViewAdapter( ArchmExampleList );
+        ArchRecyclerAdap.setOnItemClickListener( new ArchRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(int position) {
 
                 Intent intent = new Intent( ArchieveList.this, EdditActivity.class );
-                intent.putExtra( "exampleItem", mExampleList.get( position ) );
+                intent.putExtra( "ArchExampleItem", ArchmExampleList.get( position ) );
                 startActivity( intent );
 
             }
@@ -209,9 +207,9 @@ public class ArchieveList extends AppCompatActivity {
     }
 
     public void ShowlistByMolhanot(String mohamed) {
-        mExampleList.clear();
+        ArchmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + MyDataBaseCreator.TABLE_NAME + " where  " + MyDataBaseCreator.person + " like '%" + mohamed + "%' order by history asc", null );
+        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.TABLE_NAMEArch + " where  " + DbContractor.TableColumns.person + " like '%" + mohamed + "%' order by history asc", null );
 
         if (data.getCount() == 0) {
             PrintMessage( getString( R.string.alert ), getString( R.string.nodataintable ) );
@@ -221,27 +219,28 @@ public class ArchieveList extends AppCompatActivity {
 
         while (!data.isAfterLast())
             do {
-                String idnonit = data.getString( data.getColumnIndex( MyDataBaseCreator.ID ) );
-                String quantity = data.getString( data.getColumnIndex( MyDataBaseCreator.Quantity ) );
-                String qunatifier = data.getString( data.getColumnIndex( MyDataBaseCreator.Quantifier ) );
-                String itemNm = data.getString( data.getColumnIndex( MyDataBaseCreator.col1 ) );
-                String itemName = data.getString( data.getColumnIndex( MyDataBaseCreator.col2 ) );
-                String shopNm = data.getString( data.getColumnIndex( MyDataBaseCreator.person ) );
-                String DateBout = data.getString( data.getColumnIndex( MyDataBaseCreator.da ) );
-                mExampleList.add( new ArchexampleItem( idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout ) );
+                String idnonit = data.getString( data.getColumnIndex( DbContractor.TableColumns._ID ) );
+                String quantity = data.getString( data.getColumnIndex( DbContractor.TableColumns.Quantity ) );
+                String qunatifier = data.getString( data.getColumnIndex( DbContractor.TableColumns.Quantifier ) );
+                String itemNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.col1 ) );
+                String itemName = data.getString( data.getColumnIndex( DbContractor.TableColumns.col2 ) );
+                String shopNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.person ) );
+                String DateBout = data.getString( data.getColumnIndex( DbContractor.TableColumns.da ) );
+                ArchmExampleList.add( new ArchexampleItem( idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout ) );
 
             } while ((data.moveToNext()));
 
         data.close();
-        myrecycler.setLayoutManager( RecyLayManger );
-        myrecycler.setAdapter( RecyclerAdap );
+        Archmyrecycler.setLayoutManager( ArchRecyLayManger );
+        Archmyrecycler.setAdapter( ArchRecyclerAdap );
 
     }
 
     public void ShowlistByDate(String datatata) {
-        mExampleList.clear();
+        ArchmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + MyDataBaseCreator.TABLE_NAME + " where  " + MyDataBaseCreator.da + " like '%" + datatata + "%' order by history asc", null );
+        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.TABLE_NAMEArch +
+                " where  " + DbContractor.TableColumns.da + " like '%" + datatata + "%' order by history asc", null );
 
         if (data.getCount() == 0) {
             PrintMessage( getString( R.string.alert ), getString( R.string.nodataintable ) );
@@ -251,27 +250,28 @@ public class ArchieveList extends AppCompatActivity {
 
         while (!data.isAfterLast())
             do {
-                String idnonit = data.getString( data.getColumnIndex( MyDataBaseCreator.ID ) );
-                String quantity = data.getString( data.getColumnIndex( MyDataBaseCreator.Quantity ) );
-                String qunatifier = data.getString( data.getColumnIndex( MyDataBaseCreator.Quantifier ) );
-                String itemNm = data.getString( data.getColumnIndex( MyDataBaseCreator.col1 ) );
-                String itemName = data.getString( data.getColumnIndex( MyDataBaseCreator.col2 ) );
-                String shopNm = data.getString( data.getColumnIndex( MyDataBaseCreator.person ) );
-                String DateBout = data.getString( data.getColumnIndex( MyDataBaseCreator.da ) );
-                mExampleList.add( new ArchexampleItem( idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout ) );
+                String idnonit = data.getString( data.getColumnIndex( DbContractor.TableColumns._ID ) );
+                String quantity = data.getString( data.getColumnIndex( DbContractor.TableColumns.Quantity ) );
+                String qunatifier = data.getString( data.getColumnIndex( DbContractor.TableColumns.Quantifier ) );
+                String itemNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.col1 ) );
+                String itemName = data.getString( data.getColumnIndex( DbContractor.TableColumns.col2 ) );
+                String shopNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.person ) );
+                String DateBout = data.getString( data.getColumnIndex( DbContractor.TableColumns.da ) );
+                ArchmExampleList.add( new ArchexampleItem( idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout ) );
 
             } while ((data.moveToNext()));
 
         data.close();
-        myrecycler.setLayoutManager( RecyLayManger );
-        myrecycler.setAdapter( RecyclerAdap );
+        Archmyrecycler.setLayoutManager( ArchRecyLayManger );
+        Archmyrecycler.setAdapter( ArchRecyclerAdap );
 
     }
 
     public void ShowlistByItem(String goods) {
-        mExampleList.clear();
+        ArchmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + MyDataBaseCreator.TABLE_NAME + " where  " + MyDataBaseCreator.col1 + " like '%" + goods + "%' order by history asc", null );
+        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.TABLE_NAMEArch +
+                " where  " + DbContractor.TableColumns.col1 + " like '%" + goods + "%' order by history asc", null );
         if (data.getCount() == 0) {
             PrintMessage( getString( R.string.alert ), getString( R.string.nodataintable ) );
         } else
@@ -280,27 +280,27 @@ public class ArchieveList extends AppCompatActivity {
 
         while (!data.isAfterLast())
             do {
-                String idnonit = data.getString( data.getColumnIndex( MyDataBaseCreator.ID ) );
-                String quantity = data.getString( data.getColumnIndex( MyDataBaseCreator.Quantity ) );
-                String qunatifier = data.getString( data.getColumnIndex( MyDataBaseCreator.Quantifier ) );
-                String itemNm = data.getString( data.getColumnIndex( MyDataBaseCreator.col1 ) );
-                String itemName = data.getString( data.getColumnIndex( MyDataBaseCreator.col2 ) );
-                String shopNm = data.getString( data.getColumnIndex( MyDataBaseCreator.person ) );
-                String DateBout = data.getString( data.getColumnIndex( MyDataBaseCreator.da ) );
-                mExampleList.add( new ArchexampleItem( idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout ) );
+                String idnonit = data.getString( data.getColumnIndex( DbContractor.TableColumns._ID ) );
+                String quantity = data.getString( data.getColumnIndex( DbContractor.TableColumns.Quantity ) );
+                String qunatifier = data.getString( data.getColumnIndex( DbContractor.TableColumns.Quantifier ) );
+                String itemNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.col1 ) );
+                String itemName = data.getString( data.getColumnIndex( DbContractor.TableColumns.col2 ) );
+                String shopNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.person ) );
+                String DateBout = data.getString( data.getColumnIndex( DbContractor.TableColumns.da ) );
+                ArchmExampleList.add( new ArchexampleItem( idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout ) );
 
             } while ((data.moveToNext()));
 
         data.close();
-        myrecycler.setLayoutManager( RecyLayManger );
-        myrecycler.setAdapter( RecyclerAdap );
+        Archmyrecycler.setLayoutManager( ArchRecyLayManger );
+        Archmyrecycler.setAdapter( ArchRecyclerAdap );
 
     }
 
     public void ShowlistAll() {
-        mExampleList.clear();
+        ArchmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + MyDataBaseCreator.TABLE_NAME + " order by history asc", null );
+        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.TABLE_NAMEArch + " order by history asc", null );
         if (data.getCount() == 0) {
             PrintMessage( getString( R.string.alert ), getString( R.string.nodataintable ) );
         } else
@@ -309,20 +309,20 @@ public class ArchieveList extends AppCompatActivity {
 
         while (!data.isAfterLast())
             do {
-                String idnonit = data.getString( data.getColumnIndex( MyDataBaseCreator.ID ) );
-                String quantity = data.getString( data.getColumnIndex( MyDataBaseCreator.Quantity ) );
-                String qunatifier = data.getString( data.getColumnIndex( MyDataBaseCreator.Quantifier ) );
-                String itemNm = data.getString( data.getColumnIndex( MyDataBaseCreator.col1 ) );
-                String itemName = data.getString( data.getColumnIndex( MyDataBaseCreator.col2 ) );
-                String shopNm = data.getString( data.getColumnIndex( MyDataBaseCreator.person ) );
-                String DateBout = data.getString( data.getColumnIndex( MyDataBaseCreator.da ) );
-                mExampleList.add( new ArchexampleItem( idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout ) );
+                String idnonit = data.getString( data.getColumnIndex( DbContractor.TableColumns._ID ) );
+                String quantity = data.getString( data.getColumnIndex( DbContractor.TableColumns.Quantity ) );
+                String qunatifier = data.getString( data.getColumnIndex( DbContractor.TableColumns.Quantifier ) );
+                String itemNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.col1 ) );
+                String itemName = data.getString( data.getColumnIndex( DbContractor.TableColumns.col2 ) );
+                String shopNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.person ) );
+                String DateBout = data.getString( data.getColumnIndex( DbContractor.TableColumns.da ) );
+                ArchmExampleList.add( new ArchexampleItem( idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout ) );
 
             } while ((data.moveToNext()));
 
         data.close();
-        myrecycler.setLayoutManager( RecyLayManger );
-        myrecycler.setAdapter( RecyclerAdap );
+        Archmyrecycler.setLayoutManager( ArchRecyLayManger );
+        Archmyrecycler.setAdapter( ArchRecyclerAdap );
 
     }
 
@@ -334,14 +334,16 @@ public class ArchieveList extends AppCompatActivity {
     public void FillWithDates() {
         searchspinerList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor datescursor = db.rawQuery( " Select distinct " + MyDataBaseCreator.da + " from " + MyDataBaseCreator.TABLE_NAME + " order by " + MyDataBaseCreator.da + " asc ", null );
+        Cursor datescursor = db.rawQuery( " Select distinct " + DbContractor.TableColumns.da + " from "
+                + DbContractor.TableColumns.TABLE_NAMEArch + " order by " +
+                "" + DbContractor.TableColumns.da + " asc ", null );
 
         if (datescursor.getCount() == 0) {
             return;
         } else {
             datescursor.moveToFirst();
             while (!datescursor.isAfterLast()) {
-                String dts = datescursor.getString( datescursor.getColumnIndex( MyDataBaseCreator.da ) );
+                String dts = datescursor.getString( datescursor.getColumnIndex( DbContractor.TableColumns.da ) );
                 searchspinerList.add( dts );
                 datescursor.moveToNext();
             }
@@ -353,13 +355,15 @@ public class ArchieveList extends AppCompatActivity {
     public void FillWithMolhanot() {
         searchspinerList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor molhanotCursor = db.rawQuery( "select distinct " + MyDataBaseCreator.person + " from " + MyDataBaseCreator.TABLE_NAME + " order by " + MyDataBaseCreator.da + " asc", null );
+        Cursor molhanotCursor = db.rawQuery( "select distinct " + DbContractor.TableColumns.person +
+                " from " + DbContractor.TableColumns.TABLE_NAMEArch + " order by " +
+                "" + DbContractor.TableColumns.da + " asc", null );
         if (molhanotCursor.getCount() == 0) {
             return;
         } else
             molhanotCursor.moveToFirst();
         while (!molhanotCursor.isAfterLast()) {
-            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( MyDataBaseCreator.person ) );
+            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( DbContractor.TableColumns.person ) );
             searchspinerList.add( Mlhanot );
             molhanotCursor.moveToNext();
         }
@@ -371,13 +375,15 @@ public class ArchieveList extends AppCompatActivity {
     public void FillWithItems() {
         searchspinerList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor itemcursor = db.rawQuery( "select distinct " + MyDataBaseCreator.col1 + " from " + MyDataBaseCreator.TABLE_NAME + " order by " + MyDataBaseCreator.da + " asc", null );
+        Cursor itemcursor = db.rawQuery( "select distinct " + DbContractor.TableColumns.col1 +
+                " from " + DbContractor.TableColumns.TABLE_NAMEArch + " order by " +
+                "" + DbContractor.TableColumns.da + " asc", null );
         if (itemcursor.getCount() == 0) {
             return;
         } else
             itemcursor.moveToFirst();
         while (!itemcursor.isAfterLast()) {
-            String dts = itemcursor.getString( itemcursor.getColumnIndex( MyDataBaseCreator.col1 ) );
+            String dts = itemcursor.getString( itemcursor.getColumnIndex( DbContractor.TableColumns.col1 ) );
             searchspinerList.add( dts );
             itemcursor.moveToNext();
         }

@@ -1,9 +1,10 @@
 package com.dev_bourheem.hadi;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.widget.Toast;
+
+import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +14,7 @@ import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 
 import static android.os.Environment.*;
-import static com.dev_bourheem.hadi.MainActivity.GetDate;
+import static com.dev_bourheem.hadi.mainStuff.MainActivity.GetDate;
 
 public class sharedmethods {
 

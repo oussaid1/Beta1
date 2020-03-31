@@ -233,7 +233,6 @@
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/edittextborders"
                     android:hint="@string/price_in_here"
-                    android:text="0"
                     android:inputType="numberSigned"
                     android:maxLength="10"
                     android:maxLines="1"

@@ -3,8 +3,6 @@ package com.dev_bourheem.hadi.Archieve;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.dev_bourheem.hadi.exampleitem;
-
 public class ArchexampleItem implements Parcelable {
     private String idno;
     private String quantity;

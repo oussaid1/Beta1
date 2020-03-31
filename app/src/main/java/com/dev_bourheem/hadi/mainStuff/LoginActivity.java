@@ -1,4 +1,4 @@
-package com.dev_bourheem.hadi;
+package com.dev_bourheem.hadi.mainStuff;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev_bourheem.hadi.Login.LoginClass;
+import com.dev_bourheem.hadi.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -30,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        setContentView( R.layout.activity_main3);
         PasswordIn = findViewById(R.id.PasswordIn);
         username = findViewById(R.id.loginNmIn);
         loginBtn = findViewById(R.id.loginBtn);
