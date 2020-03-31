@@ -35,11 +35,11 @@ import java.util.List;
 
 
 public class ArchEddit extends AppCompatActivity {
-    EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
-    MyDataBaseCreator MDBCR;
-    AdView Edit_ad;
-    Button delete;
-    Spinner delSpinner;
+    private EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
+    private  MyDataBaseCreator MDBCR;
+    private  AdView Edit_ad;
+    private  Button delete;
+    private Spinner delSpinner;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,7 +102,7 @@ public class ArchEddit extends AppCompatActivity {
         AdsEditActivityArch();
     }
 
-    public void AdsEditActivityArch() {
+    private void AdsEditActivityArch() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -113,7 +113,7 @@ public class ArchEddit extends AppCompatActivity {
         Edit_ad.loadAd(adRequest);
     }
 
-    public void GetThem() {
+    private void GetThem() {
         Intent intent = getIntent();
         exampleitem exampleitem = intent.getParcelableExtra("ArchExampleItem");
         String quantity = null;
@@ -145,7 +145,7 @@ public class ArchEddit extends AppCompatActivity {
 
     }
 
-    public void UpdateDB() {
+    private void UpdateDB() {
         Intent intent = getIntent();
         exampleitem exampleitem = intent.getParcelableExtra("ArchExampleItem");
         String idd = null;
@@ -166,7 +166,7 @@ public class ArchEddit extends AppCompatActivity {
         } else MsgBox("لم يتم الحفظ", 1);
     }
 
-    public void DelItem() {
+    private void DelItem() {
 
         Intent intent = getIntent();
         exampleitem exampleitem = intent.getParcelableExtra("ArchExampleItem");
@@ -182,12 +182,12 @@ public class ArchEddit extends AppCompatActivity {
 
     }
 
-    public void MsgBox(String mess, int p) {
+    private void MsgBox(String mess, int p) {
         Toast.makeText(ArchEddit.this, mess, p);
     }
 
 
-    public void onDialogueUpdate() {
+    private void onDialogueUpdate() {
         new AlertDialog.Builder(this)
                 .setTitle("تحذير")
                 .setMessage(getString(R.string.surewannaupdate))
@@ -202,7 +202,7 @@ public class ArchEddit extends AppCompatActivity {
                 .setNegativeButton(R.string.no, null).show();
     }
 
-    public void FillWithByShop() {
+    private void FillWithByShop() {
         List<String> persons = new ArrayList<>();
         SQLiteDatabase db = MDBCR.getWritableDatabase();
         Cursor cursor = db.rawQuery("select distinct " + DbContractor.TableColumns.person + " from " + DbContractor.TableColumns.TABLE_NAME + " ", null);
@@ -220,7 +220,7 @@ public class ArchEddit extends AppCompatActivity {
         cursor.close();
     }
 
-    public void onDialogueDelete() {
+    private void onDialogueDelete() {
         new AlertDialog.Builder(this)
                 .setTitle("تحذير")
                 .setMessage(getString(R.string.surewannadel))
@@ -235,12 +235,12 @@ public class ArchEddit extends AppCompatActivity {
                 .setNegativeButton(R.string.no, null).show();
     }
 
-    public void OpenListItems() {
+    private void OpenListItems() {
         Intent inte = new Intent(ArchEddit.this, MainActivity.class);
         startActivity(inte);
     }
 
-    public void DeleteBy(String molhanot) {
+    private void DeleteBy(String molhanot) {
         SQLiteDatabase db = MDBCR.getWritableDatabase();
         long deleted = db.delete( DbContractor.TableColumns.TABLE_NAME, DbContractor.TableColumns.person + " = ?", new String[]{molhanot});
         if (deleted > 0) {

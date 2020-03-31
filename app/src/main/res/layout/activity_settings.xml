@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/GreenP4"
+    android:background="@drawable/backgroundlkarne"
     android:orientation="vertical"
     tools:context=".mainStuff.LoginActivity">
 
@@ -45,7 +45,6 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:text="Archive"
-                    android:onClick="PutInArchive"
                     android:textAlignment="center"
                     android:textColor="@color/GreenP1" />
 

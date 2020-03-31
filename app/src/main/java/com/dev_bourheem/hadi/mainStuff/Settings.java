@@ -29,7 +29,6 @@ public class Settings extends AppCompatActivity {
     double user_defined_Quota, user_defined_guestQuota;
     String Userusername, Userpassword, Confirmedpass;
     LoginClass Lgin;
-    ForQuotas forQutaOC;
     MyDataBaseCreator MDBC;
 
     @Override
@@ -97,8 +96,7 @@ public class Settings extends AppCompatActivity {
         archiveIt.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MDBC = new MyDataBaseCreator( getApplicationContext() );
-                MDBC.PutInArchive();
+
             }
         } );
     }
@@ -116,14 +114,13 @@ public class Settings extends AppCompatActivity {
 
 
     public void LoadQuotatoDatabase() {
-        forQutaOC = new ForQuotas( getApplicationContext() );
 
         if (setQuota.getText().toString().trim().length() == 0 || setGuestQta.getText().toString().trim().length() == 0) {
             return;
         } else
             user_defined_Quota = Double.parseDouble( setQuota.getText().toString().trim() );
         user_defined_guestQuota = Double.parseDouble( setGuestQta.getText().toString().trim() );
-        boolean newRowAdded = forQutaOC.InjectData( user_defined_Quota, user_defined_guestQuota );
+        boolean newRowAdded = MDBC.InjectQuotaData( user_defined_Quota, user_defined_guestQuota );
         if (newRowAdded) {
             MsgBox( "تم الحفظ" );
             OpenActiviti();
@@ -160,10 +157,8 @@ public class Settings extends AppCompatActivity {
 
     public void ResetAll() {
         Lgin = new LoginClass( getApplicationContext() );
-        forQutaOC = new ForQuotas( getApplicationContext() );
         MDBC = new MyDataBaseCreator( getApplicationContext() );
         Lgin.deleteall();
-        forQutaOC.deleteall();
         MDBC.deleteall();
     }
 

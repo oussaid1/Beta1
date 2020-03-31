@@ -34,21 +34,6 @@ public class ForQuotas extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean InjectData(double Q1, double Q2) {
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(col11, Q1);
-        values.put(col22, Q2);
-        long insertStaus = db.insert(TABLE_NAME, null, values);
-        return insertStaus != -1;
-    }
-
-    public Cursor JibData() {
-        // M3Actvt= new LoginActivity();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor b1 = db.rawQuery("select * from " + TABLE_NAME + " ORDER BY id DESC limit 1", null);
-        return b1;
-    }
 
     public boolean deleteall() {
         SQLiteDatabase db = getWritableDatabase();

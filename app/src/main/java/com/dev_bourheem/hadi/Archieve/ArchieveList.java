@@ -175,7 +175,7 @@ public class ArchieveList extends AppCompatActivity {
         Adslist();
     }
 
-    public void Adslist() {
+    private void Adslist() {
         MobileAds.initialize( this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -186,13 +186,13 @@ public class ArchieveList extends AppCompatActivity {
         listAd.loadAd( adRequest );
     }
 
-    public void OpentMainActivity() {
+    private void OpentMainActivity() {
         final Intent intent2;
         intent2 = new Intent( this, MainActivity.class );
         startActivity( intent2 );
     }
 
-    public void OpentSettings() {
+    private void OpentSettings() {
         final Intent intent2;
         intent2 = new Intent( this, Settings.class );
         startActivity( intent2 );
@@ -206,10 +206,11 @@ public class ArchieveList extends AppCompatActivity {
         newAlert.show();
     }
 
-    public void ShowlistByMolhanot(String mohamed) {
+    private void ShowlistByMolhanot(String mohamed) {
         ArchmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.TABLE_NAMEArch + " where  " + DbContractor.TableColumns.person + " like '%" + mohamed + "%' order by history asc", null );
+        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.TABLE_NAMEArch + " where " +
+                " " + DbContractor.TableColumns.person + " like '%" + mohamed + "%' order by history asc", null );
 
         if (data.getCount() == 0) {
             PrintMessage( getString( R.string.alert ), getString( R.string.nodataintable ) );
@@ -236,7 +237,7 @@ public class ArchieveList extends AppCompatActivity {
 
     }
 
-    public void ShowlistByDate(String datatata) {
+    private void ShowlistByDate(String datatata) {
         ArchmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
         Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.TABLE_NAMEArch +
@@ -267,7 +268,7 @@ public class ArchieveList extends AppCompatActivity {
 
     }
 
-    public void ShowlistByItem(String goods) {
+    private void ShowlistByItem(String goods) {
         ArchmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
         Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.TABLE_NAMEArch +
@@ -297,10 +298,11 @@ public class ArchieveList extends AppCompatActivity {
 
     }
 
-    public void ShowlistAll() {
+    private void ShowlistAll() {
         ArchmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.TABLE_NAMEArch + " order by history asc", null );
+        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.TABLE_NAMEArch +
+                " order by history asc", null );
         if (data.getCount() == 0) {
             PrintMessage( getString( R.string.alert ), getString( R.string.nodataintable ) );
         } else
@@ -326,12 +328,12 @@ public class ArchieveList extends AppCompatActivity {
 
     }
 
-    public void OpentStats() {
+    private void OpentStats() {
         Intent intent = new Intent( this, stats.class );
         startActivity( intent );
     }
 
-    public void FillWithDates() {
+    private void FillWithDates() {
         searchspinerList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
         Cursor datescursor = db.rawQuery( " Select distinct " + DbContractor.TableColumns.da + " from "
@@ -352,7 +354,7 @@ public class ArchieveList extends AppCompatActivity {
         searchspinner.setAdapter( searchAdapter );
     }
 
-    public void FillWithMolhanot() {
+    private void FillWithMolhanot() {
         searchspinerList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
         Cursor molhanotCursor = db.rawQuery( "select distinct " + DbContractor.TableColumns.person +
@@ -393,13 +395,13 @@ public class ArchieveList extends AppCompatActivity {
     }
 
 
-    public void fillwithStar() {
+    private void fillwithStar() {
         searchspinerList.clear();
         searchspinerList.add( "*" );
         searchspinner.setAdapter( searchAdapter );
     }
 
-    public void addtoCategoryList() {
+    private void addtoCategoryList() {
         categoryspinnerList.add( "الكل" );
         categoryspinnerList.add( "حسب المحل" );
         categoryspinnerList.add( "حسب التاريخ" );

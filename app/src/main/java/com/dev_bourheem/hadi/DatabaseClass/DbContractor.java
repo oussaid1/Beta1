@@ -9,24 +9,42 @@ public final class DbContractor  {
     public class TableColumns implements BaseColumns {
 
 
-        public static final String TABLE_NAME = "Stuff";
+        public static final String MainTable = "Stuff";
         //public static final String ID = "ID";
-        public static final String col1 = "Item_Name";
-        public static final String col2 = "Item_Price";
-        public static final String person = "MoolHanout";
-        public static final String da = "history";
-        public static final String Quantifier = "Quantifiers";
-        public static final String Quantity = "quantity";
+        public static final String MItem_Name = "Item_Name";
+        public static final String MItem_Price = "Item_Price";
+        public static final String MShopName = "ShopName";
+        public static final String MDate = "History";
+        public static final String MQuantifier = "Quantifiers";
+        public static final String MQuantity = "quantity";
 
         /*************************************************************/
 
-        public static final String TABLE_NAMEArch = "StuffArch";
-      //  public static final String IDArch = "ID";
-        public static final String col1Arch = "Item_Name";
-        public static final String col2Arch = "Item_Price";
-        public static final String personArch = "MoolHanout";
-        public static final String daArch = "history";
-        public static final String QuantifierArch = "Quantifiers";
-        public static final String QuantityArch = "quantity";
+        public static final String ArchiveTable = "StuffArch";
+
+        public static final String ArItem_Name = "Item_Name";
+        public static final String ArItem_Price = "Item_Price";
+        public static final String ArShopName = "ShopName";
+        public static final String ArDate = "History";
+        public static final String ArQuantifier = "Quantifiers";
+        public static final String ArQuantity = "quantity";
+
+        /**************************************************************/
+
+        public static final String PaymentTable = "Payment";
+        public static final String PayDate = "PayDate";
+        public static final String shopName = "paidAmount";
+        public static final String paidAmount = "paidAmount";
+        public static final String paymentDate = "paymentDate";
+
+        public static final String InfoTable = "InfoTable";
+        public static final String SHOP_NAME = "name";
+        public static final String SHOP_PHONE = "phone";
+        public static final String SHOP_EMAIL = "email";
+
+        public static final String SettingsTable = "Payment";
+        public static final String userQuota = "userQuota";
+        public static final String userGQuota = "userGQuota";
     }
+
 }

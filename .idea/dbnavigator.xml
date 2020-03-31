@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -24,21 +24,21 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="3b946f8e-2d55-45ea-ab87-898f0c166251">
+      <connection connection-id="4ed44bc9-c5cd-4ea4-8566-c3ee42d69f88">
         <schema name="main" object-types="table, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="3b946f8e-2d55-45ea-ab87-898f0c166251">
-      <console name="Connection" type="STANDARD" schema="" session="Main"><![CDATA[select * from Stuff;]]></console>
+    <connection id="4ed44bc9-c5cd-4ea4-8566-c3ee42d69f88">
+      <console name="Connection" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="3b946f8e-2d55-45ea-ab87-898f0c166251" />
+    <connection id="4ed44bc9-c5cd-4ea4-8566-c3ee42d69f88" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -63,7 +63,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="3b946f8e-2d55-45ea-ab87-898f0c166251" active="true">
+      <connection id="4ed44bc9-c5cd-4ea4-8566-c3ee42d69f88" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -78,7 +78,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="C:\Users\oussa\Documents\AndroidStudio\DeviceExplorer\oneplus-oneplus_a5000-7ccf9fe0\data\data\com.dev_bourheem.hadi\databases\Merchandise.db" schema="main" />
+            <file path="C:\Users\oussa\Documents\AndroidStudio\DeviceExplorer\oneplus-oneplus_a5000-7ccf9fe0\data\data\com.dev_bourheem.hadi\databases\Toys.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />

@@ -229,6 +229,9 @@ public class MainActivity extends AppCompatActivity {
         TotalallOut.setText(String.valueOf(getTotalAll()));
         showQuota();
         TraficLight(sumtoday);
+        if(isFirstDayOfMonth(Calendar.getInstance())){
+            ArchiveIt();
+        }
         ADSmainActivity();
     }
 
@@ -443,7 +446,7 @@ public class MainActivity extends AppCompatActivity {
 
     public double GetQuota() {
         forQutaOC = new ForQuotas(getApplicationContext());
-        Cursor qfinder = forQutaOC.JibData();
+        Cursor qfinder = MDBC.JibData();
         if (qfinder.getCount() == 0) {
             MsgBox(getString(R.string.noquotafound));
             Quota = 0;
@@ -480,7 +483,7 @@ public class MainActivity extends AppCompatActivity {
         if (itemNameCursor.getCount() == 0) MsgBox(getString(R.string.noitemnamefound));
         else {
             while (itemNameCursor.moveToNext()) {
-                allList.add(itemNameCursor.getString(itemNameCursor.getColumnIndex( DbContractor.TableColumns.col1)));
+                allList.add(itemNameCursor.getString(itemNameCursor.getColumnIndex( DbContractor.TableColumns.MItem_Name)));
 
             }
         }
@@ -497,7 +500,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             while (itemNameCursor.moveToNext()) {
-                Molhanot.add(itemNameCursor.getString(itemNameCursor.getColumnIndex(DbContractor.TableColumns.person)));
+                Molhanot.add(itemNameCursor.getString(itemNameCursor.getColumnIndex(DbContractor.TableColumns.MShopName)));
 
             }
         }
@@ -540,9 +543,9 @@ public class MainActivity extends AppCompatActivity {
     public void FillWithDaysforShop(String shop) {
         Sub2List.clear();
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor datecurs = db.rawQuery(" Select distinct " + DbContractor.TableColumns.da + " from "
-                + DbContractor.TableColumns.TABLE_NAME + " where " + DbContractor.TableColumns.person +
-                " like '%" + shop + "%' order by " + DbContractor.TableColumns.da + "", null);
+        Cursor datecurs = db.rawQuery(" Select distinct " + DbContractor.TableColumns.MDate + " from "
+                + DbContractor.TableColumns.MainTable + " where " + DbContractor.TableColumns.MShopName +
+                " like '%" + shop + "%' order by " + DbContractor.TableColumns.MDate + "", null);
         if (datecurs.getCount() == 0) {
             return;
         } else {
@@ -841,4 +844,17 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    public boolean isFirstDayOfMonth(Calendar calendar) {
+        if (calendar == null) {
+            throw new IllegalArgumentException("Calendar cannot be null.");
+        }
+       int maxDayOfMonth= calendar.getActualMaximum(Calendar.DATE);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        return dayOfMonth == 1;
+    }
+
+    public void ArchiveIt(){
+        SQLiteDatabase db =MDBC.getWritableDatabase();
+        db.execSQL( "insert into "+DbContractor.TableColumns.TABLE_NAMEArch+" select * from "+DbContractor.TableColumns.TABLE_NAME +"  order by " +DbContractor.TableColumns.da );
+    }
 }
