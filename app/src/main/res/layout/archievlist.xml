@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
-    android:background="@drawable/backgroundlkarne"
     android:elevation="8dp"
-    android:orientation="vertical"
+    android:background="@color/GreenP4"
+    android:orientation="horizontal"
     app:cardCornerRadius="8dp">
 
     <LinearLayout

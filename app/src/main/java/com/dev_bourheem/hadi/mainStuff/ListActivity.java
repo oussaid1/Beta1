@@ -122,7 +122,7 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-        searchAdapter = new ArrayAdapter<>(this, layout.simple_spinner_dropdown_item, searchspinerList);
+       // searchAdapter = new ArrayAdapter<>(this, layout.simple_spinner_dropdown_item, searchspinerList);
         searchspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -334,16 +334,22 @@ public class ListActivity extends AppCompatActivity {
     public void FillWithDates() {
         searchspinerList.clear();
         searchspinerList = MdbCrtr.GetDistinctFromTable(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MDate,DbContractor.TableColumns.MDate);
+        searchAdapter = new ArrayAdapter<>(this, layout.simple_spinner_dropdown_item, searchspinerList);
+        searchspinner.setAdapter(searchAdapter);
     }
 
     public void FillWithMolhanot() {
         searchspinerList.clear();
         searchspinerList = MdbCrtr.GetDistinctFromTable(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MShopName,DbContractor.TableColumns.MShopName);
+        searchAdapter = new ArrayAdapter<>(this, layout.simple_spinner_dropdown_item, searchspinerList);
+        searchspinner.setAdapter(searchAdapter);
     }
 
     public void FillWithItems() {
         searchspinerList.clear();
         searchspinerList = MdbCrtr.GetDistinctFromTable(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MItem_Name,DbContractor.TableColumns.MItem_Name);
+        searchAdapter = new ArrayAdapter<>(this, layout.simple_spinner_dropdown_item, searchspinerList);
+        searchspinner.setAdapter(searchAdapter);
     }
 
 

@@ -32,6 +32,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
+                android:clipChildren="true"
+                android:dropDownWidth="200dp"
+                android:dropDownHeight="100dp"
+                android:popupBackground="@color/GreenP4"
                 android:textAlignment="center"
                 android:textColor="@color/GreenP" />
         </LinearLayout>
@@ -49,6 +53,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
+                android:clipChildren="true"
+                android:dropDownWidth="200dp"
+                android:dropDownHeight="100dp"
+                android:popupBackground="@color/GreenP4"
                 android:textAlignment="center"
                 android:textColor="@color/GreenP" />
         </LinearLayout>

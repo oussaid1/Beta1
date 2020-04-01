@@ -42,7 +42,7 @@ public class ArchievStats extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archiev_stats);
-        anyChartView = findViewById(R.id.chart2);
+        anyChartView = findViewById(R.id.Archchart2);
         APIlib.getInstance().setActiveAnyChartView(anyChartView);
 
         data = new ArrayList<>();
@@ -79,7 +79,7 @@ public class ArchievStats extends AppCompatActivity {
         cartesian.yAxis(0).title("الثمن");
 
         anyChartView.setChart(cartesian);
-        AnyChartView anyChartView2 = findViewById(R.id.chartPie);
+        AnyChartView anyChartView2 = findViewById(R.id.ArchchartPie);
         APIlib.getInstance().setActiveAnyChartView(anyChartView2);
 
         Pie pie = AnyChart.pie();
@@ -110,51 +110,12 @@ public class ArchievStats extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        AdView mAdView = findViewById(R.id.adViewstats);
+        AdView mAdView = findViewById(R.id.ArchadViewstats);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
 
-    private void PiesIt() {
 
-        Cartesian cartesian = AnyChart.column();
-
-
-        datax.add(new ValueDataEntry("Rouge", 80540));
-        datax.add(new ValueDataEntry("Foundation", 94190));
-        datax.add(new ValueDataEntry("Mascara", 102610));
-        datax.add(new ValueDataEntry("Lip gloss", 110430));
-        datax.add(new ValueDataEntry("Lipstick", 128000));
-        datax.add(new ValueDataEntry("Nail polish", 143760));
-        datax.add(new ValueDataEntry("Eyebrow pencil", 170670));
-        datax.add(new ValueDataEntry("Eyeliner", 213210));
-        datax.add(new ValueDataEntry("Eyeshadows", 249980));
-
-        Column column = cartesian.column(datax);
-
-        column.tooltip()
-                .titleFormat("{%X}")
-                .position(Position.CENTER_BOTTOM)
-                .anchor(Anchor.CENTER_BOTTOM)
-                .offsetX(0d)
-                .offsetY(5d)
-                .format("${%Value}{groupsSeparator: }");
-
-        cartesian.animation(true);
-        cartesian.title("Top 10 Cosmetic Products by Revenue");
-
-        cartesian.yScale().minimum(0d);
-
-        cartesian.yAxis(0).labels().format("${%Value}{groupsSeparator: }");
-
-        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
-        cartesian.interactivity().hoverMode(HoverMode.BY_X);
-
-        cartesian.xAxis(0).title("Product");
-        cartesian.yAxis(0).title("Revenue");
-
-        anyChartView.setChart(cartesian);
-    }
 
 
     private void PieThatThing() {
@@ -181,7 +142,7 @@ public class ArchievStats extends AppCompatActivity {
         } else {
             while (cu.moveToNext()) {
                 String date = cu.getString(cu.getColumnIndex(DbContractor.TableColumns.ArDate));
-                int price = cu.getInt(cu.getColumnIndex("totalbydateArch"));
+                int price = cu.getInt(cu.getColumnIndex("totalbydate"));
                 datax.add(new ValueDataEntry(date, price));
             }
             cu.close();

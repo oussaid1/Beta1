@@ -221,9 +221,7 @@ public class MainActivity extends AppCompatActivity {
         TotalallOut.setText(String.valueOf(getTotalAll()));
         showQuota();
         TraficLight(sumtoday);
-        if (isFirstDayOfMonth(Calendar.getInstance())) {
-            //     ArchiveIt();
-        }
+
         ADSmainActivity();
     }
 
@@ -483,6 +481,7 @@ public class MainActivity extends AppCompatActivity {
     //this method gets the total of all product items from data base
     public double getTotalAll() {
         /*NumberFormat mfr = new DecimalFormat("0.00");*/
+       double allPaid= MDBC.GetPaidAmountForAllShop(DbContractor.TableColumns.PaymentTable, DbContractor.TableColumns.PaidAmount);
         Cursor c = MDBC.GetSumall();
         if (c.getCount() == 0) {
             return SumAll = 0;
@@ -492,7 +491,7 @@ public class MainActivity extends AppCompatActivity {
             //closing cursor so as not to bring anything else or ruin sth
             c.close();
         }
-        return SumAll;
+        return SumAll - allPaid;
     }
 
     /** these methods fill the second Spinner according to the firstSpinner */
@@ -557,6 +556,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** these are the methods for sums */
     public double GetSumByShop(String mohamed) {
+      double paid=  MDBC.GetPaidAmountForShop(DbContractor.TableColumns.PaymentTable, DbContractor.TableColumns.PaidShopName, DbContractor.TableColumns.PaidAmount,mohamed);
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Solo from " +
@@ -572,7 +572,8 @@ public class MainActivity extends AppCompatActivity {
             TraficLight(sumtoday);
         }
         data.close();
-        return sumtoday;
+        sumtoday = - paid;
+        return sumtoday ;
     }
     public double GetSumByDate(String ladat) {
         NumberFormat mfr = new DecimalFormat("0.00");
@@ -779,7 +780,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ArchiveIt() {
-        SQLiteDatabase db = MDBC.getWritableDatabase();
-        db.execSQL("insert into " + DbContractor.TableColumns.ArchiveTable + " select * from " + DbContractor.TableColumns.MainTable + "  order by " + DbContractor.TableColumns.MDate);
+        if (isFirstDayOfMonth(Calendar.getInstance())) {
+            //     ArchiveIt();
+            SQLiteDatabase db = MDBC.getWritableDatabase();
+            db.execSQL("insert into " + DbContractor.TableColumns.ArchiveTable + " select * from " + DbContractor.TableColumns.MainTable +
+                    "  order by " + DbContractor.TableColumns.MDate);
+        }
+
     }
 }

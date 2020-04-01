@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/GreenP4"
+    android:background="@drawable/backgroundlkarne"
     android:orientation="vertical"
     tools:context=".mainStuff.LoginActivity">
 
@@ -22,16 +22,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_marginStart="4dp"
                 android:layoutDirection="rtl"
-                android:elevation="4dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/archiveIt"
-                    android:layout_width="79dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings"
+                    android:textSize="16sp"
                     android:textAlignment="center"
                     android:textColor="@color/GreenP1" />
 
@@ -71,7 +71,6 @@
                             android:inputType="numberDecimal"
                             android:maxLength="10"
                             android:maxLines="1"
-                            android:padding="4dp"
                             android:textAlignment="center" />
                     </LinearLayout>
 
@@ -94,7 +93,6 @@
                             android:inputType="numberDecimal"
                             android:maxLength="10"
                             android:maxLines="1"
-                            android:padding="4dp"
                             android:textAlignment="center" />
                     </LinearLayout>
                 </LinearLayout>
@@ -139,7 +137,6 @@
                             android:hint="@string/username_here"
                             android:maxLength="16"
                             android:maxLines="1"
-                            android:padding="4dp"
                             android:textAlignment="center" />
                     </LinearLayout>
 
@@ -160,7 +157,6 @@
                             android:inputType="textPassword"
                             android:maxLength="8"
                             android:maxLines="1"
-                            android:padding="4dp"
                             android:textAlignment="center" />
 
                         <EditText
@@ -174,7 +170,6 @@
                             android:inputType="textPassword"
                             android:maxLength="8"
                             android:maxLines="1"
-                            android:padding="4dp"
                             android:textAlignment="center" />
 
                     </LinearLayout>

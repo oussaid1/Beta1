@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/GreenP4"
+    android:background="@drawable/backgroundlkarne"
     android:theme="@style/AppTheme"
     tools:context=".mainStuff.MainActivity">
 
@@ -55,22 +55,8 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/saqf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/justborderz"
-                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layoutDirection="rtl"
-                    android:background="@drawable/justborderz"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -78,14 +64,13 @@
                         android:layout_margin="4dp"
                         android:background="@drawable/justborderz"
                         android:layoutDirection="rtl"
-
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            android:layout_margin="2dp"
+                            android:layout_margin="4dp"
                             android:text="أظف المنتوج"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -98,31 +83,69 @@
                             android:layout_margin="4dp"
                             android:src="@drawable/ic_shopping" />
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/justborderz"
+                            android:layoutDirection="rtl"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="4dp"
+                                android:maxLines="1"
+                                android:text="@string/limit"
+                                android:textColor="@color/Green"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/hereisurqt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_margin="2dp"
+                                android:text="0"
+                                android:textAlignment="center"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:maxLines="1"
-                        android:paddingEnd="8dp"
-                        android:text="@string/limit"
-                        android:textColor="@color/Green" />
 
-                    <TextView
-                        android:id="@+id/hereisurqt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/justborderz"
-                        android:layout_margin="2dp"
-                        android:text="0"
-                        android:textAlignment="center" />
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/justborderz"
+                android:layoutDirection="rtl"
+                android:orientation="vertical">
 
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="@string/left_of_quota"
+                    android:textAlignment="center"
+                    android:textColor="@color/orange"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/QuotaLeftOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="4dp"
+                    android:maxLines="1"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/GreenP"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -219,8 +242,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_margin="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/justborderz"
                     android:layoutDirection="rtl"
@@ -232,6 +254,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:text="@string/total"
+                        android:textSize="18sp"
                         android:textAlignment="center"
                         android:textColor="@color/GreenP0" />
 
@@ -247,6 +270,7 @@
                         android:background="@drawable/edittextborders"
                         android:maxLines="1"
                         android:text="10000"
+                        android:textSize="18sp"
                         android:textAlignment="center"
                         android:textColor="@color/orange"
                         android:textStyle="bold" />
@@ -265,7 +289,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_margin="2dp"
+                        android:layout_margin="4dp"
                         android:clipChildren="true"
                         android:dropDownWidth="200dp"
                         android:dropDownHeight="100dp"
@@ -290,7 +314,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_margin="2dp"
+                        android:layout_margin="4dp"
                         android:clipChildren="true"
                         android:dropDownWidth="200dp"
                         android:dropDownHeight="80dp"
@@ -312,7 +336,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
-                        android:layout_margin="2dp"
+                        android:layout_margin="4dp"
                         android:dropDownWidth="200dp"
                         android:dropDownHeight="200dp"
                         android:maxLines="1"
@@ -327,8 +351,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_margin="4dp"
                 android:layoutDirection="rtl"
                 android:background="@drawable/justborderz"
                 android:layout_weight="1"
@@ -340,6 +363,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:text="@string/totaltoday"
+                    android:textSize="18sp"
+
                     android:textAlignment="center"
                     android:textColor="@color/GreenP1" />
 
@@ -352,50 +377,13 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="4dp"
-                    android:background="@drawable/edittextborders"
+                    android:textSize="18sp"
                     android:maxLines="1"
                     android:text="10000"
                     android:textAlignment="center"
                     android:textColor="@color/green"
                     android:textStyle="bold" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:layoutDirection="rtl"
-                android:background="@drawable/justborderz"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="@string/left_of_quota"
-                    android:textAlignment="center"
-                    android:textColor="@color/orange" />
-
-                <TextView
-                    android:id="@+id/QuotaLeftOut"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="4dp"
-                    android:background="@drawable/edittextborders"
-                    android:maxLines="1"
-                    android:text="0"
-                    android:textAlignment="center"
-                    android:textColor="@color/GreenP"
-                    android:textStyle="bold" />
             </LinearLayout>
 
 

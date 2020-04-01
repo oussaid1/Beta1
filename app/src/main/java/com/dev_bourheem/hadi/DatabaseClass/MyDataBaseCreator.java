@@ -200,14 +200,28 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         values.put(DbContractor.TableColumns.PaidShopName, shopToPay);
         values.put(DbContractor.TableColumns.PaidAmount, PaidAmount);
         values.put(DbContractor.TableColumns.PaymentDate, Paydate);
-        long insertStaus = db.insert(DbContractor.TableColumns.MainTable, null, values);
+        long insertStaus = db.insert(DbContractor.TableColumns.PaymentTable, null, values);
         return insertStaus != -1;
     }
     public double GetPaidAmountForShop(String table,String shopName,String paidAmountColumn, String ShopNameLike){
         double paid ;
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT SUM ("+ paidAmountColumn +") from "+table+ " " +
-                "where "+shopName+" like in '%" + ShopNameLike + "%'ORDER BY "+shopName+" asc", null);
+        Cursor c = db.rawQuery("SELECT SUM ("+ paidAmountColumn +") as sumOfShop from " + table + " " +
+                "where "+shopName+" like  '%" + ShopNameLike + "%' ORDER BY " + shopName + " asc", null);
+        if (c.getCount() == 0) {
+            return paid = 0;
+        } else {
+            c.moveToFirst();
+            paid = c.getDouble(c.getColumnIndex("sumOfShop"));
+            //closing cursor so as not to bring anything else or ruin sth
+            c.close();
+            return paid;
+        }
+    }
+    public double GetPaidAmountForAllShop(String table,String paidAmountColumn){
+        double paid ;
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT SUM ("+ paidAmountColumn +") from "+table+" ", null);
         if (c.getCount() == 0) {
             return paid = 0;
         } else {

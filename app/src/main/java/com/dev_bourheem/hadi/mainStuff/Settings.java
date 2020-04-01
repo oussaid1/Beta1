@@ -3,6 +3,7 @@ package com.dev_bourheem.hadi.mainStuff;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +37,7 @@ import java.util.List;
 
 public class Settings extends AppCompatActivity {
     private Spinner ShopToDeleteSpinner, ShopToPaySpinner;
+
     private TextView archiveIt;
     private EditText setQuota, setGuestQta, setusername, setpassword, confirmpass, paidAmountIn;
     private Button delete, saveBtnforuserQuotas, SaveBtnforuserdata,payButton;
@@ -130,11 +132,11 @@ public class Settings extends AppCompatActivity {
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(MDBC.PayShop(ShopToPaySpinner.getSelectedItem().toString(),Double.parseDouble(paidAmountIn.getText().toString().trim()),GetDate())) {
-                   MsgBox("Successfully Paid");
-               }else{
-                   MsgBox("Payment Unsuccessful");
-               }
+                if(paidAmountIn.getText().toString().trim().length() != 0){
+                    ConfirmPay();
+                }else {
+                    MsgBox(getString(R.string.plzinsertamount));
+                }
             }
         });
         FillWithShopNames();
@@ -161,10 +163,10 @@ public class Settings extends AppCompatActivity {
         user_defined_guestQuota = Double.parseDouble(setGuestQta.getText().toString().trim());
         boolean newRowAdded = MDBC.InjectQuotaData(user_defined_Quota, user_defined_guestQuota);
         if (newRowAdded) {
-            MsgBox("تم الحفظ");
+            MsgBox(getString(R.string.saved));
             OpenActiviti();
         } else {
-            MsgBox("لم يتم الحفظ");
+            MsgBox(getString(R.string.notsaved));
             setQuota.setText("");
             setGuestQta.setText("");
         }
@@ -183,7 +185,7 @@ public class Settings extends AppCompatActivity {
     public void LoadusertoDatabase() {
         Lgin = new LoginClass(getApplicationContext());
         if ((setusername.getText().toString().trim().length() == 0 || setpassword.getText().toString().trim().length() == 0)) {
-            MsgBox("المرجو ادخال المعلومات اولا");
+            MsgBox(getString(R.string.insertinfofirst));
         } else {
             Userusername = setusername.getText().toString().trim();
             Userpassword = setpassword.getText().toString().trim();
@@ -192,10 +194,10 @@ public class Settings extends AppCompatActivity {
                 boolean newRowAdded = Lgin.InjectData(Userusername, Userpassword);
 
                 if (newRowAdded) {
-                    MsgBox("تم الحفظ");
+                    MsgBox(getString(R.string.saved));
                     OpenActiviti();
-                } else MsgBox("لم يتم الحفظ");
-            } else MsgBox("الإسم والقن غير متطابقان");
+                } else MsgBox(getString(R.string.notsaved));
+            } else MsgBox(getString(R.string.wrongpassoruser));
         }
     }
 
@@ -213,7 +215,7 @@ public class Settings extends AppCompatActivity {
 
     private void OnDialodgDelete() {
         new AlertDialog.Builder(getApplicationContext())
-                .setTitle("تحذير")
+                .setTitle(R.string.warning)
                 .setMessage(getString(R.string.surewannadelall))
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
@@ -248,12 +250,6 @@ public class Settings extends AppCompatActivity {
 
             public void onClick(DialogInterface dialog, int whichButton) {
 
-                /*if (Restore()) {
-                    MsgBox( "تم" );
-                } else {
-                    MsgBox( "لم يتم" );
-                }*/
-
             }
         });
         builder.setNegativeButton(R.string.no, null);
@@ -262,11 +258,47 @@ public class Settings extends AppCompatActivity {
 
     private void FillWithShopNames() {
         ShopNamesList= new ArrayList<>();
-        ShopNamesList = MDBC.GetDistinctFromTable(DbContractor.TableColumns.ArchiveTable, DbContractor.TableColumns.ArShopName, DbContractor.TableColumns.ArShopName);
+        ShopNamesList = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, DbContractor.TableColumns.MShopName);
        ShopNamesSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, ShopNamesList);
         ShopToPaySpinner.setAdapter(ShopNamesSpinnerAdapter);
         ShopToDeleteSpinner.setAdapter(ShopNamesSpinnerAdapter);
     }
+    public void ConfirmPay(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.warning));
+        builder.setMessage(R.string.surewanapay);
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                if(MDBC.PayShop(ShopToPaySpinner.getSelectedItem().toString(),Double.parseDouble(paidAmountIn.getText().toString().trim()),GetDate())) {
+                    MsgBox(getString(R.string.paysuccess));
+                }else{
+                    MsgBox(getString(R.string.payunsuccessful));
+                }
+                ArchiveIt();
+            }
+        });
+        builder.setNegativeButton(R.string.no, null);
+        builder.show();
+    }
+    public boolean isFirstDayOfMonth(Calendar calendar) {
+        if (calendar == null) {
+            throw new IllegalArgumentException("Calendar cannot be null.");
+        }
+        int maxDayOfMonth = calendar.getActualMaximum(Calendar.DATE);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        return dayOfMonth == 1;
+    }
+
+    public void ArchiveIt() {
+        if (isFirstDayOfMonth(Calendar.getInstance())) {
+            //     ArchiveIt();
+            SQLiteDatabase db = MDBC.getWritableDatabase();
+            db.execSQL("insert into " + DbContractor.TableColumns.ArchiveTable + " select * from " + DbContractor.TableColumns.MainTable +
+                    "  order by " + DbContractor.TableColumns.MDate);
+        }
+
+    }
 }
 

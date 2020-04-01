@@ -51,9 +51,6 @@ public class stats extends AppCompatActivity {
         Cartesian cartesian = AnyChart.column();
 
         Pie15HighDates();
-       /* datax.add(new ValueDataEntry("Rouge", 80540));
-        datax.add(new ValueDataEntry("Foundation", 94190));*/
-
 
         Column column = cartesian.column(datax);
 
@@ -85,9 +82,6 @@ public class stats extends AppCompatActivity {
         Pie pie = AnyChart.pie();
 
         Pie8MostBoughtItems();
-        /*data.add(new ValueDataEntry("Apples", 6371664));
-        data.add(new ValueDataEntry("Pears", 789622));*/
-
 
         pie.data(data);
 
@@ -115,7 +109,7 @@ public class stats extends AppCompatActivity {
         mAdView.loadAd(adRequest);
     }
 
-    public void PiesIt() {
+   /* public void PiesIt() {
 
         Cartesian cartesian = AnyChart.column();
 
@@ -154,7 +148,7 @@ public class stats extends AppCompatActivity {
         cartesian.yAxis(0).title("Revenue");
 
         anyChartView.setChart(cartesian);
-    }
+    }*/
 
 
     public void Pie8MostBoughtItems() {
@@ -181,7 +175,7 @@ public class stats extends AppCompatActivity {
         } else {
             while (cu.moveToNext()) {
                 String date = cu.getString(cu.getColumnIndex(DbContractor.TableColumns.MDate));
-                int price = cu.getInt(cu.getColumnIndex("totalbydateArch"));
+                int price = cu.getInt(cu.getColumnIndex("totalbydate"));
                 datax.add(new ValueDataEntry(date, price));
             }
             cu.close();

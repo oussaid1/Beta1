@@ -329,7 +329,7 @@ public class ArchieveList extends AppCompatActivity {
     }
 
     private void OpentStats() {
-        Intent intent = new Intent( this, stats.class );
+        Intent intent = new Intent( this, ArchievStats.class );
         startActivity( intent );
     }
 
@@ -391,7 +391,6 @@ public class ArchieveList extends AppCompatActivity {
         }
         itemcursor.close();
         searchspinner.setAdapter( searchAdapter );
-        //searchAdapter.notifyDataSetChanged();
     }
 
 

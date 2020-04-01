@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <item
         android:id="@+id/mainArch"
@@ -8,11 +9,11 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/statsArch"
-        android:title="اصائيات الأرشيف"
+        android:title="احصائيات الأرشيف"
         app:showAsAction="never" />
     <item
         android:id="@+id/SettingsArch"
-        android:title="اعدادات الأرشيف"
+        android:title="اعدادات "
         app:showAsAction="never" />
 
     <item
