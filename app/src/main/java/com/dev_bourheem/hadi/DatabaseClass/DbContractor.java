@@ -9,7 +9,7 @@ public final class DbContractor  {
     public class TableColumns implements BaseColumns {
 
 
-        public static final String MainTable = "Stuff";
+        public static final String MainTable = "MainTable";
         //public static final String ID = "ID";
         public static final String MItem_Name = "Item_Name";
         public static final String MItem_Price = "Item_Price";
@@ -20,7 +20,7 @@ public final class DbContractor  {
 
         /*************************************************************/
 
-        public static final String ArchiveTable = "StuffArch";
+        public static final String ArchiveTable = "ArchiveTable";
         public static final String ArItem_Name = "Item_Name";
         public static final String ArItem_Price = "Item_Price";
         public static final String ArShopName = "ShopName";
@@ -30,26 +30,28 @@ public final class DbContractor  {
 
 
         public static final String ArchivePaymentTable = "ArchivePaymentTable";
-        public static final String ArPayDate = "ArPayDate";
-        public static final String ArshopName = "ArpaidAmount";
-        public static final String ArpaidAmount = "ArpaidAmount";
-        public static final String ArpaymentDate = "ArpaymentDate";
+        public static final String ArPaidShopName = "ArPshopName";
+        public static final String ArPaidAmount = "ArpaidAmount";
+        public static final String ArPaymentDate = "ArpaymentDate";
         /**************************************************************/
 
-        public static final String PaymentTable = "Payment";
-        public static final String PayDate = "PayDate";
-        public static final String shopName = "paidAmount";
-        public static final String paidAmount = "paidAmount";
-        public static final String paymentDate = "paymentDate";
+        public static final String PaymentTable = "PaymentTable";
+        public static final String PaidShopName = "pshopName";
+        public static final String PaidAmount = "paidAmount";
+        public static final String PaymentDate = "paymentDate";
 
         public static final String InfoTable = "InfoTable";
         public static final String SHOP_NAME = "name";
         public static final String SHOP_PHONE = "phone";
         public static final String SHOP_EMAIL = "email";
 
-        public static final String SettingsTable = "Payment";
+        public static final String SettingsTable = "SettingsTable";
         public static final String userQuota = "userQuota";
         public static final String userGQuota = "userGQuota";
+
+        public static final String BooleansTable = "SettingsTable";
+        public static final String BooleanName = "userQuota";
+        public static final String BooleanStatus = "userGQuota";
     }
 
 }

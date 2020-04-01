@@ -62,19 +62,48 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/justborderz"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:background="@drawable/justborderz"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/justborderz"
+                        android:layoutDirection="rtl"
+
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:layout_margin="2dp"
+                            android:text="أظف المنتوج"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:layout_margin="4dp"
+                            android:src="@drawable/ic_shopping" />
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="4dp"
                         android:maxLines="1"
                         android:paddingEnd="8dp"
                         android:text="@string/limit"
@@ -82,38 +111,13 @@
 
                     <TextView
                         android:id="@+id/hereisurqt"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:background="@drawable/justborderz"
                         android:layout_margin="2dp"
-                        android:text="0000"
-                        android:background="@drawable/edittextborders"
+                        android:text="0"
                         android:textAlignment="center" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|center_horizontal"
-                        android:text="أظف المنتوج"
-                        android:layout_margin="2dp"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/fab"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:layout_gravity="center_horizontal|center_vertical"
-                        android:src="@drawable/ic_shopping" />
-
                 </LinearLayout>
 
 
@@ -213,6 +217,43 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/justborderz"
+                    android:layoutDirection="rtl"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:text="@string/total"
+                        android:textAlignment="center"
+                        android:textColor="@color/GreenP0" />
+
+                    <TextView
+                        android:id="@+id/TotalallOut"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@drawable/edittextborders"
+                        android:maxLines="1"
+                        android:text="10000"
+                        android:textAlignment="center"
+                        android:textColor="@color/orange"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
@@ -288,17 +329,16 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
+                android:layoutDirection="rtl"
                 android:background="@drawable/justborderz"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/QuotaLeftNm"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="1dp"
+                    android:layout_margin="4dp"
                     android:text="@string/totaltoday"
                     android:textAlignment="center"
                     android:textColor="@color/GreenP1" />
@@ -327,17 +367,16 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
+                android:layoutDirection="rtl"
                 android:background="@drawable/justborderz"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="22dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
                     android:text="@string/left_of_quota"
                     android:textAlignment="center"
                     android:textColor="@color/orange" />
@@ -356,44 +395,6 @@
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/GreenP"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/justborderz"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="4dp"
-                    android:text="@string/total"
-                    android:textAlignment="center"
-                    android:textColor="@color/GreenP0" />
-
-                <TextView
-                    android:id="@+id/TotalallOut"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="4dp"
-                    android:background="@drawable/edittextborders"
-                    android:maxLines="1"
-                    android:text="10000"
-                    android:textAlignment="center"
-                    android:textColor="@color/orange"
                     android:textStyle="bold" />
             </LinearLayout>
 

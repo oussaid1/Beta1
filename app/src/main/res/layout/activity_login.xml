@@ -3,22 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/backgroundlkarne"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundlkarne"
     tools:context=".mainStuff.LoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
-        android:background="@color/GreenP4">
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-70dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_gravity="center_vertical"
-            android:verticalScrollbarPosition="right">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/TopLayout"
@@ -27,7 +25,6 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/justborderz"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -38,15 +35,15 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="25dp"
-                    android:layout_weight="3"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
+                    android:layout_weight="3"
                     android:elevation="2dp"
                     android:onClick="MasterLogin"
                     android:text="@string/login_page"
                     android:textAlignment="center"
-                    android:textColor="@color/GreenP1" />
+                    android:textColor="@color/GreenP" />
 
             </LinearLayout>
 
@@ -54,69 +51,67 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/TopLayout"
-                android:layout_marginTop="80dp"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                android:layout_marginTop="80dp">
 
                 <LinearLayout
                     android:layout_width="199dp"
                     android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:elevation="8dp"
+                    android:layout_centerVertical="true"
                     android:background="@drawable/justborderz"
+                    android:elevation="8dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
                         android:layout_marginBottom="4dp"
-                        android:text="@string/username"/>
+                        android:text="@string/username" />
 
                     <EditText
                         android:id="@+id/loginNmIn"
                         android:layout_width="150dp"
                         android:layout_height="40dp"
-                        android:layout_marginTop="4dp"
-                        android:textAlignment="center"
                         android:layout_gravity="center"
+                        android:layout_marginTop="4dp"
                         android:background="@drawable/thinborders"
                         android:drawableStart="@drawable/ic_username"
                         android:maxLines="1"
                         android:padding="4dp"
-                       />
+                        android:textAlignment="center" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="1dp"
-                        android:layout_gravity="center"
                         android:text="@string/password"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/PasswordIn"
                         android:layout_width="150dp"
                         android:layout_height="40dp"
+                        android:layout_gravity="center"
                         android:layout_marginTop="2dp"
                         android:background="@drawable/thinborders"
                         android:drawableStart="@drawable/ic_lock"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:padding="4dp"
-                        />
+                        android:textAlignment="center" />
 
                     <Button
                         android:id="@+id/loginBtn"
                         android:layout_width="100dp"
                         android:layout_height="28dp"
+                        android:layout_gravity="center"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="16dp"
-                        android:layout_gravity="center"
                         android:background="@drawable/buttonflat"
                         android:paddingBottom="2dp"
                         android:text="@string/login"
@@ -124,27 +119,25 @@
                         android:textSize="16sp">
 
                     </Button>
-                </LinearLayout>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:layout_alignParentBottom="true">
-                <com.google.android.gms.ads.AdView
-                    android:id="@+id/adlogin"
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentBottom="true"
-                    ads:adSize="BANNER"
-                    ads:adUnitId="ca-app-pub-9838187586217611/1099637487">
-                </com.google.android.gms.ads.AdView>
 
+                    <com.google.android.gms.ads.AdView
+                        android:id="@+id/adlogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:adSize="BANNER"
+                        app:adUnitId="ca-app-pub-9838187586217611/1099637487"></com.google.android.gms.ads.AdView>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp">
+
+                </RelativeLayout>
             </RelativeLayout>
-        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

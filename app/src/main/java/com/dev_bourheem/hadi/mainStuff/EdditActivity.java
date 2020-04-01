@@ -33,16 +33,15 @@ import java.util.List;
 
 
 public class EdditActivity extends AppCompatActivity {
-    EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
-    MyDataBaseCreator MDBCR;
-    AdView Edit_ad;
-    Button delete;
-    Spinner delSpinner;
+    private EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
+    private MyDataBaseCreator MDBCR;
+    private AdView Edit_ad;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate( R.menu.edditmenu, menu);
+        inflater.inflate(R.menu.edditmenu, menu);
         return true;
     }
 
@@ -74,29 +73,11 @@ public class EdditActivity extends AppCompatActivity {
         ItemNameMod = findViewById(R.id.ItemNameMod);
         QuantityMod = findViewById(R.id.quantityMod);
         PriceMod = findViewById(R.id.priceMod);
-        delSpinner = findViewById(R.id.spinnerDelete);
-        delete = findViewById(R.id.dele);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(EdditActivity.this)
-                        .setTitle("تحذير")
-                        .setMessage(getString(R.string.surewannadelall))
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                DeleteBy(delSpinner.getSelectedItem().toString());
-                            }
-                        })
-                        .setNegativeButton(R.string.no, null).show();
 
-            }
-        });
         ShopNameMod = findViewById(R.id.shopnameMod);
         DateMod = findViewById(R.id.dateMod);
         MDBCR = new MyDataBaseCreator(this);
         GetThem();
-        FillWithByShop();
         AdsEditActivity();
     }
 
@@ -200,13 +181,6 @@ public class EdditActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.no, null).show();
     }
 
-    public void FillWithByShop() {
-        ArrayList<String> persons ;
-        persons = MDBCR.GetDistinctFromTable(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MShopName,DbContractor.TableColumns.MShopName);
-            ArrayAdapter<String> Arada = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, persons);
-            delSpinner = findViewById(R.id.spinnerDelete);
-            delSpinner.setAdapter(Arada);
-        }
 
     public void onDialogueDelete() {
         new AlertDialog.Builder(this)
@@ -228,13 +202,4 @@ public class EdditActivity extends AppCompatActivity {
         startActivity(inte);
     }
 
-    public void DeleteBy(String molhanot) {
-        SQLiteDatabase db = MDBCR.getWritableDatabase();
-        long deleted = db.delete(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName + " = ?", new String[]{molhanot});
-        if (deleted > 0) {
-            Toast.makeText(this, "deleted", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "not deleted", Toast.LENGTH_SHORT).show();
-        }
-    }
 }

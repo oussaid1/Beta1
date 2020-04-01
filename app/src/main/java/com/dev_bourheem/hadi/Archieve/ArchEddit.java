@@ -38,8 +38,7 @@ public class ArchEddit extends AppCompatActivity {
     private EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
     private  MyDataBaseCreator MDBCR;
     private  AdView Edit_ad;
-    private  Button delete;
-    private Spinner delSpinner;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,29 +75,11 @@ public class ArchEddit extends AppCompatActivity {
         ItemNameMod = findViewById(R.id.ItemNameModArch);
         QuantityMod = findViewById(R.id.quantityModArch);
         PriceMod = findViewById(R.id.priceModArch);
-        delSpinner = findViewById(R.id.spinnerDeleteArch);
-        delete = findViewById(R.id.deleArch);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder( ArchEddit.this)
-                        .setTitle("تحذير")
-                        .setMessage(getString(R.string.surewannadelall))
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                DeleteBy(delSpinner.getSelectedItem().toString());
-                            }
-                        })
-                        .setNegativeButton(R.string.no, null).show();
 
-            }
-        });
         ShopNameMod = findViewById(R.id.shopnameMod);
         DateMod = findViewById(R.id.dateMod);
         MDBCR = new MyDataBaseCreator(this);
         GetThem();
-        FillWithByShop();
         AdsEditActivityArch();
     }
 
@@ -115,26 +96,26 @@ public class ArchEddit extends AppCompatActivity {
 
     private void GetThem() {
         Intent intent = getIntent();
-        exampleitem exampleitem = intent.getParcelableExtra("ArchExampleItem");
+        ArchexampleItem archExampleItem = intent.getParcelableExtra("ArchExampleItem");
         String quantity = null;
-        if (exampleitem != null) {
-            quantity = exampleitem.getQuantity();
+        if (archExampleItem != null) {
+            quantity = archExampleItem.getQuantity();
         }
         String ItemName = null;
-        if (exampleitem != null) {
-            ItemName = exampleitem.getItemName();
+        if (archExampleItem != null) {
+            ItemName = archExampleItem.getItemName();
         }
         String ItemPrice = null;
-        if (exampleitem != null) {
-            ItemPrice = exampleitem.getItemPrice();
+        if (archExampleItem != null) {
+            ItemPrice = archExampleItem.getItemPrice();
         }
         String ShopName = null;
-        if (exampleitem != null) {
-            ShopName = exampleitem.getShopName();
+        if (archExampleItem != null) {
+            ShopName = archExampleItem.getShopName();
         }
         String dateBought = null;
-        if (exampleitem != null) {
-            dateBought = exampleitem.getDateBought();
+        if (archExampleItem != null) {
+            dateBought = archExampleItem.getDateBought();
         }
 
         ItemNameMod.setText(ItemName);
@@ -147,10 +128,10 @@ public class ArchEddit extends AppCompatActivity {
 
     private void UpdateDB() {
         Intent intent = getIntent();
-        exampleitem exampleitem = intent.getParcelableExtra("ArchExampleItem");
+        ArchexampleItem archExampleItem = intent.getParcelableExtra("ArchExampleItem");
         String idd = null;
-        if (exampleitem != null) {
-            idd = exampleitem.getIdno();
+        if (archExampleItem != null) {
+            idd = archExampleItem.getIdno();
         }
         String EdItemNameMod = ItemNameMod.getText().toString().trim();
         double EdQuantityMod = Double.parseDouble(QuantityMod.getText().toString().trim());
@@ -159,7 +140,7 @@ public class ArchEddit extends AppCompatActivity {
         String EdShopNameMod = ShopNameMod.getText().toString().trim();
         String EdDateMod = DateMod.getText().toString().trim();
 
-        boolean updateStatus = MDBCR.updateData(idd, EdQuantityMod, EdItemNameMod, EdPriceMod, EdShopNameMod, EdDateMod);
+        boolean updateStatus = MDBCR.updateDataArch(idd, EdQuantityMod, EdItemNameMod, EdPriceMod, EdShopNameMod, EdDateMod);
         if (updateStatus) {
             MsgBox("تم الحفظ ", 1);
             OpenListItems();
@@ -169,10 +150,10 @@ public class ArchEddit extends AppCompatActivity {
     private void DelItem() {
 
         Intent intent = getIntent();
-        exampleitem exampleitem = intent.getParcelableExtra("ArchExampleItem");
+        ArchexampleItem archExampleItem = intent.getParcelableExtra("ArchExampleItem");
         String idd = null;
-        if (exampleitem != null) {
-            idd = exampleitem.getIdno();
+        if (archExampleItem != null) {
+            idd = archExampleItem.getIdno();
         }
         boolean updateStatus = MDBCR.DeleteItemSelected(idd);
         if (updateStatus) {
@@ -202,23 +183,8 @@ public class ArchEddit extends AppCompatActivity {
                 .setNegativeButton(R.string.no, null).show();
     }
 
-    private void FillWithByShop() {
-        List<String> persons = new ArrayList<>();
-        SQLiteDatabase db = MDBCR.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select distinct " + DbContractor.TableColumns.MShopName + " from " + DbContractor.TableColumns.MainTable + " ", null);
-        if (cursor.getCount() != 0) {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                String shopName = cursor.getString(cursor.getColumnIndex(DbContractor.TableColumns.MShopName));
-                persons.add(shopName);
-                cursor.moveToNext();
-            }
-            ArrayAdapter<String> Arada = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, persons);
-            delSpinner = findViewById(R.id.spinnerDelete);
-            delSpinner.setAdapter(Arada);
-        }
-        cursor.close();
-    }
+
+
 
     private void onDialogueDelete() {
         new AlertDialog.Builder(this)

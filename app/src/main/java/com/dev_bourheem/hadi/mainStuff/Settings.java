@@ -1,5 +1,6 @@
 package com.dev_bourheem.hadi.mainStuff;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +8,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,20 +26,31 @@ import com.dev_bourheem.hadi.Login.LoginClass;
 import com.dev_bourheem.hadi.R;
 import com.dev_bourheem.hadi.sharedmethods;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 
 public class Settings extends AppCompatActivity {
+    private Spinner ShopToDeleteSpinner, ShopToPaySpinner;
+    private TextView archiveIt;
+    private EditText setQuota, setGuestQta, setusername, setpassword, confirmpass, paidAmountIn;
+    private Button delete, saveBtnforuserQuotas, SaveBtnforuserdata,payButton;
+    private double user_defined_Quota, user_defined_guestQuota;
+    private String Userusername, Userpassword, Confirmedpass;
+    private LoginClass Lgin;
+    private MyDataBaseCreator MDBC;
+    private  ArrayAdapter<String> ShopNamesSpinnerAdapter;
+    private ArrayList<String> ShopNamesList;
 
-    EditText setQuota, setGuestQta, setusername, setpassword, confirmpass;
-    Button saveBtnforuserQuotas, SaveBtnforuserdata, archiveIt;
-    double user_defined_Quota, user_defined_guestQuota;
-    String Userusername, Userpassword, Confirmedpass;
-    LoginClass Lgin;
-    MyDataBaseCreator MDBC;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate( R.menu.settingsmenu, menu );
+        inflater.inflate(R.menu.settingsmenu, menu);
         return true;
     }
 
@@ -51,10 +66,10 @@ public class Settings extends AppCompatActivity {
                 OpenActivitilist();
                 return true;
             case R.id.backup:
-                sharedmethods.backitUp( this );
+                sharedmethods.backitUp(this);
                 return true;
             case R.id.restore:
-                sharedmethods.restoreItUp( this );
+                sharedmethods.restoreItUp(this);
                 return true;
             case R.id.reset:
                 onDialogue2();
@@ -63,54 +78,77 @@ public class Settings extends AppCompatActivity {
                 finish();
                 return true;
             default:
-                return super.onOptionsItemSelected( item );
+                return super.onOptionsItemSelected(item);
         }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_settings );
-        setQuota = findViewById( R.id.limitQuotaDef );
-        setGuestQta = findViewById( R.id.limitGuestDef );
-        setusername = findViewById( R.id.UserNameDef );
-        setpassword = findViewById( R.id.PasswordDef );
-        archiveIt = findViewById( R.id.archiveIt );
-        confirmpass = findViewById( R.id.ConfirmPassDef );
-        SaveBtnforuserdata = findViewById( R.id.saveBtnforuserdata );
-        saveBtnforuserQuotas = findViewById( R.id.saveBtnforquotas );
-        SaveBtnforuserdata.setOnClickListener( new View.OnClickListener() {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
+        setQuota = findViewById(R.id.limitQuotaDef);
+        setGuestQta = findViewById(R.id.limitGuestDef);
+        setusername = findViewById(R.id.UserNameDef);
+        paidAmountIn = findViewById(R.id.paidamountV);
+        payButton = findViewById(R.id.pay);
+        ShopToPaySpinner = findViewById(R.id.payfor);
+        setpassword = findViewById(R.id.PasswordDef);
+        archiveIt = findViewById(R.id.archiveIt);
+        confirmpass = findViewById(R.id.ConfirmPassDef);
+        SaveBtnforuserdata = findViewById(R.id.saveBtnforuserdata);
+        saveBtnforuserQuotas = findViewById(R.id.saveBtnforquotas);
+        ShopToDeleteSpinner = findViewById(R.id.shopTodelete);
+        delete = findViewById(R.id.deleteby);
+        MDBC = new MyDataBaseCreator(getApplicationContext());
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               OnDialodgDelete();
+            }
+        });
+        SaveBtnforuserdata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoadusertoDatabase();
 
             }
-        } );
-        saveBtnforuserQuotas.setOnClickListener( new View.OnClickListener() {
+        });
+        saveBtnforuserQuotas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoadQuotatoDatabase(); // injects user defined quota to database ;
 
 
             }
-        } );
-        archiveIt.setOnClickListener( new View.OnClickListener() {
+        });
+        archiveIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        } );
+        });
+        payButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if(MDBC.PayShop(ShopToPaySpinner.getSelectedItem().toString(),Double.parseDouble(paidAmountIn.getText().toString().trim()),GetDate())) {
+                   MsgBox("Successfully Paid");
+               }else{
+                   MsgBox("Payment Unsuccessful");
+               }
+            }
+        });
+        FillWithShopNames();
     }
 
     // opens main activity where add and total
     public void OpenActiviti() {
-        Intent myintdsent = new Intent( this, MainActivity.class );
-        startActivity( myintdsent );
+        Intent myintdsent = new Intent(this, MainActivity.class);
+        startActivity(myintdsent);
     }
 
     public void OpenActivitilist() {
-        Intent myintenct = new Intent( this, ListActivity.class );
-        startActivity( myintenct );
+        Intent myintenct = new Intent(this, ListActivity.class);
+        startActivity(myintenct);
     }
 
 
@@ -119,83 +157,94 @@ public class Settings extends AppCompatActivity {
         if (setQuota.getText().toString().trim().length() == 0 || setGuestQta.getText().toString().trim().length() == 0) {
             return;
         } else
-            user_defined_Quota = Double.parseDouble( setQuota.getText().toString().trim() );
-        user_defined_guestQuota = Double.parseDouble( setGuestQta.getText().toString().trim() );
-        boolean newRowAdded = MDBC.InjectQuotaData( user_defined_Quota, user_defined_guestQuota );
+            user_defined_Quota = Double.parseDouble(setQuota.getText().toString().trim());
+        user_defined_guestQuota = Double.parseDouble(setGuestQta.getText().toString().trim());
+        boolean newRowAdded = MDBC.InjectQuotaData(user_defined_Quota, user_defined_guestQuota);
         if (newRowAdded) {
-            MsgBox( "تم الحفظ" );
+            MsgBox("تم الحفظ");
             OpenActiviti();
         } else {
-            MsgBox( "لم يتم الحفظ" );
-            setQuota.setText( "0" );
-            setGuestQta.setText( "0" );
+            MsgBox("لم يتم الحفظ");
+            setQuota.setText("");
+            setGuestQta.setText("");
         }
 
     }
 
     public void MsgBox(String message) {
-        Toast.makeText( this, message, Toast.LENGTH_SHORT ).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+    public  String GetDate() {
+        Date currenttime = Calendar.getInstance().getTime();
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        return dateFormat.format(currenttime);
     }
 
     public void LoadusertoDatabase() {
-        Lgin = new LoginClass( getApplicationContext() );
+        Lgin = new LoginClass(getApplicationContext());
         if ((setusername.getText().toString().trim().length() == 0 || setpassword.getText().toString().trim().length() == 0)) {
-            MsgBox( "المرجو ادخال المعلومات اولا" );
+            MsgBox("المرجو ادخال المعلومات اولا");
         } else {
             Userusername = setusername.getText().toString().trim();
             Userpassword = setpassword.getText().toString().trim();
             Confirmedpass = confirmpass.getText().toString().trim();
-            if (Userpassword.equals( Confirmedpass )) {
-                boolean newRowAdded = Lgin.InjectData( Userusername, Userpassword );
+            if (Userpassword.equals(Confirmedpass)) {
+                boolean newRowAdded = Lgin.InjectData(Userusername, Userpassword);
 
                 if (newRowAdded) {
-                    MsgBox( "تم الحفظ" );
+                    MsgBox("تم الحفظ");
                     OpenActiviti();
-                } else MsgBox( "لم يتم الحفظ" );
-            } else MsgBox( "الإسم والقن غير متطابقان" );
+                } else MsgBox("لم يتم الحفظ");
+            } else MsgBox("الإسم والقن غير متطابقان");
         }
     }
 
     public void ResetAll() {
-        Lgin = new LoginClass( getApplicationContext() );
-        MDBC = new MyDataBaseCreator( getApplicationContext() );
+        Lgin = new LoginClass(getApplicationContext());
+
         Lgin.deleteall();
-        MDBC.deletAllInTable(DbContractor.TableColumns.MainTable);
-        MDBC.deletAllInTable(DbContractor.TableColumns.InfoTable);
-        MDBC.deletAllInTable(DbContractor.TableColumns.ArchiveTable);
-        MDBC.deletAllInTable(DbContractor.TableColumns.PaymentTable);
-        MDBC.deletAllInTable(DbContractor.TableColumns.ArchivePaymentTable);
+        MDBC.deletAllTable(DbContractor.TableColumns.MainTable);
+        MDBC.deletAllTable(DbContractor.TableColumns.InfoTable);
+        MDBC.deletAllTable(DbContractor.TableColumns.ArchiveTable);
+        MDBC.deletAllTable(DbContractor.TableColumns.PaymentTable);
+        MDBC.deletAllTable(DbContractor.TableColumns.ArchivePaymentTable);
 
     }
 
-    private void PrintMessage(String message) {
-        AlertDialog.Builder newAlert = new AlertDialog.Builder( this );
-        newAlert.setCancelable( true );
-        newAlert.setMessage( message );
-        newAlert.show();
+    private void OnDialodgDelete() {
+        new AlertDialog.Builder(getApplicationContext())
+                .setTitle("تحذير")
+                .setMessage(getString(R.string.surewannadelall))
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        MDBC.DeleteAllBy(getApplicationContext(),DbContractor.TableColumns.MainTable,ShopToDeleteSpinner.getSelectedItem().toString());
+                    }
+                })
+                .setNegativeButton(R.string.no, null).show();
     }
 
     public void onDialogue2() {
-        AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setTitle( getString( R.string.alert ) );
-        builder.setMessage( getString( R.string.doyourealywantdeletall ) );
-        builder.setPositiveButton( R.string.yes, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.alert));
+        builder.setMessage(getString(R.string.doyourealywantdeletall));
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int whichButton) {
                 ResetAll();
 
 
             }
-        } );
-        builder.setNegativeButton( R.string.no, null );
+        });
+        builder.setNegativeButton(R.string.no, null);
         builder.show();
     }
 
     public void RestoreConferm() {
-        AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setTitle( getString( R.string.alert ) );
-        builder.setMessage( getString( R.string.doyourealywantorestore ) );
-        builder.setPositiveButton( R.string.yes, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.alert));
+        builder.setMessage(getString(R.string.doyourealywantorestore));
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int whichButton) {
 
@@ -206,9 +255,18 @@ public class Settings extends AppCompatActivity {
                 }*/
 
             }
-        } );
-        builder.setNegativeButton( R.string.no, null );
+        });
+        builder.setNegativeButton(R.string.no, null);
         builder.show();
     }
+
+    private void FillWithShopNames() {
+        ShopNamesList= new ArrayList<>();
+        ShopNamesList = MDBC.GetDistinctFromTable(DbContractor.TableColumns.ArchiveTable, DbContractor.TableColumns.ArShopName, DbContractor.TableColumns.ArShopName);
+       ShopNamesSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, ShopNamesList);
+        ShopToPaySpinner.setAdapter(ShopNamesSpinnerAdapter);
+        ShopToDeleteSpinner.setAdapter(ShopNamesSpinnerAdapter);
+    }
+
 }
 

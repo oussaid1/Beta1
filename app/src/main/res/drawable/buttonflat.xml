@@ -8,7 +8,11 @@
         android:topLeftRadius="8dp"
         android:topRightRadius="8dp">
     </corners>
-    <solid android:color="@color/GreenP4"
+    <stroke android:color="@color/white"
+        android:dashGap="2dp"
+        android:width="2dp"
+       />
+    <solid android:color="@color/GreenP5"
         > </solid>
 
 </shape>
