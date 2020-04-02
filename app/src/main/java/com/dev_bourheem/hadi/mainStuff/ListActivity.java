@@ -302,11 +302,9 @@ public class ListActivity extends AppCompatActivity {
         Cursor data = db.rawQuery("select * from " + DbContractor.TableColumns.MainTable +
                 " order by history asc", null);
         if (data.getCount() == 0) {
-            PrintMessage(getString(R.string.alert), getString(R.string.nodataintable));
+           return;
         } else
-
             data.moveToNext();
-
         while (!data.isAfterLast())
             do {
                 String idnonit = data.getString(data.getColumnIndex(DbContractor.TableColumns._ID));
@@ -323,7 +321,7 @@ public class ListActivity extends AppCompatActivity {
         data.close();
         myrecycler.setLayoutManager(RecyLayManger);
         myrecycler.setAdapter(RecyclerAdap);
-
+        RecyclerAdap.notifyDataSetChanged();
     }
 
     public void OpentStats() {

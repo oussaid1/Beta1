@@ -46,7 +46,7 @@
     <string name="productprice">ثمن المنتوج</string>
     <string name="milk">الحليب</string>
     <string name="kilo">كيلو</string>
-    <string name="_1_5">1.5</string>
+    <string name="_1_5">11.5</string>
     <string name="_180">180</string>
     <string name="price">الثمن</string>
     <string name="date">التاريخ</string>
@@ -55,7 +55,7 @@
     <string name="goodsname">اسم السلعة هنا</string>
     <string name="shopnamehere">اسم المحل هنا</string>
     <string name="quantity">الكمية</string>
-    <string name="_12_01_20">12/01/20</string>
+    <string name="_12_01_20">12-01-2020</string>
     <string name="statistics">احصائيات </string>
     <string name="hajmistihlak">حجم استهلاك المنتوج</string>
     <string name="paysuccess">Successfully Paid</string>
@@ -68,5 +68,7 @@
     <string name="wrongpassoruser">الإسم والقن غير متطابقان</string>
     <string name="warning">تحذير</string>
     <string name="surewanapay">دفع المبلغ ، متاكد ؟</string>
+    <string name="pay">دفع</string>
+    <string name="remove">حذف</string>
 
 </resources>

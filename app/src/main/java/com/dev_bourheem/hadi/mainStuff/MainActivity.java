@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> AutoCompleteAdapter;
     private ArrayAdapter<String> QuanSpinAdapter;
     private MyDataBaseCreator MDBC;
-    private ForQuotas forQutaOC;
     private AdView admain;
     private FloatingActionButton floatingButon;
     private String[] QTypes = {"واحدة", " كيلو", "لتر", "متر", "صندوق", "علبة"};
@@ -113,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         SpinnerSub1List = new ArrayList<>();
         SpinnerSub2List = new ArrayList<>();
         MDBC = new MyDataBaseCreator(getApplicationContext());
-        forQutaOC = new ForQuotas(getApplicationContext());
 
         Molhanot.add(getString(R.string.unknown));
         GetItemNameFromdatabase();
@@ -360,10 +358,10 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    public boolean LoadDatabase(double qntiti, String quqntifier, String itemNm, double itemPrix, String shopNm) {
+    public boolean LoadDatabase(double qntiti, String quqntifier, String itemNm, double itemPrix, String shopNm, String date) {
 //
 // insert data to database's Table.
-        boolean newRowAdded = MDBC.InjectData(qntiti, quqntifier, itemNm, itemPrix, shopNm, GetDate());
+        boolean newRowAdded = MDBC.InjectData(qntiti, quqntifier, itemNm, itemPrix, shopNm, date);
         if (newRowAdded) {
             MsgBox("تم");
             return true;
@@ -437,7 +435,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public double GetQuota() {
-        forQutaOC = new ForQuotas(getApplicationContext());
+
         Cursor qfinder = MDBC.JibData();
         if (qfinder.getCount() == 0) {
             MsgBox(getString(R.string.noquotafound));
@@ -705,6 +703,7 @@ public class MainActivity extends AppCompatActivity {
         final Button addBut = view.findViewById(R.id.AddBtn);
         final Button Cancel = view.findViewById(R.id.Cancel);
         final EditText PriceIn = view.findViewById(R.id.ItemPriceIn);
+        final EditText DateIN = view.findViewById(R.id.DateIn);
         final Spinner quntifierSpinner = view.findViewById(R.id.QuanType);
         final Button plus = view.findViewById(R.id.plus);
         final Button minus = view.findViewById(R.id.minus);
@@ -715,6 +714,7 @@ public class MainActivity extends AppCompatActivity {
         molhanotNmIn.setAdapter(MolhntautoCompleteAdapter);
         ItemNameIn.setAdapter(AutoCompleteAdapter);
         quntifierSpinner.setAdapter(QuanSpinAdapter);
+        DateIN.setText(GetDate());
         dialogue.setView(view);
         final AlertDialog alertDialog = dialogue.create();
 
@@ -744,10 +744,11 @@ public class MainActivity extends AppCompatActivity {
                     String Quantifiier = quntifierSpinner.getSelectedItem().toString().trim();
                     double Qnt = Double.parseDouble(quantityV.getText().toString().trim());
                     double ItemPriceDbl = Double.parseDouble(PriceIn.getText().toString().trim());
+                    String dateIn= DateIN.getText().toString().trim();
                     ItemPriceDbl = Qnt * ItemPriceDbl;
                     String ItemNameStr = ItemNameIn.getText().toString().trim();
                     String Sir = molhanotNmIn.getText().toString().trim();
-                    if (LoadDatabase(Qnt, Quantifiier, ItemNameStr, ItemPriceDbl, Sir)) {
+                    if (LoadDatabase(Qnt, Quantifiier, ItemNameStr, ItemPriceDbl, Sir,dateIn)) {
                         GetItemNameFromdatabase();
                         GetShopNamesFromdatabase();
                         PriceIn.getText().clear();

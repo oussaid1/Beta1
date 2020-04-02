@@ -79,7 +79,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="4dp"
-                        android:background="@drawable/thinborders"
+                        android:background="@drawable/justborderz"
                         android:drawableStart="@drawable/ic_username"
                         android:maxLines="1"
                         android:padding="4dp"
@@ -100,7 +100,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="2dp"
-                        android:background="@drawable/thinborders"
+                        android:background="@drawable/justborderz"
                         android:drawableStart="@drawable/ic_lock"
                         android:inputType="textPassword"
                         android:maxLines="1"
@@ -122,29 +122,25 @@
 
                     </Button>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
 
-                        <com.google.android.gms.ads.AdView
-                            android:id="@+id/adlogin"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:adSize="BANNER"
-                            app:adUnitId="ca-app-pub-9838187586217611/1099637487"></com.google.android.gms.ads.AdView>
-                    </LinearLayout>
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp">
 
-                </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp">
+
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/adlogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:adSize="BANNER"
+                    app:adUnitId="ca-app-pub-9838187586217611/1099637487"></com.google.android.gms.ads.AdView>
+
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

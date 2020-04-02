@@ -61,7 +61,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
+                        android:layout_margin="2dp"
                         android:background="@drawable/justborderz"
                         android:layoutDirection="rtl"
                         android:orientation="horizontal">
@@ -79,15 +79,15 @@
                             android:id="@+id/fab"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal|center_vertical"
                             android:layout_margin="4dp"
                             android:src="@drawable/ic_shopping" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@drawable/justborderz"
                             android:layoutDirection="rtl"
+                            android:layout_marginStart="8dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -104,7 +104,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:layout_margin="2dp"
                                 android:text="0"
                                 android:textAlignment="center"
                                 android:textSize="18sp" />
@@ -117,8 +116,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
+                android:layout_margin="2dp"
                 android:background="@drawable/justborderz"
                 android:layoutDirection="rtl"
                 android:orientation="vertical">
@@ -242,8 +240,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
+                    android:layout_margin="2dp"
                     android:background="@drawable/justborderz"
                     android:layoutDirection="rtl"
                     android:orientation="vertical">
@@ -280,7 +277,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:layout_weight="1"
                     android:background="@drawable/justborderz"
                     >
 
@@ -303,7 +299,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:layout_weight="1"
                     android:background="@drawable/justborderz"
                     android:clipChildren="true"
                     android:dropDownWidth="200dp"
@@ -328,7 +323,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:layout_weight="1"
                     android:background="@drawable/justborderz">
 
                     <Spinner
@@ -351,10 +345,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="4dp"
+                android:layout_margin="2dp"
                 android:layoutDirection="rtl"
                 android:background="@drawable/justborderz"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -381,7 +374,7 @@
                     android:maxLines="1"
                     android:text="10000"
                     android:textAlignment="center"
-                    android:textColor="@color/green"
+                    android:textColor="@color/blueMarin"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -394,7 +387,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:orientation="horizontal">
 
             <com.google.android.gms.ads.AdView
@@ -402,8 +395,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_margin="4dp"
                 ads:adSize="BANNER"
                 ads:adUnitId="ca-app-pub-9838187586217611/1394031397" />
         </RelativeLayout>
