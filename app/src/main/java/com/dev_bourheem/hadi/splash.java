@@ -20,7 +20,7 @@ public class splash extends AppCompatActivity {
                 .withTargetActivity( LoginActivity.class)
                 .withSplashTimeOut(3000)
                // .withBackgroundColor(Color.parseColor("#64DEC5"))
-                .withBackgroundResource(R.drawable.lkarnetsplash)
+                .withBackgroundResource(R.drawable.splashlkarnetandroidb)
                // .withFooterText("Copyright 2020 , Dev-Bourheem ")
                // .withAfterLogoText(" حانوتي - لكارني")
         ;

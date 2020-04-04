@@ -34,7 +34,6 @@ import androidx.core.app.ActivityCompat;
 import com.dev_bourheem.hadi.Archieve.ArchieveList;
 import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
-import com.dev_bourheem.hadi.DatabaseClass.ForQuotas;
 import com.dev_bourheem.hadi.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView DateV1, RedL, RedL2, yellowL, yellowL2, OrangeL, OrangeL2, GreenL, GreenL2, QuotaLeftNm, LeftOut, SumOutBy, TotalallOut, hereisyourQuota;
     private Switch Guestmode;
     private boolean ischecked;
-    private double Quotafrom_database, GestQuotafrom_databse;
     private double Quota = 0, sumtoday = 0, leftOfQuota = 0, Qnt1 = 1;
     private ArrayList<String> allList;
     private ArrayList<String> CategoryList;
@@ -112,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         SpinnerSub1List = new ArrayList<>();
         SpinnerSub2List = new ArrayList<>();
         MDBC = new MyDataBaseCreator(getApplicationContext());
-
+        getTotalAllForAllShops();
         Molhanot.add(getString(R.string.unknown));
         GetItemNameFromdatabase();
         GetShopNamesFromdatabase();
@@ -158,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String sellection1 = CategorySpinner.getSelectedItem().toString().trim();
                 String sellection2 = SearchSpinerSub1.getSelectedItem().toString().trim();
-
+                TotalallOut.setText(String.valueOf(getTotalAllForAllShops()));
                 switch (sellection1) {
 
                     case "حسب المحل":
@@ -182,9 +180,9 @@ public class MainActivity extends AppCompatActivity {
         SearchSpinerSub2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String sellection1 = CategorySpinner.getSelectedItem().toString().trim();
-                String sellection2 = SearchSpinerSub1.getSelectedItem().toString().trim();
-                String sellection3 = SearchSpinerSub2.getSelectedItem().toString().trim();
+                String sellection1 = CategorySpinner.getSelectedItem().toString();
+                String sellection2 = SearchSpinerSub1.getSelectedItem().toString();
+                String sellection3 = SearchSpinerSub2.getSelectedItem().toString();
 
                 //this is the mai serach spinner to seach by category
                 switch (sellection1) {
@@ -216,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         fillcategory();
-        TotalallOut.setText(String.valueOf(getTotalAll()));
+        TotalallOut.setText(String.valueOf(getTotalAllForAllShops()));
         showQuota();
         TraficLight(sumtoday);
 
@@ -305,11 +303,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "حسب اليوم":
                 FillWithDays();
-                //  FillWithDaysforShopEmpty();
+
                 break;
             case "حسب السلعة":
                 FillWithItems();
-                //  FillWithDaysforShopEmpty();
+
                 break;
         }
     }
@@ -361,7 +359,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean LoadDatabase(double qntiti, String quqntifier, String itemNm, double itemPrix, String shopNm, String date) {
 //
 // insert data to database's Table.
-        boolean newRowAdded = MDBC.InjectData(qntiti, quqntifier, itemNm, itemPrix, shopNm, date);
+        boolean newRowAdded = MDBC.InjectDataToMainTable(qntiti, quqntifier, itemNm, itemPrix, shopNm, date);
         if (newRowAdded) {
             MsgBox("تم");
             return true;
@@ -435,7 +433,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public double GetQuota() {
-
+        double Quotafrom_database, GestQuotafrom_database;
         Cursor qfinder = MDBC.JibData();
         if (qfinder.getCount() == 0) {
             MsgBox(getString(R.string.noquotafound));
@@ -444,15 +442,15 @@ public class MainActivity extends AppCompatActivity {
             return Quota;
         } else {
             qfinder.moveToFirst();
-            Quotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col22));
-            GestQuotafrom_databse = qfinder.getDouble(qfinder.getColumnIndex(ForQuotas.col11));
+            Quotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(DbContractor.TableColumns.userQuota));
+            GestQuotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(DbContractor.TableColumns.userGQuota));
             qfinder.close();
             if (Guestmode.isChecked()) {
-                Quota = Quotafrom_database;
+                Quota = GestQuotafrom_database;
                 hereisyourQuota.setText(String.valueOf(Quota));
                 return Quota;
             } else {
-                Quota = GestQuotafrom_databse;
+                Quota = Quotafrom_database;
                 hereisyourQuota.setText(String.valueOf(Quota));
                 return Quota;
             }
@@ -477,7 +475,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //this method gets the total of all product items from data base
-    public double getTotalAll() {
+    public double getTotalAllForAllShops() {
         /*NumberFormat mfr = new DecimalFormat("0.00");*/
        double allPaid= MDBC.GetPaidAmountForAllShop(DbContractor.TableColumns.PaymentTable, DbContractor.TableColumns.PaidAmount);
         Cursor c = MDBC.GetSumall();
@@ -489,6 +487,7 @@ public class MainActivity extends AppCompatActivity {
             //closing cursor so as not to bring anything else or ruin sth
             c.close();
         }
+        TotalallOut.setText(String.valueOf(SumAll-allPaid));
         return SumAll - allPaid;
     }
 
@@ -496,6 +495,7 @@ public class MainActivity extends AppCompatActivity {
     public void FillWithDays() {
         SpinnerSub1List.clear();
         SpinnerSub1List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MDate, DbContractor.TableColumns.MDate);
+        SpinnerSub1List.add("*");
         SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub1List);
         SearchSpinerSub1.setAdapter(SearchSpinnerSub2Adapter);
     }
@@ -518,7 +518,6 @@ public class MainActivity extends AppCompatActivity {
         SpinnerSub2List.clear();
 
         SpinnerSub2List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MDate, DbContractor.TableColumns.MDate);
-        SpinnerSub2List.add("*");
         SearchSpinnerSub3Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub2List);
         SearchSpinerSub2.setAdapter(SearchSpinnerSub3Adapter);
     }
@@ -554,23 +553,24 @@ public class MainActivity extends AppCompatActivity {
 
     /** these are the methods for sums */
     public double GetSumByShop(String mohamed) {
-      double paid=  MDBC.GetPaidAmountForShop(DbContractor.TableColumns.PaymentTable, DbContractor.TableColumns.PaidShopName, DbContractor.TableColumns.PaidAmount,mohamed);
+      double paid=  MDBC.GetPaidAmountForShop( DbContractor.TableColumns.PaidAmount,DbContractor.TableColumns.PaymentTable,DbContractor.TableColumns.PaidShopName ,mohamed);
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Solo from " +
-                "" + DbContractor.TableColumns.MainTable + " where  " + DbContractor.TableColumns.MShopName +
-                " like '%" + mohamed + "%' group by " + DbContractor.TableColumns.MShopName + " ", null);
+        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Soa from "
+                + DbContractor.TableColumns.MainTable + " where  " + DbContractor.TableColumns.MShopName +
+                " like '%" + mohamed + "%' order by " + DbContractor.TableColumns.MDate + " ", null);
         if (data.getCount() == 0) {
 
         } else if (!data.isAfterLast()) {
 
             data.moveToFirst();
-            sumtoday = data.getDouble(data.getColumnIndex("Solo"));
+            sumtoday = data.getDouble(data.getColumnIndex("Soa"));
+            sumtoday=sumtoday-paid;
             SumOutBy.setText((mfr.format(sumtoday)));
             TraficLight(sumtoday);
         }
         data.close();
-        sumtoday = - paid;
+
         return sumtoday ;
     }
     public double GetSumByDate(String ladat) {
@@ -765,7 +765,9 @@ public class MainActivity extends AppCompatActivity {
         Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 alertDialog.cancel();
+
             }
         });
         alertDialog.show();

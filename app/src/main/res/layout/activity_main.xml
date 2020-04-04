@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundlkarne"
+    android:background="@drawable/backg"
     android:theme="@style/AppTheme"
     tools:context=".mainStuff.MainActivity">
 
@@ -16,15 +16,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:theme="@style/AppTheme">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/justborderz"
+                android:background="@color/P3"
                 android:orientation="horizontal">
 
                 <TextView
@@ -33,11 +31,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
+                    android:layout_margin="2dp"
                     android:maxLines="1"
                     android:padding="2dp"
                     android:text="2020-02-02"
                     android:textAlignment="gravity"
-                    android:textColor="@color/GreenP1" />
+                    android:textColor="@color/white" />
 
 
                 <Switch
@@ -51,75 +50,73 @@
                     android:layout_weight="1"
                     android:text="@string/guest_mode"
                     android:textAlignment="center"
-                    android:textColor="@color/GreenP" />
+                    android:textColor="@color/blueMarin" />
 
             </LinearLayout>
 
 
+            <LinearLayout
+                style="@style/margins"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/justborderz"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_margin="4dp"
+                    android:text="أظف المنتوج"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                    <LinearLayout
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/ic_shopping" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:maxLines="1"
+                        android:text="@string/limit"
+                        android:textColor="@color/blueMarin"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/hereisurqt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="2dp"
-                        android:background="@drawable/justborderz"
-                        android:layoutDirection="rtl"
-                        android:orientation="horizontal">
+                        android:text="0"
+                        android:layout_margin="4dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/blueMarin"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|center_horizontal"
-                            android:layout_margin="4dp"
-                            android:text="أظف المنتوج"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/fab"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:src="@drawable/ic_shopping" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/justborderz"
-                            android:layoutDirection="rtl"
-                            android:layout_marginStart="8dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="4dp"
-                                android:maxLines="1"
-                                android:text="@string/limit"
-                                android:textColor="@color/Green"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/hereisurqt"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:text="0"
-                                android:textAlignment="center"
-                                android:textSize="18sp" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="2dp"
-                android:background="@drawable/justborderz"
-                android:layoutDirection="rtl"
-                android:orientation="vertical">
+style="@style/margins"                android:layoutDirection="rtl"
+                android:orientation="horizontal">
 
 
                 <TextView
@@ -128,19 +125,17 @@
                     android:layout_margin="4dp"
                     android:text="@string/left_of_quota"
                     android:textAlignment="center"
-                    android:textColor="@color/orange"
+                    android:textColor="@color/blueMarin"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/QuotaLeftOut"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:layout_margin="4dp"
                     android:maxLines="1"
-                    android:text="0"
                     android:textAlignment="center"
-                    android:textColor="@color/GreenP"
+                    android:textColor="@color/blueMarin"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -149,9 +144,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-
                 android:background="@drawable/justborderz"
                 android:orientation="horizontal">
 
@@ -241,7 +233,6 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="2dp"
-                    android:background="@drawable/justborderz"
                     android:layoutDirection="rtl"
                     android:orientation="vertical">
 
@@ -251,34 +242,29 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:text="@string/total"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:textColor="@color/GreenP0" />
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/TotalallOut"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="4dp"
-                        android:background="@drawable/edittextborders"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/justborderz"
                         android:maxLines="1"
-                        android:text="10000"
-                        android:textSize="18sp"
                         android:textAlignment="center"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/blueMarin"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/margins"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/justborderz"
-                    >
+                    android:background="@drawable/justborderz">
 
                     <Spinner
                         android:id="@+id/SumCategory"
@@ -288,21 +274,17 @@
                         android:layout_margin="4dp"
                         android:clipChildren="true"
                         android:dropDownWidth="200dp"
-                        android:dropDownHeight="100dp"
-                        android:popupBackground="@color/GreenP4"
+                        android:popupBackground="@color/P2"
                         android:text="@string/totaltoday"
                         android:textAlignment="gravity"
                         android:textColor="@color/orange" />
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/margins"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/justborderz"
-                    android:clipChildren="true"
-                    android:dropDownWidth="200dp"
-                  >
+                    android:background="@drawable/justborderz">
 
                     <Spinner
                         android:id="@+id/Sumsearche"
@@ -314,15 +296,15 @@
                         android:dropDownWidth="200dp"
                         android:dropDownHeight="80dp"
                         android:maxLines="1"
-                        android:popupBackground="@color/GreenP4"
+                        android:popupBackground="@color/P2"
                         android:textAlignment="gravity"
-                        android:textColor="@color/GreenP" />
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/margins"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
                     android:background="@drawable/justborderz">
 
                     <Spinner
@@ -334,9 +316,9 @@
                         android:dropDownWidth="200dp"
                         android:dropDownHeight="200dp"
                         android:maxLines="1"
-                        android:popupBackground="@color/GreenP4"
+                        android:popupBackground="@color/P2"
                         android:textAlignment="gravity"
-                        android:textColor="@color/GreenP" />
+                        android:textColor="@color/white" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -347,7 +329,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="2dp"
                 android:layoutDirection="rtl"
-                android:background="@drawable/justborderz"
                 android:orientation="vertical">
 
                 <TextView
@@ -356,25 +337,26 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:text="@string/totaltoday"
-                    android:textSize="18sp"
-
                     android:textAlignment="center"
-                    android:textColor="@color/GreenP1" />
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/TotalTodayOut"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="4dp"
-                    android:textSize="18sp"
+                    android:background="@drawable/justborderz"
                     android:maxLines="1"
-                    android:text="10000"
+                    android:elevation="10dp"
+                    android:padding="6dp"
                     android:textAlignment="center"
                     android:textColor="@color/blueMarin"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
             </LinearLayout>

@@ -3,6 +3,7 @@ package com.dev_bourheem.hadi.mainStuff;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
-import com.dev_bourheem.hadi.DatabaseClass.ForQuotas;
 import com.dev_bourheem.hadi.Login.LoginClass;
 import com.dev_bourheem.hadi.R;
 import com.dev_bourheem.hadi.sharedmethods;
@@ -32,7 +32,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 
 public class Settings extends AppCompatActivity {
@@ -40,12 +39,12 @@ public class Settings extends AppCompatActivity {
 
     private TextView archiveIt;
     private EditText setQuota, setGuestQta, setusername, setpassword, confirmpass, paidAmountIn;
-    private Button delete, saveBtnforuserQuotas, SaveBtnforuserdata,payButton;
+    private Button delete, saveBtnforuserQuotas, SaveBtnforuserdata, payButton;
     private double user_defined_Quota, user_defined_guestQuota;
     private String Userusername, Userpassword, Confirmedpass;
     private LoginClass Lgin;
     private MyDataBaseCreator MDBC;
-    private  ArrayAdapter<String> ShopNamesSpinnerAdapter;
+    private ArrayAdapter<String> ShopNamesSpinnerAdapter;
     private ArrayList<String> ShopNamesList;
 
 
@@ -105,7 +104,7 @@ public class Settings extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               OnDialodgDelete();
+                OnDialodgDelete();
             }
         });
         SaveBtnforuserdata.setOnClickListener(new View.OnClickListener() {
@@ -132,9 +131,9 @@ public class Settings extends AppCompatActivity {
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(paidAmountIn.getText().toString().trim().length() != 0){
+                if (paidAmountIn.getText().toString().trim().length() != 0 && !ShopToPaySpinner.getSelectedItem().toString().trim().isEmpty()) {
                     ConfirmPay();
-                }else {
+                } else {
                     MsgBox(getString(R.string.plzinsertamount));
                 }
             }
@@ -176,7 +175,8 @@ public class Settings extends AppCompatActivity {
     public void MsgBox(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-    public  String GetDate() {
+
+    public String GetDate() {
         Date currenttime = Calendar.getInstance().getTime();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
         return dateFormat.format(currenttime);
@@ -205,25 +205,25 @@ public class Settings extends AppCompatActivity {
         Lgin = new LoginClass(getApplicationContext());
 
         Lgin.deleteall();
-        MDBC.deletAllTable(DbContractor.TableColumns.MainTable);
-        MDBC.deletAllTable(DbContractor.TableColumns.InfoTable);
-        MDBC.deletAllTable(DbContractor.TableColumns.ArchiveTable);
-        MDBC.deletAllTable(DbContractor.TableColumns.PaymentTable);
-        MDBC.deletAllTable(DbContractor.TableColumns.ArchivePaymentTable);
+        MDBC.deletAllFromTable(DbContractor.TableColumns.MainTable);
+        MDBC.deletAllFromTable(DbContractor.TableColumns.InfoTable);
+        MDBC.deletAllFromTable(DbContractor.TableColumns.ArchiveTable);
+        MDBC.deletAllFromTable(DbContractor.TableColumns.PaymentTable);
+        MDBC.deletAllFromTable(DbContractor.TableColumns.ArchivePaymentTable);
 
     }
 
     private void OnDialodgDelete() {
-        new AlertDialog.Builder(getApplicationContext())
-                .setTitle(R.string.warning)
-                .setMessage(getString(R.string.surewannadelall))
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.warning);
+        builder.setMessage(getString(R.string.surewannadelall));
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        MDBC.DeleteAllBy(getApplicationContext(),DbContractor.TableColumns.MainTable,ShopToDeleteSpinner.getSelectedItem().toString());
+                        MDBC.DeleteAllBy(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MShopName, ShopToDeleteSpinner.getSelectedItem().toString());
                     }
-                })
-                .setNegativeButton(R.string.no, null).show();
+                });
+        builder.setNegativeButton(R.string.no, null).show();
     }
 
     public void onDialogue2() {
@@ -257,13 +257,14 @@ public class Settings extends AppCompatActivity {
     }
 
     private void FillWithShopNames() {
-        ShopNamesList= new ArrayList<>();
+        ShopNamesList = new ArrayList<>();
         ShopNamesList = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, DbContractor.TableColumns.MShopName);
-       ShopNamesSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, ShopNamesList);
+        ShopNamesSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, ShopNamesList);
         ShopToPaySpinner.setAdapter(ShopNamesSpinnerAdapter);
         ShopToDeleteSpinner.setAdapter(ShopNamesSpinnerAdapter);
     }
-    public void ConfirmPay(){
+
+    public void ConfirmPay() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.warning));
         builder.setMessage(R.string.surewanapay);
@@ -271,34 +272,55 @@ public class Settings extends AppCompatActivity {
 
             public void onClick(DialogInterface dialog, int whichButton) {
 
-                if(MDBC.PayShop(ShopToPaySpinner.getSelectedItem().toString(),Double.parseDouble(paidAmountIn.getText().toString().trim()),GetDate())) {
+                if (MDBC.PayShop(ShopToPaySpinner.getSelectedItem().toString(), Double.parseDouble(paidAmountIn.getText().toString().trim()), GetDate())) {
                     MsgBox(getString(R.string.paysuccess));
-                }else{
+                } else {
                     MsgBox(getString(R.string.payunsuccessful));
                 }
-                ArchiveIt();
+                ArchiveIt(ShopToPaySpinner.getSelectedItem().toString());
             }
         });
         builder.setNegativeButton(R.string.no, null);
         builder.show();
     }
-    public boolean isFirstDayOfMonth(Calendar calendar) {
+    /*public boolean isFirstDayOfMonth(Calendar calendar) {
         if (calendar == null) {
             throw new IllegalArgumentException("Calendar cannot be null.");
         }
         int maxDayOfMonth = calendar.getActualMaximum(Calendar.DATE);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         return dayOfMonth == 1;
-    }
+    }*/
 
-    public void ArchiveIt() {
-        if (isFirstDayOfMonth(Calendar.getInstance())) {
-            //     ArchiveIt();
+    public void ArchiveIt(String ShopName) {
+
             SQLiteDatabase db = MDBC.getWritableDatabase();
-            db.execSQL("insert into " + DbContractor.TableColumns.ArchiveTable + " select * from " + DbContractor.TableColumns.MainTable +
-                    "  order by " + DbContractor.TableColumns.MDate);
+             db.execSQL(" insert into " + DbContractor.TableColumns.ArchiveTable + "" +
+                     " (" + DbContractor.TableColumns.ArItem_Name + "," +
+                     "" + DbContractor.TableColumns.ArQuantifier + "," +
+                     "" + DbContractor.TableColumns.ArQuantity + "," +
+                     "" + DbContractor.TableColumns.ArItem_Price + " ," +
+                     "" + DbContractor.TableColumns.ArShopName + " ," +
+                     " "+ DbContractor.TableColumns.ArDate + ") select " + DbContractor.TableColumns.MItem_Name  + "," +
+                     " "+ DbContractor.TableColumns.MQuantifier + "," +
+                     "" + DbContractor.TableColumns.MQuantity + "," +
+                     "" + DbContractor.TableColumns.MItem_Price + " ," +
+                     "" + DbContractor.TableColumns.MShopName + " ," +
+                     " "+ DbContractor.TableColumns.MDate + " from " +DbContractor.TableColumns.MainTable +"" +
+                     " where " + DbContractor.TableColumns.MShopName + " like  '%"+ShopName+"%' ");
+
+        db.execSQL(" insert into " + DbContractor.TableColumns.ArchivePaymentTable + "" +
+                " (" + DbContractor.TableColumns.ArPaidShopName + "," +
+                "" + DbContractor.TableColumns.ArPaidAmount + "," +
+                "" + DbContractor.TableColumns.ArPaymentDate +") select " + DbContractor.TableColumns.PaidShopName  + "," +
+                " "+ DbContractor.TableColumns.PaidAmount + "," +
+                "" + DbContractor.TableColumns.PaymentDate + " from " +DbContractor.TableColumns.PaymentTable +"" +
+                " where " + DbContractor.TableColumns.PaidShopName + " like '%"+ShopName+"%' ");
+
+          MDBC.DeleteAllBy(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MShopName,ShopName);
+          MDBC.DeleteAllBy(DbContractor.TableColumns.PaymentTable,DbContractor.TableColumns.PaidShopName,ShopName);
         }
 
     }
-}
+
 

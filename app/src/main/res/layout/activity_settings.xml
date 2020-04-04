@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundlkarne"
+    android:background="@drawable/backg"
     android:orientation="vertical"
     tools:context=".mainStuff.LoginActivity">
 
@@ -34,7 +34,7 @@
                     android:layout_marginStart="14dp"
                     android:textSize="18sp"
                     android:textAlignment="center"
-                    android:textColor="@color/GreenP1" />
+                    android:textColor="@color/blueMarin" />
 
             </LinearLayout>
 
@@ -42,8 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="2dp"
-                android:elevation="8dp"
+                android:layout_margin="4dp"
+                android:elevation="4dp"
                 android:orientation="vertical">
 
 
@@ -58,8 +58,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="4dp"
-                        android:background="@drawable/justborderz"
-                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <EditText
@@ -80,8 +78,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="4dp"
-                        android:background="@drawable/justborderz"
-                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <EditText
@@ -102,12 +98,12 @@
                     <Button
                         android:id="@+id/saveBtnforquotas"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:layout_margin="4dp"
                         android:background="@drawable/buttonflat"
                         android:text="@string/save"
                         android:textAlignment="center"
-                        android:textColor="@color/GreenP"
+                        android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -121,12 +117,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end|center"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:background="@drawable/justborderz"
                         android:layout_margin="4dp"
                         android:layout_height="wrap_content">
 
@@ -143,10 +137,8 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:background="@drawable/justborderz"
                         android:orientation="vertical">
 
                         <EditText
@@ -166,7 +158,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_margin="4dp"
-                            android:background="@drawable/justborderz"
                             android:hint="@string/confirm_password"
                             android:inputType="textPassword"
                             android:maxLength="8"
@@ -178,17 +169,15 @@
 
                 </LinearLayout>
 
-
-
                     <Button
                         android:id="@+id/saveBtnforuserdata"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:layout_margin="4dp"
                         android:background="@drawable/buttonflat"
                         android:elevation="4dp"
                         android:text="@string/save"
-                        android:textColor="@color/GreenP"
+                        android:textColor="@color/white"
                         android:textStyle="bold" />
 
 
@@ -200,7 +189,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="2dp"
                 android:layoutDirection="rtl"
-                android:elevation="8dp"
+                android:elevation="4dp"
                 android:orientation="vertical">
 
 
@@ -210,7 +199,7 @@
                     android:layout_marginStart="14dp"
                     android:text="@string/pay"
                     android:textAlignment="center"
-                    android:textColor="@color/orange"
+                    android:textColor="@color/blueMarin"
                     android:textSize="18sp" />
 
                 <LinearLayout
@@ -228,15 +217,17 @@
                         android:layout_margin="4dp"
                         android:layoutDirection="inherit"
                         android:text="دفع "
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
                     <EditText
                         android:id="@+id/paidamountV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:layout_margin="2dp"
                         android:layout_weight="1"
-                        android:text="10000"
+                        android:inputType="numberDecimal"
+                        android:text="0"
+                        android:textAlignment="center"
                         />
                     <TextView
                         android:layout_width="wrap_content"
@@ -245,6 +236,7 @@
                         android:layout_margin="4dp"
                         android:layoutDirection="inherit"
                         android:text=" لــ"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
                     <Spinner
                         android:id="@+id/payfor"
@@ -253,7 +245,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:popupBackground="@color/GreenP4"
+                        android:popupBackground="@color/P2"
                         android:dropDownWidth="200dp"
                         android:layoutDirection="rtl"
                         android:padding="2dp"
@@ -266,7 +258,7 @@
                 <Button
                     android:id="@+id/pay"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_margin="4dp"
                     android:background="@drawable/buttonflat"
                     android:text="حفظ"
@@ -301,6 +293,7 @@
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:layoutDirection="inherit"
+                        android:textColor="@color/blueMarin"
                         android:text="حذف الكل لــ"
                         android:textSize="16sp" />
 
@@ -313,7 +306,7 @@
                     android:textAlignment="gravity"
                     android:layout_margin="4dp"
                     android:padding="2dp"
-                    android:popupBackground="@color/GreenP4"
+                    android:popupBackground="@color/P2"
                     android:layoutDirection="rtl"
                     android:layout_weight="1"/>
 
@@ -321,7 +314,7 @@
                 <Button
                     android:id="@+id/deleteby"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:background="@drawable/buttonflat"
                     android:layout_margin="4dp"
                     android:textStyle="bold"

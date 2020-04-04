@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backg"
-    tools:context=".Archieve.ArchEddit">
+    tools:context=".ArchivePayment.ArPaymentEdit">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-     >
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/ItemNameModArch"
+                        android:id="@+id/l"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -85,35 +85,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/quantityModArch"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
-                        android:hint="@string/quantity"
-                        android:inputType="numberDecimal"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
-                        android:text="@string/quantity" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/priceModArch"
+                        android:id="@+id/p"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -141,34 +113,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/ArchShopNmview"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
-                        android:hint="@string/shop_name"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
-                        android:text="@string/shop_name" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/ArchdateEdit"
+                        android:id="@+id/g"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -241,7 +186,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/ArchshopTodelete"
+                        android:id="@+id/ArchshopTodeletep"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -255,7 +200,7 @@
 
                 </LinearLayout>
                 <Button
-                    android:id="@+id/Archdeleteby"
+                    android:id="@+id/Archdeletebyp"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:background="@drawable/buttonflat"

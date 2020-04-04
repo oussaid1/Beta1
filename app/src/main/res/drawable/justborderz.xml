@@ -5,7 +5,5 @@
     android:bottomRightRadius="2dp"
    android:topLeftRadius="2dp"
     android:topRightRadius="2dp"/>
-    <stroke android:color="@color/GreenP4"
-        android:width="2dp"> </stroke>
-<solid android:color="@color/white"/>
+<solid android:color="@color/P"/>
 </shape>

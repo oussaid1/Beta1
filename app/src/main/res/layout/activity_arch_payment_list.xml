@@ -7,7 +7,7 @@
     android:background="@drawable/backg"
     android:orientation="vertical"
     android:theme="@style/AppTheme"
-    tools:context=".mainStuff.ListActivity">
+    tools:context=".ArchivePayment.ArchPaymentList">
 
 
     <LinearLayout
@@ -28,7 +28,7 @@
             android:elevation="8dp">
 
             <Spinner
-                android:id="@+id/CategorySpin"
+                android:id="@+id/PCategorySpin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
@@ -48,7 +48,7 @@
             android:elevation="8dp">
 
             <Spinner
-                android:id="@+id/searchSpin"
+                android:id="@+id/PsearchSpin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
@@ -75,142 +75,80 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/P2"
         android:layout_gravity="center_horizontal"
-        android:background="@color/P1"
-        android:layout_margin="2dp"
         android:orientation="horizontal">
 
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="match_parent"
             android:layout_gravity="start|center_vertical"
-            android:layout_margin="4dp"
             android:padding="4dp"
             android:src="@drawable/ic_shopping" />
-
-        <LinearLayout
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="4dp"
-            android:orientation="vertical">
-
-
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:padding="2dp"
-                android:text="الكمية"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="4dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:maxLines="1"
-                android:padding="2dp"
-                android:text="العيار"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="4dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/ArPmolhanotCV"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:maxLines="1"
-                android:padding="2dp"
-                android:text="السلعة"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="4dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:padding="2dp"
-                android:text="@string/price"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="4dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layoutDirection="inherit"
                 android:maxLines="1"
                 android:padding="2dp"
-                android:text="المحل"
+                android:text="مومو"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                android:textStyle="italic" />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="2dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
-
+                android:id="@+id/ArPPriceCV"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:maxLines="1"
                 android:padding="2dp"
-                android:text="@string/date"
+                android:text="@string/_180"
                 android:textAlignment="center"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ArPdateCV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxLines="1"
+                android:padding="2dp"
+                android:text="@string/_12_01_20"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/ArPid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
     </LinearLayout>
+
 
 
     <LinearLayout
@@ -221,7 +159,7 @@
         android:background="@drawable/justborderz">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/myrecycler"
+            android:id="@+id/Pmyrecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -236,7 +174,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.gms.ads.AdView
-            android:id="@+id/listAd"
+            android:id="@+id/PlistAd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"

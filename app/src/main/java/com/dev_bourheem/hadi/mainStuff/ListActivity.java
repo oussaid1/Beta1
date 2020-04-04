@@ -354,6 +354,7 @@ public class ListActivity extends AppCompatActivity {
     public void fillwithStar() {
         searchspinerList.clear();
         searchspinerList.add("*");
+        searchAdapter = new ArrayAdapter<>(this, layout.simple_spinner_dropdown_item, searchspinerList);
         searchspinner.setAdapter(searchAdapter);
     }
 

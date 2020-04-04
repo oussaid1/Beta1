@@ -10,7 +10,7 @@ public final class DbContractor  {
 
 
         public static final String MainTable = "MainTable";
-        //public static final String ID = "ID";
+      //  public static final String ID = "ID";
         public static final String MItem_Name = "Item_Name";
         public static final String MItem_Price = "Item_Price";
         public static final String MShopName = "ShopName";

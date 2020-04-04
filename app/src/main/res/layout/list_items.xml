@@ -2,8 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp"
-    android:background="@color/white"
+    android:layout_margin="1dp"
     android:elevation="8dp"
     android:orientation="vertical"
     app:cardCornerRadius="8dp">
@@ -11,7 +10,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/GreenP4"
+            android:background="@color/P3"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
