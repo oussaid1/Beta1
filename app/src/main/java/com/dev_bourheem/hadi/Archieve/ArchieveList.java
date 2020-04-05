@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.dev_bourheem.hadi.ArchivePayment.ArchPaymentList;
 import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.mainStuff.EdditActivity;
 import com.dev_bourheem.hadi.mainStuff.MainActivity;
@@ -62,12 +63,13 @@ public class ArchieveList extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.mainArch:
-                //func here
                 OpentMainActivity();
                 return true;
             case R.id.statsArch:
-                //func here
                 OpentStats();
+                return true;
+            case R.id.ArchPayment:
+                OpentArchPayment();
                 return true;
             case R.id.SettingsArch:
                 OpentSettings();
@@ -161,7 +163,7 @@ public class ArchieveList extends AppCompatActivity {
             @Override
             public void OnItemClick(int position) {
 
-                Intent intent = new Intent( ArchieveList.this, EdditActivity.class );
+                Intent intent = new Intent( ArchieveList.this, ArchEddit.class );
                 intent.putExtra( "ArchExampleItem", ArchmExampleList.get( position ) );
                 startActivity( intent );
 
@@ -169,7 +171,7 @@ public class ArchieveList extends AppCompatActivity {
 
             @Override
             public void OnItemDelete(int position) {
-                //DeletItem(position);
+
             }
         } );
         Adslist();
@@ -330,6 +332,10 @@ public class ArchieveList extends AppCompatActivity {
 
     private void OpentStats() {
         Intent intent = new Intent( this, ArchievStats.class );
+        startActivity( intent );
+    }
+    private void OpentArchPayment(){
+        Intent intent = new Intent( this, ArchPaymentList.class );
         startActivity( intent );
     }
 

@@ -1,6 +1,5 @@
-package com.dev_bourheem.hadi.ArchivePayment;
+package com.dev_bourheem.hadi.Payment;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,9 +9,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,8 +17,6 @@ import android.widget.Spinner;
 import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.R;
-import com.dev_bourheem.hadi.mainStuff.MainActivity;
-import com.dev_bourheem.hadi.mainStuff.Settings;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -31,21 +25,22 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 import java.util.ArrayList;
 
-public class ArchPaymentList extends AppCompatActivity {
+public class PaymentList extends AppCompatActivity {
+
     MyDataBaseCreator MdbCrtr;
     private Spinner categoryspinner, searchspinner;
     private ArrayList<String> mainList;
     private ArrayList<String> categoryspinnerList, searchspinerList;
     private ArrayAdapter<String> categoryAdapter, searchAdapter;
-    private ArrayList<ArPaymentExampleItem> ArchPmExampleList;
+    private ArrayList<PaymentItemsClass> ArchPmExampleList;
     private RecyclerView Archmyrecycler;
     private RecyclerView.LayoutManager ArchPRecyLayManger;
-    private ArPaymentRecyAdapter ArchPRecyclerAdap;
-   private AdView listAd;
+    private PaymentRecyclerAdapter ArchPRecyclerAdap;
+    private AdView listAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_arch_payment_list );
+        setContentView( R.layout.activity_payment_list );
         Archmyrecycler = findViewById( R.id.Pmyrecycler );
         listAd = findViewById( R.id.PlistAd );
         Archmyrecycler.setHasFixedSize( true );
@@ -104,12 +99,12 @@ public class ArchPaymentList extends AppCompatActivity {
             }
         } );
         ArchPRecyLayManger = new LinearLayoutManager( this );
-        ArchPRecyclerAdap = new ArPaymentRecyAdapter( ArchPmExampleList );
-        ArchPRecyclerAdap.setOnItemClickListener( new ArPaymentRecyAdapter.OnItemClickListener() {
+        ArchPRecyclerAdap = new PaymentRecyclerAdapter( ArchPmExampleList );
+        ArchPRecyclerAdap.setOnItemClickListener( new PaymentRecyclerAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(int position) {
 
-                Intent intent = new Intent( ArchPaymentList.this, ArPaymentEdit.class );
+                Intent intent = new Intent( PaymentList.this, PaymentEddit.class );
                 intent.putExtra( "ArPaymentExampleItem", ArchPmExampleList.get( position ) );
                 startActivity( intent );
 
@@ -142,8 +137,8 @@ public class ArchPaymentList extends AppCompatActivity {
     private void GetAllPaymentHistoryForAll() {
         ArchPmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.ArchivePaymentTable +
-                " order by "+DbContractor.TableColumns.ArPaymentDate+" asc", null );
+        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.PaymentTable +
+                " order by "+DbContractor.TableColumns.PaymentDate+" asc", null );
         if (data.getCount() != 0) {
             data.moveToFirst();
             while (!data.isAfterLast()) {
@@ -152,7 +147,7 @@ public class ArchPaymentList extends AppCompatActivity {
                 String shopName = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaidShopName));
                 String paidAmount = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaidAmount));
                 String paidDate = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaymentDate));
-                ArchPmExampleList.add(new ArPaymentExampleItem(id, shopName, paidAmount, paidDate));
+                ArchPmExampleList.add(new PaymentItemsClass(id, shopName, paidAmount, paidDate));
 
                 data.moveToNext();
             }
@@ -164,9 +159,9 @@ public class ArchPaymentList extends AppCompatActivity {
     private void GetAllPaymentHistoryForShopNm(String ShopName) {
         ArchPmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.ArchivePaymentTable + "" +
-                " where " + DbContractor.TableColumns.ArPaidShopName + " like '%" + ShopName + "%'" +
-                "  order by "+DbContractor.TableColumns.ArPaymentDate+" asc", null );
+        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.PaymentTable + "" +
+                " where " + DbContractor.TableColumns.PaidShopName + " like '%" + ShopName + "%'" +
+                "  order by "+DbContractor.TableColumns.PaymentDate+" asc", null );
         if (data.getCount() != 0) {
             data.moveToFirst();
             while (!data.isAfterLast()) {
@@ -175,7 +170,7 @@ public class ArchPaymentList extends AppCompatActivity {
                 String shopName = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaidShopName));
                 String paidAmount = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaidAmount));
                 String paidDate = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaymentDate));
-                ArchPmExampleList.add(new ArPaymentExampleItem(id, shopName, paidAmount, paidDate));
+                ArchPmExampleList.add(new PaymentItemsClass(id, shopName, paidAmount, paidDate));
 
                 data.moveToNext();
             }
@@ -187,9 +182,9 @@ public class ArchPaymentList extends AppCompatActivity {
     private void FillWithMolhanot() {
         searchspinerList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor molhanotCursor = db.rawQuery( "select distinct " + DbContractor.TableColumns.ArPaidShopName +
-                " from " + DbContractor.TableColumns.ArchivePaymentTable + " order by " +
-                "" + DbContractor.TableColumns.ArPaymentDate + " asc", null );
+        Cursor molhanotCursor = db.rawQuery( "select distinct " + DbContractor.TableColumns.PaidShopName +
+                " from " + DbContractor.TableColumns.PaymentTable + " order by " +
+                "" + DbContractor.TableColumns.PaymentDate + " asc", null );
         if (molhanotCursor.getCount() == 0) {
             return;
         } else
@@ -234,3 +229,4 @@ public class ArchPaymentList extends AppCompatActivity {
         categoryspinnerList.add( "حسب المحل" );
     }
 }
+

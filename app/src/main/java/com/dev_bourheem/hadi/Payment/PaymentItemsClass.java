@@ -1,16 +1,16 @@
-package com.dev_bourheem.hadi.ArchivePayment;
+package com.dev_bourheem.hadi.Payment;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ArPaymentExampleItem implements Parcelable {
+public class PaymentItemsClass implements Parcelable {
     private String id;
     private String ShopName;
     private String paidAmount;
     private String datePaid;
 
 
-    public ArPaymentExampleItem(String idd,String shopName,String paidAmounts,String datePaid1) {
+    public PaymentItemsClass(String idd,String shopName,String paidAmounts,String datePaid1) {
         id=idd;
         ShopName = shopName;
         paidAmount = paidAmounts;
@@ -19,24 +19,27 @@ public class ArPaymentExampleItem implements Parcelable {
     }
 
 
-    protected ArPaymentExampleItem(Parcel in) {
+    protected PaymentItemsClass(Parcel in) {
         id= in.readString();
         ShopName = in.readString();
         paidAmount = in.readString();
         datePaid = in.readString();
     }
 
-    public static final Creator<ArPaymentExampleItem> CREATOR = new Creator<ArPaymentExampleItem>() {
+    public static final Parcelable.Creator<PaymentItemsClass> CREATOR = new Parcelable.Creator<PaymentItemsClass>() {
         @Override
-        public ArPaymentExampleItem createFromParcel(Parcel in) {
-            return new ArPaymentExampleItem(in);
+        public PaymentItemsClass createFromParcel(Parcel in) {
+            return new PaymentItemsClass(in);
         }
 
         @Override
-        public ArPaymentExampleItem[] newArray(int size) {
-            return new ArPaymentExampleItem[size];
+        public PaymentItemsClass[] newArray(int size) {
+            return new PaymentItemsClass[size];
         }
     };
+    public String getIdno() {
+        return id;
+    }
 
     public String getShopName() {
         return ShopName;
@@ -64,7 +67,5 @@ public class ArPaymentExampleItem implements Parcelable {
         dest.writeString(datePaid);
     }
 
-    public String getIdno() {
-        return id;
-    }
+
 }

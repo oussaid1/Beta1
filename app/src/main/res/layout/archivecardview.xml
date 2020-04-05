@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
-    android:elevation="8dp"
+    android:elevation="12dp"
     android:layoutDirection="rtl"
     android:orientation="vertical"
     app:cardCornerRadius="8dp">
@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/P2"
+        android:background="@color/P"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -22,6 +22,41 @@
             android:layout_gravity="start|center_vertical"
             android:padding="4dp"
             android:src="@drawable/ic_shopping" />
+
+        <LinearLayout
+            android:layout_width="47dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/ArchivequantityCV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="2dp"
+                android:maxLines="1"
+                android:text="@string/_1_5"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ArchivequantifierCv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:maxLines="1"
+                android:textAlignment="center"
+                android:padding="2dp"
+                android:text="@string/kilo"
+                android:textSize="12sp" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -29,7 +64,46 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/arPaidShop"
+                android:id="@+id/ArchiveItemNameCV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:maxWidth="140dp"
+                android:maxHeight="40dp"
+                android:maxLines="1"
+                android:padding="2dp"
+                android:text="@string/milk"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ArchivePriceCV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxLines="1"
+                android:padding="2dp"
+                android:text="@string/_180"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ArchivemolhanotCV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layoutDirection="inherit"
@@ -37,28 +111,9 @@
                 android:padding="2dp"
                 android:text="مومو"
                 android:textAlignment="center"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="italic" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/arPaidAmount"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxLines="1"
-                android:padding="2dp"
-                android:text="@string/_180"
-                android:textAlignment="center"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,19 +122,19 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/arPayDate"
+                android:id="@+id/ArchivedateCV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxLines="1"
                 android:padding="2dp"
                 android:text="@string/_12_01_20"
                 android:textAlignment="center"
-                android:textSize="16sp"
+                android:textSize="10sp"
                 android:textStyle="italic" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/ArPayId"
+            android:id="@+id/Archiveid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone" />

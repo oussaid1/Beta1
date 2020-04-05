@@ -153,7 +153,7 @@ public class EdditActivity extends AppCompatActivity {
         if (exampleitem != null) {
             idd = exampleitem.getIdno();
         }
-        boolean updateStatus = MDBCR.DeleteItemSelected(idd);
+        boolean updateStatus = MDBCR.DeleteItemSelected(DbContractor.TableColumns.MainTable,idd);
         if (updateStatus) {
             MsgBox("تم الحذف ", 1);
             OpenListItems();

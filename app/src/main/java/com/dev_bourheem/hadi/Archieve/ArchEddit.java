@@ -52,12 +52,10 @@ public class ArchEddit extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.save:
-                //func here
                 onDialogueUpdate();
                 return true;
             case R.id.deletMod:
                 onDialogueDelete();
-
                 return true;
             case R.id.exit_Mod:
                 finish();
@@ -71,13 +69,13 @@ public class ArchEddit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arch_eddit);
-        Edit_ad = findViewById(R.id.Edit_ad);
+        Edit_ad = findViewById(R.id.ArchAD);
         ItemNameMod = findViewById(R.id.ItemNameModArch);
         QuantityMod = findViewById(R.id.quantityModArch);
         PriceMod = findViewById(R.id.priceModArch);
 
-        ShopNameMod = findViewById(R.id.shopnameMod);
-        DateMod = findViewById(R.id.dateMod);
+        ShopNameMod = findViewById(R.id.ShopNmviewArch);
+        DateMod = findViewById(R.id.ArchdateEdit);
         MDBCR = new MyDataBaseCreator(this);
         GetThem();
         AdsEditActivityArch();
@@ -155,7 +153,7 @@ public class ArchEddit extends AppCompatActivity {
         if (archExampleItem != null) {
             idd = archExampleItem.getIdno();
         }
-        boolean updateStatus = MDBCR.DeleteItemSelected(idd);
+        boolean updateStatus = MDBCR.DeleteItemSelected(DbContractor.TableColumns.ArchiveTable,idd);
         if (updateStatus) {
             MsgBox("تم الحذف ", 1);
             OpenListItems();
@@ -206,13 +204,5 @@ public class ArchEddit extends AppCompatActivity {
         startActivity(inte);
     }
 
-    private void DeleteBy(String molhanot) {
-        SQLiteDatabase db = MDBCR.getWritableDatabase();
-        long deleted = db.delete( DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName + " = ?", new String[]{molhanot});
-        if (deleted > 0) {
-            Toast.makeText(this, "deleted", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "not deleted", Toast.LENGTH_SHORT).show();
-        }
-    }
+
 }

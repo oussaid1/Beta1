@@ -32,6 +32,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.dev_bourheem.hadi.Archieve.ArchieveList;
+import com.dev_bourheem.hadi.ArchivePayment.ArchPaymentList;
 import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.R;
@@ -236,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
                 OpenArch();
                 return true;
             case R.id.ShowList_M:
-                OpentAvtivity2();
+                OpentMainListActivity();
                 return true;
             case R.id.stats:
                 OpenStats();
@@ -313,19 +314,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // this opens list activity
-    public void OpentAvtivity2() {
+    public void OpentMainListActivity() {
         final Intent intent1;
         intent1 = new Intent(this, ListActivity.class);
-        //intent1.putExtra("tarikh" ,date);
         startActivity(intent1);
     }
 
     public void OpenArch() {
         final Intent intent1;
         intent1 = new Intent(this, ArchieveList.class);
-        //intent1.putExtra("tarikh" ,date);
         startActivity(intent1);
     }
+
 
     /**
      * this method fills the autocomplete Edittextview
@@ -502,7 +502,7 @@ public class MainActivity extends AppCompatActivity {
     public void FillwithShopNm() {
         SpinnerSub1List.clear();
         SpinnerSub1List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, DbContractor.TableColumns.MShopName);
-        SpinnerSub1List.add("*");
+
         SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub1List);
         SearchSpinerSub1.setAdapter(SearchSpinnerSub2Adapter);
     }
@@ -516,7 +516,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void FillWithDaysforShop(String shop) {
         SpinnerSub2List.clear();
-
+        SpinnerSub1List.add("*");
         SpinnerSub2List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MDate, DbContractor.TableColumns.MDate);
         SearchSpinnerSub3Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub2List);
         SearchSpinerSub2.setAdapter(SearchSpinnerSub3Adapter);
@@ -553,7 +553,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** these are the methods for sums */
     public double GetSumByShop(String mohamed) {
-      double paid=  MDBC.GetPaidAmountForShop( DbContractor.TableColumns.PaidAmount,DbContractor.TableColumns.PaymentTable,DbContractor.TableColumns.PaidShopName ,mohamed);
+      double paid=  MDBC.GetSumOfPaidAmountForShop( DbContractor.TableColumns.PaidAmount,DbContractor.TableColumns.PaymentTable,DbContractor.TableColumns.PaidShopName ,mohamed);
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Soa from "

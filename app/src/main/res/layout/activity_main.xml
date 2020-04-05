@@ -115,7 +115,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-style="@style/margins"                android:layoutDirection="rtl"
+                style="@style/margins"
+                android:layoutDirection="rtl"
                 android:orientation="horizontal">
 
 
@@ -145,6 +146,7 @@ style="@style/margins"                android:layoutDirection="rtl"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:background="@drawable/justborderz"
+                style="@style/margins"
                 android:orientation="horizontal">
 
                 <Button
@@ -254,6 +256,7 @@ style="@style/margins"                android:layoutDirection="rtl"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/justborderz"
                         android:maxLines="1"
+                        style="@style/margins"
                         android:textAlignment="center"
                         android:textColor="@color/blueMarin"
                         android:textSize="18sp"

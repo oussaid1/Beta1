@@ -30,22 +30,22 @@ public class ArchRecyclerViewAdapter extends RecyclerView.Adapter<ArchRecyclerVi
     }
 
     static class ArchSubRecycler extends RecyclerView.ViewHolder {
-        public TextView idTv;
-        public TextView quantity;
-        public TextView quantifier;
-        public TextView ItemName;
-        public TextView ItemPrice;
-        public TextView ShopName;
-        public TextView dateBought;
+        public TextView ArchiveID;
+        public TextView ArchiveQuantity;
+        public TextView ArchiveQuantifier;
+        public TextView ArchiveItemName;
+        public TextView ArchiveItemPrice;
+        public TextView ArchiveShopName;
+        public TextView ArchiveDateBought;
         public ArchSubRecycler(View itemView, final ArchRecyclerViewAdapter.OnItemClickListener listener) {
             super(itemView);
-            idTv = itemView.findViewById( R.id.id);
-            quantity = itemView.findViewById(R.id.quantityCV);
-            quantifier = itemView.findViewById(R.id.quantifierCv);
-            ItemName = itemView.findViewById(R.id.ItemNameCV);
-            ItemPrice = itemView.findViewById(R.id.PriceCV);
-            ShopName = itemView.findViewById(R.id.molhanotCV);
-            dateBought = itemView.findViewById(R.id.dateCV);
+            ArchiveID = itemView.findViewById( R.id.Archiveid);
+            ArchiveQuantity = itemView.findViewById(R.id.ArchivequantityCV);
+            ArchiveQuantifier = itemView.findViewById(R.id.ArchivequantifierCv);
+            ArchiveItemName = itemView.findViewById(R.id.ArchiveItemNameCV);
+            ArchiveItemPrice = itemView.findViewById(R.id.ArchivePriceCV);
+            ArchiveShopName = itemView.findViewById(R.id.ArchivemolhanotCV);
+            ArchiveDateBought = itemView.findViewById(R.id.ArchivedateCV);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -70,7 +70,7 @@ public class ArchRecyclerViewAdapter extends RecyclerView.Adapter<ArchRecyclerVi
     @NonNull
     @Override
     public ArchRecyclerViewAdapter.ArchSubRecycler onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_items, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.archivecardview, parent, false);
         return new ArchRecyclerViewAdapter.ArchSubRecycler(v, mListener);
     }
 
@@ -78,13 +78,13 @@ public class ArchRecyclerViewAdapter extends RecyclerView.Adapter<ArchRecyclerVi
     public void onBindViewHolder(ArchRecyclerViewAdapter.ArchSubRecycler holder, int position) {
         ArchexampleItem currentItem = mExampleList.get(position);
 
-        holder.idTv.setText(currentItem.getIdno());
-        holder.quantity.setText(currentItem.getQuantity());
-        holder.quantifier.setText(currentItem.getQuantifier());
-        holder.ItemName.setText(currentItem.getItemName());
-        holder.ItemPrice.setText(currentItem.getItemPrice());
-        holder.ShopName.setText(currentItem.getShopName());
-        holder.dateBought.setText(currentItem.getDateBought());
+        holder.ArchiveID.setText(currentItem.getIdno());
+        holder.ArchiveQuantity.setText(currentItem.getQuantity());
+        holder.ArchiveQuantifier.setText(currentItem.getQuantifier());
+        holder.ArchiveItemName.setText(currentItem.getItemName());
+        holder.ArchiveItemPrice.setText(currentItem.getItemPrice());
+        holder.ArchiveShopName.setText(currentItem.getShopName());
+        holder.ArchiveDateBought.setText(currentItem.getDateBought());
 
 
     }

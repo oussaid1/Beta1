@@ -68,14 +68,16 @@
             android:padding="4dp"
             android:text="@string/show_today_items"
             android:textAlignment="gravity"
-            android:textColor="@color/blueMarin"
+            android:textSize="16sp"
+            android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/P2"
+        android:background="@color/P3"
+        android:layoutDirection="rtl"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -99,7 +101,7 @@
                 android:layoutDirection="inherit"
                 android:maxLines="1"
                 android:padding="2dp"
-                android:text="مومو"
+                android:text="@string/shop_name"
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:textStyle="italic" />
@@ -116,7 +118,7 @@
                 android:layout_height="match_parent"
                 android:maxLines="1"
                 android:padding="2dp"
-                android:text="@string/_180"
+                android:text="المبلغ المدفوع"
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -136,7 +138,7 @@
                 android:layout_height="match_parent"
                 android:maxLines="1"
                 android:padding="2dp"
-                android:text="@string/_12_01_20"
+                android:text="@string/date"
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:textStyle="italic" />

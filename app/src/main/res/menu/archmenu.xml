@@ -8,6 +8,10 @@
         android:title="الرئيسية"
         app:showAsAction="never" />
     <item
+        android:id="@+id/ArchPayment"
+        android:title="ارشيف الدفع"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/statsArch"
         android:title="احصائيات الأرشيف"
         app:showAsAction="never" />
