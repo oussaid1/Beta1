@@ -176,7 +176,12 @@ public class Settings extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    public String GetDate() {
+    public Calendar GetCalendar() {
+        //DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        return cal;
+    }
+    public static String GetDate() {
         Date currenttime = Calendar.getInstance().getTime();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
         return dateFormat.format(currenttime);
@@ -277,49 +282,33 @@ public class Settings extends AppCompatActivity {
                 } else {
                     MsgBox(getString(R.string.payunsuccessful));
                 }
-                ArchiveIt(ShopToPaySpinner.getSelectedItem().toString());
+                if(MDBC.OweHimNothing(ShopToPaySpinner.getSelectedItem().toString()) || isFirstDayOfMonth(GetCalendar())){
+                  String mohamed=  ShopToPaySpinner.getSelectedItem().toString();
+                   SQLiteDatabase db = MDBC.getReadableDatabase();
+                   Cursor cursor =db.rawQuery("SELECT * from " + DbContractor.TableColumns.PaymentTable + " " +
+                           "where " + DbContractor.TableColumns.PaidShopName + " like  ' %" + mohamed + " % ' ", null);
+                   if(cursor.getCount() != 0) {
+                       MDBC.ArchiveIt(ShopToPaySpinner.getSelectedItem().toString());
+                   }
+                }
+
             }
         });
         builder.setNegativeButton(R.string.no, null);
         builder.show();
     }
-    /*public boolean isFirstDayOfMonth(Calendar calendar) {
+    public boolean isFirstDayOfMonth(Calendar calendar) {
         if (calendar == null) {
             throw new IllegalArgumentException("Calendar cannot be null.");
         }
         int maxDayOfMonth = calendar.getActualMaximum(Calendar.DATE);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-        return dayOfMonth == 1;
-    }*/
-
-    public void ArchiveIt(String ShopName) {
-
-            SQLiteDatabase db = MDBC.getWritableDatabase();
-             db.execSQL(" insert into " + DbContractor.TableColumns.ArchiveTable + "" +
-                     " (" + DbContractor.TableColumns.ArItem_Name + "," +
-                     "" + DbContractor.TableColumns.ArQuantifier + "," +
-                     "" + DbContractor.TableColumns.ArQuantity + "," +
-                     "" + DbContractor.TableColumns.ArItem_Price + " ," +
-                     "" + DbContractor.TableColumns.ArShopName + " ," +
-                     " "+ DbContractor.TableColumns.ArDate + ") select " + DbContractor.TableColumns.MItem_Name  + "," +
-                     " "+ DbContractor.TableColumns.MQuantifier + "," +
-                     "" + DbContractor.TableColumns.MQuantity + "," +
-                     "" + DbContractor.TableColumns.MItem_Price + " ," +
-                     "" + DbContractor.TableColumns.MShopName + " ," +
-                     " "+ DbContractor.TableColumns.MDate + " from " +DbContractor.TableColumns.MainTable +"" +
-                     " where " + DbContractor.TableColumns.MShopName + " like  '%"+ShopName+"%' ");
-
-        db.execSQL(" insert into " + DbContractor.TableColumns.ArchivePaymentTable + "" +
-                " (" + DbContractor.TableColumns.ArPaidShopName + "," +
-                "" + DbContractor.TableColumns.ArPaidAmount + "," +
-                "" + DbContractor.TableColumns.ArPaymentDate +") select " + DbContractor.TableColumns.PaidShopName  + "," +
-                " "+ DbContractor.TableColumns.PaidAmount + "," +
-                "" + DbContractor.TableColumns.PaymentDate + " from " +DbContractor.TableColumns.PaymentTable +"" +
-                " where " + DbContractor.TableColumns.PaidShopName + " like '%"+ShopName+"%' ");
-
-          MDBC.DeleteAllBy(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MShopName,ShopName);
-          MDBC.DeleteAllBy(DbContractor.TableColumns.PaymentTable,DbContractor.TableColumns.PaidShopName,ShopName);
-        }
+        if(dayOfMonth == maxDayOfMonth){
+            return true;
+        } else
+            return false;
+        //return dayOfMonth == 1;
+    }
 
     }
 

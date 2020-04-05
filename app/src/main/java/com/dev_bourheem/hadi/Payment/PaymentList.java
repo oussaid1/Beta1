@@ -41,11 +41,11 @@ public class PaymentList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_payment_list );
-        Archmyrecycler = findViewById( R.id.Pmyrecycler );
-        listAd = findViewById( R.id.PlistAd );
+        Archmyrecycler = findViewById( R.id.PayPmyrecycler );
+        listAd = findViewById( R.id.PayPlistAd );
         Archmyrecycler.setHasFixedSize( true );
-        categoryspinner = findViewById( R.id.PCategorySpin );
-        searchspinner = findViewById( R.id.PsearchSpin );
+        categoryspinner = findViewById( R.id.PayPCategorySpin );
+        searchspinner = findViewById( R.id.PayPsearchSpin );
         ArchPmExampleList = new ArrayList<>();
         mainList = new ArrayList<>();
         MdbCrtr = new MyDataBaseCreator( this );
@@ -144,9 +144,9 @@ public class PaymentList extends AppCompatActivity {
             while (!data.isAfterLast()) {
 
                 String id = data.getString(data.getColumnIndex(DbContractor.TableColumns._ID));
-                String shopName = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaidShopName));
-                String paidAmount = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaidAmount));
-                String paidDate = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaymentDate));
+                String shopName = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaidShopName));
+                String paidAmount = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaidAmount));
+                String paidDate = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaymentDate));
                 ArchPmExampleList.add(new PaymentItemsClass(id, shopName, paidAmount, paidDate));
 
                 data.moveToNext();
@@ -167,9 +167,9 @@ public class PaymentList extends AppCompatActivity {
             while (!data.isAfterLast()) {
 
                 String id = data.getString(data.getColumnIndex(DbContractor.TableColumns._ID));
-                String shopName = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaidShopName));
-                String paidAmount = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaidAmount));
-                String paidDate = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaymentDate));
+                String shopName = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaidShopName));
+                String paidAmount = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaidAmount));
+                String paidDate = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaymentDate));
                 ArchPmExampleList.add(new PaymentItemsClass(id, shopName, paidAmount, paidDate));
 
                 data.moveToNext();
@@ -190,7 +190,7 @@ public class PaymentList extends AppCompatActivity {
         } else
             molhanotCursor.moveToFirst();
         while (!molhanotCursor.isAfterLast()) {
-            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( DbContractor.TableColumns.ArPaidShopName ) );
+            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( DbContractor.TableColumns.PaidShopName ) );
             searchspinerList.add( Mlhanot );
             molhanotCursor.moveToNext();
         }

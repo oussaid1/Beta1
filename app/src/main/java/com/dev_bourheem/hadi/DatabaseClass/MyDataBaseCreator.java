@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -255,16 +257,16 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
          long insertStaus = db.insert(DbContractor.TableColumns.ArchivePaymentTable, null, values);
          return insertStaus != -1;
      }*/
-    public double GetSumOfPaidAmountForShop(String paidAmountColumn, String fromTable, String whereColumnShopName, String ShopNameLike) {
+    public double GetSumOfPaidAmountForShop( String ShopNameLike) {
         double paid;
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT SUM (" + paidAmountColumn + ") as sumOfShop from " + fromTable + " " +
-                "where " + whereColumnShopName + " like  ' %" + ShopNameLike + " % ' ", null);
+        Cursor c = db.rawQuery("SELECT SUM (" + DbContractor.TableColumns.PaidAmount + ") as sumOfShops from " + DbContractor.TableColumns.PaymentTable + " " +
+                "where " + DbContractor.TableColumns.PaidShopName + " like  ' %" + ShopNameLike + " % ' ", null);
         if (c.getCount() == 0) {
             return paid = 0;
         } else {
             c.moveToFirst();
-            paid = c.getDouble(c.getColumnIndex("sumOfShop"));
+            paid = c.getDouble(c.getColumnIndex("sumOfShops"));
             c.close();
             return paid;
         }
@@ -284,5 +286,55 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
             return paid;
         }
     }
+
+    public boolean OweHimNothing( String ShopNameLike){
+        boolean oweStatus = false;
+            double sumOfItemsForShop;
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT SUM (" + DbContractor.TableColumns.MItem_Price + ") as sumOfItems from " + DbContractor.TableColumns.MainTable + " " +
+                "where " + DbContractor.TableColumns.MShopName + " like  ' %" + ShopNameLike + " % ' ", null);
+        if (c.getCount() == 0) {
+            sumOfItemsForShop = 0;
+        } else {
+            c.moveToFirst();
+            sumOfItemsForShop = c.getDouble(c.getColumnIndex("sumOfItems"));
+        }
+        c.close();
+
+        if (sumOfItemsForShop - GetSumOfPaidAmountForShop(ShopNameLike)  == 0 ){
+            return oweStatus = true;
+        }else {
+            return oweStatus = false;
+        }
+
+    }
+    public void ArchiveIt(String ShopName) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(" insert into " + DbContractor.TableColumns.ArchiveTable + "" +
+                " (" + DbContractor.TableColumns.ArItem_Name + "," +
+                "" + DbContractor.TableColumns.ArQuantifier + "," +
+                "" + DbContractor.TableColumns.ArQuantity + "," +
+                "" + DbContractor.TableColumns.ArItem_Price + " ," +
+                "" + DbContractor.TableColumns.ArShopName + " ," +
+                " "+ DbContractor.TableColumns.ArDate + ") select " + DbContractor.TableColumns.MItem_Name  + "," +
+                " "+ DbContractor.TableColumns.MQuantifier + "," +
+                "" + DbContractor.TableColumns.MQuantity + "," +
+                "" + DbContractor.TableColumns.MItem_Price + " ," +
+                "" + DbContractor.TableColumns.MShopName + " ," +
+                " "+ DbContractor.TableColumns.MDate + " from " +DbContractor.TableColumns.MainTable +"" +
+                " where " + DbContractor.TableColumns.MShopName + " like  '%"+ShopName+"%' ");
+
+        db.execSQL(" insert into " + DbContractor.TableColumns.ArchivePaymentTable + "" +
+                " (" + DbContractor.TableColumns.ArPaidShopName + "," +
+                "" + DbContractor.TableColumns.ArPaidAmount + "," +
+                "" + DbContractor.TableColumns.ArPaymentDate +") select " + DbContractor.TableColumns.PaidShopName  + "," +
+                " "+ DbContractor.TableColumns.PaidAmount + "," +
+                "" + DbContractor.TableColumns.PaymentDate + " from " +DbContractor.TableColumns.PaymentTable +"" +
+                " where " + DbContractor.TableColumns.PaidShopName + " like '%"+ShopName+"%' ");
+
+       DeleteAllBy(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MShopName,ShopName);
+       DeleteAllBy(DbContractor.TableColumns.PaymentTable,DbContractor.TableColumns.PaidShopName,ShopName);
+    }
+
 
 }

@@ -35,6 +35,7 @@ import com.dev_bourheem.hadi.Archieve.ArchieveList;
 import com.dev_bourheem.hadi.ArchivePayment.ArchPaymentList;
 import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
+import com.dev_bourheem.hadi.Payment.PaymentList;
 import com.dev_bourheem.hadi.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -79,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton floatingButon;
     private String[] QTypes = {"واحدة", " كيلو", "لتر", "متر", "صندوق", "علبة"};
     private double SumAll = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -221,14 +221,12 @@ public class MainActivity extends AppCompatActivity {
 
         ADSmainActivity();
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.exmenu, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -239,6 +237,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.ShowList_M:
                 OpentMainListActivity();
                 return true;
+            case R.id.ShowPayList:
+                OpenPaymentList();
+                return true;
+
             case R.id.stats:
                 OpenStats();
                 return true;
@@ -254,7 +256,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
     public boolean isStoragePermissionGranted() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -272,8 +273,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
-
-
     public void ADSmainActivity() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -284,7 +283,6 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         admain.loadAd(adRequest);
     }
-
     public void fillcategory() {
         CategoryList.clear();
         CategoryList.add("حسب المحل");
@@ -293,69 +291,59 @@ public class MainActivity extends AppCompatActivity {
         SearchSpinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, CategoryList);
         CategorySpinner.setAdapter(SearchSpinnerAdapter);
     }
-
     public void Spinner1Fill() {
         String sellection1 = CategorySpinner.getSelectedItem().toString().trim();
 
         switch (sellection1) {
             case "حسب المحل":
                 FillwithShopNm();
-
                 break;
             case "حسب اليوم":
                 FillWithDays();
-
                 break;
             case "حسب السلعة":
                 FillWithItems();
-
                 break;
         }
     }
-
     // this opens list activity
     public void OpentMainListActivity() {
         final Intent intent1;
         intent1 = new Intent(this, ListActivity.class);
         startActivity(intent1);
     }
-
     public void OpenArch() {
         final Intent intent1;
         intent1 = new Intent(this, ArchieveList.class);
         startActivity(intent1);
     }
-
-
     /**
      * this method fills the autocomplete Edittextview
      */
-
     public void OpentSettings() {
         final Intent intent2;
         intent2 = new Intent(this, Settings.class);
         startActivity(intent2);
     }
-
     public void OpenStats() {
         final Intent intent2;
         intent2 = new Intent(this, stats.class);
         startActivity(intent2);
     }
-
+    public void OpenPaymentList() {
+        final Intent intent2;
+        intent2 = new Intent(this, PaymentList.class);
+        startActivity(intent2);
+    }
     public static String GetDate() {
         Date currenttime = Calendar.getInstance().getTime();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
         return dateFormat.format(currenttime);
     }
-
     // this method calculates the limit (Quota ) according to the switch and according to the user settings
-
-
     public void MsgBox(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-
     public boolean LoadDatabase(double qntiti, String quqntifier, String itemNm, double itemPrix, String shopNm, String date) {
 //
 // insert data to database's Table.
@@ -366,8 +354,6 @@ public class MainActivity extends AppCompatActivity {
         } else MsgBox("لم يتم");
         return false;
     }
-
-
     // this method controlls Traffic Light and the text with it
     public void TraficLight(Double sum2day) {
         leftOfQuota = Quota - sum2day;
@@ -383,7 +369,6 @@ public class MainActivity extends AppCompatActivity {
             Redlight();
         }
     }
-
     public void Greenlight() {
         RedL.setVisibility(View.INVISIBLE);
         RedL2.setVisibility(View.INVISIBLE);
@@ -395,7 +380,6 @@ public class MainActivity extends AppCompatActivity {
         GreenL2.setVisibility(View.VISIBLE);
         QuotaLeftNm.setTextColor(Color.parseColor("#64DD17"));
     }
-
     public void Yellowlight() {
         RedL.setVisibility(View.INVISIBLE);
         RedL2.setVisibility(View.INVISIBLE);
@@ -407,7 +391,6 @@ public class MainActivity extends AppCompatActivity {
         yellowL2.setVisibility(View.VISIBLE);
         QuotaLeftNm.setTextColor(Color.parseColor("#FFC107"));
     }
-
     public void OrangeLight() {
         GreenL.setVisibility(View.VISIBLE);
         GreenL2.setVisibility(View.VISIBLE);
@@ -419,7 +402,6 @@ public class MainActivity extends AppCompatActivity {
         OrangeL2.setVisibility(View.VISIBLE);
         QuotaLeftNm.setTextColor(Color.parseColor("#FF6D00"));
     }
-
     public void Redlight() {
         GreenL.setVisibility(View.VISIBLE);
         GreenL2.setVisibility(View.VISIBLE);
@@ -431,7 +413,6 @@ public class MainActivity extends AppCompatActivity {
         RedL2.setVisibility(View.VISIBLE);
         QuotaLeftNm.setTextColor(Color.parseColor("#D50000"));
     }
-
     public double GetQuota() {
         double Quotafrom_database, GestQuotafrom_database;
         Cursor qfinder = MDBC.JibData();
@@ -457,23 +438,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
     public void showQuota() {
         hereisyourQuota.setText(String.valueOf(GetQuota()));
     }
-
     // this method gets product names from database
     public void GetItemNameFromdatabase() {
         allList.clear();
         allList = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MItem_Name, DbContractor.TableColumns.MItem_Name);
     }
-
     // this method gets shop names from database
     public void GetShopNamesFromdatabase() {
         Molhanot.clear();
         Molhanot = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, DbContractor.TableColumns.MShopName);
     }
-
     //this method gets the total of all product items from data base
     public double getTotalAllForAllShops() {
         /*NumberFormat mfr = new DecimalFormat("0.00");*/
@@ -490,7 +467,6 @@ public class MainActivity extends AppCompatActivity {
         TotalallOut.setText(String.valueOf(SumAll-allPaid));
         return SumAll - allPaid;
     }
-
     /** these methods fill the second Spinner according to the firstSpinner */
     public void FillWithDays() {
         SpinnerSub1List.clear();
@@ -502,7 +478,6 @@ public class MainActivity extends AppCompatActivity {
     public void FillwithShopNm() {
         SpinnerSub1List.clear();
         SpinnerSub1List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, DbContractor.TableColumns.MShopName);
-
         SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub1List);
         SearchSpinerSub1.setAdapter(SearchSpinnerSub2Adapter);
     }
@@ -512,12 +487,10 @@ public class MainActivity extends AppCompatActivity {
         SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub1List);
         SearchSpinerSub1.setAdapter(SearchSpinnerSub2Adapter);
     }
-
-
     public void FillWithDaysforShop(String shop) {
         SpinnerSub2List.clear();
-        SpinnerSub1List.add("*");
         SpinnerSub2List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MDate, DbContractor.TableColumns.MDate);
+        SpinnerSub2List.add("*");
         SearchSpinnerSub3Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub2List);
         SearchSpinerSub2.setAdapter(SearchSpinnerSub3Adapter);
     }
@@ -525,11 +498,9 @@ public class MainActivity extends AppCompatActivity {
         SpinnerSub2List.clear();
         SearchSpinnerSub3Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub2List);
         SearchSpinerSub2.setAdapter(SearchSpinnerSub3Adapter);
-
     }
     public void FillWithItemsDates(String goods) {
         SpinnerSub2List.clear();
-
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor ItemCursor = db.rawQuery("select  " + DbContractor.TableColumns.MDate + " from" +
                 " " + DbContractor.TableColumns.MainTable + " where " + DbContractor.TableColumns.MItem_Name +
@@ -550,10 +521,9 @@ public class MainActivity extends AppCompatActivity {
         SearchSpinerSub2.setAdapter(SearchSpinnerSub3Adapter);
 
     }
-
     /** these are the methods for sums */
     public double GetSumByShop(String mohamed) {
-      double paid=  MDBC.GetSumOfPaidAmountForShop( DbContractor.TableColumns.PaidAmount,DbContractor.TableColumns.PaymentTable,DbContractor.TableColumns.PaidShopName ,mohamed);
+      double paid=  MDBC.GetSumOfPaidAmountForShop(mohamed);
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Soa from "
@@ -693,7 +663,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-
     public void PopupDialogue() {
         AlertDialog.Builder dialogue = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.additempopup, null);
@@ -772,7 +741,6 @@ public class MainActivity extends AppCompatActivity {
         });
         alertDialog.show();
     }
-
     public boolean isFirstDayOfMonth(Calendar calendar) {
         if (calendar == null) {
             throw new IllegalArgumentException("Calendar cannot be null.");
@@ -781,7 +749,6 @@ public class MainActivity extends AppCompatActivity {
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         return dayOfMonth == 1;
     }
-
     public void ArchiveIt() {
         if (isFirstDayOfMonth(Calendar.getInstance())) {
             //     ArchiveIt();

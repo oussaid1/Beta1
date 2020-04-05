@@ -5,19 +5,19 @@
 
     <item
         android:id="@+id/mainArch"
-        android:title="الرئيسية"
+        android:title="@string/main"
         app:showAsAction="never" />
     <item
         android:id="@+id/ArchPayment"
-        android:title="ارشيف الدفع"
+        android:title="@string/payarchive"
         app:showAsAction="never" />
     <item
         android:id="@+id/statsArch"
-        android:title="احصائيات الأرشيف"
+        android:title="@string/archivestats"
         app:showAsAction="never" />
     <item
         android:id="@+id/SettingsArch"
-        android:title="اعدادات "
+        android:title="@string/settings"
         app:showAsAction="never" />
 
     <item

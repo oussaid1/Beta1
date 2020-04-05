@@ -7,7 +7,7 @@
         android:topLeftRadius="2dp"
         android:topRightRadius="2dp">
     </corners>
-    <stroke android:color="@color/white"
+    <stroke android:color="@color/P3"
         android:dashGap="1dp"
         android:width="1dp"
        />

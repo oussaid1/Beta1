@@ -24,7 +24,7 @@
     <string name="reset_all">حذف الكل</string>
     <string name="add_items">أظف المنتوج</string>
     <string name="add_items_to_table">أظف المنتوج</string>
-    <string name="show_lists">أظهر الائحة</string>
+    <string name="show_lists">ألائحة السلعة</string>
     <string name="settings">إعدادات</string>
     <string name="exit">الخروج</string>
     <string name="unknown">مجهول</string>
@@ -62,5 +62,10 @@
     <string name="surewanapay">دفع المبلغ ، متاكد ؟</string>
     <string name="pay">دفع</string>
     <string name="remove">حذف</string>
+    <string name="paylist">لائحة الدفع</string>
+    <string name="archive">الأرشيف</string>
+    <string name="main">الرئيسية</string>
+    <string name="payarchive">ارشيف الدفع</string>
+    <string name="archivestats">احصائيات الأرشيف</string>
 
 </resources>

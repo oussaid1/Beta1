@@ -48,7 +48,6 @@
                     android:clipChildren="true"
                     android:completionThreshold="2"
                     android:dropDownWidth="200dp"
-                    android:dropDownHeight="100dp"
                     android:hint="@string/shopnamehere"
                     android:maxLength="16"
                     android:maxLines="1"

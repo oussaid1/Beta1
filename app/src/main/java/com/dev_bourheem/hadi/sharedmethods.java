@@ -1,9 +1,11 @@
 package com.dev_bourheem.hadi;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.widget.Toast;
 
+import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 
 import java.io.File;
@@ -193,4 +195,5 @@ public class sharedmethods {
 
         }
     }
+
 }

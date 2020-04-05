@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
+import com.dev_bourheem.hadi.Payment.PaymentList;
 import com.dev_bourheem.hadi.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -57,15 +58,17 @@ public class ListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
 
-            case R.id.Add_M:
-                //func here
-                OpentAvtivity3();
+            case R.id.Add_Mmenu:
+                OpenMainActivity();
                 return true;
-            case R.id.stats_M:
+            case R.id.paymentActivitymenu:
+                OpentPaymentList();
+                return true;
+            case R.id.stats_Mmenu:
                 //func here
                 OpentStats();
                 return true;
-            case R.id.Settingsactvt2:
+            case R.id.Settingsactvt2menu:
                 OpentSettings();
                 return true;
             case R.id.exit_M:
@@ -182,7 +185,7 @@ public class ListActivity extends AppCompatActivity {
         listAd.loadAd(adRequest);
     }
 
-    public void OpentAvtivity3() {
+    public void OpenMainActivity() {
         final Intent intent2;
         intent2 = new Intent(this, MainActivity.class);
         startActivity(intent2);
@@ -191,6 +194,11 @@ public class ListActivity extends AppCompatActivity {
     public void OpentSettings() {
         final Intent intent2;
         intent2 = new Intent(this, Settings.class);
+        startActivity(intent2);
+    }
+    private void OpentPaymentList() {
+        final Intent intent2;
+        intent2 = new Intent(this, PaymentList.class);
         startActivity(intent2);
     }
 

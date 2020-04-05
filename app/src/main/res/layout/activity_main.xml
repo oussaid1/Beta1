@@ -34,7 +34,7 @@
                     android:layout_margin="2dp"
                     android:maxLines="1"
                     android:padding="2dp"
-                    android:text="2020-02-02"
+                    android:text="@string/_12_01_20"
                     android:textAlignment="gravity"
                     android:textColor="@color/white" />
 
@@ -56,8 +56,10 @@
 
 
             <LinearLayout
-                style="@style/margins"
-                android:layout_width="match_parent"
+                android:elevation="10dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/justborderz"
@@ -115,8 +117,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                style="@style/margins"
                 android:layoutDirection="rtl"
+                android:background="@drawable/justborderz"
+                android:elevation="10dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginStart="6dp"
                 android:orientation="horizontal">
 
 
@@ -146,8 +152,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:background="@drawable/justborderz"
-                style="@style/margins"
-                android:orientation="horizontal">
+                android:elevation="10dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginStart="6dp"                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/BtnRed2"
@@ -256,16 +264,20 @@
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/justborderz"
                         android:maxLines="1"
-                        style="@style/margins"
-                        android:textAlignment="center"
+                        android:elevation="10dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginStart="6dp"                        android:textAlignment="center"
                         android:textColor="@color/blueMarin"
                         android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/margins"
-                    android:layout_width="match_parent"
+                    android:elevation="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginStart="6dp"                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/justborderz">
 
@@ -284,8 +296,10 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/margins"
-                    android:layout_width="match_parent"
+                    android:elevation="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginStart="6dp"                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/justborderz">
 
@@ -305,10 +319,14 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/margins"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/justborderz">
+                    android:background="@drawable/justborderz"
+                    android:elevation="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginStart="6dp"
+                    >
 
                     <Spinner
                         android:id="@+id/SumsearchBydate"
