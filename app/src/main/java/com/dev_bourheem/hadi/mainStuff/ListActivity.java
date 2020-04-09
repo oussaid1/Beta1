@@ -218,7 +218,6 @@ public class ListActivity extends AppCompatActivity {
                 " like '%" + mohamed + "%' order by history asc", null);
 
         if (data.getCount() == 0) {
-            PrintMessage(getString(R.string.alert), getString(R.string.nodataintable));
         } else
 
             data.moveToNext();
@@ -250,7 +249,6 @@ public class ListActivity extends AppCompatActivity {
                 " like '%" + datatata + "%' order by history asc", null);
 
         if (data.getCount() == 0) {
-            PrintMessage(getString(R.string.alert), getString(R.string.nodataintable));
         } else
 
             data.moveToNext();
@@ -280,7 +278,6 @@ public class ListActivity extends AppCompatActivity {
         Cursor data = db.rawQuery("select * from " + DbContractor.TableColumns.MainTable +
                 " where  " + DbContractor.TableColumns.MItem_Name + " like '%" + goods + "%' order by history asc", null);
         if (data.getCount() == 0) {
-            PrintMessage(getString(R.string.alert), getString(R.string.nodataintable));
         } else
 
             data.moveToNext();

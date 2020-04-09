@@ -29,15 +29,15 @@ public interface OnItemClickListener {
     }
 
 static class PaymentSubRecyclerClass extends RecyclerView.ViewHolder {
-    public TextView PaymentId;
-    public TextView PaymentPrice;
-    public TextView PaidShopNm;
-    public TextView PAYDate;
-    public PaymentSubRecyclerClass(View itemView, final PaymentRecyclerAdapter.OnItemClickListener listener) {
+    private TextView PaymentId;
+    private TextView PaidShopNm;
+    private TextView PaymentPrice;
+    private TextView PAYDate;
+    private PaymentSubRecyclerClass(View itemView, final PaymentRecyclerAdapter.OnItemClickListener listener) {
         super(itemView);
         PaymentId = itemView.findViewById( R.id.payId);
-        PaymentPrice = itemView.findViewById(R.id.payAmount);
         PaidShopNm = itemView.findViewById(R.id.payShopName);
+        PaymentPrice = itemView.findViewById(R.id.payAmount);
         PAYDate = itemView.findViewById(R.id.payDate);
 
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -71,11 +71,10 @@ static class PaymentSubRecyclerClass extends RecyclerView.ViewHolder {
     public void onBindViewHolder(PaymentRecyclerAdapter.PaymentSubRecyclerClass holder, int position) {
         PaymentItemsClass currentItem = mExampleList.get(position);
 
-        holder.PaymentId.setText(currentItem.getIdno());
-        holder.PaymentPrice.setText(currentItem.getItemPrice());
+        holder.PaymentId.setText(currentItem.getId());
         holder.PaidShopNm.setText(currentItem.getShopName());
-        holder.PAYDate.setText(currentItem.getDateBought());
-
+        holder.PaymentPrice.setText(currentItem.getpaidAmount());
+        holder.PAYDate.setText(currentItem.getDatePaid());
 
     }
 

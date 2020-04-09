@@ -3,6 +3,8 @@ package com.dev_bourheem.hadi.mainStuff;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -30,6 +32,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 
 import com.dev_bourheem.hadi.Archieve.ArchieveList;
 import com.dev_bourheem.hadi.ArchivePayment.ArchPaymentList;
@@ -80,13 +83,14 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton floatingButon;
     private String[] QTypes = {"واحدة", " كيلو", "لتر", "متر", "صندوق", "علبة"};
     private double SumAll = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DateV1 = findViewById(R.id.dateView);
         floatingButon = findViewById(R.id.fab);
-        QuotaLeftNm = findViewById(R.id.QuotaLeftNm);
+       // QuotaLeftNm = findViewById(R.id.QuotaLeftNm);
         GreenL = findViewById(R.id.BtnGreen);
         GreenL2 = findViewById(R.id.BtnGreen2);
         yellowL = findViewById(R.id.BtnYellow);
@@ -137,7 +141,8 @@ public class MainActivity extends AppCompatActivity {
         floatingButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupDialogue();
+               PopupDialogue();
+               // ShowNotif();
             }
         });
         CategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -165,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "حسب اليوم":
                         GetSumByDate(sellection2);
+                        FillEmpty();
                         break;
                     case "حسب السلعة":
                         FillWithItemsDates(sellection2);
@@ -204,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
                             GetSumByItem(sellection2);
                         } else
                             GetSumByItemsByDate(sellection2, sellection3);
-
                         break;
                 }
             }
@@ -221,12 +226,14 @@ public class MainActivity extends AppCompatActivity {
 
         ADSmainActivity();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.exmenu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -256,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     public boolean isStoragePermissionGranted() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -273,6 +281,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
+
     public void ADSmainActivity() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -283,6 +292,7 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         admain.loadAd(adRequest);
     }
+
     public void fillcategory() {
         CategoryList.clear();
         CategoryList.add("حسب المحل");
@@ -291,6 +301,7 @@ public class MainActivity extends AppCompatActivity {
         SearchSpinnerAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, CategoryList);
         CategorySpinner.setAdapter(SearchSpinnerAdapter);
     }
+
     public void Spinner1Fill() {
         String sellection1 = CategorySpinner.getSelectedItem().toString().trim();
 
@@ -306,17 +317,20 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
     // this opens list activity
     public void OpentMainListActivity() {
         final Intent intent1;
         intent1 = new Intent(this, ListActivity.class);
         startActivity(intent1);
     }
+
     public void OpenArch() {
         final Intent intent1;
         intent1 = new Intent(this, ArchieveList.class);
         startActivity(intent1);
     }
+
     /**
      * this method fills the autocomplete Edittextview
      */
@@ -325,25 +339,30 @@ public class MainActivity extends AppCompatActivity {
         intent2 = new Intent(this, Settings.class);
         startActivity(intent2);
     }
+
     public void OpenStats() {
         final Intent intent2;
         intent2 = new Intent(this, stats.class);
         startActivity(intent2);
     }
+
     public void OpenPaymentList() {
         final Intent intent2;
         intent2 = new Intent(this, PaymentList.class);
         startActivity(intent2);
     }
+
     public static String GetDate() {
         Date currenttime = Calendar.getInstance().getTime();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
         return dateFormat.format(currenttime);
     }
+
     // this method calculates the limit (Quota ) according to the switch and according to the user settings
     public void MsgBox(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
     public boolean LoadDatabase(double qntiti, String quqntifier, String itemNm, double itemPrix, String shopNm, String date) {
 //
 // insert data to database's Table.
@@ -354,6 +373,7 @@ public class MainActivity extends AppCompatActivity {
         } else MsgBox("لم يتم");
         return false;
     }
+
     // this method controlls Traffic Light and the text with it
     public void TraficLight(Double sum2day) {
         leftOfQuota = Quota - sum2day;
@@ -369,6 +389,7 @@ public class MainActivity extends AppCompatActivity {
             Redlight();
         }
     }
+
     public void Greenlight() {
         RedL.setVisibility(View.INVISIBLE);
         RedL2.setVisibility(View.INVISIBLE);
@@ -378,8 +399,9 @@ public class MainActivity extends AppCompatActivity {
         yellowL2.setVisibility(View.INVISIBLE);
         GreenL.setVisibility(View.VISIBLE);
         GreenL2.setVisibility(View.VISIBLE);
-        QuotaLeftNm.setTextColor(Color.parseColor("#64DD17"));
+      //  QuotaLeftNm.setTextColor(Color.parseColor("#64DD17"));
     }
+
     public void Yellowlight() {
         RedL.setVisibility(View.INVISIBLE);
         RedL2.setVisibility(View.INVISIBLE);
@@ -389,8 +411,9 @@ public class MainActivity extends AppCompatActivity {
         GreenL2.setVisibility(View.VISIBLE);
         yellowL.setVisibility(View.VISIBLE);
         yellowL2.setVisibility(View.VISIBLE);
-        QuotaLeftNm.setTextColor(Color.parseColor("#FFC107"));
+        //QuotaLeftNm.setTextColor(Color.parseColor("#FFC107"));
     }
+
     public void OrangeLight() {
         GreenL.setVisibility(View.VISIBLE);
         GreenL2.setVisibility(View.VISIBLE);
@@ -400,8 +423,9 @@ public class MainActivity extends AppCompatActivity {
         RedL2.setVisibility(View.INVISIBLE);
         OrangeL.setVisibility(View.VISIBLE);
         OrangeL2.setVisibility(View.VISIBLE);
-        QuotaLeftNm.setTextColor(Color.parseColor("#FF6D00"));
+       // QuotaLeftNm.setTextColor(Color.parseColor("#FF6D00"));
     }
+
     public void Redlight() {
         GreenL.setVisibility(View.VISIBLE);
         GreenL2.setVisibility(View.VISIBLE);
@@ -411,8 +435,9 @@ public class MainActivity extends AppCompatActivity {
         OrangeL2.setVisibility(View.VISIBLE);
         RedL.setVisibility(View.VISIBLE);
         RedL2.setVisibility(View.VISIBLE);
-        QuotaLeftNm.setTextColor(Color.parseColor("#D50000"));
+       // QuotaLeftNm.setTextColor(Color.parseColor("#D50000"));
     }
+
     public double GetQuota() {
         double Quotafrom_database, GestQuotafrom_database;
         Cursor qfinder = MDBC.JibData();
@@ -438,23 +463,27 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     public void showQuota() {
         hereisyourQuota.setText(String.valueOf(GetQuota()));
     }
+
     // this method gets product names from database
     public void GetItemNameFromdatabase() {
         allList.clear();
         allList = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MItem_Name, DbContractor.TableColumns.MItem_Name);
     }
+
     // this method gets shop names from database
     public void GetShopNamesFromdatabase() {
         Molhanot.clear();
         Molhanot = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, DbContractor.TableColumns.MShopName);
     }
+
     //this method gets the total of all product items from data base
     public double getTotalAllForAllShops() {
         /*NumberFormat mfr = new DecimalFormat("0.00");*/
-       double allPaid= MDBC.GetPaidAmountForAllShop(DbContractor.TableColumns.PaymentTable, DbContractor.TableColumns.PaidAmount);
+        double allPaid = MDBC.GetPaidAmountForAllShop(DbContractor.TableColumns.PaymentTable, DbContractor.TableColumns.PaidAmount);
         Cursor c = MDBC.GetSumall();
         if (c.getCount() == 0) {
             return SumAll = 0;
@@ -464,10 +493,13 @@ public class MainActivity extends AppCompatActivity {
             //closing cursor so as not to bring anything else or ruin sth
             c.close();
         }
-        TotalallOut.setText(String.valueOf(SumAll-allPaid));
+        TotalallOut.setText(String.valueOf(SumAll - allPaid));
         return SumAll - allPaid;
     }
-    /** these methods fill the second Spinner according to the firstSpinner */
+
+    /**
+     * these methods fill the second Spinner according to the firstSpinner
+     */
     public void FillWithDays() {
         SpinnerSub1List.clear();
         SpinnerSub1List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MDate, DbContractor.TableColumns.MDate);
@@ -475,18 +507,23 @@ public class MainActivity extends AppCompatActivity {
         SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub1List);
         SearchSpinerSub1.setAdapter(SearchSpinnerSub2Adapter);
     }
+
     public void FillwithShopNm() {
         SpinnerSub1List.clear();
+
         SpinnerSub1List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, DbContractor.TableColumns.MShopName);
+        SpinnerSub1List.add("*");
         SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub1List);
         SearchSpinerSub1.setAdapter(SearchSpinnerSub2Adapter);
     }
+
     public void FillWithItems() {
         SpinnerSub1List.clear();
         SpinnerSub1List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MItem_Name, DbContractor.TableColumns.MDate);
         SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub1List);
         SearchSpinerSub1.setAdapter(SearchSpinnerSub2Adapter);
     }
+
     public void FillWithDaysforShop(String shop) {
         SpinnerSub2List.clear();
         SpinnerSub2List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MDate, DbContractor.TableColumns.MDate);
@@ -494,11 +531,13 @@ public class MainActivity extends AppCompatActivity {
         SearchSpinnerSub3Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub2List);
         SearchSpinerSub2.setAdapter(SearchSpinnerSub3Adapter);
     }
+
     public void FillWithDaysforShopEmpty() {
         SpinnerSub2List.clear();
         SearchSpinnerSub3Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub2List);
         SearchSpinerSub2.setAdapter(SearchSpinnerSub3Adapter);
     }
+
     public void FillWithItemsDates(String goods) {
         SpinnerSub2List.clear();
         SQLiteDatabase db = MDBC.getReadableDatabase();
@@ -521,9 +560,18 @@ public class MainActivity extends AppCompatActivity {
         SearchSpinerSub2.setAdapter(SearchSpinnerSub3Adapter);
 
     }
-    /** these are the methods for sums */
-    public double GetSumByShop(String mohamed) {
-      double paid=  MDBC.GetSumOfPaidAmountForShop(mohamed);
+
+    private void FillEmpty() {
+        SpinnerSub2List.clear();
+        SearchSpinnerSub3Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub2List);
+        SearchSpinerSub2.setAdapter(SearchSpinnerSub3Adapter);
+    }
+
+    /**
+     * these are the methods for sums
+     */
+    private double GetSumByShop(String mohamed) {
+        double paid = MDBC.GetSumOfPaidAmountForShop(mohamed);
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Soa from "
@@ -535,15 +583,16 @@ public class MainActivity extends AppCompatActivity {
 
             data.moveToFirst();
             sumtoday = data.getDouble(data.getColumnIndex("Soa"));
-            sumtoday=sumtoday-paid;
+            sumtoday = sumtoday - paid;
             SumOutBy.setText((mfr.format(sumtoday)));
             TraficLight(sumtoday);
         }
         data.close();
 
-        return sumtoday ;
+        return sumtoday;
     }
-    public double GetSumByDate(String ladat) {
+
+    private double GetSumByDate(String ladat) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as So from "
@@ -561,7 +610,8 @@ public class MainActivity extends AppCompatActivity {
         data.close();
         return sumtoday;
     }
-    public double GetSumByShopDate(String mohamed, String dat) {
+
+    private double GetSumByShopDate(String mohamed, String dat) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Soa from "
@@ -579,7 +629,8 @@ public class MainActivity extends AppCompatActivity {
         data.close();
         return sumtoday;
     }
-    public double GetSumByItem(String ItemName) {
+
+    private double GetSumByItem(String ItemName) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as SumItems from "
@@ -597,7 +648,8 @@ public class MainActivity extends AppCompatActivity {
         data.close();
         return sumtoday;
     }
-    public double GetSumByItemsByDate(String item, String dat) {
+
+    private double GetSumByItemsByDate(String item, String dat) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
         Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Soa from "
@@ -616,8 +668,9 @@ public class MainActivity extends AppCompatActivity {
         data.close();
         return sumtoday;
     }
-/************************************************************/
-    public boolean Backup() throws IOException {
+
+    /************************************************************/
+    private boolean Backup() throws IOException {
 
         final String inFileName = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS) + "/" + "School.db";
         File dbFile = new File(inFileName);
@@ -639,7 +692,8 @@ public class MainActivity extends AppCompatActivity {
         fis.close();
         return true;
     }
-    public boolean Restore() {
+
+    private boolean Restore() {
         try {
             File sd = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
             File data = Environment.getDataDirectory();
@@ -663,7 +717,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-    public void PopupDialogue() {
+
+    private void PopupDialogue() {
         AlertDialog.Builder dialogue = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.additempopup, null);
         final AutoCompleteTextView molhanotNmIn = view.findViewById(R.id.molhanoutNameIn);
@@ -713,11 +768,11 @@ public class MainActivity extends AppCompatActivity {
                     String Quantifiier = quntifierSpinner.getSelectedItem().toString().trim();
                     double Qnt = Double.parseDouble(quantityV.getText().toString().trim());
                     double ItemPriceDbl = Double.parseDouble(PriceIn.getText().toString().trim());
-                    String dateIn= DateIN.getText().toString().trim();
+                    String dateIn = DateIN.getText().toString().trim();
                     ItemPriceDbl = Qnt * ItemPriceDbl;
                     String ItemNameStr = ItemNameIn.getText().toString().trim();
                     String Sir = molhanotNmIn.getText().toString().trim();
-                    if (LoadDatabase(Qnt, Quantifiier, ItemNameStr, ItemPriceDbl, Sir,dateIn)) {
+                    if (LoadDatabase(Qnt, Quantifiier, ItemNameStr, ItemPriceDbl, Sir, dateIn)) {
                         GetItemNameFromdatabase();
                         GetShopNamesFromdatabase();
                         PriceIn.getText().clear();
@@ -741,7 +796,8 @@ public class MainActivity extends AppCompatActivity {
         });
         alertDialog.show();
     }
-    public boolean isFirstDayOfMonth(Calendar calendar) {
+
+    private boolean isFirstDayOfMonth(Calendar calendar) {
         if (calendar == null) {
             throw new IllegalArgumentException("Calendar cannot be null.");
         }
@@ -749,13 +805,28 @@ public class MainActivity extends AppCompatActivity {
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         return dayOfMonth == 1;
     }
-    public void ArchiveIt() {
-        if (isFirstDayOfMonth(Calendar.getInstance())) {
-            //     ArchiveIt();
-            SQLiteDatabase db = MDBC.getWritableDatabase();
-            db.execSQL("insert into " + DbContractor.TableColumns.ArchiveTable + " select * from " + DbContractor.TableColumns.MainTable +
-                    "  order by " + DbContractor.TableColumns.MDate);
+
+    public void ShowNotif() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CHANNEL_ID")
+                .setSmallIcon(R.drawable.ic_notifications)
+                .setContentTitle("My notification")
+                .setContentText("Much longer text that cannot fit one line...")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Much longer text that cannot fit one line..."))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setShowWhen(true);
+    /*  *//*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name =(" Dont forget to Add Items");
+            String description = ("please dont forget to add ");
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;*//*
+           // NotificationChannel channel = new NotificationChannel("CHANNEL_ID", "name", importance);
+         //   channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            assert notificationManager != null;
+            notificationManager.createNotificationChannel(channel);*/
         }
 
     }
-}
+

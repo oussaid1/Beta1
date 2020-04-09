@@ -91,7 +91,7 @@ public class Settings extends AppCompatActivity {
         setGuestQta = findViewById(R.id.limitGuestDef);
         setusername = findViewById(R.id.UserNameDef);
         paidAmountIn = findViewById(R.id.paidamountV);
-        payButton = findViewById(R.id.pay);
+        payButton = findViewById(R.id.saveBtnforPayment);
         ShopToPaySpinner = findViewById(R.id.payfor);
         setpassword = findViewById(R.id.PasswordDef);
         archiveIt = findViewById(R.id.archiveIt);
@@ -181,6 +181,7 @@ public class Settings extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         return cal;
     }
+
     public static String GetDate() {
         Date currenttime = Calendar.getInstance().getTime();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
@@ -224,16 +225,15 @@ public class Settings extends AppCompatActivity {
         builder.setMessage(getString(R.string.surewannadelall));
         builder.setIcon(android.R.drawable.ic_dialog_alert);
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        MDBC.DeleteAllBy(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MShopName, ShopToDeleteSpinner.getSelectedItem().toString());
-                    }
-                });
+            public void onClick(DialogInterface dialog, int whichButton) {
+                MDBC.DeleteAllBy(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, ShopToDeleteSpinner.getSelectedItem().toString());
+            }
+        });
         builder.setNegativeButton(R.string.no, null).show();
     }
 
     public void onDialogue2() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.alert));
         builder.setMessage(getString(R.string.doyourealywantdeletall));
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -249,7 +249,6 @@ public class Settings extends AppCompatActivity {
 
     public void RestoreConferm() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.alert));
         builder.setMessage(getString(R.string.doyourealywantorestore));
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -279,17 +278,9 @@ public class Settings extends AppCompatActivity {
 
                 if (MDBC.PayShop(ShopToPaySpinner.getSelectedItem().toString(), Double.parseDouble(paidAmountIn.getText().toString().trim()), GetDate())) {
                     MsgBox(getString(R.string.paysuccess));
+                    ArchiveIt();
                 } else {
                     MsgBox(getString(R.string.payunsuccessful));
-                }
-                if(MDBC.OweHimNothing(ShopToPaySpinner.getSelectedItem().toString()) || isFirstDayOfMonth(GetCalendar())){
-                  String mohamed=  ShopToPaySpinner.getSelectedItem().toString();
-                   SQLiteDatabase db = MDBC.getReadableDatabase();
-                   Cursor cursor =db.rawQuery("SELECT * from " + DbContractor.TableColumns.PaymentTable + " " +
-                           "where " + DbContractor.TableColumns.PaidShopName + " like  ' %" + mohamed + " % ' ", null);
-                   if(cursor.getCount() != 0) {
-                       MDBC.ArchiveIt(ShopToPaySpinner.getSelectedItem().toString());
-                   }
                 }
 
             }
@@ -297,19 +288,24 @@ public class Settings extends AppCompatActivity {
         builder.setNegativeButton(R.string.no, null);
         builder.show();
     }
+
     public boolean isFirstDayOfMonth(Calendar calendar) {
         if (calendar == null) {
             throw new IllegalArgumentException("Calendar cannot be null.");
         }
-        int maxDayOfMonth = calendar.getActualMaximum(Calendar.DATE);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-        if(dayOfMonth == maxDayOfMonth){
-            return true;
-        } else
-            return false;
-        //return dayOfMonth == 1;
+
+        return dayOfMonth == 1;
     }
 
+    public void ArchiveIt() {
+        if (MDBC.TablegetCountIsFull(DbContractor.TableColumns.PaymentTable, DbContractor.TableColumns.PaidShopName, ShopToPaySpinner.getSelectedItem().toString())
+                && MDBC.TablegetCountIsFull(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, ShopToPaySpinner.getSelectedItem().toString())) {
+            if (MDBC.OweHimNothing(ShopToPaySpinner.getSelectedItem().toString()) == 0 /*|| isFirstDayOfMonth(GetCalendar())*/) {
+                //String mohamed=  ShopToPaySpinner.getSelectedItem().toString();
+                MDBC.ArchiveIt(ShopToPaySpinner.getSelectedItem().toString());
+            }
+        }
     }
-
+}
 

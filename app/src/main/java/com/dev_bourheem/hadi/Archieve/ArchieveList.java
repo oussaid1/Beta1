@@ -215,7 +215,6 @@ public class ArchieveList extends AppCompatActivity {
                 " " + DbContractor.TableColumns.ArShopName + " like '%" + mohamed + "%' order by history asc", null );
 
         if (data.getCount() == 0) {
-            PrintMessage( getString( R.string.alert ), getString( R.string.nodataintable ) );
         } else
 
             data.moveToNext();
@@ -246,7 +245,6 @@ public class ArchieveList extends AppCompatActivity {
                 " where  " + DbContractor.TableColumns.ArDate + " like '%" + datatata + "%' order by history asc", null );
 
         if (data.getCount() == 0) {
-            PrintMessage( getString( R.string.alert ), getString( R.string.nodataintable ) );
         } else
 
             data.moveToNext();
@@ -276,7 +274,6 @@ public class ArchieveList extends AppCompatActivity {
         Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.ArchiveTable +
                 " where  " + DbContractor.TableColumns.ArItem_Name + " like '%" + goods + "%' order by history asc", null );
         if (data.getCount() == 0) {
-            PrintMessage( getString( R.string.alert ), getString( R.string.nodataintable ) );
         } else
 
             data.moveToNext();
@@ -306,7 +303,6 @@ public class ArchieveList extends AppCompatActivity {
         Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.ArchiveTable +
                 " order by history asc", null );
         if (data.getCount() == 0) {
-            PrintMessage( getString( R.string.alert ), getString( R.string.nodataintable ) );
         } else
 
             data.moveToNext();

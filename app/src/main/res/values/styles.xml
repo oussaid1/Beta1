@@ -5,15 +5,124 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/white</item>
-        <item name="android:textColor"> @color/blueMarin</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/orange</item>
 
     </style>
-<!--<style name="margins">
-    <item name="android:layout_marginTop">4dp</item>
-    <item name="android:layout_marginStart">6dp</item>
-    <item name="android:layout_marginEnd">6dp</item>
-    <item name="background">@drawable/justborderz</item>
-    <item name="elevation">10dp</item>
-</style>-->
+
+    <style name="ButtonsStyle" parent="Theme.AppCompat">
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginStart">2dp</item>
+        <item name="android:layout_marginEnd">2dp</item>
+        <item name="background">@drawable/buttonflat</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="elevation">10dp</item>
+    </style>
+
+    <style name="MainTextViews" parent="Theme.AppCompat">
+        <item name="android:textColor">@color/P</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/allerta</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_marginStart">4dp</item>
+    </style>
+    <style name="SubTextViews" parent="Theme.AppCompat">
+        <item name="android:textColor">@color/Orange</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/allerta</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_marginStart">4dp</item>
+    </style>
+
+    <style name="DetailTextViews" parent="Theme.AppCompat">
+        <item name="android:textColor">@color/P2</item>
+        <item name="android:textStyle">italic</item>
+        <item name="fontFamily">@font/amiko</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginStart">8dp</item>
+    </style>
+
+    <style name="EditTextViewsNumbers" parent="Theme.AppCompat">
+        <item name="android:layout_width">160sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textStyle">italic</item>
+        <item name="fontFamily">@font/amiko</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">numberDecimal</item>
+    </style>
+    <style name="TextViewsText" parent="Theme.AppCompat">
+        <item name="android:layout_width">160sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textStyle">italic</item>
+        <item name="fontFamily">@font/amiko</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="NumbersTextViews" parent="Theme.AppCompat">
+        <item name="android:textColor">@color/P2</item>
+        <item name="android:textStyle">normal</item>
+        <item name="fontFamily">@font/federant</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+    <style name="SumTextViews" parent="Theme.AppCompat">
+        <item name="android:textColor">@color/rouge</item>
+        <item name="android:textStyle">normal</item>
+        <item name="fontFamily">@font/federant</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
+    <style name="MainContainer" parent="Theme.AppCompat">
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layoutDirection">rtl</item>
+        <item name="background">@color/colorPrimary</item>
+        <item name="elevation">4dp</item>
+    </style>
+
+    <style name="Spinners" parent="Theme.AppCompat">
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="background">@drawable/spinnerstextboxses</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:dropDownWidth">200dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:popupBackground">@color/colorPrimary</item>
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:spinnerStyle">@drawable/spinnerstextboxses</item>
+    </style>
+    <style name="SpinnerContainer" parent="Theme.AppCompat">
+        <item name="android:layout_marginStart">2dp</item>
+        <item name="android:layout_marginEnd">2dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:layoutDirection">rtl</item>
+        <item name="background">@drawable/spinnerstextboxses</item>
+    </style>
+
 </resources>

@@ -71,7 +71,7 @@ public class ArPaymentRecyAdapter  extends RecyclerView.Adapter<ArPaymentRecyAda
     public void onBindViewHolder(ArPaymentRecyAdapter.ArchPSubRecycler holder, int position) {
         ArPaymentExampleItem currentItem = mExampleList.get(position);
 
-        holder.ArPayID.setText(currentItem.getIdno());
+        holder.ArPayID.setText(currentItem.getARIdno());
         holder.ArPaidMoney.setText(currentItem.getItemPrice());
         holder.ArPaidShop.setText(currentItem.getShopName());
         holder.dateDePay.setText(currentItem.getDateBought());

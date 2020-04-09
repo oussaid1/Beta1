@@ -37,7 +37,7 @@ public class PaymentItemsClass implements Parcelable {
             return new PaymentItemsClass[size];
         }
     };
-    public String getIdno() {
+    public String getId() {
         return id;
     }
 
@@ -45,12 +45,12 @@ public class PaymentItemsClass implements Parcelable {
         return ShopName;
     }
 
-    public String getDateBought() {
-        return paidAmount;
+    public String getDatePaid() {
+        return datePaid;
     }
 
-    public String getItemPrice() {
-        return datePaid;
+    public String getpaidAmount() {
+        return paidAmount;
     }
 
     @Override

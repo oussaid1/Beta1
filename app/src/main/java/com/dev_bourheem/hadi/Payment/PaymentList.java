@@ -32,7 +32,7 @@ public class PaymentList extends AppCompatActivity {
     private ArrayList<String> mainList;
     private ArrayList<String> categoryspinnerList, searchspinerList;
     private ArrayAdapter<String> categoryAdapter, searchAdapter;
-    private ArrayList<PaymentItemsClass> ArchPmExampleList;
+    private ArrayList<PaymentItemsClass> PaymentItemsClassList;
     private RecyclerView Archmyrecycler;
     private RecyclerView.LayoutManager ArchPRecyLayManger;
     private PaymentRecyclerAdapter ArchPRecyclerAdap;
@@ -46,7 +46,7 @@ public class PaymentList extends AppCompatActivity {
         Archmyrecycler.setHasFixedSize( true );
         categoryspinner = findViewById( R.id.PayPCategorySpin );
         searchspinner = findViewById( R.id.PayPsearchSpin );
-        ArchPmExampleList = new ArrayList<>();
+        PaymentItemsClassList = new ArrayList<>();
         mainList = new ArrayList<>();
         MdbCrtr = new MyDataBaseCreator( this );
         categoryspinnerList = new ArrayList<>();
@@ -99,15 +99,13 @@ public class PaymentList extends AppCompatActivity {
             }
         } );
         ArchPRecyLayManger = new LinearLayoutManager( this );
-        ArchPRecyclerAdap = new PaymentRecyclerAdapter( ArchPmExampleList );
+        ArchPRecyclerAdap = new PaymentRecyclerAdapter( PaymentItemsClassList );
         ArchPRecyclerAdap.setOnItemClickListener( new PaymentRecyclerAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(int position) {
-
                 Intent intent = new Intent( PaymentList.this, PaymentEddit.class );
-                intent.putExtra( "ArPaymentExampleItem", ArchPmExampleList.get( position ) );
+                intent.putExtra( "PaymentEdit", PaymentItemsClassList.get( position ) );
                 startActivity( intent );
-
             }
 
             @Override
@@ -135,7 +133,7 @@ public class PaymentList extends AppCompatActivity {
         newAlert.show();
     }
     private void GetAllPaymentHistoryForAll() {
-        ArchPmExampleList.clear();
+        PaymentItemsClassList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
         Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.PaymentTable +
                 " order by "+DbContractor.TableColumns.PaymentDate+" asc", null );
@@ -147,7 +145,7 @@ public class PaymentList extends AppCompatActivity {
                 String shopName = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaidShopName));
                 String paidAmount = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaidAmount));
                 String paidDate = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaymentDate));
-                ArchPmExampleList.add(new PaymentItemsClass(id, shopName, paidAmount, paidDate));
+                PaymentItemsClassList.add(new PaymentItemsClass(id, shopName, paidAmount, paidDate));
 
                 data.moveToNext();
             }
@@ -157,7 +155,7 @@ public class PaymentList extends AppCompatActivity {
         }
     }
     private void GetAllPaymentHistoryForShopNm(String ShopName) {
-        ArchPmExampleList.clear();
+        PaymentItemsClassList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
         Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.PaymentTable + "" +
                 " where " + DbContractor.TableColumns.PaidShopName + " like '%" + ShopName + "%'" +
@@ -170,7 +168,7 @@ public class PaymentList extends AppCompatActivity {
                 String shopName = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaidShopName));
                 String paidAmount = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaidAmount));
                 String paidDate = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaymentDate));
-                ArchPmExampleList.add(new PaymentItemsClass(id, shopName, paidAmount, paidDate));
+                PaymentItemsClassList.add(new PaymentItemsClass(id, shopName, paidAmount, paidDate));
 
                 data.moveToNext();
             }

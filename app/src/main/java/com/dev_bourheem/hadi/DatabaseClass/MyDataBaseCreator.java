@@ -224,7 +224,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public Cursor JibData() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor b1 = db.rawQuery("select * from " + DbContractor.TableColumns.SettingsTable + " ORDER BY _id DESC limit 1", null);
-
         return b1;
     }
 
@@ -238,6 +237,17 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         }
     }
 
+    public boolean TablegetCountIsFull(String table, String ColumnNameLike, String mohamed) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * from " + table + " " +
+                "where " + ColumnNameLike + " like  '%" + mohamed + "%' ", null);
+        if (cursor.getCount() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public boolean PayShop(String shopToPay, double PaidAmount, String Paydate) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -248,34 +258,45 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         return insertStaus != -1;
     }
 
-    /* public boolean ArchivePayShop(String shopToPay,double PaidAmount,String Paydate){
-         SQLiteDatabase db = getWritableDatabase();
-         ContentValues values = new ContentValues();
-         values.put(DbContractor.TableColumns.ArPaidShopName, shopToPay);
-         values.put(DbContractor.TableColumns.ArPaidAmount, PaidAmount);
-         values.put(DbContractor.TableColumns.ArPaymentDate, Paydate);
-         long insertStaus = db.insert(DbContractor.TableColumns.ArchivePaymentTable, null, values);
-         return insertStaus != -1;
-     }*/
-    public double GetSumOfPaidAmountForShop( String ShopNameLike) {
-        double paid;
+    public boolean UpdatePayment(String id, String shopToPay, double PaidAmount, String PayDate) {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT SUM (" + DbContractor.TableColumns.PaidAmount + ") as sumOfShops from " + DbContractor.TableColumns.PaymentTable + " " +
-                "where " + DbContractor.TableColumns.PaidShopName + " like  ' %" + ShopNameLike + " % ' ", null);
-        if (c.getCount() == 0) {
-            return paid = 0;
-        } else {
-            c.moveToFirst();
-            paid = c.getDouble(c.getColumnIndex("sumOfShops"));
-            c.close();
-            return paid;
-        }
+        ContentValues values = new ContentValues();
+        values.put(DbContractor.TableColumns.PaidShopName, shopToPay);
+        values.put(DbContractor.TableColumns.PaidAmount, PaidAmount);
+        values.put(DbContractor.TableColumns.PaymentDate, PayDate);
+        long insertStaus = db.update(DbContractor.TableColumns.PaymentTable, values, DbContractor.TableColumns._ID + " = ? ", new String[]{id});
+        return insertStaus != -1;
     }
 
-    public double GetPaidAmountForAllShop(String table,String paidAmountColumn){
-        double paid ;
+    public boolean UpdateArPayment(String id, String shopToPay, double PaidAmount, String PayDate) {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT SUM ("+ paidAmountColumn +") from "+table+" ", null);
+        ContentValues values = new ContentValues();
+        values.put(DbContractor.TableColumns.ArPaidShopName, shopToPay);
+        values.put(DbContractor.TableColumns.ArPaidAmount, PaidAmount);
+        values.put(DbContractor.TableColumns.ArPaymentDate, PayDate);
+        long insertStaus = db.update(DbContractor.TableColumns.ArchivePaymentTable, values, DbContractor.TableColumns._ID + " = ? ", new String[]{id});
+        return insertStaus != -1;
+    }
+
+    public double GetSumOfPaidAmountForShop(String ShopNameLike) {
+        double paid=0;
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT SUM (" + DbContractor.TableColumns.PaidAmount + ") as sumOfShops from " + DbContractor.TableColumns.PaymentTable + " " +
+                "where " + DbContractor.TableColumns.PaidShopName + " like  '%" + ShopNameLike + "%' ", null);
+        if (c.getCount() == 0) {
+           return paid=0;
+        } else if (!c.isAfterLast()) {
+            c.moveToFirst();
+            paid = c.getDouble(c.getColumnIndex("sumOfShops"));
+        }
+        return paid;
+    }
+
+
+    public double GetPaidAmountForAllShop(String table, String paidAmountColumn) {
+        double paid;
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT SUM (" + paidAmountColumn + ") from " + table + " ", null);
         if (c.getCount() == 0) {
             return paid = 0;
         } else {
@@ -286,28 +307,24 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
             return paid;
         }
     }
-
-    public boolean OweHimNothing( String ShopNameLike){
-        boolean oweStatus = false;
-            double sumOfItemsForShop;
+    public double GetSumForShop(String mohamed){
+        double sum=0;
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery("SELECT SUM (" + DbContractor.TableColumns.MItem_Price + ") as sumOfItems from " + DbContractor.TableColumns.MainTable + " " +
-                "where " + DbContractor.TableColumns.MShopName + " like  ' %" + ShopNameLike + " % ' ", null);
-        if (c.getCount() == 0) {
-            sumOfItemsForShop = 0;
-        } else {
-            c.moveToFirst();
-            sumOfItemsForShop = c.getDouble(c.getColumnIndex("sumOfItems"));
-        }
+                "where " + DbContractor.TableColumns.MShopName + " like  '%" + mohamed + "%' ", null);
+
+        c.moveToFirst();
+        sum = c.getDouble(c.getColumnIndex("sumOfItems"));
+
         c.close();
-
-        if (sumOfItemsForShop - GetSumOfPaidAmountForShop(ShopNameLike)  == 0 ){
-            return oweStatus = true;
-        }else {
-            return oweStatus = false;
-        }
-
+        return sum;
     }
+
+    public double OweHimNothing(String ShopNameLike) {
+        double   owe = GetSumForShop(ShopNameLike) - GetSumOfPaidAmountForShop(ShopNameLike);
+             return owe;
+    }
+
     public void ArchiveIt(String ShopName) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(" insert into " + DbContractor.TableColumns.ArchiveTable + "" +
@@ -316,24 +333,24 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
                 "" + DbContractor.TableColumns.ArQuantity + "," +
                 "" + DbContractor.TableColumns.ArItem_Price + " ," +
                 "" + DbContractor.TableColumns.ArShopName + " ," +
-                " "+ DbContractor.TableColumns.ArDate + ") select " + DbContractor.TableColumns.MItem_Name  + "," +
-                " "+ DbContractor.TableColumns.MQuantifier + "," +
+                " " + DbContractor.TableColumns.ArDate + ") select " + DbContractor.TableColumns.MItem_Name + "," +
+                " " + DbContractor.TableColumns.MQuantifier + "," +
                 "" + DbContractor.TableColumns.MQuantity + "," +
                 "" + DbContractor.TableColumns.MItem_Price + " ," +
                 "" + DbContractor.TableColumns.MShopName + " ," +
-                " "+ DbContractor.TableColumns.MDate + " from " +DbContractor.TableColumns.MainTable +"" +
-                " where " + DbContractor.TableColumns.MShopName + " like  '%"+ShopName+"%' ");
+                " " + DbContractor.TableColumns.MDate + " from " + DbContractor.TableColumns.MainTable + "" +
+                " where " + DbContractor.TableColumns.MShopName + " like  '%" + ShopName + "%' ");
 
         db.execSQL(" insert into " + DbContractor.TableColumns.ArchivePaymentTable + "" +
                 " (" + DbContractor.TableColumns.ArPaidShopName + "," +
                 "" + DbContractor.TableColumns.ArPaidAmount + "," +
-                "" + DbContractor.TableColumns.ArPaymentDate +") select " + DbContractor.TableColumns.PaidShopName  + "," +
-                " "+ DbContractor.TableColumns.PaidAmount + "," +
-                "" + DbContractor.TableColumns.PaymentDate + " from " +DbContractor.TableColumns.PaymentTable +"" +
-                " where " + DbContractor.TableColumns.PaidShopName + " like '%"+ShopName+"%' ");
+                "" + DbContractor.TableColumns.ArPaymentDate + ") select " + DbContractor.TableColumns.PaidShopName + "," +
+                " " + DbContractor.TableColumns.PaidAmount + "," +
+                "" + DbContractor.TableColumns.PaymentDate + " from " + DbContractor.TableColumns.PaymentTable + "" +
+                " where " + DbContractor.TableColumns.PaidShopName + " like '%" + ShopName + "%' ");
 
-       DeleteAllBy(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MShopName,ShopName);
-       DeleteAllBy(DbContractor.TableColumns.PaymentTable,DbContractor.TableColumns.PaidShopName,ShopName);
+        DeleteAllBy(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, ShopName);
+        DeleteAllBy(DbContractor.TableColumns.PaymentTable, DbContractor.TableColumns.PaidShopName, ShopName);
     }
 
 

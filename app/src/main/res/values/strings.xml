@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">لكارني</string>
-    <string name="show_today_items">الائحةحسب</string>
+    <string name="show_today_items">الائحة</string>
     <string name="guest_mode">  وضع ( الضيوف ! ) </string>
     <string name="left_of_quota">الباقي من السقف</string>
     <string name="total">  المجموع العام </string>
@@ -18,13 +18,12 @@
     <string name="username_here">اسم المستعمل هنا </string>
     <string name="confirm_password">تاكيد القن السري</string>
     <string name="nodataintable">لا يوجد بيانات</string>
-    <string name="alert">تحذير</string>
     <string name="doyourealywantdeletall">حذف جميع البيانات , هل انت متاكد</string>
     <string name="doyourealywantorestore">نسخ جميع البيانات هل انت متاكد سيتم تعويض البيانات السابقة</string>
     <string name="reset_all">حذف الكل</string>
     <string name="add_items">أظف المنتوج</string>
     <string name="add_items_to_table">أظف المنتوج</string>
-    <string name="show_lists">ألائحة السلعة</string>
+    <string name="show_lists">لائحة السلعة</string>
     <string name="settings">إعدادات</string>
     <string name="exit">الخروج</string>
     <string name="unknown">مجهول</string>
@@ -50,7 +49,7 @@
     <string name="quantity">الكمية</string>
     <string name="_12_01_20">12-01-2020</string>
     <string name="statistics">احصائيات </string>
-    <string name="hajmistihlak">حجم استهلاك المنتوج</string>
+    <string name="hajmistihlak">احصائيات الإستهلاك </string>
     <string name="paysuccess">Successfully Paid</string>
     <string name="payunsuccessful">Payment Unsuccessful</string>
     <string name="plzinsertamount">plz insert pay amount</string>
@@ -67,5 +66,8 @@
     <string name="main">الرئيسية</string>
     <string name="payarchive">ارشيف الدفع</string>
     <string name="archivestats">احصائيات الأرشيف</string>
+    <string name="paymentdate">تاريخ الدفع</string>
+    <string name="paidamount">المبلغ المدفوع</string>
+    <string name="cancel">إلغاء</string>
 
 </resources>

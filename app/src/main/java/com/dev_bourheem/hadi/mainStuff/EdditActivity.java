@@ -36,15 +36,12 @@ public class EdditActivity extends AppCompatActivity {
     private EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
     private MyDataBaseCreator MDBCR;
     private AdView Edit_ad;
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.edditmenu, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -64,7 +61,6 @@ public class EdditActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +76,6 @@ public class EdditActivity extends AppCompatActivity {
         GetThem();
         AdsEditActivity();
     }
-
     public void AdsEditActivity() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -91,7 +86,6 @@ public class EdditActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         Edit_ad.loadAd(adRequest);
     }
-
     public void GetThem() {
         Intent intent = getIntent();
         exampleitem exampleitem = intent.getParcelableExtra("exampleItem");
@@ -123,7 +117,6 @@ public class EdditActivity extends AppCompatActivity {
         DateMod.setText(dateBought);
 
     }
-
     public void UpdateDB() {
         Intent intent = getIntent();
         exampleitem exampleitem = intent.getParcelableExtra("exampleItem");
@@ -144,7 +137,6 @@ public class EdditActivity extends AppCompatActivity {
             OpenListItems();
         } else MsgBox("لم يتم الحفظ", 1);
     }
-
     public void DelItem() {
 
         Intent intent = getIntent();
@@ -160,12 +152,9 @@ public class EdditActivity extends AppCompatActivity {
         } else MsgBox("لم يتم الحذف", 1);
 
     }
-
     public void MsgBox(String mess, int p) {
         Toast.makeText(EdditActivity.this, mess, p);
     }
-
-
     public void onDialogueUpdate() {
         new AlertDialog.Builder(this)
                 .setTitle("تحذير")
@@ -180,8 +169,6 @@ public class EdditActivity extends AppCompatActivity {
                 })
                 .setNegativeButton(R.string.no, null).show();
     }
-
-
     public void onDialogueDelete() {
         new AlertDialog.Builder(this)
                 .setTitle("تحذير")
@@ -196,7 +183,6 @@ public class EdditActivity extends AppCompatActivity {
                 })
                 .setNegativeButton(R.string.no, null).show();
     }
-
     public void OpenListItems() {
         Intent inte = new Intent(EdditActivity.this, MainActivity.class);
         startActivity(inte);

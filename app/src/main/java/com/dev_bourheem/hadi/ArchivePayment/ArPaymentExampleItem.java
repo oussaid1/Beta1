@@ -64,7 +64,7 @@ public class ArPaymentExampleItem implements Parcelable {
         dest.writeString(datePaid);
     }
 
-    public String getIdno() {
+    public String getARIdno() {
         return id;
     }
 }

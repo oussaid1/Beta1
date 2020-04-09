@@ -4,90 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backg"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     android:theme="@style/AppTheme"
     tools:context=".mainStuff.ListActivity">
 
 
     <LinearLayout
-        android:id="@+id/TopLayout"
+        style="@style/MainContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
         android:background="@drawable/justborderz"
-        android:elevation="4dp"
+        android:layout_margin="2dp"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:elevation="8dp">
+            android:layout_weight="3"
+            android:layoutDirection="rtl"
+            android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/CategorySpin"
+            <TextView
+                style="@style/SubTextViews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_today_items" />
+
+            <TextView
+                style="@style/DetailTextViews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:clipChildren="true"
-                android:dropDownWidth="200dp"
-                android:popupBackground="@color/P2"
-                android:textAlignment="center"
-                android:textColor="@color/blueMarin" />
+                android:text="فلترة الائحة حسب الإختار " />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:elevation="8dp">
+            android:layout_marginTop="4dp"
+            android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/searchSpin"
+            <LinearLayout
+                style="@style/SpinnerContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:clipChildren="true"
-                android:dropDownWidth="200dp"
-                android:popupBackground="@color/P2"
-                android:textAlignment="center"
-                android:textColor="@color/blueMarin" />
+                android:background="@drawable/spinnerstextboxses">
+
+
+            <Spinner
+                    android:id="@+id/CategorySpin"
+                    style="@style/Spinners"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/SpinnerContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinnerstextboxses">
+
+                <Spinner
+                    android:id="@+id/searchSpin"
+                    style="@style/Spinners"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:layout_margin="2dp"
-            android:padding="4dp"
-            android:text="@string/show_today_items"
-            android:textAlignment="gravity"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@color/P3"
-        android:layoutDirection="rtl"
         android:layout_margin="2dp"
+        android:background="@drawable/justborderz"
+        android:layoutDirection="rtl"
         android:orientation="horizontal">
 
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="start|center_vertical"
-            android:layout_margin="4dp"
             android:padding="4dp"
             android:src="@drawable/ic_shopping" />
 
@@ -100,7 +101,6 @@
 
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backg"
+    android:background="@color/colorPrimaryDark"
     tools:context=".mainStuff.LoginActivity">
 
     <ScrollView
@@ -20,10 +20,11 @@
 
             <LinearLayout
                 android:id="@+id/TopLayout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:elevation="4dp"
                 android:layout_marginStart="8dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
@@ -35,17 +36,13 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:elevation="2dp"
                     android:onClick="MasterLogin"
+                    android:layout_gravity="center_horizontal"
                     android:text="@string/login_page"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
+                   style="@style/MainTextViews"/>
 
             </LinearLayout>
 
@@ -62,7 +59,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/justborderz"
-                    android:elevation="8dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -71,6 +67,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
                         android:textSize="16sp"
+                        android:textColor="@color/P2"
                         android:layout_marginBottom="4dp"
                         android:text="@string/username" />
 
@@ -80,7 +77,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_margin="4dp"
-                        android:background="@color/P3"
+                        android:background="@color/white"
                         android:drawableStart="@drawable/ic_username"
                         android:maxLines="1"
                         android:padding="4dp"
@@ -92,6 +89,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="12dp"
                         android:layout_marginBottom="4dp"
+                        android:textColor="@color/P2"
                         android:text="@string/password"
                         android:textSize="16sp" />
 
@@ -101,7 +99,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_margin="4dp"
-                        android:background="@color/P3"
+                        android:background="@color/white"
                         android:drawableStart="@drawable/ic_lock"
                         android:inputType="textPassword"
                         android:maxLines="1"

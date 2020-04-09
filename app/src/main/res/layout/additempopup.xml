@@ -1,38 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/backg"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_margin="2dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_weight="2"
+                android:layout_margin="2dp"
+                android:layoutDirection="rtl"
                 android:background="@drawable/justborderz"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_margin="4dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"
-                    android:gravity="center_horizontal"
                     android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:text="@string/shop_name"
                     android:textAlignment="center" />
 
@@ -44,7 +38,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="1dp"
                     android:layout_marginEnd="4dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="4dp"
                     android:clipChildren="true"
                     android:completionThreshold="2"
                     android:dropDownWidth="200dp"
@@ -54,29 +48,26 @@
                     android:padding="4dp"
                     android:popupBackground="@color/P2"
                     android:textAlignment="center"
-                    android:textColor="@color/blueMarin" />
+                    />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_weight="2"
+                android:layout_margin="2dp"
+                android:layoutDirection="rtl"
                 android:background="@drawable/justborderz"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginBottom="1dp"
                     android:textSize="18sp"
-                    android:gravity="center_horizontal"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:text="@string/productname" />
 
                 <AutoCompleteTextView
@@ -87,7 +78,6 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
-                    android:layout_marginBottom="8dp"
                     android:clipChildren="true"
                     android:completionThreshold="2"
                     android:dropDownWidth="200dp"
@@ -99,7 +89,7 @@
                     android:textSize="18sp"
                     android:popupBackground="@color/P2"
                     android:textAlignment="center"
-                    android:textColor="@color/blueMarin" />
+                  />
             </LinearLayout>
 
         </LinearLayout>
@@ -116,8 +106,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:text="@string/productprice"
-                android:textSize="18sp"
-                android:textAlignment="center" />
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/ItemPriceIn"
@@ -134,7 +126,20 @@
                 android:maxLines="1"
                 android:padding="4dp"
                 android:textAlignment="center"
-                android:textColor="@color/blueMarin" />
+                />
+
+            <Button
+                android:id="@+id/AddBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/buttonflat"
+                android:text="@string/add"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -164,6 +169,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        style="@style/SpinnerContainer"
+                        android:background="@drawable/spinnerstextboxses"
                         android:layout_margin="4dp">
 
                         <Spinner
@@ -173,8 +180,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_margin="2dp"
                             android:dropDownWidth="200dp"
-                            android:dropDownSelector="@color/P2"
-                            android:elevation="4dp"
+                            android:popupBackground="@color/P2"
                             android:fadingEdgeLength="4dp"
                             android:hapticFeedbackEnabled="true"
                             android:paddingBottom="8dp" />
@@ -213,7 +219,7 @@
                             android:padding="2dp"
                             android:text="1"
                             android:textAlignment="center"
-                            android:textColor="@color/blueMarin" />
+                           />
 
                         <Button
                             android:id="@+id/minus"
@@ -256,9 +262,11 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="1dp"
-                android:textSize="18sp"
                 android:gravity="center_horizontal"
-                android:text="التاريخ" />
+                android:text="@string/date"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <AutoCompleteTextView
                 android:id="@+id/DateIn"
@@ -279,13 +287,12 @@
                 android:padding="4dp"
                 android:popupBackground="@color/P2"
                 android:textAlignment="center"
-                android:textColor="@color/blueMarin" />
+                 />
         </LinearLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_margin="4dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -294,23 +301,10 @@
                 android:id="@+id/Cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_margin="2dp"
-                android:textColor="@color/white"
-                android:background="@drawable/buttonflat"
-                android:text="إلغاء" />
 
-            <Button
-                android:id="@+id/AddBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="2dp"
-                android:textColor="@color/blueMarin"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:background="@drawable/buttonflat"
-                android:text="@string/add" />
+android:layout_alignParentStart="true"                android:background="@drawable/buttonflat"
+                android:text="@string/cancel" />
+
         </RelativeLayout>
-    </LinearLayout>
 </LinearLayout>
