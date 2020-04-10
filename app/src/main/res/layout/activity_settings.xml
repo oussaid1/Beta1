@@ -136,13 +136,11 @@
 
                 <Button
                     android:id="@+id/saveBtnforquotas"
-                    style="@style/ButtonsStyle"
                     android:layout_width="100dp"
                     android:layout_height="30dp"
                     android:layout_marginBottom="4dp"
                     android:background="@drawable/buttonflat"
                     android:text="@string/save"
-                    android:textStyle="bold"
                     tools:style="@style/ButtonsStyle" />
 
             </LinearLayout>

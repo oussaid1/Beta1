@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
-    android:theme="@style/AppTheme"
     tools:context=".mainStuff.MainActivity">
 
     <LinearLayout
@@ -271,7 +270,11 @@
                     <Spinner
                         android:id="@+id/SumCategory"
                         style="@style/Spinners"
-                        android:text="@string/totaltoday" />
+                        android:layout_width="0dp"
+                        android:layout_height="40sp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                       />
                 </LinearLayout>
 
                 <LinearLayout
@@ -283,7 +286,10 @@
                     <Spinner
                         android:id="@+id/Sumsearche"
                         style="@style/Spinners"
-                        android:text="@string/totaltoday" />
+                        android:layout_width="0dp"
+                        android:layout_height="40sp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -295,7 +301,10 @@
                     <Spinner
                         android:id="@+id/SumsearchBydate"
                         style="@style/Spinners"
-                        android:text="@string/totaltoday" />
+                        android:layout_width="0dp"
+                        android:layout_height="40sp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -320,7 +329,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/justborderz"
             android:text="159"
-            android:textColor="@color/P" />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

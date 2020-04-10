@@ -6,20 +6,21 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColor">@color/orange</item>
-
+        <item name="android:textColor">@color/white</item>
+        <item name="android:itemBackground">@color/colorPrimary</item>
     </style>
 
-    <style name="ButtonsStyle" parent="Theme.AppCompat">
+    <style name="ButtonsStyle" parent="Widget.AppCompat.ImageButton">
         <item name="android:layout_marginTop">2dp</item>
         <item name="android:layout_marginStart">2dp</item>
         <item name="android:layout_marginEnd">2dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
         <item name="background">@drawable/buttonflat</item>
         <item name="android:layout_height">30dp</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:textColor">@color/Orange</item>
         <item name="android:textStyle">bold</item>
-        <item name="elevation">10dp</item>
+        <item name="elevation">8dp</item>
     </style>
 
     <style name="MainTextViews" parent="Theme.AppCompat">
@@ -59,11 +60,11 @@
     </style>
     <style name="TextViewsText" parent="Theme.AppCompat">
         <item name="android:layout_width">160sp</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/P</item>
         <item name="android:textStyle">italic</item>
         <item name="fontFamily">@font/amiko</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAlignment">gravity</item>
         <item name="android:layout_marginStart">8dp</item>
         <item name="android:padding">2dp</item>
         <item name="android:maxLines">1</item>
