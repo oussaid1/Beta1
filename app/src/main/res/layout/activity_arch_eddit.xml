@@ -52,20 +52,14 @@
 
                     <EditText
                         android:id="@+id/ItemNameModArch"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
+                       style="@style/EditTextText"
                         android:hint="@string/productname"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
+                        style="@style/SubTextViews"
                         android:text="@string/productname" />
                 </LinearLayout>
 
@@ -79,21 +73,14 @@
 
                     <EditText
                         android:id="@+id/quantityModArch"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
-                        android:hint="@string/quantity"
-                        android:inputType="numberDecimal"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                        style="@style/EditTextViewsNumbers"
+                        android:hint="@string/_180"
+                         />
 
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
+                        style="@style/SubTextViews"
                         android:text="@string/quantity" />
                 </LinearLayout>
 
@@ -107,21 +94,14 @@
 
                     <EditText
                         android:id="@+id/priceModArch"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
-                        android:hint="@string/price"
-                        android:inputType="numberDecimal"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                        style="@style/EditTextViewsNumbers"
+                        android:text="@string/number"
+                        />
 
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
+                        style="@style/SubTextViews"
                         android:text="@string/price" />
                 </LinearLayout>
 
@@ -135,20 +115,14 @@
 
                     <EditText
                         android:id="@+id/ShopNmviewArch"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
+                        style="@style/EditTextText"
                         android:hint="@string/shop_name"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                       />
 
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
+                        style="@style/SubTextViews"
                         android:text="@string/shop_name" />
                 </LinearLayout>
 
@@ -162,21 +136,15 @@
 
                     <EditText
                         android:id="@+id/ArchdateEdit"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
+                        style="@style/EditTextText"
                         android:hint="@string/_12_01_20"
                         android:inputType="date"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                        />
 
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
+                        style="@style/SubTextViews"
                         android:text="@string/date" />
                 </LinearLayout>
 
@@ -243,7 +211,7 @@
 
                         <Spinner
                             android:layout_width="160dp"
-                            android:layout_height="40sp"
+                            android:layout_height="30sp"
                             android:id="@+id/ArchshopTodelete"
                            style="@style/Spinners" />
                     </LinearLayout>

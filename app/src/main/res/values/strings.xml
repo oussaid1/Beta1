@@ -69,5 +69,7 @@
     <string name="paymentdate">تاريخ الدفع</string>
     <string name="paidamount">المبلغ المدفوع</string>
     <string name="cancel">إلغاء</string>
+    <string name="number">10000</string>
+    <string name="paymentInfo">معلومات الدفع</string>
 
 </resources>

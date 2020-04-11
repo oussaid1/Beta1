@@ -43,11 +43,11 @@ public class ArPaymentExampleItem implements Parcelable {
     }
 
     public String getDateBought() {
-        return paidAmount;
+        return datePaid;
     }
 
     public String getItemPrice() {
-        return datePaid;
+        return paidAmount;
     }
 
     @Override

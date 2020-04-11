@@ -10,8 +10,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-      >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,11 +37,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        style="@style/MainTextViews"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/MainTextViews"
-                        android:text="@string/productinfo"
-                         />
+                        android:text="@string/productinfo" />
 
 
                 </LinearLayout>
@@ -57,21 +55,13 @@
 
                     <EditText
                         android:id="@+id/ItemNameMod"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
-                        android:hint="@string/productname"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                        style="@style/EditTextText"
+                        android:hint="@string/productname" />
 
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
+                        style="@style/SubTextViews"
                         android:text="@string/productname" />
                 </LinearLayout>
 
@@ -85,22 +75,13 @@
 
                     <EditText
                         android:id="@+id/quantityMod"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
-                        android:hint="@string/quantity"
-                        android:inputType="numberDecimal"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                        style="@style/EditTextViewsNumbers"
+                        android:text="@string/_180" />
 
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
+                        style="@style/SubTextViews"
                         android:text="@string/quantity" />
                 </LinearLayout>
 
@@ -114,22 +95,14 @@
 
                     <EditText
                         android:id="@+id/priceMod"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
-                        android:hint="@string/price"
-                        android:inputType="numberDecimal"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                        style="@style/EditTextViewsNumbers"
+                        android:text="@string/_180"
+                        />
 
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
+                        style="@style/SubTextViews"
                         android:text="@string/price" />
                 </LinearLayout>
 
@@ -143,21 +116,14 @@
 
                     <EditText
                         android:id="@+id/shopnameMod"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
+                        style="@style/EditTextText"
                         android:hint="@string/shop_name"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                      />
 
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
+                        style="@style/SubTextViews"
                         android:text="@string/shop_name" />
                 </LinearLayout>
 
@@ -171,22 +137,14 @@
 
                     <EditText
                         android:id="@+id/dateMod"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
+                        style="@style/EditTextText"
                         android:hint="@string/_12_01_20"
-                        android:inputType="date"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                      />
 
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
+                        style="@style/SubTextViews"
                         android:text="@string/date" />
                 </LinearLayout>
 

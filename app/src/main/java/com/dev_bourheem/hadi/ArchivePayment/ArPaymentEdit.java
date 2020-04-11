@@ -62,25 +62,15 @@ public class ArPaymentEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ar_payment_edit);
-        Edit_ad = findViewById(R.id.Edit_ad);
+
         ArpaidAmountEd = findViewById(R.id.ArpaidAmountView);
         ArpaidShopNameEd = findViewById(R.id.ArpaidShopNameView);
         ArpaymentDAteEd = findViewById(R.id.ArpaymentDAteView);
         MDBCR = new MyDataBaseCreator(this);
         GetThem();
-        AdsEditActivity();
+
     }
 
-    public void AdsEditActivity() {
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        Edit_ad.loadAd(adRequest);
-    }
 
     public void GetThem() {
         Intent intent = getIntent();

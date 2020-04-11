@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/backg"
+        android:background="@color/colorPrimaryDark"
         tools:context=".Payment.PaymentEddit">
 
         <ScrollView
@@ -37,15 +37,10 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="0dp"
+                            style="@style/MainTextViews"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_weight="2"
-                            android:text="@string/productinfo"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/white" />
+                            android:text="@string/paymentInfo"/>
 
 
                     </LinearLayout>
@@ -60,20 +55,14 @@
 
                         <EditText
                             android:id="@+id/paidShopNameView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_weight="2"
+                            style="@style/EditTextText"
                             android:hint="@string/productname"
-                            android:maxLength="16"
-                            android:maxLines="1"
-                            android:textAlignment="center" />
+                          />
 
                         <TextView
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
+                            style="@style/SubTextViews"
                             android:text="@string/shop_name" />
                     </LinearLayout>
 
@@ -87,21 +76,13 @@
 
                         <EditText
                             android:id="@+id/paidAmountView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_weight="2"
-                            android:hint="@string/quantity"
-                            android:inputType="numberDecimal"
-                            android:maxLength="16"
-                            android:maxLines="1"
-                            android:textAlignment="center" />
+                            style="@style/EditTextViewsNumbers"
+                            android:hint="@string/_180" />
 
                         <TextView
-                            android:layout_width="100dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
+                            style="@style/SubTextViews"
                             android:text="@string/paidamount" />
                     </LinearLayout>
 
@@ -115,21 +96,14 @@
 
                         <EditText
                             android:id="@+id/paymentDAteView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_weight="2"
+                            style="@style/EditTextText"
                             android:hint="@string/_12_01_20"
-                            android:inputType="date"
-                            android:maxLength="16"
-                            android:maxLines="1"
-                            android:textAlignment="center" />
+                             />
 
                         <TextView
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
+                            style="@style/SubTextViews"
                             android:text="@string/paymentdate" />
                     </LinearLayout>
 
@@ -144,7 +118,7 @@
                     android:orientation="horizontal">
 
                     <com.google.android.gms.ads.AdView
-                        android:id="@+id/Edit_ad"
+                        android:id="@+id/Edit_PayAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"

@@ -20,31 +20,12 @@
             android:background="@drawable/justborderz"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/TextViewsText"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-
-                android:text="@string/shop_name" />
-
             <AutoCompleteTextView
                 android:id="@+id/molhanoutNameIn"
+                style="@style/AutoCompleteTextViews"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:clipChildren="true"
-                android:completionThreshold="2"
-                android:dropDownWidth="200dp"
-                android:hint="@string/shopnamehere"
-                android:maxLength="16"
-                android:maxLines="1"
-                android:padding="4dp"
-                android:popupBackground="@color/P2"
-                android:textAlignment="center" />
+                android:hint="@string/shopnamehere" />
 
         </LinearLayout>
 
@@ -56,31 +37,12 @@
             android:background="@drawable/justborderz"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/TextViewsText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/productname" />
-
             <AutoCompleteTextView
                 android:id="@+id/ItemNameIn"
+                style="@style/AutoCompleteTextViews"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:clipChildren="true"
-                android:completionThreshold="2"
-                android:dropDownWidth="200dp"
-                android:gravity="center"
-                android:hint="@string/goodsname"
-                android:maxLength="16"
-                android:maxLines="1"
-                android:padding="4dp"
-                android:popupBackground="@color/P2"
-                android:textAlignment="center"
-                android:textSize="18sp" />
+                android:hint="@string/goodsname" />
         </LinearLayout>
 
     </LinearLayout>
@@ -93,27 +55,12 @@
         android:background="@drawable/justborderz"
         android:orientation="vertical">
 
-        <TextView
-            style="@style/TextViewsText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/productprice" />
-
         <EditText
             android:id="@+id/ItemPriceIn"
+            style="@style/EditTextViewsNumbers"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="8dp"
-            android:hint="@string/price_in_here"
-            android:inputType="numberSigned"
-            android:maxLength="10"
-            android:maxLines="1"
-            android:padding="4dp"
-            android:textAlignment="center" />
+            android:hint="@string/price_in_here" />
 
         <Button
             android:id="@+id/AddBtn"
@@ -126,15 +73,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        style="@style/MainContainer"
-        android:background="@drawable/justborderz"
-        android:elevation="2dp"
-        android:layoutDirection="ltr"
-        android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -145,90 +84,59 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="119dp"
+                style="@style/SpinnerContainer"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:layout_weight="2"
+                android:background="@drawable/spinnerstextboxses"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    style="@style/SpinnerContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/spinnerstextboxses">
-
-                    <Spinner
-                        android:id="@+id/QuanType"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_margin="2dp"
-                        android:dropDownWidth="200dp"
-                        android:fadingEdgeLength="4dp"
-                        android:hapticFeedbackEnabled="true"
-                        android:paddingBottom="8dp"
-                        android:popupBackground="@color/P2" />
-                </LinearLayout>
-
+                <Spinner
+                    android:id="@+id/QuanType"
+                    style="@style/Spinners"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp" />
             </LinearLayout>
 
+
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <Button
+                    android:id="@+id/plus"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_up" />
+
+                <TextView
+                    android:id="@+id/quantityView"
+                    android:layout_width="62dp"
+                    android:layout_height="30dp"
+                    android:maxLines="1"
+                    android:text="1"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/minus"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_down" />
+
+                <TextView
+                    style="@style/TextViewsText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/plus"
-                        style="@style/ButtonsStyle"
-                        android:layout_width="40dp"
-                        android:layout_height="30dp"
-                        android:layout_margin="2dp"
-                        android:background="@drawable/ic_up"
-                        />
-
-                    <TextView
-                        android:id="@+id/quantityView"
-                        android:layout_width="62dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_horizontal"
-                        android:maxLength="10"
-                        android:maxLines="1"
-                        android:padding="2dp"
-                        android:text="1"
-                        android:textAlignment="center" />
-
-                    <Button
-                        android:id="@+id/minus"
-                        style="@style/ButtonsStyle"
-                        android:layout_width="40dp"
-                        android:layout_height="30dp"
-                        android:layout_margin="2dp"
-                        android:background="@drawable/ic_down" />
-
-                    <TextView
-                        style="@style/TextViewsText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/quantity"
-                        />
-
-                </LinearLayout>
+                    android:text="@string/quantity" />
 
             </LinearLayout>
 
 
         </LinearLayout>
 
-    </LinearLayout>
+
 
     <LinearLayout
         style="@style/MainContainer"
@@ -237,32 +145,19 @@
         android:layout_margin="4dp"
         android:background="@drawable/justborderz"
         android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    />
 
-        <TextView
-            style="@style/TextViewsText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date" />
 
         <AutoCompleteTextView
             android:id="@+id/DateIn"
+            style="@style/AutoCompleteTextViews"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="8dp"
-            android:clipChildren="true"
-            android:completionThreshold="2"
-            android:dropDownWidth="200dp"
-            android:gravity="center"
-            android:hint="@string/_12_01_20"
-            android:maxLength="16"
-            android:maxLines="1"
-            android:padding="4dp"
-            android:popupBackground="@color/P2"
-            android:textAlignment="center" />
+            android:hint="@string/_12_01_20" />
 
         <Button
             android:id="@+id/Cancel"

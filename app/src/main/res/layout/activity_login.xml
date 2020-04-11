@@ -67,21 +67,16 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
                         android:textSize="16sp"
-                        android:textColor="@color/P2"
+                        android:textColor="@color/Text_sub"
                         android:layout_marginBottom="4dp"
                         android:text="@string/username" />
 
                     <EditText
                         android:id="@+id/loginNmIn"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_margin="4dp"
-                        android:background="@color/white"
+                       style="@style/EditTextPassword"
                         android:drawableStart="@drawable/ic_username"
-                        android:maxLines="1"
-                        android:padding="4dp"
-                        android:textAlignment="center" />
+                         />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -89,22 +84,15 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="12dp"
                         android:layout_marginBottom="4dp"
-                        android:textColor="@color/P2"
+                        android:textColor="@color/Text_sub"
                         android:text="@string/password"
                         android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/PasswordIn"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_margin="4dp"
-                        android:background="@color/white"
                         android:drawableStart="@drawable/ic_lock"
-                        android:inputType="textPassword"
-                        android:maxLines="1"
-                        android:padding="4dp"
-                        android:textAlignment="center" />
+                        style="@style/EditTextPassword"/>
 
                     <Button
                         android:id="@+id/loginBtn"

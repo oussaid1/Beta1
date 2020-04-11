@@ -33,6 +33,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.dev_bourheem.hadi.Archieve.ArchieveList;
 import com.dev_bourheem.hadi.ArchivePayment.ArchPaymentList;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private Spinner CategorySpinner, SearchSpinerSub1, SearchSpinerSub2;
     private TextView DateV1, RedL, RedL2, yellowL, yellowL2, OrangeL, OrangeL2, GreenL, GreenL2, QuotaLeftNm, LeftOut, SumOutBy, TotalallOut, hereisyourQuota;
     private Switch Guestmode;
+    private static final String CHANNEL_ID = "Main";
     private boolean ischecked;
     private double Quota = 0, sumtoday = 0, leftOfQuota = 0, Qnt1 = 1;
     private ArrayList<String> allList;
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         DateV1 = findViewById(R.id.dateView);
         floatingButon = findViewById(R.id.fab);
-       // QuotaLeftNm = findViewById(R.id.QuotaLeftNm);
+        // QuotaLeftNm = findViewById(R.id.QuotaLeftNm);
         GreenL = findViewById(R.id.BtnGreen);
         GreenL2 = findViewById(R.id.BtnGreen2);
         yellowL = findViewById(R.id.BtnYellow);
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         SumOutBy = findViewById(R.id.TotalTodayOut);
         admain = findViewById(R.id.admain);
         CategorySpinner = findViewById(R.id.SumCategory);
-        SearchSpinerSub1 = findViewById(R.id.Sumsearche);
+        SearchSpinerSub1 = findViewById(R.id.SumSearch);
         SearchSpinerSub2 = findViewById(R.id.SumsearchBydate);
         Molhanot = new ArrayList<>();
         allList = new ArrayList<String>();
@@ -141,8 +143,8 @@ public class MainActivity extends AppCompatActivity {
         floatingButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               PopupDialogue();
-               // ShowNotif();
+                PopupDialogue();
+                ShowNotif();
             }
         });
         CategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -399,7 +401,7 @@ public class MainActivity extends AppCompatActivity {
         yellowL2.setVisibility(View.INVISIBLE);
         GreenL.setVisibility(View.VISIBLE);
         GreenL2.setVisibility(View.VISIBLE);
-      //  QuotaLeftNm.setTextColor(Color.parseColor("#64DD17"));
+        //  QuotaLeftNm.setTextColor(Color.parseColor("#64DD17"));
     }
 
     public void Yellowlight() {
@@ -423,7 +425,7 @@ public class MainActivity extends AppCompatActivity {
         RedL2.setVisibility(View.INVISIBLE);
         OrangeL.setVisibility(View.VISIBLE);
         OrangeL2.setVisibility(View.VISIBLE);
-       // QuotaLeftNm.setTextColor(Color.parseColor("#FF6D00"));
+        // QuotaLeftNm.setTextColor(Color.parseColor("#FF6D00"));
     }
 
     public void Redlight() {
@@ -435,7 +437,7 @@ public class MainActivity extends AppCompatActivity {
         OrangeL2.setVisibility(View.VISIBLE);
         RedL.setVisibility(View.VISIBLE);
         RedL2.setVisibility(View.VISIBLE);
-       // QuotaLeftNm.setTextColor(Color.parseColor("#D50000"));
+        // QuotaLeftNm.setTextColor(Color.parseColor("#D50000"));
     }
 
     public double GetQuota() {
@@ -806,27 +808,30 @@ public class MainActivity extends AppCompatActivity {
         return dayOfMonth == 1;
     }
 
-    public void ShowNotif() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CHANNEL_ID")
+    private void ShowNotif() {
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notifications)
                 .setContentTitle("My notification")
                 .setContentText("Much longer text that cannot fit one line...")
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText("Much longer text that cannot fit one line..."))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        builder.setShowWhen(true);
-    /*  *//*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name =(" Dont forget to Add Items");
+        builder.build();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = (" Dont forget to Add Items");
             String description = ("please dont forget to add ");
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;*//*
-           // NotificationChannel channel = new NotificationChannel("CHANNEL_ID", "name", importance);
-         //   channel.setDescription(description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("CHANNEL_ID", "name", importance);
+            channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
+            //   or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             assert notificationManager != null;
-            notificationManager.createNotificationChannel(channel);*/
+            notificationManager.createNotificationChannel(channel);
         }
 
     }
+}
 

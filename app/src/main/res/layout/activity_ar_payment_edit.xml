@@ -56,20 +56,14 @@
 
                     <EditText
                         android:id="@+id/ArpaidShopNameView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
+                        style="@style/EditTextText"
                         android:hint="@string/productname"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                       />
 
                     <TextView
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
+                        style="@style/SubTextViews"
                         android:text="@string/shop_name" />
                 </LinearLayout>
 
@@ -85,19 +79,15 @@
                         android:id="@+id/ArpaidAmountView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
-                        android:hint="@string/quantity"
-                        android:inputType="numberDecimal"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                        style="@style/EditTextViewsNumbers"
+                        android:layout_weight="1"
+                        android:hint="@string/number"
+                      />
 
                     <TextView
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
+                        style="@style/SubTextViews"
                         android:text="@string/paidamount" />
                 </LinearLayout>
 
@@ -111,21 +101,15 @@
 
                     <EditText
                         android:id="@+id/ArpaymentDAteView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="2"
+                        style="@style/EditTextText"
                         android:hint="@string/_12_01_20"
                         android:inputType="date"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:textAlignment="center" />
+                       />
 
                     <TextView
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
+                        style="@style/SubTextViews"
                         android:text="@string/paymentdate" />
                 </LinearLayout>
 

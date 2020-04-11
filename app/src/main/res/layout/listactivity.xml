@@ -55,7 +55,7 @@
                     android:id="@+id/CategorySpin"
                     style="@style/Spinners"
                     android:layout_width="160dp"
-                    android:layout_height="wrap_content" />
+               />
             </LinearLayout>
 
             <LinearLayout
@@ -68,7 +68,7 @@
                     android:id="@+id/searchSpin"
                     style="@style/Spinners"
                     android:layout_width="160dp"
-                    android:layout_height="wrap_content" />
+                    />
             </LinearLayout>
         </LinearLayout>
 

@@ -55,7 +55,7 @@ tools:context=".Payment.PaymentList">
                     android:id="@+id/PayPCategorySpin"
                     style="@style/Spinners"
                     android:layout_width="160dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="30dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -68,7 +68,7 @@ tools:context=".Payment.PaymentList">
                     android:id="@+id/PayPsearchSpin"
                     style="@style/Spinners"
                     android:layout_width="160dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="30dp" />
             </LinearLayout>
         </LinearLayout>
 
