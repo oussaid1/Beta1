@@ -2,9 +2,9 @@
 <resources>
 
 
-    <color name="colorPrimary">#973961</color>
-    <color name="colorPrimaryDark">#973961</color>
-    <color name="colorAccent">#ff006c</color>
+    <color name="colorPrimary">#A9374B</color>
+    <color name="colorPrimaryDark">#731A2A</color>
+    <color name="colorAccent">#FF9100</color>
     <color name="Text_sub">#F9BF8F</color>
     <color name="Text_details">#F2BCB2B2</color>
     <color name="Text_sub2">#FEE9D7</color>
@@ -15,7 +15,7 @@
     <color name="yellow">#FFC107</color>
     <color name="white">#FFFFFF</color>
     <color name="Text_main">#FF781E</color>
-    <color name="Text_numbers">#FF2D56</color>
-
+    <color name="Text_numbers">#03092E</color>
+    <color name="cardViews">#7F731A2A</color>
 
 </resources>

@@ -170,64 +170,6 @@
                     ads:adUnitId="ca-app-pub-9838187586217611/9542315857" />
             </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:background="@drawable/justborderz"
-                android:elevation="4dp"
-                android:layoutDirection="rtl"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/MainTextViews"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/remove" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/justborderz"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/SubTextViews"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:layoutDirection="inherit"
-                        android:text="حذف الكل لــ"
-                        android:textSize="16sp" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/spinnerstextboxses">
-
-                        <Spinner
-                            android:layout_width="160dp"
-                            android:layout_height="30sp"
-                            android:id="@+id/ArchshopTodelete"
-                           style="@style/Spinners" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/Archdeleteby"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/buttonflat"
-                    android:text="حذف"
-                    android:textStyle="bold" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,10 +2,14 @@ package com.dev_bourheem.hadi.mainStuff;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,7 +17,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,21 +36,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import com.dev_bourheem.hadi.Archieve.ArchieveList;
-import com.dev_bourheem.hadi.ArchivePayment.ArchPaymentList;
 import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.Payment.PaymentList;
 import com.dev_bourheem.hadi.R;
+import com.dev_bourheem.hadi.mineAlarmReciever;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -68,23 +69,26 @@ public class MainActivity extends AppCompatActivity {
     private Spinner CategorySpinner, SearchSpinerSub1, SearchSpinerSub2;
     private TextView DateV1, RedL, RedL2, yellowL, yellowL2, OrangeL, OrangeL2, GreenL, GreenL2, QuotaLeftNm, LeftOut, SumOutBy, TotalallOut, hereisyourQuota;
     private Switch Guestmode;
-    private static final String CHANNEL_ID = "Main";
     private boolean ischecked;
     private double Quota = 0, sumtoday = 0, leftOfQuota = 0, Qnt1 = 1;
     private ArrayList<String> allList;
     private ArrayList<String> CategoryList;
     private ArrayList<String> SpinnerSub1List;
     private ArrayList<String> SpinnerSub2List;
-
+    private NotificationManager mNotificationManager;
+    private static final int NOTIFICATION_ID = 0;
+    private static final String PRIMARY_CHANNEL_ID =
+            "primary_notification_channel";
     private ArrayList<String> Molhanot;
     private ArrayAdapter<String> MolhntautoCompleteAdapter, SearchSpinnerAdapter, SearchSpinnerSub2Adapter, SearchSpinnerSub3Adapter;
     private ArrayAdapter<String> AutoCompleteAdapter;
     private ArrayAdapter<String> QuanSpinAdapter;
     private MyDataBaseCreator MDBC;
     private AdView admain;
-    private FloatingActionButton floatingButon;
+    private Button floatingButon;
     private String[] QTypes = {"واحدة", " كيلو", "لتر", "متر", "صندوق", "علبة"};
     private double SumAll = 0;
+    private Boolean alarmUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
         TotalallOut = findViewById(R.id.TotalallOut);
         Guestmode = findViewById(R.id.SwitchGuest);
         hereisyourQuota = findViewById(R.id.hereisurqt);
-
         LeftOut = findViewById(R.id.QuotaLeftOut);
         SumOutBy = findViewById(R.id.TotalTodayOut);
         admain = findViewById(R.id.admain);
@@ -112,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
         SearchSpinerSub1 = findViewById(R.id.SumSearch);
         SearchSpinerSub2 = findViewById(R.id.SumsearchBydate);
         Molhanot = new ArrayList<>();
+        createNotificationChannel();
+        mNotificationManager = (NotificationManager)
+                getSystemService(NOTIFICATION_SERVICE);
         allList = new ArrayList<String>();
         CategoryList = new ArrayList<>();
         SpinnerSub1List = new ArrayList<>();
@@ -121,9 +127,14 @@ public class MainActivity extends AppCompatActivity {
         Molhanot.add(getString(R.string.unknown));
         GetItemNameFromdatabase();
         GetShopNamesFromdatabase();
+        SharedPreferences mSharedPeff = this.getPreferences(Context.MODE_PRIVATE);
+       alarmUp= mSharedPeff.getBoolean("alarmStatus", false);
 
+        // DateV1.setText(Boolean.toString(alarmUp));
+        if (  ! alarmUp ) {
+            SetAlarmedNotification();
+        }
         DateV1.setText(GetDate());
-
         Guestmode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -133,18 +144,20 @@ public class MainActivity extends AppCompatActivity {
                     MsgBox("وضع (الضيوف )");
                     showQuota();
                     TraficLight(sumtoday);
+
                 } else {
                     MsgBox("الوضع العائلي");
                     showQuota();
                     TraficLight(sumtoday);
                 }
+
             }
+
         });
         floatingButon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopupDialogue();
-                ShowNotif();
             }
         });
         CategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -221,11 +234,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
         fillcategory();
         TotalallOut.setText(String.valueOf(getTotalAllForAllShops()));
         showQuota();
         TraficLight(sumtoday);
-
         ADSmainActivity();
     }
 
@@ -266,23 +280,65 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void SetAlarmedNotification() {
+        Intent notifyIntent = new Intent(this, mineAlarmReciever.class);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 16);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 1);
+
+        PendingIntent notifyPendingIntent = PendingIntent.getBroadcast
+                (this, NOTIFICATION_ID, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        long repeatInterval = AlarmManager.INTERVAL_HALF_DAY;
+        long triggerTime = SystemClock.elapsedRealtime()+repeatInterval;
+
+//If the Toggle is turned on, set the repeating alarm with a 15 minute interval
+        if (alarmManager != null) {
+            alarmManager.setInexactRepeating
+                    (AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                            triggerTime, repeatInterval, notifyPendingIntent);
+            alarmUp=true;
+        }
+        /* alarmUp = (PendingIntent.getBroadcast(this, NOTIFICATION_ID, notifyIntent,
+                PendingIntent.FLAG_NO_CREATE) != null);*/
+        SharedPreferences mSharedPeff = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSharedPeff.edit();
+        editor.putBoolean("alarmStatus", alarmUp);
+        editor.apply();
+
+    }
+
+    private void createNotificationChannel() {
+        mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(PRIMARY_CHANNEL_ID,
+                    "تنبيهات اساسية ", NotificationManager.IMPORTANCE_HIGH);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.enableVibration(true);
+            notificationChannel.setDescription(" هذه تنبيهات اساسية للتذكير بالقيام بعمليات مهمة");
+            mNotificationManager.createNotificationChannel(notificationChannel);
+        }
+    }
+
     public boolean isStoragePermissionGranted() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
-                Log.v("per", "Permission is granted");
                 return true;
             } else {
-                Log.v("per", "Permission is revoked");
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                 return false;
             }
         } else { //permission is automatically granted on sdk<23 upon installation
-            Log.v("per", "Permission is granted");
             return true;
         }
     }
+
 
     public void ADSmainActivity() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -355,9 +411,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static String GetDate() {
-        Date currenttime = Calendar.getInstance().getTime();
+        Date currentTime = Calendar.getInstance().getTime();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
-        return dateFormat.format(currenttime);
+        return dateFormat.format(currentTime);
+    }
+
+    private long GetTime(int hour, int minutes, int seconds) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minutes);
+        calendar.set(Calendar.SECOND, seconds);
+        return calendar.getTimeInMillis();
     }
 
     // this method calculates the limit (Quota ) according to the switch and according to the user settings
@@ -376,7 +441,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    // this method controlls Traffic Light and the text with it
+    // this method controls Traffic Light and the text with it
     public void TraficLight(Double sum2day) {
         leftOfQuota = Quota - sum2day;
         LeftOut.setText(String.valueOf(leftOfQuota));
@@ -808,30 +873,5 @@ public class MainActivity extends AppCompatActivity {
         return dayOfMonth == 1;
     }
 
-    private void ShowNotif() {
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_notifications)
-                .setContentTitle("My notification")
-                .setContentText("Much longer text that cannot fit one line...")
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText("Much longer text that cannot fit one line..."))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        builder.build();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = (" Dont forget to Add Items");
-            String description = ("please dont forget to add ");
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("CHANNEL_ID", "name", importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            //   or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            assert notificationManager != null;
-            notificationManager.createNotificationChannel(channel);
-        }
-
-    }
 }
 

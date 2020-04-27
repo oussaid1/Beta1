@@ -46,13 +46,12 @@
     <string name="delete">احذف</string>
     <string name="goodsname">اسم السلعة هنا</string>
     <string name="shopnamehere">اسم المحل هنا</string>
-    <string name="quantity">الكمية</string>
     <string name="_12_01_20">12-01-2020</string>
     <string name="statistics">احصائيات </string>
     <string name="hajmistihlak">احصائيات الإستهلاك </string>
     <string name="paysuccess">Successfully Paid</string>
     <string name="payunsuccessful">Payment Unsuccessful</string>
-    <string name="plzinsertamount">plz insert pay amount</string>
+    <string name="plzinsertamount">المرجو ادخال المبلغ</string>
     <string name="saved">تم الحفظ</string>
     <string name="notsaved">لم يتم الحفظ</string>
     <string name="insertinfofirst">المرجو ادخال المعلومات اولا</string>
@@ -71,5 +70,13 @@
     <string name="cancel">إلغاء</string>
     <string name="number">10000</string>
     <string name="paymentInfo">معلومات الدفع</string>
+    <string name="momo">مومو</string>
+    <string name="notificationTitle">تذكير</string>
+    <string name="notificationMessage">لا تنسى تسجيل سلعة اليوم</string>
+    <string name="quantity">الكمية</string>
+    <string name="quantifier">العيار</string>
+    <string name="product">السلعة</string>
+    <string name="shop">المحل</string>
+    <string name="deletefor">حذف لـ</string>
 
 </resources>

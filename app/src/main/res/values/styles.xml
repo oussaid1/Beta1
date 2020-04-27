@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:itemBackground">@color/colorPrimary</item>
+        <item name="colorBackgroundFloating">@color/colorPrimary</item>
+        <item name="android:colorBackgroundFloating" tools:targetApi="23">@color/colorPrimary</item>
     </style>
 
     <style name="ButtonsStyle" parent="Widget.AppCompat.ImageButton">
@@ -25,7 +27,7 @@
 
     <style name="MainTextViews" parent="Theme.AppCompat">
         <item name="android:textColor">@color/Text_sub2</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">normal</item>
         <item name="fontFamily">@font/allerta</item>
         <item name="android:textSize">24sp</item>
         <item name="android:layout_marginStart">4dp</item>
@@ -45,6 +47,31 @@
         <item name="android:textSize">12sp</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_marginStart">8dp</item>
+    </style>
+    <style name="ListViewHeads" parent="Theme.AppCompat">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/Text_details</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/amiko</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_gravity">center_vertical</item>
+
+    </style>
+    <style name="ListViewCards" parent="Theme.AppCompat">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/Text_sub</item>
+        <item name="android:textStyle">italic</item>
+        <item name="fontFamily">@font/amiko</item>
+        <item name="android:textSize">16sp</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_gravity">center_vertical</item>
+
     </style>
 
     <style name="EditTextViewsNumbers" parent="Theme.AppCompat">

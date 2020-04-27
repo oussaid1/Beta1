@@ -1,6 +1,7 @@
 package com.dev_bourheem.hadi.mainStuff;
 
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -90,7 +91,7 @@ public class stats extends AppCompatActivity {
         pie.labels().position("outside");
 
         pie.legend().title().enabled(false);
-
+       // anyChartView2.setBackgroundColor(Color.parseColor("#973961"));
         anyChartView2.setChart(pie);
 
 

@@ -1,5 +1,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
@@ -11,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/Text_sub1"
+        android:background="@color/cardViews"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -33,12 +34,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layoutDirection="inherit"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMaxTextSize="20sp"
+                android:autoSizeMinTextSize="12sp"
                 android:maxLines="1"
                 android:padding="2dp"
                 android:text="مومو"
                 android:textAlignment="center"
                 android:textSize="16sp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                tools:ignore="UnusedAttribute" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

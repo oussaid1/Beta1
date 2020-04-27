@@ -39,6 +39,7 @@
                     android:id="@+id/chartPie"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
                     android:elevation="6dp"/>
 
             </LinearLayout>
@@ -52,6 +53,7 @@
                     android:id="@+id/chart2"
                     android:layout_width="match_parent"
                     android:elevation="4dp"
+                    android:background="@color/colorPrimary"
                     android:layout_height="match_parent"
                   />
             </LinearLayout>

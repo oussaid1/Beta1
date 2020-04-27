@@ -3,8 +3,6 @@ package com.dev_bourheem.hadi.mainStuff;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -89,13 +87,12 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         setQuota = findViewById(R.id.limitQuotaDef);
         setGuestQta = findViewById(R.id.limitGuestDef);
-        setusername = findViewById(R.id.UserNameDef);
+        setusername = findViewById(R.id.usernameDef);
         paidAmountIn = findViewById(R.id.paidamountV);
         payButton = findViewById(R.id.saveBtnforPayment);
         ShopToPaySpinner = findViewById(R.id.payfor);
-        setpassword = findViewById(R.id.PasswordDef);
-        archiveIt = findViewById(R.id.archiveIt);
-        confirmpass = findViewById(R.id.ConfirmPassDef);
+        setpassword = findViewById(R.id.passwordDef);
+        confirmpass = findViewById(R.id.ConfirmPassView);
         SaveBtnforuserdata = findViewById(R.id.saveBtnforuserdata);
         saveBtnforuserQuotas = findViewById(R.id.saveBtnforquotas);
         ShopToDeleteSpinner = findViewById(R.id.shopTodelete);
@@ -104,7 +101,9 @@ public class Settings extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OnDialodgDelete();
+                if ( ShopToDeleteSpinner != null && ShopToDeleteSpinner.getSelectedItem() !=null ) {
+                    OnDialodgDelete();
+                }
             }
         });
         SaveBtnforuserdata.setOnClickListener(new View.OnClickListener() {
@@ -122,16 +121,11 @@ public class Settings extends AppCompatActivity {
 
             }
         });
-        archiveIt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (paidAmountIn.getText().toString().trim().length() != 0 && !ShopToPaySpinner.getSelectedItem().toString().trim().isEmpty()) {
+                if (paidAmountIn.getText().toString().trim().length() != 0 && ShopToPaySpinner != null && ShopToPaySpinner.getSelectedItem() !=null  ) {
                     ConfirmPay();
                 } else {
                     MsgBox(getString(R.string.plzinsertamount));
@@ -201,7 +195,9 @@ public class Settings extends AppCompatActivity {
 
                 if (newRowAdded) {
                     MsgBox(getString(R.string.saved));
-                    OpenActiviti();
+                    setusername.getText().clear();
+                    setpassword.getText().clear();
+                    confirmpass.getText().clear();
                 } else MsgBox(getString(R.string.notsaved));
             } else MsgBox(getString(R.string.wrongpassoruser));
         }
@@ -220,16 +216,16 @@ public class Settings extends AppCompatActivity {
     }
 
     private void OnDialodgDelete() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.warning);
-        builder.setMessage(getString(R.string.surewannadelall));
-        builder.setIcon(android.R.drawable.ic_dialog_alert);
-        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder mbuilder = new AlertDialog.Builder(this);
+        mbuilder.setTitle(R.string.warning);
+        mbuilder.setMessage(getString(R.string.surewannadelall));
+        mbuilder.setIcon(android.R.drawable.ic_dialog_alert);
+        mbuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 MDBC.DeleteAllBy(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, ShopToDeleteSpinner.getSelectedItem().toString());
             }
         });
-        builder.setNegativeButton(R.string.no, null).show();
+        mbuilder.setNegativeButton(R.string.no, null).create().show();
     }
 
     public void onDialogue2() {
@@ -289,14 +285,7 @@ public class Settings extends AppCompatActivity {
         builder.show();
     }
 
-    public boolean isFirstDayOfMonth(Calendar calendar) {
-        if (calendar == null) {
-            throw new IllegalArgumentException("Calendar cannot be null.");
-        }
-        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
-        return dayOfMonth == 1;
-    }
 
     public void ArchiveIt() {
         if (MDBC.TablegetCountIsFull(DbContractor.TableColumns.PaymentTable, DbContractor.TableColumns.PaidShopName, ShopToPaySpinner.getSelectedItem().toString())
