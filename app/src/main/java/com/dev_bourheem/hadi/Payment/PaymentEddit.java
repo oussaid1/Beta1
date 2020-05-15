@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.R;
 import com.dev_bourheem.hadi.mainStuff.MainActivity;
@@ -23,6 +22,8 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
+import static com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator.PaymentTable;
 
 public class PaymentEddit extends AppCompatActivity {
         private EditText  paidAmountEd, paidShopNameEd, paymentDAteEd;
@@ -124,7 +125,7 @@ public class PaymentEddit extends AppCompatActivity {
             if (exampleitem != null) {
                 idd = exampleitem.getId();
             }
-            boolean updateStatus = MDBCR.DeleteItemSelected(DbContractor.TableColumns.PaymentTable,idd);
+            boolean updateStatus = MDBCR.DeleteItemSelected(PaymentTable,idd);
             if (updateStatus) {
                 MsgBox("تم الحذف ", 1);
                 OpenListItems();

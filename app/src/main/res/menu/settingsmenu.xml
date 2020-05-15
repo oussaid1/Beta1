@@ -9,10 +9,7 @@
         android:id="@+id/ShowList_M"
         android:title="@string/show_lists"
         app:showAsAction="never" />
-    <item
-        android:title="Backup ' Restore "
-        app:showAsAction="never">
-        <menu>
+
             <item
                 android:id="@+id/backup"
                 android:title="backup"
@@ -25,9 +22,7 @@
                 android:id="@+id/reset"
                 android:title="@string/reset_all"
                 app:showAsAction="never" />
-        </menu>
 
-    </item>
     <item
         android:id="@+id/exit_M"
         android:title="@string/exit"

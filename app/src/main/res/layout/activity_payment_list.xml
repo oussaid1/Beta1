@@ -98,7 +98,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ArPmolhanotCV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layoutDirection="inherit"
@@ -117,7 +116,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ArPPriceCV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxLines="1"
@@ -136,7 +134,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ArPdateCV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxLines="1"
@@ -148,7 +145,6 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/ArPid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone" />

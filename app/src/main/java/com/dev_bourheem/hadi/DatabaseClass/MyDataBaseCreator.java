@@ -20,35 +20,77 @@ import java.util.List;
 public class MyDataBaseCreator extends SQLiteOpenHelper {
     public static final String database_name = "Merchandise.db";
     public Context context;
+    public static final String _ID = "_id";
+    public static final String MainTable = "MainTable";
+    public static final String MItem_Name = "Item_Name";
+    public static final String MItem_Price = "Item_Price";
+    public static final String MShopName = "ShopName";
+    public static final String MDate = "History";
+    public static final String MQuantifier = "Quantifiers";
+    public static final String MQuantity = "quantity";
 
-    private static final String CreateMainTable = " CREATE TABLE " + DbContractor.TableColumns.MainTable + " ( " + DbContractor.TableColumns._ID +
-            " INTEGER PRIMARY KEY AUTOINCREMENT," + DbContractor.TableColumns.MItem_Name + " TEXT," + DbContractor.TableColumns.MQuantifier +
-            " TEXT , " + DbContractor.TableColumns.MQuantity + " DOUBLE ," + DbContractor.TableColumns.MItem_Price + " DOUBLE," + DbContractor.TableColumns.MShopName +
-            " TEXT," + DbContractor.TableColumns.MDate + " TEXT )";
+    /*************************************************************/
+
+    public static final String ArchiveTable = "ArchiveTable";
+    public static final String ArItem_Name = "Item_Name";
+    public static final String ArItem_Price = "Item_Price";
+    public static final String ArShopName = "ShopName";
+    public static final String ArDate = "History";
+    public static final String ArQuantifier = "Quantifiers";
+    public static final String ArQuantity = "quantity";
+
+
+    public static final String ArchivePaymentTable = "ArchivePaymentTable";
+    public static final String ArPaidShopName = "ArPshopName";
+    public static final String ArPaidAmount = "ArpaidAmount";
+    public static final String ArPaymentDate = "ArpaymentDate";
+    /**************************************************************/
+
+    public static final String PaymentTable = "PaymentTable";
+    public static final String PaidShopName = "pshopName";
+    public static final String PaidAmount = "paidAmount";
+    public static final String PaymentDate = "paymentDate";
+
+    public static final String InfoTable = "InfoTable";
+    public static final String SHOP_NAME = "name";
+    public static final String SHOP_PHONE = "phone";
+    public static final String SHOP_EMAIL = "email";
+
+    public static final String SettingsTable = "SettingsTable";
+    public static final String userQuota = "userQuota";
+    public static final String userGQuota = "userGQuota";
+
+    public static final String BooleansTable = "SettingsTable";
+    public static final String BooleanName = "userQuota";
+    public static final String BooleanStatus = "userGQuota";
+    private static final String CreateMainTable = " CREATE TABLE " +  MainTable + " ( " +  _ID +
+            " INTEGER PRIMARY KEY AUTOINCREMENT," +  MItem_Name + " TEXT," +  MQuantifier +
+            " TEXT , " +  MQuantity + " DOUBLE ," +  MItem_Price + " DOUBLE," +  MShopName +
+            " TEXT," +  MDate + " TEXT )";
     /*****************************************************************************/
-    private static final String CreateArchiveTable = "CREATE TABLE " + DbContractor.TableColumns.ArchiveTable +
-            " ( " + DbContractor.TableColumns._ID + " INTEGER primary key autoincrement , "
-            + DbContractor.TableColumns.ArItem_Name + " TEXT," + DbContractor.TableColumns.ArQuantifier + " TEXT ," +
-            " " + DbContractor.TableColumns.ArQuantity + " DOUBLE ," + DbContractor.TableColumns.ArItem_Price + " DOUBLE," +
-            "" + DbContractor.TableColumns.ArShopName + " TEXT," + DbContractor.TableColumns.ArDate + " TEXT )";
+    private static final String CreateArchiveTable = "CREATE TABLE " +  ArchiveTable +
+            " ( " +  _ID + " INTEGER primary key autoincrement , "
+            +  ArItem_Name + " TEXT," +  ArQuantifier + " TEXT ," +
+            " " +  ArQuantity + " DOUBLE ," +  ArItem_Price + " DOUBLE," +
+            "" +  ArShopName + " TEXT," +  ArDate + " TEXT )";
     /*****************************************************************************/
 
-    private static final String CreatePaymentTable = "Create Table " + DbContractor.TableColumns.PaymentTable + " (" + DbContractor.TableColumns._ID + "" +
-            " integer primary key autoincrement , " + DbContractor.TableColumns.PaidShopName + " text ," +
-            "" + DbContractor.TableColumns.PaidAmount + " double , " + DbContractor.TableColumns.PaymentDate + " DATE )";
+    private static final String CreatePaymentTable = "Create Table " +  PaymentTable + " (" +  _ID + "" +
+            " integer primary key autoincrement , " +  PaidShopName + " text ," +
+            "" +  PaidAmount + " double , " +  PaymentDate + " DATE )";
 
     /*****************************************************************************/
-    private static final String CreateArchivePaymentTable = " Create Table " + DbContractor.TableColumns.ArchivePaymentTable + " (" + DbContractor.TableColumns._ID + "" +
-            " integer primary key  , " + DbContractor.TableColumns.ArPaidShopName + " text ," +
-            "" + DbContractor.TableColumns.ArPaidAmount + " double , " + DbContractor.TableColumns.ArPaymentDate + " date )";
+    private static final String CreateArchivePaymentTable = " Create Table " +  ArchivePaymentTable + " (" +  _ID + "" +
+            " integer primary key  , " +  ArPaidShopName + " text ," +
+            "" +  ArPaidAmount + " double , " +  ArPaymentDate + " date )";
     /*****************************************************************************/
-    private static final String CreateSettingsTable = "Create Table " + DbContractor.TableColumns.SettingsTable + " (" + DbContractor.TableColumns._ID + "" +
-            " integer primary key autoincrement , " + DbContractor.TableColumns.userQuota + " double ," +
-            "" + DbContractor.TableColumns.userGQuota + " double )";
+    private static final String CreateSettingsTable = "Create Table " +  SettingsTable + " (" +  _ID + "" +
+            " integer primary key autoincrement , " +  userQuota + " double ," +
+            "" +  userGQuota + " double )";
     /*****************************************************************************/
-    private static final String CreateInfoTable = "Create Table " + DbContractor.TableColumns.InfoTable + " (" + DbContractor.TableColumns._ID + "" +
-            " integer primary key autoincrement , " + DbContractor.TableColumns.SHOP_NAME + " text ," +
-            "" + DbContractor.TableColumns.SHOP_PHONE + " text ," + DbContractor.TableColumns.SHOP_EMAIL + " text )";
+    private static final String CreateInfoTable = "Create Table " +  InfoTable + " (" +  _ID + "" +
+            " integer primary key autoincrement , " +  SHOP_NAME + " text ," +
+            "" +  SHOP_PHONE + " text ," +  SHOP_EMAIL + " text )";
 
     /*****************************************************************************/
 
@@ -71,12 +113,12 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("drop table if exists " + DbContractor.TableColumns.MainTable);
-        db.execSQL("drop table if exists " + DbContractor.TableColumns.ArchiveTable);
-        db.execSQL("drop table if exists " + DbContractor.TableColumns.PaymentTable);
-        db.execSQL("drop table if exists " + DbContractor.TableColumns.ArchivePaymentTable);
-        db.execSQL("drop table if exists " + DbContractor.TableColumns.InfoTable);
-        db.execSQL("drop table if exists " + DbContractor.TableColumns.SettingsTable);
+        db.execSQL("drop table if exists " +  MainTable);
+        db.execSQL("drop table if exists " +  ArchiveTable);
+        db.execSQL("drop table if exists " +  PaymentTable);
+        db.execSQL("drop table if exists " +  ArchivePaymentTable);
+        db.execSQL("drop table if exists " +  InfoTable);
+        db.execSQL("drop table if exists " +  SettingsTable);
 
         onCreate(db);
     }
@@ -84,13 +126,13 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public boolean InjectDataToMainTable(double Quanty, String Quantif, String name, double prix, String Sir, String daat) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DbContractor.TableColumns.MItem_Name, name);
-        values.put(DbContractor.TableColumns.MItem_Price, prix);
-        values.put(DbContractor.TableColumns.MQuantifier, Quantif);
-        values.put(DbContractor.TableColumns.MQuantity, Quanty);
-        values.put(DbContractor.TableColumns.MShopName, Sir);
-        values.put(DbContractor.TableColumns.MDate, daat);
-        long insertStaus = db.insert(DbContractor.TableColumns.MainTable, null, values);
+        values.put( MItem_Name, name);
+        values.put( MItem_Price, prix);
+        values.put( MQuantifier, Quantif);
+        values.put( MQuantity, Quanty);
+        values.put( MShopName, Sir);
+        values.put( MDate, daat);
+        long insertStaus = db.insert( MainTable, null, values);
 
         return insertStaus >= 1;
     }
@@ -98,14 +140,14 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public boolean InjectDataToArchiveTable(int id, String Quantifier, double Quantity, String ItemName, double prix, String ShopName, String date) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DbContractor.TableColumns._ID, id);
-        values.put(DbContractor.TableColumns.ArQuantifier, Quantifier);
-        values.put(DbContractor.TableColumns.ArQuantity, Quantity);
-        values.put(DbContractor.TableColumns.ArItem_Name, ItemName);
-        values.put(DbContractor.TableColumns.ArItem_Price, prix);
-        values.put(DbContractor.TableColumns.ArShopName, ShopName);
-        values.put(DbContractor.TableColumns.ArDate, date);
-        long insertStaus = db.insert(DbContractor.TableColumns.ArchiveTable, null, values);
+        values.put( _ID, id);
+        values.put( ArQuantifier, Quantifier);
+        values.put( ArQuantity, Quantity);
+        values.put( ArItem_Name, ItemName);
+        values.put( ArItem_Price, prix);
+        values.put( ArShopName, ShopName);
+        values.put( ArDate, date);
+        long insertStaus = db.insert( ArchiveTable, null, values);
 
         return insertStaus >= 1;
     }
@@ -113,11 +155,11 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public boolean InjectToArchivePayment(int id, String paidShop, double paidAmount, String paymentDate) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DbContractor.TableColumns._ID, id);
-        values.put(DbContractor.TableColumns.ArPaidShopName, paidShop);
-        values.put(DbContractor.TableColumns.ArPaidAmount, paidAmount);
-        values.put(DbContractor.TableColumns.ArPaymentDate, paymentDate);
-        db.insert(DbContractor.TableColumns.ArchivePaymentTable, null, values);
+        values.put( _ID, id);
+        values.put( ArPaidShopName, paidShop);
+        values.put( ArPaidAmount, paidAmount);
+        values.put( ArPaymentDate, paymentDate);
+        db.insert( ArchivePaymentTable, null, values);
 
         return true;
     }
@@ -125,12 +167,12 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public boolean updateData(String id, double Quanty, String name, double prix, String Sir, String daat) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DbContractor.TableColumns.MItem_Name, name);
-        values.put(DbContractor.TableColumns.MItem_Price, prix);
-        values.put(DbContractor.TableColumns.MQuantity, Quanty);
-        values.put(DbContractor.TableColumns.MShopName, Sir);
-        values.put(DbContractor.TableColumns.MDate, daat);
-        db.update(DbContractor.TableColumns.MainTable, values, DbContractor.TableColumns._ID + " = ?", new String[]{id});
+        values.put( MItem_Name, name);
+        values.put( MItem_Price, prix);
+        values.put( MQuantity, Quanty);
+        values.put( MShopName, Sir);
+        values.put( MDate, daat);
+        db.update( MainTable, values,  _ID + " = ?", new String[]{id});
 
         return true;
     }
@@ -138,19 +180,19 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public boolean updateDataArch(String id, double Quanty, String name, double prix, String Sir, String daat) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DbContractor.TableColumns.ArItem_Name, name);
-        values.put(DbContractor.TableColumns.ArItem_Price, prix);
-        values.put(DbContractor.TableColumns.ArQuantity, Quanty);
-        values.put(DbContractor.TableColumns.ArShopName, Sir);
-        values.put(DbContractor.TableColumns.ArDate, daat);
-        db.update(DbContractor.TableColumns.ArchiveTable, values, DbContractor.TableColumns._ID + " = ?", new String[]{id});
+        values.put( ArItem_Name, name);
+        values.put( ArItem_Price, prix);
+        values.put( ArQuantity, Quanty);
+        values.put( ArShopName, Sir);
+        values.put( ArDate, daat);
+        db.update( ArchiveTable, values,  _ID + " = ?", new String[]{id});
 
         return true;
     }
 
     public boolean DeleteItemSelected(String table, String ById) {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(table, DbContractor.TableColumns._ID + " = ?", new String[]{ById});
+        db.delete(table,  _ID + " = ?", new String[]{ById});
         return true;
     }
 
@@ -195,7 +237,7 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
     public Cursor GetSumall() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor crall = db.rawQuery("SELECT SUM (Item_Price) FROM " + DbContractor.TableColumns.MainTable, null);
+        Cursor crall = db.rawQuery("SELECT SUM (Item_Price) FROM " +  MainTable, null);
 
         return crall;
     }
@@ -215,15 +257,15 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public boolean InjectQuotaData(double userQ, double userGQ) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DbContractor.TableColumns.userQuota, userQ);
-        values.put(DbContractor.TableColumns.userGQuota, userGQ);
-        long insertStaus = db.insert(DbContractor.TableColumns.SettingsTable, null, values);
+        values.put( userQuota, userQ);
+        values.put( userGQuota, userGQ);
+        long insertStaus = db.insert( SettingsTable, null, values);
         return insertStaus != -1;
     }
 
     public Cursor JibData() {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor b1 = db.rawQuery("select * from " + DbContractor.TableColumns.SettingsTable + " ORDER BY _id DESC limit 1", null);
+        Cursor b1 = db.rawQuery("select * from " +  SettingsTable + " ORDER BY _id DESC limit 1", null);
         return b1;
     }
 
@@ -248,41 +290,41 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         }
     }
 
-    public boolean PayShop(String shopToPay, double PaidAmount, String Paydate) {
+    public boolean PayShop(String shopToPay, double PaidAmounta, String Paydate) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DbContractor.TableColumns.PaidShopName, shopToPay);
-        values.put(DbContractor.TableColumns.PaidAmount, PaidAmount);
-        values.put(DbContractor.TableColumns.PaymentDate, Paydate);
-        long insertStaus = db.insert(DbContractor.TableColumns.PaymentTable, null, values);
+        values.put( PaidShopName, shopToPay);
+        values.put( PaidAmount, PaidAmounta);
+        values.put( PaymentDate, Paydate);
+        long insertStaus = db.insert( PaymentTable, null, values);
         return insertStaus != -1;
     }
 
-    public boolean UpdatePayment(String id, String shopToPay, double PaidAmount, String PayDate) {
+    public boolean UpdatePayment(String id, String shopToPay, double PaidAmounta, String PayDate) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DbContractor.TableColumns.PaidShopName, shopToPay);
-        values.put(DbContractor.TableColumns.PaidAmount, PaidAmount);
-        values.put(DbContractor.TableColumns.PaymentDate, PayDate);
-        long insertStaus = db.update(DbContractor.TableColumns.PaymentTable, values, DbContractor.TableColumns._ID + " = ? ", new String[]{id});
+        values.put( PaidShopName, shopToPay);
+        values.put( PaidAmount, PaidAmounta);
+        values.put( PaymentDate, PayDate);
+        long insertStaus = db.update( PaymentTable, values,  _ID + " = ? ", new String[]{id});
         return insertStaus != -1;
     }
 
     public boolean UpdateArPayment(String id, String shopToPay, double PaidAmount, String PayDate) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DbContractor.TableColumns.ArPaidShopName, shopToPay);
-        values.put(DbContractor.TableColumns.ArPaidAmount, PaidAmount);
-        values.put(DbContractor.TableColumns.ArPaymentDate, PayDate);
-        long insertStaus = db.update(DbContractor.TableColumns.ArchivePaymentTable, values, DbContractor.TableColumns._ID + " = ? ", new String[]{id});
+        values.put( ArPaidShopName, shopToPay);
+        values.put( ArPaidAmount, PaidAmount);
+        values.put( ArPaymentDate, PayDate);
+        long insertStaus = db.update( ArchivePaymentTable, values,  _ID + " = ? ", new String[]{id});
         return insertStaus != -1;
     }
 
     public double GetSumOfPaidAmountForShop(String ShopNameLike) {
         double paid=0;
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT SUM (" + DbContractor.TableColumns.PaidAmount + ") as sumOfShops from " + DbContractor.TableColumns.PaymentTable + " " +
-                "where " + DbContractor.TableColumns.PaidShopName + " like  '%" + ShopNameLike + "%' ", null);
+        Cursor c = db.rawQuery("SELECT SUM (" +  PaidAmount + ") as sumOfShops from " +  PaymentTable + " " +
+                "where " +  PaidShopName + " like  '%" + ShopNameLike + "%' ", null);
         if (c.getCount() == 0) {
            return paid=0;
         } else if (!c.isAfterLast()) {
@@ -310,8 +352,8 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
     public double GetSumForShop(String mohamed){
         double sum=0;
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT SUM (" + DbContractor.TableColumns.MItem_Price + ") as sumOfItems from " + DbContractor.TableColumns.MainTable + " " +
-                "where " + DbContractor.TableColumns.MShopName + " like  '%" + mohamed + "%' ", null);
+        Cursor c = db.rawQuery("SELECT SUM (" +  MItem_Price + ") as sumOfItems from " +  MainTable + " " +
+                "where " +  MShopName + " like  '%" + mohamed + "%' ", null);
 
         c.moveToFirst();
         sum = c.getDouble(c.getColumnIndex("sumOfItems"));
@@ -327,30 +369,30 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
     public void ArchiveIt(String ShopName) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL(" insert into " + DbContractor.TableColumns.ArchiveTable + "" +
-                " (" + DbContractor.TableColumns.ArItem_Name + "," +
-                "" + DbContractor.TableColumns.ArQuantifier + "," +
-                "" + DbContractor.TableColumns.ArQuantity + "," +
-                "" + DbContractor.TableColumns.ArItem_Price + " ," +
-                "" + DbContractor.TableColumns.ArShopName + " ," +
-                " " + DbContractor.TableColumns.ArDate + ") select " + DbContractor.TableColumns.MItem_Name + "," +
-                " " + DbContractor.TableColumns.MQuantifier + "," +
-                "" + DbContractor.TableColumns.MQuantity + "," +
-                "" + DbContractor.TableColumns.MItem_Price + " ," +
-                "" + DbContractor.TableColumns.MShopName + " ," +
-                " " + DbContractor.TableColumns.MDate + " from " + DbContractor.TableColumns.MainTable + "" +
-                " where " + DbContractor.TableColumns.MShopName + " like  '%" + ShopName + "%' ");
+        db.execSQL(" insert into " +  ArchiveTable + "" +
+                " (" +  ArItem_Name + "," +
+                "" +  ArQuantifier + "," +
+                "" +  ArQuantity + "," +
+                "" +  ArItem_Price + " ," +
+                "" +  ArShopName + " ," +
+                " " +  ArDate + ") select " +  MItem_Name + "," +
+                " " +  MQuantifier + "," +
+                "" +  MQuantity + "," +
+                "" +  MItem_Price + " ," +
+                "" +  MShopName + " ," +
+                " " +  MDate + " from " +  MainTable + "" +
+                " where " +  MShopName + " like  '%" + ShopName + "%' ");
 
-        db.execSQL(" insert into " + DbContractor.TableColumns.ArchivePaymentTable + "" +
-                " (" + DbContractor.TableColumns.ArPaidShopName + "," +
-                "" + DbContractor.TableColumns.ArPaidAmount + "," +
-                "" + DbContractor.TableColumns.ArPaymentDate + ") select " + DbContractor.TableColumns.PaidShopName + "," +
-                " " + DbContractor.TableColumns.PaidAmount + "," +
-                "" + DbContractor.TableColumns.PaymentDate + " from " + DbContractor.TableColumns.PaymentTable + "" +
-                " where " + DbContractor.TableColumns.PaidShopName + " like '%" + ShopName + "%' ");
+        db.execSQL(" insert into " +  ArchivePaymentTable + "" +
+                " (" +  ArPaidShopName + "," +
+                "" +  ArPaidAmount + "," +
+                "" +  ArPaymentDate + ") select " +  PaidShopName + "," +
+                " " +  PaidAmount + "," +
+                "" +  PaymentDate + " from " +  PaymentTable + "" +
+                " where " +  PaidShopName + " like '%" + ShopName + "%' ");
 
-        DeleteAllBy(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, ShopName);
-        DeleteAllBy(DbContractor.TableColumns.PaymentTable, DbContractor.TableColumns.PaidShopName, ShopName);
+        DeleteAllBy( MainTable,  MShopName, ShopName);
+        DeleteAllBy( PaymentTable,  PaidShopName, ShopName);
     }
 
 

@@ -20,7 +20,6 @@ import com.anychart.enums.Anchor;
 import com.anychart.enums.HoverMode;
 import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
-import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.R;
 import com.google.android.gms.ads.AdRequest;
@@ -155,12 +154,12 @@ public class stats extends AppCompatActivity {
     public void Pie8MostBoughtItems() {
         data.clear();
 
-        Cursor cu = MBC.Get8MostFrequentItemsBought(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MItem_Name);
+        Cursor cu = MBC.Get8MostFrequentItemsBought(MyDataBaseCreator.MainTable,MyDataBaseCreator.MItem_Name);
         if (cu.getCount() == 0) {
             return;
         } else {
             while (cu.moveToNext()) {
-                String item = cu.getString(cu.getColumnIndex( DbContractor.TableColumns.MItem_Name));
+                String item = cu.getString(cu.getColumnIndex( MyDataBaseCreator.MItem_Name));
                 int timesBought = cu.getInt(cu.getColumnIndex("countIt"));
                 data.add(new ValueDataEntry(item, timesBought));
             }
@@ -170,12 +169,12 @@ public class stats extends AppCompatActivity {
 
     public void Pie15HighDates() {
         datax.clear();
-        Cursor cu = MBC.Get15HighDays(DbContractor.TableColumns.MainTable,DbContractor.TableColumns.MDate,DbContractor.TableColumns.MItem_Price);
+        Cursor cu = MBC.Get15HighDays(MyDataBaseCreator.MainTable,MyDataBaseCreator.MDate,MyDataBaseCreator.MItem_Price);
         if (cu.getCount() == 0) {
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         } else {
             while (cu.moveToNext()) {
-                String date = cu.getString(cu.getColumnIndex(DbContractor.TableColumns.MDate));
+                String date = cu.getString(cu.getColumnIndex(MyDataBaseCreator.MDate));
                 int price = cu.getInt(cu.getColumnIndex("totalbydate"));
                 datax.add(new ValueDataEntry(date, price));
             }

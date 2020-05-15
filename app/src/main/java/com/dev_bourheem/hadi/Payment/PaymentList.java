@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.R;
 import com.google.android.gms.ads.AdRequest;
@@ -135,16 +134,16 @@ public class PaymentList extends AppCompatActivity {
     private void GetAllPaymentHistoryForAll() {
         PaymentItemsClassList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.PaymentTable +
-                " order by "+DbContractor.TableColumns.PaymentDate+" asc", null );
+        Cursor data = db.rawQuery( "select * from " + MyDataBaseCreator.PaymentTable +
+                " order by "+MyDataBaseCreator.PaymentDate+" asc", null );
         if (data.getCount() != 0) {
             data.moveToFirst();
             while (!data.isAfterLast()) {
 
-                String id = data.getString(data.getColumnIndex(DbContractor.TableColumns._ID));
-                String shopName = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaidShopName));
-                String paidAmount = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaidAmount));
-                String paidDate = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaymentDate));
+                String id = data.getString(data.getColumnIndex(MyDataBaseCreator._ID));
+                String shopName = data.getString(data.getColumnIndex(MyDataBaseCreator.PaidShopName));
+                String paidAmount = data.getString(data.getColumnIndex(MyDataBaseCreator.PaidAmount));
+                String paidDate = data.getString(data.getColumnIndex(MyDataBaseCreator.PaymentDate));
                 PaymentItemsClassList.add(new PaymentItemsClass(id, shopName, paidAmount, paidDate));
 
                 data.moveToNext();
@@ -157,17 +156,17 @@ public class PaymentList extends AppCompatActivity {
     private void GetAllPaymentHistoryForShopNm(String ShopName) {
         PaymentItemsClassList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.PaymentTable + "" +
-                " where " + DbContractor.TableColumns.PaidShopName + " like '%" + ShopName + "%'" +
-                "  order by "+DbContractor.TableColumns.PaymentDate+" asc", null );
+        Cursor data = db.rawQuery( "select * from " + MyDataBaseCreator.PaymentTable + "" +
+                " where " + MyDataBaseCreator.PaidShopName + " like '%" + ShopName + "%'" +
+                "  order by "+MyDataBaseCreator.PaymentDate+" asc", null );
         if (data.getCount() != 0) {
             data.moveToFirst();
             while (!data.isAfterLast()) {
 
-                String id = data.getString(data.getColumnIndex(DbContractor.TableColumns._ID));
-                String shopName = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaidShopName));
-                String paidAmount = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaidAmount));
-                String paidDate = data.getString(data.getColumnIndex(DbContractor.TableColumns.PaymentDate));
+                String id = data.getString(data.getColumnIndex(MyDataBaseCreator._ID));
+                String shopName = data.getString(data.getColumnIndex(MyDataBaseCreator.PaidShopName));
+                String paidAmount = data.getString(data.getColumnIndex(MyDataBaseCreator.PaidAmount));
+                String paidDate = data.getString(data.getColumnIndex(MyDataBaseCreator.PaymentDate));
                 PaymentItemsClassList.add(new PaymentItemsClass(id, shopName, paidAmount, paidDate));
 
                 data.moveToNext();
@@ -180,15 +179,15 @@ public class PaymentList extends AppCompatActivity {
     private void FillWithMolhanot() {
         searchspinerList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor molhanotCursor = db.rawQuery( "select distinct " + DbContractor.TableColumns.PaidShopName +
-                " from " + DbContractor.TableColumns.PaymentTable + " order by " +
-                "" + DbContractor.TableColumns.PaymentDate + " asc", null );
+        Cursor molhanotCursor = db.rawQuery( "select distinct " + MyDataBaseCreator.PaidShopName +
+                " from " + MyDataBaseCreator.PaymentTable + " order by " +
+                "" + MyDataBaseCreator.PaymentDate + " asc", null );
         if (molhanotCursor.getCount() == 0) {
             return;
         } else
             molhanotCursor.moveToFirst();
         while (!molhanotCursor.isAfterLast()) {
-            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( DbContractor.TableColumns.PaidShopName ) );
+            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( MyDataBaseCreator.PaidShopName ) );
             searchspinerList.add( Mlhanot );
             molhanotCursor.moveToNext();
         }
@@ -200,16 +199,16 @@ public class PaymentList extends AppCompatActivity {
         searchspinerList.clear();
         searchspinerList.add( "*" );
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor molhanotCursor = db.rawQuery( "select distinct " + DbContractor.TableColumns.ArPaymentDate +" from " +
-                "" + DbContractor.TableColumns.ArchivePaymentTable + "" +
-                " where " + DbContractor.TableColumns.ArPaymentDate + " like '%" + ladat + "%' " +
-                "order by " + DbContractor.TableColumns.ArPaymentDate + " asc ", null );
+        Cursor molhanotCursor = db.rawQuery( "select distinct " + MyDataBaseCreator.ArPaymentDate +" from " +
+                "" + MyDataBaseCreator.ArchivePaymentTable + "" +
+                " where " + MyDataBaseCreator.ArPaymentDate + " like '%" + ladat + "%' " +
+                "order by " + MyDataBaseCreator.ArPaymentDate + " asc ", null );
         if (molhanotCursor.getCount() == 0) {
             return;
         } else
             molhanotCursor.moveToFirst();
         while (!molhanotCursor.isAfterLast()) {
-            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( DbContractor.TableColumns.ArPaymentDate ) );
+            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( MyDataBaseCreator.ArPaymentDate ) );
             searchspinerList.add( Mlhanot );
             molhanotCursor.moveToNext();
         }

@@ -24,21 +24,21 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="4ed44bc9-c5cd-4ea4-8566-c3ee42d69f88">
+      <connection connection-id="bd814923-b0c5-4a5f-8fc8-9c840962d834">
         <schema name="main" object-types="table, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="4ed44bc9-c5cd-4ea4-8566-c3ee42d69f88">
-      <console name="Connection" type="STANDARD" schema="main" session="Main" />
+    <connection id="bd814923-b0c5-4a5f-8fc8-9c840962d834">
+      <console name="Connection 2" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="4ed44bc9-c5cd-4ea4-8566-c3ee42d69f88" />
+    <connection id="bd814923-b0c5-4a5f-8fc8-9c840962d834" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -63,9 +63,9 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="4ed44bc9-c5cd-4ea4-8566-c3ee42d69f88" active="true">
+      <connection id="bd814923-b0c5-4a5f-8fc8-9c840962d834" active="true">
         <database>
-          <name value="Connection" />
+          <name value="Connection 2" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
@@ -78,7 +78,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="C:\Users\oussa\Documents\AndroidStudio\DeviceExplorer\oneplus-oneplus_a5000-7ccf9fe0\data\data\com.dev_bourheem.hadi\databases\Toys.db" schema="main" />
+            <file path="C:\Users\oussa\Documents\AndroidStudio\DeviceExplorer\oneplus-oneplus_a5000-7ccf9fe0\data\data\com.dev_bourheem.hadi\databases\Merchandise.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />
@@ -281,6 +281,8 @@
           <content-type name="Java" enabled="true" />
           <content-type name="SQL" enabled="true" />
           <content-type name="PL/SQL" enabled="true" />
+          <content-type name="JSON" enabled="true" />
+          <content-type name="JSON5" enabled="true" />
           <content-type name="Groovy" enabled="true" />
           <content-type name="AIDL" enabled="true" />
           <content-type name="YAML" enabled="true" />

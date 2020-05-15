@@ -17,7 +17,6 @@
         >
 
         <ImageView
-            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:layout_marginTop="52dp"
@@ -51,7 +50,7 @@
             android:background="@drawable/spinnerstextboxses"
             android:drawableStart="@drawable/ic_lock"
             android:hint="@string/password"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:maxLength="4"
             android:textSize="22sp"
             tools:targetApi="o" />

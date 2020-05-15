@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.R;
 import com.google.android.gms.ads.AdRequest;
@@ -145,7 +144,7 @@ public class EdditActivity extends AppCompatActivity {
         if (exampleitem != null) {
             idd = exampleitem.getIdno();
         }
-        boolean updateStatus = MDBCR.DeleteItemSelected(DbContractor.TableColumns.MainTable,idd);
+        boolean updateStatus = MDBCR.DeleteItemSelected(MyDataBaseCreator.MainTable,idd);
         if (updateStatus) {
             MsgBox("تم الحذف ", 1);
             OpenListItems();

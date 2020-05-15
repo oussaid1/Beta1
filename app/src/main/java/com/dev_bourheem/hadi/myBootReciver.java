@@ -29,12 +29,12 @@ public class myBootReciver extends BroadcastReceiver {
             PendingIntent notifyPendingIntent = PendingIntent.getBroadcast
                     (context, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-            long repeatInterval = AlarmManager.INTERVAL_HALF_DAY;
-            long triggerTime = SystemClock.elapsedRealtime()+repeatInterval;
+            long repeatInterval = AlarmManager.INTERVAL_HOUR*4;
+            long triggerTime = calendar.getTimeInMillis();
 
 //If the Toggle is turned on, set the repeating alarm with a 15 minute interval
             if (alarmManager != null) {
-                alarmManager.setInexactRepeating
+                alarmManager.setRepeating
                         (AlarmManager.ELAPSED_REALTIME_WAKEUP,
                                 triggerTime, repeatInterval, notifyPendingIntent);
             }

@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.Payment.PaymentEddit;
 import com.dev_bourheem.hadi.Payment.PaymentItemsClass;
@@ -122,7 +121,7 @@ public class ArPaymentEdit extends AppCompatActivity {
         if (exampleitem != null) {
             idd = exampleitem.getARIdno();
         }
-        boolean updateStatus = MDBCR.DeleteItemSelected(DbContractor.TableColumns.ArchivePaymentTable, idd);
+        boolean updateStatus = MDBCR.DeleteItemSelected(MyDataBaseCreator.ArchivePaymentTable, idd);
         if (updateStatus) {
             MsgBox("تم الحذف ", 1);
             OpenListItems();

@@ -19,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.dev_bourheem.hadi.ArchivePayment.ArchPaymentList;
-import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.mainStuff.EdditActivity;
 import com.dev_bourheem.hadi.mainStuff.MainActivity;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
@@ -211,8 +210,8 @@ public class ArchieveList extends AppCompatActivity {
     private void ShowlistByMolhanot(String mohamed) {
         ArchmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.ArchiveTable + " where " +
-                " " + DbContractor.TableColumns.ArShopName + " like '%" + mohamed + "%' order by history asc", null );
+        Cursor data = db.rawQuery( "select * from " + MyDataBaseCreator.ArchiveTable + " where " +
+                " " + MyDataBaseCreator.ArShopName + " like '%" + mohamed + "%' order by history asc", null );
 
         if (data.getCount() == 0) {
         } else
@@ -221,13 +220,13 @@ public class ArchieveList extends AppCompatActivity {
 
         while (!data.isAfterLast())
             do {
-                String idnonit = data.getString( data.getColumnIndex( DbContractor.TableColumns._ID ) );
-                String quantity = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArQuantity ) );
-                String qunatifier = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArQuantifier ) );
-                String itemNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArItem_Name ) );
-                String itemName = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArItem_Price ) );
-                String shopNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArShopName ) );
-                String DateBout = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArDate ) );
+                String idnonit = data.getString( data.getColumnIndex( MyDataBaseCreator._ID ) );
+                String quantity = data.getString( data.getColumnIndex( MyDataBaseCreator.ArQuantity ) );
+                String qunatifier = data.getString( data.getColumnIndex( MyDataBaseCreator.ArQuantifier ) );
+                String itemNm = data.getString( data.getColumnIndex( MyDataBaseCreator.ArItem_Name ) );
+                String itemName = data.getString( data.getColumnIndex( MyDataBaseCreator.ArItem_Price ) );
+                String shopNm = data.getString( data.getColumnIndex( MyDataBaseCreator.ArShopName ) );
+                String DateBout = data.getString( data.getColumnIndex( MyDataBaseCreator.ArDate ) );
                 ArchmExampleList.add( new ArchexampleItem( idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout ) );
 
             } while ((data.moveToNext()));
@@ -241,8 +240,8 @@ public class ArchieveList extends AppCompatActivity {
     private void ShowlistByDate(String datatata) {
         ArchmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.ArchiveTable +
-                " where  " + DbContractor.TableColumns.ArDate + " like '%" + datatata + "%' order by history asc", null );
+        Cursor data = db.rawQuery( "select * from " + MyDataBaseCreator.ArchiveTable +
+                " where  " + MyDataBaseCreator.ArDate + " like '%" + datatata + "%' order by history asc", null );
 
         if (data.getCount() == 0) {
         } else
@@ -251,13 +250,13 @@ public class ArchieveList extends AppCompatActivity {
 
         while (!data.isAfterLast())
             do {
-                String idnonit = data.getString( data.getColumnIndex( DbContractor.TableColumns._ID ) );
-                String quantity = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArQuantity ) );
-                String qunatifier = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArQuantifier ) );
-                String itemNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArItem_Name ) );
-                String itemName = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArItem_Price ) );
-                String shopNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArShopName ) );
-                String DateBout = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArDate ) );
+                String idnonit = data.getString( data.getColumnIndex( MyDataBaseCreator._ID ) );
+                String quantity = data.getString( data.getColumnIndex( MyDataBaseCreator.ArQuantity ) );
+                String qunatifier = data.getString( data.getColumnIndex( MyDataBaseCreator.ArQuantifier ) );
+                String itemNm = data.getString( data.getColumnIndex( MyDataBaseCreator.ArItem_Name ) );
+                String itemName = data.getString( data.getColumnIndex( MyDataBaseCreator.ArItem_Price ) );
+                String shopNm = data.getString( data.getColumnIndex( MyDataBaseCreator.ArShopName ) );
+                String DateBout = data.getString( data.getColumnIndex( MyDataBaseCreator.ArDate ) );
                 ArchmExampleList.add( new ArchexampleItem( idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout ) );
 
             } while ((data.moveToNext()));
@@ -271,8 +270,8 @@ public class ArchieveList extends AppCompatActivity {
     private void ShowlistByItem(String goods) {
         ArchmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.ArchiveTable +
-                " where  " + DbContractor.TableColumns.ArItem_Name + " like '%" + goods + "%' order by history asc", null );
+        Cursor data = db.rawQuery( "select * from " + MyDataBaseCreator.ArchiveTable +
+                " where  " + MyDataBaseCreator.ArItem_Name + " like '%" + goods + "%' order by history asc", null );
         if (data.getCount() == 0) {
         } else
 
@@ -280,13 +279,13 @@ public class ArchieveList extends AppCompatActivity {
 
         while (!data.isAfterLast())
             do {
-                String idnonit = data.getString( data.getColumnIndex( DbContractor.TableColumns._ID ) );
-                String quantity = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArQuantity ) );
-                String qunatifier = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArQuantifier ) );
-                String itemNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArItem_Name ) );
-                String itemName = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArItem_Price ) );
-                String shopNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArShopName ) );
-                String DateBout = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArDate ) );
+                String idnonit = data.getString( data.getColumnIndex( MyDataBaseCreator._ID ) );
+                String quantity = data.getString( data.getColumnIndex( MyDataBaseCreator.ArQuantity ) );
+                String qunatifier = data.getString( data.getColumnIndex( MyDataBaseCreator.ArQuantifier ) );
+                String itemNm = data.getString( data.getColumnIndex( MyDataBaseCreator.ArItem_Name ) );
+                String itemName = data.getString( data.getColumnIndex( MyDataBaseCreator.ArItem_Price ) );
+                String shopNm = data.getString( data.getColumnIndex( MyDataBaseCreator.ArShopName ) );
+                String DateBout = data.getString( data.getColumnIndex( MyDataBaseCreator.ArDate ) );
                 ArchmExampleList.add( new ArchexampleItem( idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout ) );
 
             } while ((data.moveToNext()));
@@ -300,7 +299,7 @@ public class ArchieveList extends AppCompatActivity {
     private void ShowlistAll() {
         ArchmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.ArchiveTable +
+        Cursor data = db.rawQuery( "select * from " + MyDataBaseCreator.ArchiveTable +
                 " order by history asc", null );
         if (data.getCount() == 0) {
         } else
@@ -309,13 +308,13 @@ public class ArchieveList extends AppCompatActivity {
 
         while (!data.isAfterLast())
             do {
-                String idnonit = data.getString( data.getColumnIndex( DbContractor.TableColumns._ID ) );
-                String quantity = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArQuantity ) );
-                String qunatifier = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArQuantifier ) );
-                String itemNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArItem_Name ) );
-                String itemName = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArItem_Price ) );
-                String shopNm = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArShopName ) );
-                String DateBout = data.getString( data.getColumnIndex( DbContractor.TableColumns.ArDate ) );
+                String idnonit = data.getString( data.getColumnIndex( MyDataBaseCreator._ID ) );
+                String quantity = data.getString( data.getColumnIndex( MyDataBaseCreator.ArQuantity ) );
+                String qunatifier = data.getString( data.getColumnIndex( MyDataBaseCreator.ArQuantifier ) );
+                String itemNm = data.getString( data.getColumnIndex( MyDataBaseCreator.ArItem_Name ) );
+                String itemName = data.getString( data.getColumnIndex( MyDataBaseCreator.ArItem_Price ) );
+                String shopNm = data.getString( data.getColumnIndex( MyDataBaseCreator.ArShopName ) );
+                String DateBout = data.getString( data.getColumnIndex( MyDataBaseCreator.ArDate ) );
                 ArchmExampleList.add( new ArchexampleItem( idnonit, quantity, qunatifier, itemNm, itemName, shopNm, DateBout ) );
 
             } while ((data.moveToNext()));
@@ -338,16 +337,16 @@ public class ArchieveList extends AppCompatActivity {
     private void FillWithDates() {
         searchspinerList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor datescursor = db.rawQuery( " Select distinct " + DbContractor.TableColumns.ArDate + " from "
-                + DbContractor.TableColumns.ArchiveTable + " order by " +
-                "" + DbContractor.TableColumns.ArDate + " asc ", null );
+        Cursor datescursor = db.rawQuery( " Select distinct " + MyDataBaseCreator.ArDate + " from "
+                + MyDataBaseCreator.ArchiveTable + " order by " +
+                "" + MyDataBaseCreator.ArDate + " asc ", null );
 
         if (datescursor.getCount() == 0) {
             return;
         } else {
             datescursor.moveToFirst();
             while (!datescursor.isAfterLast()) {
-                String dts = datescursor.getString( datescursor.getColumnIndex( DbContractor.TableColumns.ArDate ) );
+                String dts = datescursor.getString( datescursor.getColumnIndex( MyDataBaseCreator.ArDate ) );
                 searchspinerList.add( dts );
                 datescursor.moveToNext();
             }
@@ -359,15 +358,15 @@ public class ArchieveList extends AppCompatActivity {
     private void FillWithMolhanot() {
         searchspinerList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor molhanotCursor = db.rawQuery( "select distinct " + DbContractor.TableColumns.ArShopName +
-                " from " + DbContractor.TableColumns.ArchiveTable + " order by " +
-                "" + DbContractor.TableColumns.ArDate + " asc", null );
+        Cursor molhanotCursor = db.rawQuery( "select distinct " + MyDataBaseCreator.ArShopName +
+                " from " + MyDataBaseCreator.ArchiveTable + " order by " +
+                "" + MyDataBaseCreator.ArDate + " asc", null );
         if (molhanotCursor.getCount() == 0) {
             return;
         } else
             molhanotCursor.moveToFirst();
         while (!molhanotCursor.isAfterLast()) {
-            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( DbContractor.TableColumns.ArShopName ) );
+            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( MyDataBaseCreator.ArShopName ) );
             searchspinerList.add( Mlhanot );
             molhanotCursor.moveToNext();
         }
@@ -379,15 +378,15 @@ public class ArchieveList extends AppCompatActivity {
     public void FillWithItems() {
         searchspinerList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor itemcursor = db.rawQuery( "select distinct " + DbContractor.TableColumns.ArItem_Name +
-                " from " + DbContractor.TableColumns.ArchiveTable + " order by " +
-                "" + DbContractor.TableColumns.ArDate + " asc", null );
+        Cursor itemcursor = db.rawQuery( "select distinct " + MyDataBaseCreator.ArItem_Name +
+                " from " + MyDataBaseCreator.ArchiveTable + " order by " +
+                "" + MyDataBaseCreator.ArDate + " asc", null );
         if (itemcursor.getCount() == 0) {
             return;
         } else
             itemcursor.moveToFirst();
         while (!itemcursor.isAfterLast()) {
-            String dts = itemcursor.getString( itemcursor.getColumnIndex( DbContractor.TableColumns.ArItem_Name ) );
+            String dts = itemcursor.getString( itemcursor.getColumnIndex( MyDataBaseCreator.ArItem_Name ) );
             searchspinerList.add( dts );
             itemcursor.moveToNext();
         }

@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.mainStuff.MainActivity;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.R;
@@ -32,6 +31,8 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator.ArchiveTable;
 
 
 public class ArchEddit extends AppCompatActivity {
@@ -153,7 +154,7 @@ public class ArchEddit extends AppCompatActivity {
         if (archExampleItem != null) {
             idd = archExampleItem.getIdno();
         }
-        boolean updateStatus = MDBCR.DeleteItemSelected(DbContractor.TableColumns.ArchiveTable,idd);
+        boolean updateStatus = MDBCR.DeleteItemSelected(ArchiveTable,idd);
         if (updateStatus) {
             MsgBox("تم الحذف ", 1);
             OpenListItems();

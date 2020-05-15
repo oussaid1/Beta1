@@ -1,9 +1,11 @@
 package com.dev_bourheem.hadi.mainStuff;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,17 +21,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.Login.LoginClass;
 import com.dev_bourheem.hadi.R;
 import com.dev_bourheem.hadi.sharedmethods;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 
 public class Settings extends AppCompatActivity {
@@ -65,10 +72,10 @@ public class Settings extends AppCompatActivity {
                 OpenActivitilist();
                 return true;
             case R.id.backup:
-                sharedmethods.backitUp(this);
+               backUp();
                 return true;
             case R.id.restore:
-                sharedmethods.restoreItUp(this);
+            restore();
                 return true;
             case R.id.reset:
                 onDialogue2();
@@ -146,7 +153,59 @@ public class Settings extends AppCompatActivity {
         startActivity(myintenct);
     }
 
+    public  void backUp() {
+        try {
+            File sd = Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
+            File data = Settings.this.getFilesDir();
 
+            if (sd.canWrite() ) {
+                String currentDBPath ="Merchandise.db";
+                String backupDBPath = "BackedUpMerchandise.db";
+                File currentDB = this.getDatabasePath("Merchandise.db");
+                File backupDB = new File(sd, backupDBPath);
+
+                FileChannel src = new FileInputStream(currentDB).getChannel();
+                FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                dst.transferFrom(src, 0, src.size());
+                src.close();
+                dst.close();
+                Toast.makeText(Settings.this, "Backup Successful!",
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        } catch (Exception e) {
+
+            Toast.makeText(Settings.this, "Backup Failed!", Toast.LENGTH_SHORT)
+                    .show();
+
+        }
+    }
+    public  void restore() {
+        try {
+            File sd = Settings.this.getFilesDir();
+            File data =  Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
+            if (sd.canWrite()) {
+
+                String DBName =MyDataBaseCreator.database_name;
+                String backupDBPath = "importedDatabase.db"; // From SD directory.
+                File backupDB = new File(data, DBName);
+                File currentDB = new File(sd, backupDBPath);
+
+                FileChannel src = new FileInputStream(backupDB).getChannel();
+                FileChannel dst = new FileOutputStream(currentDB).getChannel();
+                dst.transferFrom(src, 0, src.size());
+                src.close();
+                dst.close();
+                Toast.makeText(Settings.this, "Import Successful!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+
+            Toast.makeText(Settings.this, "Import Failed!", Toast.LENGTH_SHORT)
+                    .show();
+
+        }
+    }
     public void LoadQuotatoDatabase() {
 
         if (setQuota.getText().toString().trim().length() == 0 || setGuestQta.getText().toString().trim().length() == 0) {
@@ -205,13 +264,12 @@ public class Settings extends AppCompatActivity {
 
     public void ResetAll() {
         Lgin = new LoginClass(getApplicationContext());
-
         Lgin.deleteall();
-        MDBC.deletAllFromTable(DbContractor.TableColumns.MainTable);
-        MDBC.deletAllFromTable(DbContractor.TableColumns.InfoTable);
-        MDBC.deletAllFromTable(DbContractor.TableColumns.ArchiveTable);
-        MDBC.deletAllFromTable(DbContractor.TableColumns.PaymentTable);
-        MDBC.deletAllFromTable(DbContractor.TableColumns.ArchivePaymentTable);
+        MDBC.deletAllFromTable(MyDataBaseCreator.MainTable);
+        MDBC.deletAllFromTable(MyDataBaseCreator.InfoTable);
+        MDBC.deletAllFromTable(MyDataBaseCreator.ArchiveTable);
+        MDBC.deletAllFromTable(MyDataBaseCreator.PaymentTable);
+        MDBC.deletAllFromTable(MyDataBaseCreator.ArchivePaymentTable);
 
     }
 
@@ -222,7 +280,7 @@ public class Settings extends AppCompatActivity {
         mbuilder.setIcon(android.R.drawable.ic_dialog_alert);
         mbuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                MDBC.DeleteAllBy(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, ShopToDeleteSpinner.getSelectedItem().toString());
+                MDBC.DeleteAllBy(MyDataBaseCreator.MainTable, MyDataBaseCreator.MShopName, ShopToDeleteSpinner.getSelectedItem().toString());
             }
         });
         mbuilder.setNegativeButton(R.string.no, null).create().show();
@@ -258,7 +316,7 @@ public class Settings extends AppCompatActivity {
 
     private void FillWithShopNames() {
         ShopNamesList = new ArrayList<>();
-        ShopNamesList = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, DbContractor.TableColumns.MShopName);
+        ShopNamesList = MDBC.GetDistinctFromTable(MyDataBaseCreator.MainTable, MyDataBaseCreator.MShopName, MyDataBaseCreator.MShopName);
         ShopNamesSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, ShopNamesList);
         ShopToPaySpinner.setAdapter(ShopNamesSpinnerAdapter);
         ShopToDeleteSpinner.setAdapter(ShopNamesSpinnerAdapter);
@@ -288,8 +346,8 @@ public class Settings extends AppCompatActivity {
 
 
     public void ArchiveIt() {
-        if (MDBC.TablegetCountIsFull(DbContractor.TableColumns.PaymentTable, DbContractor.TableColumns.PaidShopName, ShopToPaySpinner.getSelectedItem().toString())
-                && MDBC.TablegetCountIsFull(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, ShopToPaySpinner.getSelectedItem().toString())) {
+        if (MDBC.TablegetCountIsFull(MyDataBaseCreator.PaymentTable, MyDataBaseCreator.PaidShopName, ShopToPaySpinner.getSelectedItem().toString())
+                && MDBC.TablegetCountIsFull(MyDataBaseCreator.MainTable, MyDataBaseCreator.MShopName, ShopToPaySpinner.getSelectedItem().toString())) {
             if (MDBC.OweHimNothing(ShopToPaySpinner.getSelectedItem().toString()) == 0 /*|| isFirstDayOfMonth(GetCalendar())*/) {
                 //String mohamed=  ShopToPaySpinner.getSelectedItem().toString();
                 MDBC.ArchiveIt(ShopToPaySpinner.getSelectedItem().toString());

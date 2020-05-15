@@ -38,7 +38,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.dev_bourheem.hadi.Archieve.ArchieveList;
-import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.Payment.PaymentList;
 import com.dev_bourheem.hadi.R;
@@ -284,19 +283,19 @@ public class MainActivity extends AppCompatActivity {
         Intent notifyIntent = new Intent(this, mineAlarmReciever.class);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 16);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 1);
 
         PendingIntent notifyPendingIntent = PendingIntent.getBroadcast
                 (this, NOTIFICATION_ID, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        long repeatInterval = AlarmManager.INTERVAL_HALF_DAY;
-        long triggerTime = SystemClock.elapsedRealtime()+repeatInterval;
+        long repeatInterval = AlarmManager.INTERVAL_HOUR*4;
+        long triggerTime =calendar.getTimeInMillis() ;/*SystemClock.elapsedRealtime()+repeatInterval;*/
 
 //If the Toggle is turned on, set the repeating alarm with a 15 minute interval
         if (alarmManager != null) {
-            alarmManager.setInexactRepeating
+            alarmManager.setRepeating
                     (AlarmManager.ELAPSED_REALTIME_WAKEUP,
                             triggerTime, repeatInterval, notifyPendingIntent);
             alarmUp=true;
@@ -515,8 +514,8 @@ public class MainActivity extends AppCompatActivity {
             return Quota;
         } else {
             qfinder.moveToFirst();
-            Quotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(DbContractor.TableColumns.userQuota));
-            GestQuotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(DbContractor.TableColumns.userGQuota));
+            Quotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(MyDataBaseCreator.userQuota));
+            GestQuotafrom_database = qfinder.getDouble(qfinder.getColumnIndex(MyDataBaseCreator.userGQuota));
             qfinder.close();
             if (Guestmode.isChecked()) {
                 Quota = GestQuotafrom_database;
@@ -538,19 +537,19 @@ public class MainActivity extends AppCompatActivity {
     // this method gets product names from database
     public void GetItemNameFromdatabase() {
         allList.clear();
-        allList = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MItem_Name, DbContractor.TableColumns.MItem_Name);
+        allList = MDBC.GetDistinctFromTable(MyDataBaseCreator.MainTable, MyDataBaseCreator.MItem_Name, MyDataBaseCreator.MItem_Name);
     }
 
     // this method gets shop names from database
     public void GetShopNamesFromdatabase() {
         Molhanot.clear();
-        Molhanot = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, DbContractor.TableColumns.MShopName);
+        Molhanot = MDBC.GetDistinctFromTable(MyDataBaseCreator.MainTable, MyDataBaseCreator.MShopName, MyDataBaseCreator.MShopName);
     }
 
     //this method gets the total of all product items from data base
     public double getTotalAllForAllShops() {
         /*NumberFormat mfr = new DecimalFormat("0.00");*/
-        double allPaid = MDBC.GetPaidAmountForAllShop(DbContractor.TableColumns.PaymentTable, DbContractor.TableColumns.PaidAmount);
+        double allPaid = MDBC.GetPaidAmountForAllShop(MyDataBaseCreator.PaymentTable, MyDataBaseCreator.PaidAmount);
         Cursor c = MDBC.GetSumall();
         if (c.getCount() == 0) {
             return SumAll = 0;
@@ -569,7 +568,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void FillWithDays() {
         SpinnerSub1List.clear();
-        SpinnerSub1List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MDate, DbContractor.TableColumns.MDate);
+        SpinnerSub1List = MDBC.GetDistinctFromTable(MyDataBaseCreator.MainTable, MyDataBaseCreator.MDate, MyDataBaseCreator.MDate);
         SpinnerSub1List.add("*");
         SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub1List);
         SearchSpinerSub1.setAdapter(SearchSpinnerSub2Adapter);
@@ -578,7 +577,7 @@ public class MainActivity extends AppCompatActivity {
     public void FillwithShopNm() {
         SpinnerSub1List.clear();
 
-        SpinnerSub1List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MShopName, DbContractor.TableColumns.MShopName);
+        SpinnerSub1List = MDBC.GetDistinctFromTable(MyDataBaseCreator.MainTable, MyDataBaseCreator.MShopName, MyDataBaseCreator.MShopName);
         SpinnerSub1List.add("*");
         SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub1List);
         SearchSpinerSub1.setAdapter(SearchSpinnerSub2Adapter);
@@ -586,14 +585,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void FillWithItems() {
         SpinnerSub1List.clear();
-        SpinnerSub1List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MItem_Name, DbContractor.TableColumns.MDate);
+        SpinnerSub1List = MDBC.GetDistinctFromTable(MyDataBaseCreator.MainTable, MyDataBaseCreator.MItem_Name, MyDataBaseCreator.MDate);
         SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub1List);
         SearchSpinerSub1.setAdapter(SearchSpinnerSub2Adapter);
     }
 
     public void FillWithDaysforShop(String shop) {
         SpinnerSub2List.clear();
-        SpinnerSub2List = MDBC.GetDistinctFromTable(DbContractor.TableColumns.MainTable, DbContractor.TableColumns.MDate, DbContractor.TableColumns.MDate);
+        SpinnerSub2List = MDBC.GetDistinctFromTable(MyDataBaseCreator.MainTable, MyDataBaseCreator.MDate, MyDataBaseCreator.MDate);
         SpinnerSub2List.add("*");
         SearchSpinnerSub3Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub2List);
         SearchSpinerSub2.setAdapter(SearchSpinnerSub3Adapter);
@@ -608,17 +607,17 @@ public class MainActivity extends AppCompatActivity {
     public void FillWithItemsDates(String goods) {
         SpinnerSub2List.clear();
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor ItemCursor = db.rawQuery("select  " + DbContractor.TableColumns.MDate + " from" +
-                " " + DbContractor.TableColumns.MainTable + " where " + DbContractor.TableColumns.MItem_Name +
-                " like '%" + goods + "%'group by " + DbContractor.TableColumns.MItem_Name +
-                "  order by " + DbContractor.TableColumns.MDate + " desc ", null);
+        Cursor ItemCursor = db.rawQuery("select  " + MyDataBaseCreator.MDate + " from" +
+                " " + MyDataBaseCreator.MainTable + " where " + MyDataBaseCreator.MItem_Name +
+                " like '%" + goods + "%'group by " + MyDataBaseCreator.MItem_Name +
+                "  order by " + MyDataBaseCreator.MDate + " desc ", null);
         if (ItemCursor.getCount() == 0) {
             return;
         } else
             ItemCursor.moveToFirst();
         SpinnerSub2List.add("*");
         while (!ItemCursor.isAfterLast()) {
-            String Items = ItemCursor.getString(ItemCursor.getColumnIndex(DbContractor.TableColumns.MDate));
+            String Items = ItemCursor.getString(ItemCursor.getColumnIndex(MyDataBaseCreator.MDate));
             SpinnerSub2List.add(Items);
             ItemCursor.moveToNext();
         }
@@ -641,9 +640,9 @@ public class MainActivity extends AppCompatActivity {
         double paid = MDBC.GetSumOfPaidAmountForShop(mohamed);
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Soa from "
-                + DbContractor.TableColumns.MainTable + " where  " + DbContractor.TableColumns.MShopName +
-                " like '%" + mohamed + "%' order by " + DbContractor.TableColumns.MDate + " ", null);
+        Cursor data = db.rawQuery("select Sum(" + MyDataBaseCreator.MItem_Price + ")as Soa from "
+                + MyDataBaseCreator.MainTable + " where  " + MyDataBaseCreator.MShopName +
+                " like '%" + mohamed + "%' order by " + MyDataBaseCreator.MDate + " ", null);
         if (data.getCount() == 0) {
 
         } else if (!data.isAfterLast()) {
@@ -662,9 +661,9 @@ public class MainActivity extends AppCompatActivity {
     private double GetSumByDate(String ladat) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as So from "
-                + DbContractor.TableColumns.MainTable + " where  " + DbContractor.TableColumns.MDate +
-                " like '%" + ladat + "%' group by " + DbContractor.TableColumns.MDate + " ", null);
+        Cursor data = db.rawQuery("select Sum(" + MyDataBaseCreator.MItem_Price + ")as So from "
+                + MyDataBaseCreator.MainTable + " where  " + MyDataBaseCreator.MDate +
+                " like '%" + ladat + "%' group by " + MyDataBaseCreator.MDate + " ", null);
         if (data.getCount() == 0) {
 
         } else if (!data.isAfterLast()) {
@@ -681,9 +680,9 @@ public class MainActivity extends AppCompatActivity {
     private double GetSumByShopDate(String mohamed, String dat) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Soa from "
-                + DbContractor.TableColumns.MainTable + " where  " + DbContractor.TableColumns.MShopName +
-                " like '%" + mohamed + "%' and " + DbContractor.TableColumns.MDate + " like '%" + dat + "%' group by " + DbContractor.TableColumns.MDate + " ", null);
+        Cursor data = db.rawQuery("select Sum(" + MyDataBaseCreator.MItem_Price + ")as Soa from "
+                + MyDataBaseCreator.MainTable + " where  " + MyDataBaseCreator.MShopName +
+                " like '%" + mohamed + "%' and " + MyDataBaseCreator.MDate + " like '%" + dat + "%' group by " + MyDataBaseCreator.MDate + " ", null);
         if (data.getCount() == 0) {
 
         } else if (!data.isAfterLast()) {
@@ -700,9 +699,9 @@ public class MainActivity extends AppCompatActivity {
     private double GetSumByItem(String ItemName) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as SumItems from "
-                + DbContractor.TableColumns.MainTable + " where  " + DbContractor.TableColumns.MItem_Name +
-                " like '%" + ItemName + "%' group by " + DbContractor.TableColumns.MItem_Name + " order by " + DbContractor.TableColumns.MDate + " desc ", null);
+        Cursor data = db.rawQuery("select Sum(" + MyDataBaseCreator.MItem_Price + ")as SumItems from "
+                + MyDataBaseCreator.MainTable + " where  " + MyDataBaseCreator.MItem_Name +
+                " like '%" + ItemName + "%' group by " + MyDataBaseCreator.MItem_Name + " order by " + MyDataBaseCreator.MDate + " desc ", null);
         if (data.getCount() == 0) {
 
         } else if (!data.isAfterLast()) {
@@ -719,10 +718,10 @@ public class MainActivity extends AppCompatActivity {
     private double GetSumByItemsByDate(String item, String dat) {
         NumberFormat mfr = new DecimalFormat("0.00");
         SQLiteDatabase db = MDBC.getReadableDatabase();
-        Cursor data = db.rawQuery("select Sum(" + DbContractor.TableColumns.MItem_Price + ")as Soa from "
-                + DbContractor.TableColumns.MainTable + " where  " + DbContractor.TableColumns.MItem_Name +
-                " like '%" + item + "%' and " + DbContractor.TableColumns.MDate + " like '%" + dat + "%' group by "
-                + DbContractor.TableColumns.MDate + "  ", null);
+        Cursor data = db.rawQuery("select Sum(" + MyDataBaseCreator.MItem_Price + ")as Soa from "
+                + MyDataBaseCreator.MainTable + " where  " + MyDataBaseCreator.MItem_Name +
+                " like '%" + item + "%' and " + MyDataBaseCreator.MDate + " like '%" + dat + "%' group by "
+                + MyDataBaseCreator.MDate + "  ", null);
         if (data.getCount() == 0) {
 
         } else if (!data.isAfterLast()) {

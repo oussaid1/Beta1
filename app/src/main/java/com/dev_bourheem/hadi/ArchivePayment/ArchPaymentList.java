@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.dev_bourheem.hadi.DatabaseClass.DbContractor;
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.R;
 import com.dev_bourheem.hadi.mainStuff.MainActivity;
@@ -142,16 +141,16 @@ public class ArchPaymentList extends AppCompatActivity {
     private void GetAllPaymentHistoryForAll() {
         ArchPmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.ArchivePaymentTable +
-                " order by "+DbContractor.TableColumns.ArPaymentDate+" asc", null );
+        Cursor data = db.rawQuery( "select * from " + MyDataBaseCreator.ArchivePaymentTable +
+                " order by "+MyDataBaseCreator.ArPaymentDate+" asc", null );
         if (data.getCount() != 0) {
             data.moveToFirst();
             while (!data.isAfterLast()) {
 
-                String id = data.getString(data.getColumnIndex(DbContractor.TableColumns._ID));
-                String shopName = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaidShopName));
-                String paidAmount = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaidAmount));
-                String paidDate = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaymentDate));
+                String id = data.getString(data.getColumnIndex(MyDataBaseCreator._ID));
+                String shopName = data.getString(data.getColumnIndex(MyDataBaseCreator.ArPaidShopName));
+                String paidAmount = data.getString(data.getColumnIndex(MyDataBaseCreator.ArPaidAmount));
+                String paidDate = data.getString(data.getColumnIndex(MyDataBaseCreator.ArPaymentDate));
                 ArchPmExampleList.add(new ArPaymentExampleItem(id, shopName, paidAmount, paidDate));
 
                 data.moveToNext();
@@ -164,17 +163,17 @@ public class ArchPaymentList extends AppCompatActivity {
     private void GetAllPaymentHistoryForShopNm(String ShopName) {
         ArchPmExampleList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor data = db.rawQuery( "select * from " + DbContractor.TableColumns.ArchivePaymentTable + "" +
-                " where " + DbContractor.TableColumns.ArPaidShopName + " like '%" + ShopName + "%'" +
-                "  order by "+DbContractor.TableColumns.ArPaymentDate+" asc", null );
+        Cursor data = db.rawQuery( "select * from " + MyDataBaseCreator.ArchivePaymentTable + "" +
+                " where " + MyDataBaseCreator.ArPaidShopName + " like '%" + ShopName + "%'" +
+                "  order by "+MyDataBaseCreator.ArPaymentDate+" asc", null );
         if (data.getCount() != 0) {
             data.moveToFirst();
             while (!data.isAfterLast()) {
 
-                String id = data.getString(data.getColumnIndex(DbContractor.TableColumns._ID));
-                String shopName = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaidShopName));
-                String paidAmount = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaidAmount));
-                String paidDate = data.getString(data.getColumnIndex(DbContractor.TableColumns.ArPaymentDate));
+                String id = data.getString(data.getColumnIndex(MyDataBaseCreator._ID));
+                String shopName = data.getString(data.getColumnIndex(MyDataBaseCreator.ArPaidShopName));
+                String paidAmount = data.getString(data.getColumnIndex(MyDataBaseCreator.ArPaidAmount));
+                String paidDate = data.getString(data.getColumnIndex(MyDataBaseCreator.ArPaymentDate));
                 ArchPmExampleList.add(new ArPaymentExampleItem(id, shopName, paidAmount, paidDate));
 
                 data.moveToNext();
@@ -187,15 +186,15 @@ public class ArchPaymentList extends AppCompatActivity {
     private void FillWithMolhanot() {
         searchspinerList.clear();
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor molhanotCursor = db.rawQuery( "select distinct " + DbContractor.TableColumns.ArPaidShopName +
-                " from " + DbContractor.TableColumns.ArchivePaymentTable + " order by " +
-                "" + DbContractor.TableColumns.ArPaymentDate + " asc", null );
+        Cursor molhanotCursor = db.rawQuery( "select distinct " + MyDataBaseCreator.ArPaidShopName +
+                " from " + MyDataBaseCreator.ArchivePaymentTable + " order by " +
+                "" + MyDataBaseCreator.ArPaymentDate + " asc", null );
         if (molhanotCursor.getCount() == 0) {
             return;
         } else
             molhanotCursor.moveToFirst();
         while (!molhanotCursor.isAfterLast()) {
-            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( DbContractor.TableColumns.ArPaidShopName ) );
+            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( MyDataBaseCreator.ArPaidShopName ) );
             searchspinerList.add( Mlhanot );
             molhanotCursor.moveToNext();
         }
@@ -207,16 +206,16 @@ public class ArchPaymentList extends AppCompatActivity {
         searchspinerList.clear();
         searchspinerList.add( "*" );
         SQLiteDatabase db = MdbCrtr.getReadableDatabase();
-        Cursor molhanotCursor = db.rawQuery( "select distinct " + DbContractor.TableColumns.ArPaymentDate +" from " +
-                "" + DbContractor.TableColumns.ArchivePaymentTable + "" +
-                " where " + DbContractor.TableColumns.ArPaymentDate + " like '%" + ladat + "%' " +
-                "order by " + DbContractor.TableColumns.ArPaymentDate + " asc ", null );
+        Cursor molhanotCursor = db.rawQuery( "select distinct " + MyDataBaseCreator.ArPaymentDate +" from " +
+                "" + MyDataBaseCreator.ArchivePaymentTable + "" +
+                " where " + MyDataBaseCreator.ArPaymentDate + " like '%" + ladat + "%' " +
+                "order by " + MyDataBaseCreator.ArPaymentDate + " asc ", null );
         if (molhanotCursor.getCount() == 0) {
             return;
         } else
             molhanotCursor.moveToFirst();
         while (!molhanotCursor.isAfterLast()) {
-            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( DbContractor.TableColumns.ArPaymentDate ) );
+            String Mlhanot = molhanotCursor.getString( molhanotCursor.getColumnIndex( MyDataBaseCreator.ArPaymentDate ) );
             searchspinerList.add( Mlhanot );
             molhanotCursor.moveToNext();
         }
