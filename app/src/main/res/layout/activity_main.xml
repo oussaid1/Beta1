@@ -1,288 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/gradient"
     android:orientation="vertical"
     tools:context=".mainStuff.MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="1dp"
         android:background="@color/colorPrimary"
-        android:orientation="horizontal">
+        ads:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.0"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toTopOf="parent">
+
 
         <TextView
             android:id="@+id/dateView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="215dp"
+            android:layout_marginBottom="2dp"
             android:maxLines="1"
             android:padding="2dp"
             android:text="@string/_12_01_20"
             android:textAlignment="gravity"
-            android:textColor="@color/Text_details" />
+            android:textColor="@color/Text_details"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintEnd_toStartOf="@+id/SwitchGuest"
+            ads:layout_constraintHorizontal_bias="0.0"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/hereisurqt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeTextType="uniform"
+            android:text="@string/_20000"
+            android:textAlignment="center"
+            android:textColor="@color/Text_sub"
+            android:textStyle="italic"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintEnd_toStartOf="@+id/SwitchGuest"
+            ads:layout_constraintHorizontal_bias="0.68"
+            ads:layout_constraintStart_toEndOf="@+id/dateView"
+            ads:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="o" />
 
         <Switch
             android:id="@+id/SwitchGuest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:layout_weight="1"
             android:text="@string/guest_mode"
             android:textAlignment="center"
-            android:textColor="@color/Text_sub2" />
+            android:textColor="@color/Text_sub2"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <LinearLayout
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
+        android:layout_margin="8dp"
         android:layout_marginBottom="8dp"
-        android:layoutDirection="rtl"
-        android:orientation="horizontal">
+        android:progress="30"
+        ads:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        ads:layout_constraintEnd_toEndOf="@+id/linearLayout6"
+        ads:layout_constraintStart_toStartOf="@+id/linearLayout6"
+        ads:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
-        <Button
-            android:id="@+id/fab"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="4dp"
-            android:background="@drawable/ic_sbasketadd" />
-
-        <TextView
-            style="@style/DetailTextViews"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="2dp"
-            android:text="اضف سلعة جديدة" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/justborderz"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/MainTextViews"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="المجموع العام"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/TotalallOut"
-                style="@style/SumTextViews"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="2"
-                android:text="159" />
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        style="@style/MainContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_circle"
+        ads:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.51"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <TextView
-            style="@style/SubTextViews"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/left_of_quota" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layoutDirection="rtl"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/DetailTextViews"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=" السقف المحدد  " />
-
-                <TextView
-                    android:id="@+id/hereisurqt"
-                    style="@style/SubTextViews"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="159"
-                    android:textColor="@color/Text_details"
-                    android:textSize="16sp"
-                    android:textStyle="italic" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/DetailTextViews"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="المتبقي من السقف المحدد حسب الوضع عائلي / ضيوف " />
-
-                <TextView
-                    android:id="@+id/QuotaLeftOut"
-                    style="@style/NumbersTextViews"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:maxLines="1"
-                    android:text="195" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        style="@style/MainContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:elevation="4dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/BtnRed2"
-            android:layout_width="40dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="2dp"
-            android:layout_weight="1"            android:background="@drawable/redlight"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/BtnRed"
-            android:layout_width="40dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="2dp"
-            android:layout_weight="1"            android:background="@drawable/redlight"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/BtnOrange2"
-            android:layout_width="40dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="2dp"
-            android:layout_weight="1"            android:background="@drawable/orangelight"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/BtnOrange"
-            android:layout_width="40dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="2dp"
-            android:layout_weight="1"            android:background="@drawable/orangelight"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/BtnYellow2"
-            android:layout_width="40dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="2dp"
-            android:layout_weight="1"            android:background="@drawable/yellowlight"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/BtnYellow"
-            android:layout_width="40dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="2dp"
-            android:layout_weight="1"            android:background="@drawable/yellowlight"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/BtnGreen2"
-            android:layout_width="40dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/greenlight"
-            android:visibility="invisible" />
-
-        <Button
-            android:id="@+id/BtnGreen"
-            android:layout_width="40dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="2dp"
-            android:layout_weight="1"            android:background="@drawable/greenlight"
-            android:visibility="invisible" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        style="@style/MainContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/justborderz"
-        android:orientation="vertical">
-
-        <TextView
+            android:id="@+id/allTotal"
             style="@style/MainTextViews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="المجموع" />
 
-        <LinearLayout
+            android:layout_marginTop="44dp"
+            android:text="المجموع العام"
+            android:textAlignment="center"
+            ads:layout_constraintBottom_toTopOf="@+id/TotalallOut"
+            ads:layout_constraintEnd_toEndOf="@+id/TotalallOut"
+            ads:layout_constraintStart_toStartOf="@+id/TotalallOut"
+            ads:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TotalallOut"
+            style="@style/SumTextViews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="39dp"
+            android:layout_marginEnd="108dp"
+            android:text="159"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintTop_toBottomOf="@+id/allTotal" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        style="@style/MainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.0"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/DetailTextViews"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="2dp"
-            android:layoutDirection="rtl"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:text="المتبقي من السقف المحدد حسب الوضع عائلي / ضيوف "
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/QuotaLeftOut"
+            style="@style/NumbersTextViews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="195"
+            ads:layout_constraintBottom_toBottomOf="@+id/textView"
+            ads:layout_constraintTop_toTopOf="@+id/textView"
+            ads:layout_constraintVertical_bias="0.555"
+            tools:layout_editor_absoluteX="55dp" />
+    </LinearLayout>
 
 
-            <TextView
-                style="@style/DetailTextViews"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="المجموع العام للكل ، ناقص مجموع الدفع للكل" />
-            <TextView
-                android:id="@+id/TotalTodayOut"
-                style="@style/SumTextViews"
-                android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/spinnerstextboxses"                android:text="159"
-                android:textColor="@color/colorAccent" />
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        style="@style/MainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        ads:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.0"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -298,8 +195,7 @@
                     style="@style/SpinnerContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/spinnerstextboxses">
+                    android:layout_margin="4dp">
 
                     <Spinner
                         android:id="@+id/SumCategory"
@@ -313,8 +209,7 @@
                     style="@style/SpinnerContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/spinnerstextboxses">
+                    android:layout_margin="4dp">
 
                     <Spinner
                         android:id="@+id/SumSearch"
@@ -328,8 +223,7 @@
                     style="@style/SpinnerContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/spinnerstextboxses">
+                    android:layout_margin="4dp">
 
                     <Spinner
                         android:id="@+id/SumsearchBydate"
@@ -338,26 +232,40 @@
                         android:layout_height="40sp"
                         android:layout_weight="1" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/TotalTodayOut"
+                    style="@style/SumTextViews"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="..."
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layoutDirection="rtl"
+            android:orientation="vertical">
+
         </LinearLayout>
 
 
     </LinearLayout>
 
-
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="2dp"
-        android:layoutDirection="rtl"
-        android:orientation="vertical"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="35dp"
+        android:orientation="horizontal"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/admain"
@@ -369,4 +277,29 @@
             ads:adUnitId="ca-app-pub-9838187586217611/1394031397" />
     </LinearLayout>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/fab"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="4dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/ic_sbasketadd"
+        ads:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.75"
+        ads:layout_constraintStart_toEndOf="@+id/relativeLayout"
+        ads:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        ads:layout_constraintVertical_bias="0.84" />
+
+    <Button
+        android:id="@+id/menubutton"
+        android:layout_width="29dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_baseline_menu_24"
+        android:onClick="showPopup"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

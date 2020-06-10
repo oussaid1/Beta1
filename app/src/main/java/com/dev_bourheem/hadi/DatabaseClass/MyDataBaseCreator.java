@@ -136,7 +136,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
         return insertStaus >= 1;
     }
-
     public boolean InjectDataToArchiveTable(int id, String Quantifier, double Quantity, String ItemName, double prix, String ShopName, String date) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -151,7 +150,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
         return insertStaus >= 1;
     }
-
     public boolean InjectToArchivePayment(int id, String paidShop, double paidAmount, String paymentDate) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -163,7 +161,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
         return true;
     }
-
     public boolean updateData(String id, double Quanty, String name, double prix, String Sir, String daat) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -176,7 +173,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
         return true;
     }
-
     public boolean updateDataArch(String id, double Quanty, String name, double prix, String Sir, String daat) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -189,15 +185,11 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
         return true;
     }
-
     public boolean DeleteItemSelected(String table, String ById) {
         SQLiteDatabase db = getWritableDatabase();
         db.delete(table,  _ID + " = ?", new String[]{ById});
         return true;
     }
-
-
-    // this is for Stats MainTable
     public Cursor Get8MostFrequentItemsBought(String table, String columnName) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c1 = db.rawQuery("select " + columnName + ",count(" + columnName + ")as countIt from " +
@@ -205,8 +197,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
         return c1;
     }
-
-
     public Cursor Get15HighDays(String table, String dateColumn, String itemPriceColumn) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cu = db.rawQuery("select " + dateColumn + ",sum(" + itemPriceColumn + ")as totalbydate from "
@@ -214,16 +204,14 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
 
         return cu;
     }
-
-    //delete table
     public boolean deletAllFromTable(String table) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(" delete from  " + table);
         return true;
     }
-
     public ArrayList<String> GetDistinctFromTable(String table, String Column, String orderBy) {
         ArrayList<String> distinctStufList = new ArrayList<>();
+        distinctStufList.add("*");
         SQLiteDatabase db = getReadableDatabase();
         Cursor cur = db.rawQuery("select distinct " + Column + " from " + table + "  order by " + orderBy + " asc ", null);
         cur.moveToFirst();
@@ -234,14 +222,12 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         cur.close();
         return distinctStufList;
     }
-
     public Cursor GetSumall() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor crall = db.rawQuery("SELECT SUM (Item_Price) FROM " +  MainTable, null);
 
         return crall;
     }
-
     public double GetSumAllForShop(String Pricescolumn, String table, String shopNameColumn, String shopName) {
         double sumAllByShop;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -253,7 +239,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         return sumAllByShop;
 
     }
-
     public boolean InjectQuotaData(double userQ, double userGQ) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -262,13 +247,11 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         long insertStaus = db.insert( SettingsTable, null, values);
         return insertStaus != -1;
     }
-
     public Cursor JibData() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor b1 = db.rawQuery("select * from " +  SettingsTable + " ORDER BY _id DESC limit 1", null);
         return b1;
     }
-
     public boolean DeleteAllBy(String table, String columnName, String like) {
         SQLiteDatabase db = getWritableDatabase();
         long deleted = db.delete(" " + table + "", columnName + " = ? ", new String[]{like});
@@ -278,7 +261,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
             return false;
         }
     }
-
     public boolean TablegetCountIsFull(String table, String ColumnNameLike, String mohamed) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * from " + table + " " +
@@ -289,7 +271,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
             return true;
         }
     }
-
     public boolean PayShop(String shopToPay, double PaidAmounta, String Paydate) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -299,7 +280,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         long insertStaus = db.insert( PaymentTable, null, values);
         return insertStaus != -1;
     }
-
     public boolean UpdatePayment(String id, String shopToPay, double PaidAmounta, String PayDate) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -309,7 +289,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         long insertStaus = db.update( PaymentTable, values,  _ID + " = ? ", new String[]{id});
         return insertStaus != -1;
     }
-
     public boolean UpdateArPayment(String id, String shopToPay, double PaidAmount, String PayDate) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -319,7 +298,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         long insertStaus = db.update( ArchivePaymentTable, values,  _ID + " = ? ", new String[]{id});
         return insertStaus != -1;
     }
-
     public double GetSumOfPaidAmountForShop(String ShopNameLike) {
         double paid=0;
         SQLiteDatabase db = getWritableDatabase();
@@ -333,8 +311,6 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         }
         return paid;
     }
-
-
     public double GetPaidAmountForAllShop(String table, String paidAmountColumn) {
         double paid;
         SQLiteDatabase db = getWritableDatabase();
@@ -361,12 +337,10 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         c.close();
         return sum;
     }
-
     public double OweHimNothing(String ShopNameLike) {
         double   owe = GetSumForShop(ShopNameLike) - GetSumOfPaidAmountForShop(ShopNameLike);
              return owe;
     }
-
     public void ArchiveIt(String ShopName) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(" insert into " +  ArchiveTable + "" +
@@ -394,6 +368,4 @@ public class MyDataBaseCreator extends SQLiteOpenHelper {
         DeleteAllBy( MainTable,  MShopName, ShopName);
         DeleteAllBy( PaymentTable,  PaidShopName, ShopName);
     }
-
-
 }

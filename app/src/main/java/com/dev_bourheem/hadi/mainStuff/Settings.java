@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
@@ -29,6 +30,7 @@ import com.dev_bourheem.hadi.sharedmethods;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -72,7 +74,13 @@ public class Settings extends AppCompatActivity {
                 OpenActivitilist();
                 return true;
             case R.id.backup:
-               backUp();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    try {
+                        sharedmethods.exportDB(this);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 return true;
             case R.id.restore:
             restore();

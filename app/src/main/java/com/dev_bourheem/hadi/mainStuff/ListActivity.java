@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,7 +42,8 @@ public class ListActivity extends AppCompatActivity {
 
     private ArrayList<exampleitem> mExampleList;
     RecyclerView myrecycler;
-    RecyclerView.LayoutManager RecyLayManger;
+    //RecyclerView.LayoutManager RecyLayManger;
+    private RecyclerView.LayoutManager RecyLayManger;
     public ExampleAdapter RecyclerAdap;
 
     AdView listAd;
@@ -92,6 +94,7 @@ public class ListActivity extends AppCompatActivity {
         MdbCrtr = new MyDataBaseCreator(this);
         categoryspinnerList = new ArrayList<>();
         addtoCategoryList();
+        RecyLayManger= new LinearLayoutManager(this );
         searchspinerList = new ArrayList<>();
         categoryAdapter = new ArrayAdapter<>(this, layout.simple_spinner_dropdown_item, categoryspinnerList);
         categoryspinner.setAdapter(categoryAdapter);
@@ -153,7 +156,7 @@ public class ListActivity extends AppCompatActivity {
 
             }
         });
-        RecyLayManger = new LinearLayoutManager(this);
+       // RecyLayManger = new LinearLayoutManager(this);
         RecyclerAdap = new ExampleAdapter(mExampleList);
         RecyclerAdap.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
             @Override

@@ -3,6 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/allerta</item>
         <item>@font/amiko</item>
+        <item>@font/amiri_bold</item>
         <item>@font/federant</item>
     </array>
 </resources>

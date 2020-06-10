@@ -28,12 +28,15 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -64,9 +67,9 @@ import java.util.Date;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     private Spinner CategorySpinner, SearchSpinerSub1, SearchSpinerSub2;
-    private TextView DateV1, RedL, RedL2, yellowL, yellowL2, OrangeL, OrangeL2, GreenL, GreenL2, QuotaLeftNm, LeftOut, SumOutBy, TotalallOut, hereisyourQuota;
+    private TextView DateV1, LeftOut, SumOutBy, TotalallOut, hereisyourQuota;
     private Switch Guestmode;
     private boolean ischecked;
     private double Quota = 0, sumtoday = 0, leftOfQuota = 0, Qnt1 = 1;
@@ -84,26 +87,21 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> QuanSpinAdapter;
     private MyDataBaseCreator MDBC;
     private AdView admain;
+    private ProgressBar progressBar;
     private Button floatingButon;
     private String[] QTypes = {"واحدة", " كيلو", "لتر", "متر", "صندوق", "علبة"};
     private double SumAll = 0;
+    private int it;
     private Boolean alarmUp;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DateV1 = findViewById(R.id.dateView);
         floatingButon = findViewById(R.id.fab);
-        // QuotaLeftNm = findViewById(R.id.QuotaLeftNm);
-        GreenL = findViewById(R.id.BtnGreen);
-        GreenL2 = findViewById(R.id.BtnGreen2);
-        yellowL = findViewById(R.id.BtnYellow);
-        yellowL2 = findViewById(R.id.BtnYellow2);
-        OrangeL = findViewById(R.id.BtnOrange);
-        OrangeL2 = findViewById(R.id.BtnOrange2);
-        RedL = findViewById(R.id.BtnRed);
-        RedL2 = findViewById(R.id.BtnRed2);
+        progressBar = findViewById(R.id.progressBar);
         TotalallOut = findViewById(R.id.TotalallOut);
         Guestmode = findViewById(R.id.SwitchGuest);
         hereisyourQuota = findViewById(R.id.hereisurqt);
@@ -113,6 +111,10 @@ public class MainActivity extends AppCompatActivity {
         CategorySpinner = findViewById(R.id.SumCategory);
         SearchSpinerSub1 = findViewById(R.id.SumSearch);
         SearchSpinerSub2 = findViewById(R.id.SumsearchBydate);
+        MDBC = new MyDataBaseCreator(getApplicationContext());
+
+        GetQuota();
+        showQuota();
         Molhanot = new ArrayList<>();
         createNotificationChannel();
         mNotificationManager = (NotificationManager)
@@ -121,16 +123,16 @@ public class MainActivity extends AppCompatActivity {
         CategoryList = new ArrayList<>();
         SpinnerSub1List = new ArrayList<>();
         SpinnerSub2List = new ArrayList<>();
-        MDBC = new MyDataBaseCreator(getApplicationContext());
+
         getTotalAllForAllShops();
         Molhanot.add(getString(R.string.unknown));
         GetItemNameFromdatabase();
         GetShopNamesFromdatabase();
         SharedPreferences mSharedPeff = this.getPreferences(Context.MODE_PRIVATE);
-       alarmUp= mSharedPeff.getBoolean("alarmStatus", false);
+        alarmUp = mSharedPeff.getBoolean("alarmStatus", false);
 
         // DateV1.setText(Boolean.toString(alarmUp));
-        if (  ! alarmUp ) {
+        if (!alarmUp) {
             SetAlarmedNotification();
         }
         DateV1.setText(GetDate());
@@ -142,12 +144,12 @@ public class MainActivity extends AppCompatActivity {
                 if (ischecked) {
                     MsgBox("وضع (الضيوف )");
                     showQuota();
-                    TraficLight(sumtoday);
+                    ProgressLimit(sumtoday);
 
                 } else {
                     MsgBox("الوضع العائلي");
                     showQuota();
-                    TraficLight(sumtoday);
+                    ProgressLimit(sumtoday);
                 }
 
             }
@@ -234,48 +236,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         fillcategory();
-        TotalallOut.setText(String.valueOf(getTotalAllForAllShops()));
-        showQuota();
-        TraficLight(sumtoday);
+        ProgressLimit(sumtoday);
         ADSmainActivity();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.exmenu, menu);
-        return true;
-    }
+    public static void ExportDataBase(Context context) throws IOException {
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
+        final String inFileName = "/data/data/com.dev_bourheem.hadi/databases/Merchandise.db";
 
-            case R.id.openArch:
-                OpenArch();
-                return true;
-            case R.id.ShowList_M:
-                OpentMainListActivity();
-                return true;
-            case R.id.ShowPayList:
-                OpenPaymentList();
-                return true;
+        File dbFile = (context.getDatabasePath("Merchandise.db"));
+        FileInputStream fis = new FileInputStream(dbFile);
 
-            case R.id.stats:
-                OpenStats();
-                return true;
-            case R.id.Settings:
-                OpentSettings();
-                isStoragePermissionGranted();
-                return true;
-            case R.id.exit_M:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        File outFileName = context.getExternalFilesDir(DIRECTORY_DOWNLOADS);
+        File backup = new File(outFileName, "backup.db");
+
+        OutputStream output = new FileOutputStream(backup);
+
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = fis.read(buffer)) > 0) {
+            output.write(buffer, 0, length);
         }
+        // Close the streams
+        output.flush();
+        output.close();
+        fis.close();
+        Toast.makeText(context, "Backup Successful!",
+                Toast.LENGTH_SHORT).show();
 
     }
 
@@ -286,22 +274,18 @@ public class MainActivity extends AppCompatActivity {
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 1);
-
         PendingIntent notifyPendingIntent = PendingIntent.getBroadcast
                 (this, NOTIFICATION_ID, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        long repeatInterval = AlarmManager.INTERVAL_HOUR*4;
-        long triggerTime =calendar.getTimeInMillis() ;/*SystemClock.elapsedRealtime()+repeatInterval;*/
+        long repeatInterval = AlarmManager.INTERVAL_HOUR * 4;
+        long triggerTime = calendar.getTimeInMillis();/*SystemClock.elapsedRealtime()+repeatInterval;*/
 
-//If the Toggle is turned on, set the repeating alarm with a 15 minute interval
         if (alarmManager != null) {
             alarmManager.setRepeating
                     (AlarmManager.ELAPSED_REALTIME_WAKEUP,
                             triggerTime, repeatInterval, notifyPendingIntent);
-            alarmUp=true;
+            alarmUp = true;
         }
-        /* alarmUp = (PendingIntent.getBroadcast(this, NOTIFICATION_ID, notifyIntent,
-                PendingIntent.FLAG_NO_CREATE) != null);*/
         SharedPreferences mSharedPeff = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSharedPeff.edit();
         editor.putBoolean("alarmStatus", alarmUp);
@@ -441,70 +425,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // this method controls Traffic Light and the text with it
-    public void TraficLight(Double sum2day) {
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void ProgressLimit(double sum2day) {
+        int c = (int) sum2day;
         leftOfQuota = Quota - sum2day;
         LeftOut.setText(String.valueOf(leftOfQuota));
 
-        if (sum2day <= Quota / 3) {
-            Greenlight();
-        } else if ((sum2day < Quota / 2 && sum2day > Quota / 3)) {
-            Yellowlight();
-        } else if (sum2day < Quota && sum2day > Quota / 2) {
-            OrangeLight();
-        } else if (sum2day >= Quota) {
-            Redlight();
+        if (sum2day > 0) {
+            progressBar.setProgress(c);
+
         }
     }
 
-    public void Greenlight() {
-        RedL.setVisibility(View.INVISIBLE);
-        RedL2.setVisibility(View.INVISIBLE);
-        OrangeL.setVisibility(View.INVISIBLE);
-        OrangeL2.setVisibility(View.INVISIBLE);
-        yellowL.setVisibility(View.INVISIBLE);
-        yellowL2.setVisibility(View.INVISIBLE);
-        GreenL.setVisibility(View.VISIBLE);
-        GreenL2.setVisibility(View.VISIBLE);
-        //  QuotaLeftNm.setTextColor(Color.parseColor("#64DD17"));
-    }
-
-    public void Yellowlight() {
-        RedL.setVisibility(View.INVISIBLE);
-        RedL2.setVisibility(View.INVISIBLE);
-        OrangeL.setVisibility(View.INVISIBLE);
-        OrangeL2.setVisibility(View.INVISIBLE);
-        GreenL.setVisibility(View.VISIBLE);
-        GreenL2.setVisibility(View.VISIBLE);
-        yellowL.setVisibility(View.VISIBLE);
-        yellowL2.setVisibility(View.VISIBLE);
-        //QuotaLeftNm.setTextColor(Color.parseColor("#FFC107"));
-    }
-
-    public void OrangeLight() {
-        GreenL.setVisibility(View.VISIBLE);
-        GreenL2.setVisibility(View.VISIBLE);
-        yellowL.setVisibility(View.VISIBLE);
-        yellowL2.setVisibility(View.VISIBLE);
-        RedL.setVisibility(View.INVISIBLE);
-        RedL2.setVisibility(View.INVISIBLE);
-        OrangeL.setVisibility(View.VISIBLE);
-        OrangeL2.setVisibility(View.VISIBLE);
-        // QuotaLeftNm.setTextColor(Color.parseColor("#FF6D00"));
-    }
-
-    public void Redlight() {
-        GreenL.setVisibility(View.VISIBLE);
-        GreenL2.setVisibility(View.VISIBLE);
-        yellowL.setVisibility(View.VISIBLE);
-        yellowL2.setVisibility(View.VISIBLE);
-        OrangeL.setVisibility(View.VISIBLE);
-        OrangeL2.setVisibility(View.VISIBLE);
-        RedL.setVisibility(View.VISIBLE);
-        RedL2.setVisibility(View.VISIBLE);
-        // QuotaLeftNm.setTextColor(Color.parseColor("#D50000"));
-    }
 
     public double GetQuota() {
+
         double Quotafrom_database, GestQuotafrom_database;
         Cursor qfinder = MDBC.JibData();
         if (qfinder.getCount() == 0) {
@@ -531,7 +466,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showQuota() {
+        progressBar.setMax(GetItInt(Quota));
+        TotalallOut.setText(String.valueOf(getTotalAllForAllShops()));
         hereisyourQuota.setText(String.valueOf(GetQuota()));
+        progressBar.setProgress(GetItInt(leftOfQuota));
     }
 
     // this method gets product names from database
@@ -563,22 +501,24 @@ public class MainActivity extends AppCompatActivity {
         return SumAll - allPaid;
     }
 
+    private int GetItInt(double x) {
+        int y = (int) x;
+        return y;
+    }
+
     /**
      * these methods fill the second Spinner according to the firstSpinner
      */
     public void FillWithDays() {
         SpinnerSub1List.clear();
         SpinnerSub1List = MDBC.GetDistinctFromTable(MyDataBaseCreator.MainTable, MyDataBaseCreator.MDate, MyDataBaseCreator.MDate);
-        SpinnerSub1List.add("*");
         SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub1List);
         SearchSpinerSub1.setAdapter(SearchSpinnerSub2Adapter);
     }
 
     public void FillwithShopNm() {
         SpinnerSub1List.clear();
-
         SpinnerSub1List = MDBC.GetDistinctFromTable(MyDataBaseCreator.MainTable, MyDataBaseCreator.MShopName, MyDataBaseCreator.MShopName);
-        SpinnerSub1List.add("*");
         SearchSpinnerSub2Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub1List);
         SearchSpinerSub1.setAdapter(SearchSpinnerSub2Adapter);
     }
@@ -592,9 +532,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void FillWithDaysforShop(String shop) {
         SpinnerSub2List.clear();
-        SpinnerSub2List = MDBC.GetDistinctFromTable(MyDataBaseCreator.MainTable, MyDataBaseCreator.MDate, MyDataBaseCreator.MDate);
-        SpinnerSub2List.add("*");
-        SearchSpinnerSub3Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, SpinnerSub2List);
+
+        // SpinnerSub2List.add("*");
+        SearchSpinnerSub3Adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, MDBC.GetDistinctFromTable(MyDataBaseCreator.MainTable, MyDataBaseCreator.MDate, MyDataBaseCreator.MDate));
         SearchSpinerSub2.setAdapter(SearchSpinnerSub3Adapter);
     }
 
@@ -651,7 +591,7 @@ public class MainActivity extends AppCompatActivity {
             sumtoday = data.getDouble(data.getColumnIndex("Soa"));
             sumtoday = sumtoday - paid;
             SumOutBy.setText((mfr.format(sumtoday)));
-            TraficLight(sumtoday);
+            ProgressLimit(sumtoday);
         }
         data.close();
 
@@ -671,7 +611,7 @@ public class MainActivity extends AppCompatActivity {
             data.moveToFirst();
             sumtoday = data.getDouble(data.getColumnIndex("So"));
             SumOutBy.setText((mfr.format(sumtoday)));
-            TraficLight(sumtoday);
+            ProgressLimit(sumtoday);
         }
         data.close();
         return sumtoday;
@@ -690,7 +630,7 @@ public class MainActivity extends AppCompatActivity {
             data.moveToFirst();
             sumtoday = data.getDouble(data.getColumnIndex("Soa"));
             SumOutBy.setText((mfr.format(sumtoday)));
-            TraficLight(sumtoday);
+            ProgressLimit(sumtoday);
         }
         data.close();
         return sumtoday;
@@ -709,7 +649,7 @@ public class MainActivity extends AppCompatActivity {
             data.moveToFirst();
             sumtoday = data.getDouble(data.getColumnIndex("SumItems"));
             SumOutBy.setText((mfr.format(sumtoday)));
-            TraficLight(sumtoday);
+            ProgressLimit(sumtoday);
         }
         data.close();
         return sumtoday;
@@ -729,7 +669,7 @@ public class MainActivity extends AppCompatActivity {
             data.moveToFirst();
             sumtoday = data.getDouble(data.getColumnIndex("Soa"));
             SumOutBy.setText((mfr.format(sumtoday)));
-            TraficLight(sumtoday);
+            ProgressLimit(sumtoday);
         }
         data.close();
         return sumtoday;
@@ -843,7 +783,7 @@ public class MainActivity extends AppCompatActivity {
                         GetShopNamesFromdatabase();
                         PriceIn.getText().clear();
                         ItemNameIn.getText().clear();
-                        TraficLight(sumtoday);
+                        ProgressLimit(sumtoday);
                         FillwithShopNm();
                         //alertDialog.cancel();
                     }
@@ -872,5 +812,40 @@ public class MainActivity extends AppCompatActivity {
         return dayOfMonth == 1;
     }
 
-}
+    public void showPopup(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.exmenu);
+        popup.show();
+    }
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
 
+            case R.id.openArch:
+                OpenArch();
+                return true;
+            case R.id.ShowList_M:
+                OpentMainListActivity();
+                return true;
+            case R.id.ShowPayList:
+                OpenPaymentList();
+                return true;
+
+            case R.id.stats:
+                OpenStats();
+                return true;
+            case R.id.Settings:
+                OpentSettings();
+                isStoragePermissionGranted();
+                return true;
+            case R.id.exit_M:
+                finish();
+                return true;
+            default:
+
+            return false;
+        }
+    }
+
+}
