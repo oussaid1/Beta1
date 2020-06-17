@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     tools:context=".mainStuff.MainActivity">
 
@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="1dp"
-        android:background="@color/colorPrimary"
         ads:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintHorizontal_bias="0.0"
@@ -48,7 +47,7 @@
             android:autoSizeTextType="uniform"
             android:text="@string/_20000"
             android:textAlignment="center"
-            android:textColor="@color/Text_sub"
+            android:textColor="@color/Text"
             android:textStyle="italic"
             ads:layout_constraintBottom_toBottomOf="parent"
             ads:layout_constraintEnd_toStartOf="@+id/SwitchGuest"
@@ -63,7 +62,7 @@
             android:layout_height="wrap_content"
             android:text="@string/guest_mode"
             android:textAlignment="center"
-            android:textColor="@color/Text_sub2"
+            android:textColor="@color/Text_details"
             ads:layout_constraintBottom_toBottomOf="parent"
             ads:layout_constraintEnd_toEndOf="parent"
             ads:layout_constraintTop_toTopOf="parent" />
@@ -86,8 +85,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -106,9 +105,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="44dp"
+            android:layout_marginBottom="24dp"
             android:text="المجموع العام"
             android:textAlignment="center"
+            android:textSize="16sp"
             ads:layout_constraintBottom_toTopOf="@+id/TotalallOut"
             ads:layout_constraintEnd_toEndOf="@+id/TotalallOut"
             ads:layout_constraintStart_toStartOf="@+id/TotalallOut"
@@ -119,14 +119,16 @@
             style="@style/SumTextViews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="39dp"
-            android:layout_marginEnd="108dp"
-            android:text="159"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="2dp"
+            android:text="12000"
+            ads:autoSizeTextType="uniform"
             ads:layout_constraintBottom_toBottomOf="parent"
             ads:layout_constraintEnd_toEndOf="parent"
             ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@+id/allTotal" />
+            ads:layout_constraintTop_toBottomOf="@+id/allTotal"
+            tools:maxLines="1" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -137,7 +139,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
+        ads:layout_constraintBottom_toTopOf="@+id/progressBar"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintHorizontal_bias="0.0"
         ads:layout_constraintStart_toStartOf="parent"
@@ -244,15 +248,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layoutDirection="rtl"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
 
     </LinearLayout>
 
@@ -279,27 +274,77 @@
 
     <Button
         android:id="@+id/fab"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_margin="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="22dp"
         android:background="@drawable/ic_sbasketadd"
-        ads:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        ads:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         ads:layout_constraintEnd_toEndOf="parent"
-        ads:layout_constraintHorizontal_bias="0.75"
         ads:layout_constraintStart_toEndOf="@+id/relativeLayout"
-        ads:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        ads:layout_constraintVertical_bias="0.84" />
+        ads:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
     <Button
         android:id="@+id/menubutton"
         android:layout_width="29dp"
         android:layout_height="24dp"
+        android:layout_marginStart="105dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/ic_baseline_menu_24"
         android:onClick="showPopup"
+        ads:layout_constraintBottom_toTopOf="@+id/linearLayout7"
         ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="1.0"
+        ads:layout_constraintStart_toEndOf="@+id/relativeLayout"
         ads:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_ttetl"
+        android:orientation="vertical"
+        ads:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toEndOf="@+id/relativeLayout"
+        ads:layout_constraintTop_toTopOf="@+id/relativeLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_ttetr"
+        android:orientation="horizontal"
+        ads:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        ads:layout_constraintEnd_toStartOf="@+id/relativeLayout"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toTopOf="@+id/relativeLayout"></LinearLayout>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:barrierDirection="left" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:barrierDirection="left" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:barrierDirection="top" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

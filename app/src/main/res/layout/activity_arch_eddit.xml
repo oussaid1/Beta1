@@ -95,8 +95,7 @@
                     <EditText
                         android:id="@+id/priceModArch"
                         style="@style/EditTextViewsNumbers"
-                        android:text="@string/number"
-                        />
+                        tools:hint="@string/number" />
 
                     <TextView
                         android:layout_width="100dp"

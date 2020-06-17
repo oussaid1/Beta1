@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">لكارني</string>
     <string name="show_today_items">الائحة</string>
-    <string name="guest_mode"> الوضع التقشفي </string>
+    <string name="guest_mode"> الوضع الإقتصادي </string>
     <string name="left_of_quota">الباقي من السقف</string>
     <string name="shop_name">اسم المحل</string>
     <string name="price_in_here">الثمن هنا</string>
