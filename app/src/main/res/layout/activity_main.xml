@@ -8,80 +8,8 @@
     android:orientation="vertical"
     tools:context=".mainStuff.MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="1dp"
-        ads:layout_constraintBottom_toTopOf="@+id/relativeLayout"
-        ads:layout_constraintEnd_toEndOf="parent"
-        ads:layout_constraintHorizontal_bias="0.0"
-        ads:layout_constraintStart_toStartOf="parent"
-        ads:layout_constraintTop_toTopOf="parent">
 
 
-        <TextView
-            android:id="@+id/dateView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="215dp"
-            android:layout_marginBottom="2dp"
-            android:maxLines="1"
-            android:padding="2dp"
-            android:text="@string/_12_01_20"
-            android:textAlignment="gravity"
-            android:textColor="@color/Text_details"
-            ads:layout_constraintBottom_toBottomOf="parent"
-            ads:layout_constraintEnd_toStartOf="@+id/SwitchGuest"
-            ads:layout_constraintHorizontal_bias="0.0"
-            ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/hereisurqt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autoSizeMaxTextSize="16sp"
-            android:autoSizeTextType="uniform"
-            android:text="@string/_20000"
-            android:textAlignment="center"
-            android:textColor="@color/Text"
-            android:textStyle="italic"
-            ads:layout_constraintBottom_toBottomOf="parent"
-            ads:layout_constraintEnd_toStartOf="@+id/SwitchGuest"
-            ads:layout_constraintHorizontal_bias="0.68"
-            ads:layout_constraintStart_toEndOf="@+id/dateView"
-            ads:layout_constraintTop_toTopOf="parent"
-            tools:targetApi="o" />
-
-        <Switch
-            android:id="@+id/SwitchGuest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/guest_mode"
-            android:textAlignment="center"
-            android:textColor="@color/Text_details"
-            ads:layout_constraintBottom_toBottomOf="parent"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="8dp"
-        android:layout_marginBottom="8dp"
-        android:progress="30"
-        ads:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        ads:layout_constraintEnd_toEndOf="@+id/linearLayout6"
-        ads:layout_constraintStart_toStartOf="@+id/linearLayout6"
-        ads:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout"
@@ -97,7 +25,7 @@
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintHorizontal_bias="0.51"
         ads:layout_constraintStart_toStartOf="parent"
-        ads:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+        ads:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/allTotal"
@@ -139,9 +67,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:orientation="vertical"
-        ads:layout_constraintBottom_toTopOf="@+id/progressBar"
+        ads:layout_constraintBottom_toTopOf="@+id/linearLayout"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintHorizontal_bias="0.0"
         ads:layout_constraintStart_toStartOf="parent"
@@ -168,6 +96,15 @@
             ads:layout_constraintTop_toTopOf="@+id/textView"
             ads:layout_constraintVertical_bias="0.555"
             tools:layout_editor_absoluteX="55dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:progress="30"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="309dp" />
     </LinearLayout>
 
 
@@ -185,11 +122,6 @@
         ads:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -199,6 +131,7 @@
                     style="@style/SpinnerContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/justborderz"
                     android:layout_margin="4dp">
 
                     <Spinner
@@ -213,6 +146,8 @@
                     style="@style/SpinnerContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/justborderz"
+
                     android:layout_margin="4dp">
 
                     <Spinner
@@ -227,6 +162,8 @@
                     style="@style/SpinnerContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/justborderz"
+
                     android:layout_margin="4dp">
 
                     <Spinner
@@ -246,7 +183,6 @@
                     android:text="..."
                     android:textColor="@color/colorAccent" />
             </LinearLayout>
-        </LinearLayout>
 
 
     </LinearLayout>
@@ -290,19 +226,17 @@
         android:id="@+id/menubutton"
         android:layout_width="29dp"
         android:layout_height="24dp"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/ic_baseline_menu_24"
         android:onClick="showPopup"
         ads:layout_constraintBottom_toTopOf="@+id/linearLayout7"
         ads:layout_constraintEnd_toEndOf="parent"
-        ads:layout_constraintHorizontal_bias="1.0"
-        ads:layout_constraintStart_toEndOf="@+id/relativeLayout"
-        ads:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        ads:layout_constraintHorizontal_bias="0.979"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout7"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -311,9 +245,41 @@
         ads:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintStart_toEndOf="@+id/relativeLayout"
-        ads:layout_constraintTop_toTopOf="@+id/relativeLayout" />
+        ads:layout_constraintTop_toTopOf="@+id/relativeLayout">
 
-    <LinearLayout
+        <Switch
+            android:id="@+id/SwitchGuest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:maxLines="1"
+            android:text="@string/guest_mode"
+            android:textAlignment="center"
+            android:textColor="@color/Text_details"
+            android:textSize="18sp"
+            ads:layout_constraintLeft_toLeftOf="parent"
+            ads:layout_constraintRight_toRightOf="parent"
+            ads:layout_constraintTop_toTopOf="parent"
+            tools:layout_gravity="end" />
+
+        <TextView
+            android:id="@+id/hereisurqt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeTextType="uniform"
+            android:text="@string/_20000"
+            android:textAlignment="center"
+            android:textColor="@color/Text"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintLeft_toLeftOf="parent"
+            ads:layout_constraintRight_toRightOf="parent"
+            ads:layout_constraintTop_toBottomOf="@+id/SwitchGuest"
+            tools:targetApi="o" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -322,7 +288,24 @@
         ads:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
         ads:layout_constraintEnd_toStartOf="@+id/relativeLayout"
         ads:layout_constraintStart_toStartOf="parent"
-        ads:layout_constraintTop_toTopOf="@+id/relativeLayout"></LinearLayout>
+        ads:layout_constraintTop_toTopOf="@+id/relativeLayout">
+
+        <TextView
+            android:id="@+id/dateView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:padding="2dp"
+            android:text="@string/_12_01_20"
+            android:textAlignment="gravity"
+            android:textColor="@color/Text_details"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="23dp"
+            tools:layout_conversion_absoluteWidth="76dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"

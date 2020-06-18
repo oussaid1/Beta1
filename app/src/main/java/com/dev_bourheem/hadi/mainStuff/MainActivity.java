@@ -37,6 +37,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -142,12 +143,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
                 ischecked = Guestmode.isChecked();
                 if (ischecked) {
-                    MsgBox("وضع (الضيوف )");
+                    Guestmode.setText(R.string.guest_mode);
+                    MsgBox(getString(R.string.guest_mode));
                     showQuota();
                     ProgressLimit(sumtoday);
 
                 } else {
-                    MsgBox("الوضع العائلي");
+                    Guestmode.setText(R.string.guest_mode2);
+                    MsgBox(getString(R.string.guest_mode2));
                     showQuota();
                     ProgressLimit(sumtoday);
                 }

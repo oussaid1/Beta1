@@ -24,7 +24,14 @@
             android:layout_weight="3"
             android:layoutDirection="rtl"
             android:orientation="vertical">
-
+            <Button
+                android:id="@+id/menubuttonEd"
+                android:layout_width="29dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/ic_baseline_menu_24"
+                android:onClick="showPopupqrchP"
+                />
             <TextView
                 style="@style/SubTextViews"
                 android:layout_width="wrap_content"

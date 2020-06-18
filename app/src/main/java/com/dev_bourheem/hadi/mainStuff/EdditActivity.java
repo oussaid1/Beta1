@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,45 +23,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev_bourheem.hadi.DatabaseClass.MyDataBaseCreator;
 import com.dev_bourheem.hadi.R;
+import com.dev_bourheem.hadi.sharedmethods;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class EdditActivity extends AppCompatActivity {
+public class EdditActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
     private EditText ItemNameMod, QuantityMod, PriceMod, ShopNameMod, DateMod;
     private MyDataBaseCreator MDBCR;
     private AdView Edit_ad;
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.edditmenu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
 
-            case R.id.save:
-                //func here
-                onDialogueUpdate();
-                return true;
-            case R.id.deletMod:
-                onDialogueDelete();
-
-                return true;
-            case R.id.exit_Mod:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,6 +165,32 @@ public class EdditActivity extends AppCompatActivity {
     public void OpenListItems() {
         Intent inte = new Intent(EdditActivity.this, MainActivity.class);
         startActivity(inte);
+    }
+    public void showPopupEddit(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.edditmenu);
+        popup.show();
+    }
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.save:
+                //func here
+                onDialogueUpdate();
+                return true;
+            case R.id.deletMod:
+                onDialogueDelete();
+
+                return true;
+            case R.id.exit_Mod:
+                finish();
+                return true;
+            default:
+
+                return false;
+        }
     }
 
 }

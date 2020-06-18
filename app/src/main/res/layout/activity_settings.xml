@@ -17,8 +17,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layoutDirection="rtl"
-            android:orientation="horizontal">
-
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/menubuttonEdP"
+                android:layout_width="29dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="showPopupSetting"
+                android:background="@drawable/ic_baseline_menu_24"/>
             <TextView
                 style="@style/MainTextViews"
                 android:layout_width="wrap_content"
@@ -132,6 +138,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginBottom="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/buttonflat"
                 android:text="@string/save"
                 tools:style="@style/ButtonsStyle" />
@@ -232,6 +240,8 @@
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/buttonflat"
                 android:text="@string/save"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:textStyle="bold"
                 tools:style="@style/ButtonsStyle" />
 
@@ -350,6 +360,8 @@
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/buttonflat"
                 android:text="@string/pay"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:textStyle="bold"
                 tools:style="@style/ButtonsStyle" />
 
@@ -452,6 +464,8 @@
                 android:background="@drawable/buttonflat"
                 android:text="@string/delete"
                 android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 tools:style="@style/ButtonsStyle" />
         </LinearLayout>
 

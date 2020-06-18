@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,7 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 import java.util.ArrayList;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     MyDataBaseCreator MdbCrtr;
 
     Spinner categoryspinner, searchspinner;
@@ -48,37 +49,7 @@ public class ListActivity extends AppCompatActivity {
 
     AdView listAd;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate( R.menu.myexmenu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.Add_Mmenu:
-                OpenMainActivity();
-                return true;
-            case R.id.paymentActivitymenu:
-                OpentPaymentList();
-                return true;
-            case R.id.stats_Mmenu:
-                //func here
-                OpentStats();
-                return true;
-            case R.id.Settingsactvt2menu:
-                OpentSettings();
-                return true;
-            case R.id.exit_M:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -373,5 +344,37 @@ public class ListActivity extends AppCompatActivity {
 
 
     }
+    public void showPopupList(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.myexmenu);
+        popup.show();
+    }
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.Add_Mmenu:
+                OpenMainActivity();
+                return true;
+            case R.id.paymentActivitymenu:
+                OpentPaymentList();
+                return true;
+            case R.id.stats_Mmenu:
+                //func here
+                OpentStats();
+                return true;
+            case R.id.Settingsactvt2menu:
+                OpentSettings();
+                return true;
+            case R.id.exit_M:
+                finish();
+                return true;
+            default:
+
+                return false;
+        }
+    }
+
 
 }

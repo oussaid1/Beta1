@@ -25,16 +25,19 @@
         android:id="@+id/linearLayout5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/adlogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26">
 
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
-            android:layout_height="140dp"
+            android:layout_height="277dp"
             app:srcCompat="@drawable/framesplash" />
 
         <EditText
@@ -56,12 +59,12 @@
             style="@style/EditTextPassword"
             android:layout_width="match_parent"
             android:layout_height="46dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:autoSizeTextType="uniform"
             android:background="@drawable/justborderz"
             android:drawableStart="@drawable/ic_lock"
             android:hint="@string/password"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:inputType="textPassword"
             android:maxLength="4"
             android:textSize="22sp"
@@ -71,7 +74,9 @@
             android:id="@+id/loginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/buttonflat"
             android:paddingBottom="2dp"
             android:text="@string/login"

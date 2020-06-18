@@ -3,6 +3,8 @@ package com.dev_bourheem.hadi;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
+import android.view.MenuItem;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -22,7 +24,7 @@ import static android.os.Environment.DIRECTORY_DOWNLOADS;
 import static android.os.Environment.DIRECTORY_MUSIC;
 import static com.dev_bourheem.hadi.mainStuff.MainActivity.GetDate;
 
-public class sharedmethods {
+public class sharedmethods implements PopupMenu.OnMenuItemClickListener {
 
     public static void restoreItUp(Context context) {
         try {
@@ -117,4 +119,8 @@ public class sharedmethods {
 
     }
 
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        return false;
+    }
 }

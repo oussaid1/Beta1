@@ -8,167 +8,161 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".mainStuff.EdditActivity">
 
-    <ScrollView
+    <Button
+        android:id="@+id/menubuttonEd"
+        android:layout_width="29dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_baseline_menu_24"
+        android:onClick="showPopupEddit"
+        ads:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintHorizontal_bias="0.958"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toTopOf="parent"
+        ads:layout_constraintVertical_bias="0.037" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/justborderz"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintTop_toBottomOf="@+id/menubuttonEd">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="end"
+            android:layout_margin="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
-            <LinearLayout
+            <TextView
+                style="@style/MainTextViews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/justborderz"
-                android:elevation="8dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/MainTextViews"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/productinfo" />
+                android:text="@string/productinfo" />
 
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/ItemNameMod"
-                        style="@style/EditTextText"
-                        android:hint="@string/productname" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        style="@style/SubTextViews"
-                        android:text="@string/productname" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/quantityMod"
-                        style="@style/EditTextViewsNumbers"
-                        android:text="@string/_180" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        style="@style/SubTextViews"
-                        android:text="@string/quantity" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/priceMod"
-                        style="@style/EditTextViewsNumbers"
-                        android:text="@string/_180"
-                        />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        style="@style/SubTextViews"
-                        android:text="@string/price" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/shopnameMod"
-                        style="@style/EditTextText"
-                        android:hint="@string/shop_name"
-                      />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        style="@style/SubTextViews"
-                        android:text="@string/shop_name" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/dateMod"
-                        style="@style/EditTextText"
-                        android:hint="@string/_12_01_20"
-                      />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        style="@style/SubTextViews"
-                        android:text="@string/date" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <com.google.android.gms.ads.AdView
-                    android:id="@+id/Edit_ad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity=""
-                    android:layout_margin="8dp"
-                    android:layout_marginTop="8dp"
-                    ads:adSize="BANNER"
-                    ads:adUnitId="ca-app-pub-9838187586217611/9542315857" />
-            </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/ItemNameMod"
+                style="@style/EditTextText"
+                android:hint="@string/productname" />
+
+            <TextView
+                style="@style/SubTextViews"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/productname" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/quantityMod"
+                style="@style/EditTextViewsNumbers"
+                android:text="@string/_180" />
+
+            <TextView
+                style="@style/SubTextViews"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/quantity" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/priceMod"
+                style="@style/EditTextViewsNumbers"
+                android:text="@string/_180" />
+
+            <TextView
+                style="@style/SubTextViews"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/price" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/shopnameMod"
+                style="@style/EditTextText"
+                android:hint="@string/shop_name" />
+
+            <TextView
+                style="@style/SubTextViews"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/shop_name" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/dateMod"
+                style="@style/EditTextText"
+                android:hint="@string/_12_01_20" />
+
+            <TextView
+                style="@style/SubTextViews"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/date" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/Edit_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity=""
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-9838187586217611/9542315857"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

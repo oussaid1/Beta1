@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ import java.util.Date;
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 
-public class Settings extends AppCompatActivity {
+public class Settings extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     private Spinner ShopToDeleteSpinner, ShopToPaySpinner;
 
     private TextView archiveIt;
@@ -55,46 +56,7 @@ public class Settings extends AppCompatActivity {
     private ArrayList<String> ShopNamesList;
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.settingsmenu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.Additems:
-                OpenActiviti();
-                //func here
-                return true;
-            case R.id.ShowList_M:
-                OpenActivitilist();
-                return true;
-            case R.id.backup:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    try {
-                        sharedmethods.exportDB(this);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                return true;
-            case R.id.restore:
-            restore();
-                return true;
-            case R.id.reset:
-                onDialogue2();
-                return true;
-            case R.id.exit_M:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -360,6 +322,47 @@ public class Settings extends AppCompatActivity {
                 //String mohamed=  ShopToPaySpinner.getSelectedItem().toString();
                 MDBC.ArchiveIt(ShopToPaySpinner.getSelectedItem().toString());
             }
+        }
+    }
+
+    public void showPopupSetting(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.settingsmenu);
+        popup.show();
+    }
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.Additems:
+                OpenActiviti();
+                //func here
+                return true;
+            case R.id.ShowList_M:
+                OpenActivitilist();
+                return true;
+            case R.id.backup:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    try {
+                        sharedmethods.exportDB(this);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return true;
+            case R.id.restore:
+                restore();
+                return true;
+            case R.id.reset:
+                onDialogue2();
+                return true;
+            case R.id.exit_M:
+                finish();
+                return true;
+            default:
+
+                return false;
         }
     }
 }
